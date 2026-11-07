@@ -460,3 +460,176 @@ button {
     font-size: 15px;
   }
 }
+/* ==================================
+   PREMIUM SERVICES SECTION
+================================== */
+
+#services.services {
+    background: #081522;
+    padding: 100px 7%;
+    color: #FFFFFF;
+}
+
+.services-heading {
+    max-width: 680px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.services-heading .eyebrow {
+    color: #C9A45C;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.services-heading h2 {
+    color: #FFFFFF;
+    font-size: clamp(36px, 5vw, 52px);
+    font-family: Georgia, serif;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.services-heading .section-description {
+    color: #AAB4BE;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+#services .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 1250px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+#services .service-card {
+    background: #102638;
+    border: 1px solid rgba(201, 164, 92, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 0;
+    transition: transform 0.35s ease,
+                border-color 0.35s ease;
+}
+
+#services .service-card:hover {
+    transform: translateY(-8px);
+    border-color: #C9A45C;
+}
+
+#services .service-image {
+    height: 235px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+#services .service-real-estate .service-image {
+    background-image:
+        linear-gradient(rgba(8, 21, 34, 0.12), rgba(8, 21, 34, 0.25)),
+        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85");
+}
+
+#services .service-investment .service-image {
+    background-image:
+        linear-gradient(rgba(8, 21, 34, 0.12), rgba(8, 21, 34, 0.25)),
+        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85");
+}
+
+#services .service-corporate .service-image {
+    background-image:
+        linear-gradient(rgba(8, 21, 34, 0.12), rgba(8, 21, 34, 0.25)),
+        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85");
+}
+
+#services .service-content {
+    padding: 30px 25px 32px;
+}
+
+#services .service-number {
+    display: block;
+    color: #C9A45C;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+#services .service-card h3 {
+    color: #FFFFFF;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.35;
+    margin-bottom: 15px;
+}
+
+#services .service-card p {
+    color: #AAB4BE;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+#services .service-link {
+    display: inline-block;
+    color: #C9A45C;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    border-bottom: 1px solid rgba(201, 164, 92, 0.5);
+    padding-bottom: 7px;
+    transition: color 0.3s ease;
+}
+
+#services .service-link:hover {
+    color: #FFFFFF;
+}
+
+/* TABLET */
+
+@media (min-width: 651px) and (max-width: 1024px) {
+    #services.services {
+        padding: 80px 5%;
+    }
+
+    #services .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    #services .service-corporate {
+        grid-column: 1 / -1;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+    #services.services {
+        padding: 70px 6%;
+    }
+
+    .services-heading {
+        margin-bottom: 35px;
+    }
+
+    #services .service-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    #services .service-image {
+        height: 210px;
+    }
+
+    #services .service-content {
+        padding: 25px 22px 28px;
+    }
+}
