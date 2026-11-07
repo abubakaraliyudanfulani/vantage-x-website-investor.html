@@ -844,3 +844,52 @@ button {
   }
  }
  
+/* WHATSAPP FLOATING BUTTON */
+
+.whatsapp-float {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 22px;
+
+  background: #25D366;
+  color: #ffffff;
+
+  border-radius: 50px;
+  text-decoration: none;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.3s ease,
+              background 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background: #1ebe5d;
+  transform: translateY(-4px);
+}
+
+.whatsapp-icon {
+  font-size: 23px;
+  line-height: 1;
+}
+
+@media (max-width: 650px) {
+  .whatsapp-float {
+    right: 15px;
+    bottom: 15px;
+    padding: 13px 17px;
+    font-size: 11px;
+  }
+}
