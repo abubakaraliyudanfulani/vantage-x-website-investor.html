@@ -1,0 +1,252 @@
+:root {
+    --navy: #081522;
+    --navy-light: #102638;
+    --gold: #C9A45C;
+    --white: #FFFFFF;
+    --muted: #AAB4BE;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.7;
+}
+
+header {
+    min-height: 85px;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,164,92,.3);
+}
+
+.logo {
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.logo span, footer span {
+    color: var(--gold);
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+.hero {
+    min-height: 680px;
+    padding: 100px 9%;
+    display: flex;
+    align-items: center;
+    background:
+    linear-gradient(90deg,
+    rgba(5,16,27,.95),
+    rgba(5,16,27,.45)),
+    url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=85")
+    center/cover no-repeat;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(40px, 6vw, 75px);
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.hero h1 span, .about h2 span {
+    color: var(--gold);
+}
+
+.hero-content > p:not(.eyebrow) {
+    color: #D2D9DF;
+    max-width: 550px;
+    margin-bottom: 35px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 25px;
+    background: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.about, .contact {
+    padding: 100px 9%;
+    text-align: center;
+}
+
+.about h2, .services h2,
+.investment h2, .contact h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 48px);
+    margin-bottom: 20px;
+}
+
+.about > p:last-child {
+    max-width: 700px;
+    margin: auto;
+    color: var(--muted);
+}
+
+.services {
+    padding: 100px 9%;
+    text-align: center;
+    background: #0D1E2D;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 45px;
+}
+
+.cards article {
+    padding: 40px 30px;
+    text-align: left;
+    background: #13283A;
+    border-bottom: 2px solid var(--gold);
+    transition: .3s;
+}
+
+.cards article:hover {
+    transform: translateY(-7px);
+}
+
+.cards h3 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--gold);
+}
+
+.cards p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.investment {
+    padding: 110px 9%;
+    text-align: center;
+    background:
+    linear-gradient(rgba(5,16,27,.90), rgba(5,16,27,.90)),
+    url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.investment p:not(.eyebrow) {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.contact p:not(.eyebrow) {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+footer {
+    background: #050E17;
+    text-align: center;
+    padding: 45px 7%;
+}
+
+footer h2 {
+    letter-spacing: 3px;
+}
+
+footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 600px;
+        padding: 80px 7%;
+        background-position: 60% center;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .about, .contact, .services {
+        padding: 75px 7%;
+    }
+}
