@@ -4,85 +4,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>VANTAGE X GROUP LTD | Estates & Co.</title>
+
     <meta name="description" content="VANTAGE X GROUP LTD. Real Estate, Investment and Corporate Services. Building Value. Creating Opportunities.">
+
+    <meta name="theme-color" content="#081522">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-    <a href="#" class="logo">
+<!-- NAVIGATION -->
+
+<header class="header">
+    <a href="#home" class="logo">
         VANTAGE <span>X</span>
         <small>GROUP LTD · ESTATES & CO.</small>
     </a>
 
-    <nav>
+    <button class="menu-toggle" id="menuToggle"
+    aria-label="Toggle navigation" aria-expanded="false">
+        ☰
+    </button>
+
+    <nav class="navigation" id="navigation">
         <a href="#home">Home</a>
-        <a href="#about">About</a>
+        <a href="#about">About Us</a>
         <a href="#services">Services</a>
+        <a href="#properties">Properties</a>
         <a href="#investment">Investment</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-button">Contact Us</a>
     </nav>
 </header>
 
+<main>
+
+<!-- HERO SECTION -->
+
 <section class="hero" id="home">
+
     <div class="hero-content">
-        <p class="eyebrow">REAL ESTATE · INVESTMENT · BUSINESS</p>
-        <h1>Building Value.<br>
-        <span>Creating Opportunities.</span></h1>
-        <p>Discover a new perspective on real estate, investment and professional corporate services.</p>
-        <a href="#services" class="btn">EXPLORE OUR SERVICES</a>
+
+        <p class="eyebrow">
+            REAL ESTATE · INVESTMENT · CORPORATE SERVICES
+        </p>
+
+        <h1>
+            Building Value.<br>
+            <span>Creating Opportunities.</span>
+        </h1>
+
+        <p class="hero-description">
+            Discover a new perspective on real estate,
+            investment and professional corporate services.
+
+            We are driven by vision, built on ambition
+            and focused on creating lasting value.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#services" class="btn-primary">
+                EXPLORE OUR SERVICES
+            </a>
+
+            <a href="#about" class="btn-outline">
+                DISCOVER VANTAGE X
+            </a>
+
+        </div>
+
+        <div class="hero-location">
+            <span></span> KANO STATE, NIGERIA
+        </div>
+
     </div>
+
 </section>
 
-<section class="about" id="about">
-    <p class="eyebrow">WELCOME TO VANTAGE X</p>
-    <h2>Where Vision Meets <span>Value.</span></h2>
-    <p>We are a forward-thinking company focused on real estate, investment opportunities and professional business services. Our vision is to create sustainable value and meaningful opportunities.</p>
+<!-- COMPANY INTRODUCTION -->
+
+<section class="about section" id="about">
+
+    <p class="eyebrow">WELCOME TO VANTAGE X GROUP</p>
+
+    <h2>
+        Where Vision Meets
+        <span>Value.</span>
+    </h2>
+
+    <p class="about-description">
+        VANTAGE X GROUP LTD is a forward-thinking company
+        focused on real estate, investment opportunities
+        and professional corporate services.
+
+        Our philosophy is built around strategic thinking,
+        professionalism, meaningful partnerships and
+        sustainable value creation.
+    </p>
+
+    <a href="#contact" class="text-link">
+        CONNECT WITH US →
+    </a>
+
 </section>
 
-<section class="services" id="services">
-    <p class="eyebrow">WHAT WE DO</p>
-    <h2>Our Core Services</h2>
+<!-- SERVICES -->
 
-    <div class="cards">
-        <article>
+<section class="services section" id="services">
+
+    <p class="eyebrow">OUR EXPERTISE</p>
+
+    <h2>What We Do</h2>
+
+    <p class="section-description">
+        Creating opportunities through strategic business
+        activities and professional services.
+    </p>
+
+    <div class="service-grid">
+
+        <article class="service-card">
+            <span class="service-number">01</span>
             <h3>Real Estate</h3>
-            <p>Property opportunities, development and real estate services.</p>
+            <p>
+                Property opportunities, real estate
+                development and property-related services.
+            </p>
+            <a href="#contact">LEARN MORE →</a>
         </article>
 
-        <article>
+        <article class="service-card">
+            <span class="service-number">02</span>
             <h3>Investment</h3>
-            <p>Exploring structured investment opportunities and long-term value.</p>
+            <p>
+                Exploring structured investment opportunities
+                and sustainable long-term value creation.
+            </p>
+            <a href="#investment">LEARN MORE →</a>
         </article>
 
-        <article>
+        <article class="service-card">
+            <span class="service-number">03</span>
             <h3>Corporate Services</h3>
-            <p>Business support, partnerships and strategic solutions.</p>
+            <p>
+                Professional business support, partnerships
+                and strategic corporate solutions.
+            </p>
+            <a href="#contact">LEARN MORE →</a>
         </article>
+
     </div>
+
 </section>
 
-<section class="investment" id="investment">
-    <p class="eyebrow">GROW WITH VANTAGE X</p>
-    <h2>Opportunity Begins With Vision.</h2>
-    <p>Let's explore possibilities and build valuable business relationships.</p>
-    <a href="#contact" class="btn">MAKE AN ENQUIRY</a>
+<!-- PROPERTY SECTION -->
+
+<section class="properties section" id="properties">
+
+    <p class="eyebrow">REAL ESTATE PORTFOLIO</p>
+
+    <h2>Spaces. Value. Possibilities.</h2>
+
+    <p class="section-description">
+        Discover the possibilities of modern real estate
+        and property opportunities.
+    </p>
+
+    <div class="property-grid">
+
+        <div class="property-card property-one">
+            <div class="property-info">
+                <span>RESIDENTIAL</span>
+                <h3>Luxury Living</h3>
+            </div>
+        </div>
+
+        <div class="property-card property-two">
+            <div class="property-info">
+                <span>ARCHITECTURE</span>
+                <h3>Modern Developments</h3>
+            </div>
+        </div>
+
+        <div class="property-card property-three">
+            <div class="property-info">
+                <span>PROPERTY</span>
+                <h3>Real Estate Opportunities</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="portfolio-note">
+        Illustrative property imagery. Actual listings and
+        availability will be published when verified.
+    </p>
+
 </section>
 
-<section class="contact" id="contact">
-    <p class="eyebrow">GET IN TOUCH</p>
-    <h2>Let's Build Something Valuable.</h2>
-    <p>Email: vantagexgroupltd@gmail.com</p>
-    <a href="mailto:vantagexgroupltd@gmail.com" class="btn">CONTACT US</a>
+<!-- INVESTMENT SECTION -->
+
+<section class="investment section" id="investment">
+
+    <p class="eyebrow">INVESTMENT & PARTNERSHIPS</p>
+
+    <h2>
+        Opportunity Begins
+        With Vision.
+    </h2>
+
+    <p>
+        We believe in strategic thinking, informed decisions
+        and building meaningful business relationships.
+    </p>
+
+    <a href="#contact" class="btn-primary">
+        DISCUSS A BUSINESS OPPORTUNITY
+    </a>
+
 </section>
 
-<footer>
-    <h2>VANTAGE <span>X</span></h2>
-    <p>GROUP LTD · ESTATES & CO.</p>
+<!-- LEADERSHIP -->
+
+<section class="leadership section">
+
+    <p class="eyebrow">OUR LEADERSHIP</p>
+
+    <h2>Driven By Vision.</h2>
+
+    <div class="leader-card">
+
+        <div class="leader-details">
+
+            <span>FOUNDER & CHIEF EXECUTIVE OFFICER</span>
+
+            <h3>Abubakar Aliyu</h3>
+
+            <p>
+                Building a vision around enterprise,
+                real estate, strategic investment
+                and sustainable opportunities.
+            </p>
+
+            <a href="#contact" class="text-link">
+                CONNECT WITH VANTAGE X →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact section" id="contact">
+
+    <p class="eyebrow">LET'S CONNECT</p>
+
+    <h2>
+        Let's Build Something
+        <span>Valuable.</span>
+    </h2>
+
+    <p>
+        For property enquiries, business partnerships
+        and corporate enquiries, connect with our team.
+    </p>
+
+    <a href="mailto:vantagexgroupltd@gmail.com"
+    class="btn-primary">
+        CONTACT OUR TEAM
+    </a>
+
+    <p class="contact-email">
+        vantagexgroupltd@gmail.com
+    </p>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <a href="#home" class="logo">
+        VANTAGE <span>X</span>
+        <small>GROUP LTD · ESTATES & CO.</small>
+    </a>
+
     <p>Building Value. Creating Opportunities.</p>
-    <p>© 2026 VANTAGE X GROUP LTD. All rights reserved.</p>
+
+    <p>Kano State, Nigeria</p>
+
+    <div class="footer-line"></div>
+
+    <p>
+        © <span id="year"></span>
+        VANTAGE X GROUP LTD.
+        All rights reserved.
+    </p>
+
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
