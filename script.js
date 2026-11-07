@@ -1,70 +1,46 @@
-// VANTAGE X GROUP LTD
-// Website interactive functionality
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menuToggle");
+  const navigation = document.getElementById("navigation");
 
-    // 1. Automatically update copyright year
-    const copyright = document.querySelector("footer p:last-child");
-
-    if (copyright) {
-        copyright.textContent =
-            `© ${new Date().getFullYear()} VANTAGE X GROUP LTD. All rights reserved.`;
-    }
-
-    // 2. Prepare scroll animations
-    const animatedElements = document.querySelectorAll(
-        ".about, .services, .investment, .contact, .cards article"
-    );
-
-    animatedElements.forEach(element => {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(25px)";
-        element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+  // Mobile navigation
+  if (menuToggle && navigation) {
+    menuToggle.addEventListener("click", function () {
+      navigation.classList.toggle("active");
     });
 
-    // 3. Reveal sections when visitors scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.12
+    // Close menu after selecting a link
+    navigation.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navigation.classList.remove("active");
+      });
     });
+  }
 
-    animatedElements.forEach(element => {
-        observer.observe(element);
+  // Automatically update copyright year
+  const year = document.getElementById("year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  // Reveal sections smoothly when scrolling
+  const sections = document.querySelectorAll(
+    ".section, .service-card, .property-card"
+  );
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    sections.forEach(function (section) {
+      observer.observe(section);
     });
-
-    // 4. Highlight active navigation link
-    const sections = document.querySelectorAll(
-        "#home, #about, #services, #investment, #contact"
-    );
-
-    const navLinks = document.querySelectorAll("nav a");
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.toggle(
-                        "active",
-                        link.getAttribute("href") === "#" + entry.target.id
-                    );
-                });
-            }
-        });
-    }, {
-        threshold: 0.4
-    });
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
-
-    console.log("VANTAGE X website is running successfully.");
-
+  }
 });
