@@ -828,9 +828,40 @@ async function initialiseDashboard() {
   showLogin();
 
   try {
-    await supabaseClient.auth.signOut({ scope: "local" });
+    const { data, error } =
+      await supabaseClient.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data.session) {
+      showLogin();
+      return;
+    }
+
+    const { data: profile, error: profileError } =
+      await supabaseClient
+        .from("admin_profiles")
+        .select("full_name, role, is_active")
+        .eq("user_id", data.session.user.id)
+        .maybeSingle();
+
+    if (profileError) throw profileError;
+
+    if (
+      !profile ||
+      profile.is_active !== true ||
+      !["CEO", "MANAGER", "STAFF"].includes(profile.role)
+    ) {
+      await supabaseClient.auth.signOut({ scope: "local" });
+      showLogin("Your admin account could not be verified.");
+      return;
+    }
+
+    showDashboard(profile, data.session.user);
+
   } catch (error) {
-    console.error("Initial session cleanup:", error);
+    console.error("Dashboard restoration error:", error);
+    showLogin("Session verification failed. Please sign in again.");
   }
 }
 
