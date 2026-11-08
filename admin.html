@@ -113,43 +113,26 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 
 <body>
 
+<!-- LOGIN SCREEN -->
 <section class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-brand">VANTAGE X</div>
     <div class="login-subtitle">EXECUTIVE CONTROL CENTRE</div>
 
-    <h2 id="loginHeading">Administrator Login</h2>
-    <p class="login-description" id="loginDescription">
+    <h2>Administrator Login</h2>
+    <p class="login-description">
       Sign in with your authorised administrator account.
     </p>
 
     <form id="loginForm">
-      <div id="passwordFields">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" autocomplete="username" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" autocomplete="username"
+        placeholder="Enter your email address" required>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" autocomplete="current-password" required>
-      </div>
-
-      <div id="setupFields" style="display:none">
-        <p style="color:#d1ad70;font-size:13px;line-height:1.7;margin-bottom:12px">
-          Add the private setup key below to Google Authenticator.
-          Keep this key confidential.
-        </p>
-        <label for="setupSecret">Authenticator setup key</label>
-        <input id="setupSecret" type="text" readonly>
-        <button type="button" id="copySecretButton" class="login-button">
-          Copy Setup Key
-        </button>
-      </div>
-
-      <div id="mfaFields" style="display:none">
-        <label for="mfaCode">Six-digit authenticator code</label>
-        <input id="mfaCode" type="text" inputmode="numeric"
-          autocomplete="one-time-code" maxlength="6"
-          pattern="[0-9]{6}" placeholder="000000">
-      </div>
+      <label for="password">Password</label>
+      <input type="password" id="password"
+        autocomplete="current-password"
+        placeholder="Enter your password" required>
 
       <button type="submit" class="login-button" id="loginButton">
         Sign In Securely
@@ -165,7 +148,9 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
   </div>
 </section>
 
+<!-- ADMIN DASHBOARD -->
 <div class="layout" id="dashboard">
+
 <aside class="sidebar">
   <div class="brand">VANTAGE X</div>
   <div class="brand-sub">EXECUTIVE CONTROL CENTRE</div>
@@ -192,11 +177,13 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 </aside>
 
 <main class="main">
+
 <header class="topbar">
   <div>
     <h1 id="pageTitle">Executive Dashboard</h1>
     <p>VANTAGE X GROUP LTD — Management Overview</p>
   </div>
+
   <div class="topbar-actions">
     <div class="admin-tag" id="adminTag">ADMINISTRATOR</div>
     <button class="logout-button" id="logoutButton">Sign Out</button>
@@ -211,6 +198,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
   </div>
 
   <h2 class="section-title">Business Overview</h2>
+
   <div class="cards">
     <div class="card"><p>Total Investors</p><h3>—</h3></div>
     <div class="card"><p>Total Clients</p><h3>—</h3></div>
@@ -219,6 +207,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
   </div>
 
   <h2 class="section-title">Management Centre</h2>
+
   <div class="management">
     <div class="management-item"><h3>Investor Management</h3><p>Organise investor accounts and records.</p></div>
     <div class="management-item"><h3>Client Management</h3><p>Oversee client enquiries and relationships.</p></div>
@@ -229,24 +218,53 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
   </div>
 </section>
 
-<section class="view" id="investors"><div class="panel"><h2>Investor Management</h2><p>Manage investor profiles, account records, documents and account status.</p><span class="status">Database connection pending</span></div></section>
-<section class="view" id="clients"><div class="panel"><h2>Client Management</h2><p>Manage client information, enquiries, service requests and communications.</p><span class="status">Database connection pending</span></div></section>
-<section class="view" id="properties"><div class="panel"><h2>Property Management</h2><p>Organise property listings, descriptions, prices, images and availability.</p><span class="status">Database connection pending</span></div></section>
-<section class="view" id="investments"><div class="panel"><h2>Investment Management</h2><p>Organise investment records, agreements, transactions and reporting.</p><span class="status">Database connection pending</span></div></section>
-<section class="view" id="partnerships"><div class="panel"><h2>Partnership Management</h2><p>Review partnership enquiries, applications and collaboration records.</p><span class="status">Database connection pending</span></div></section>
-<section class="view" id="staff"><div class="panel"><h2>Staff & Managers</h2><p>Organise staff profiles, manager accounts, responsibilities and access permissions.</p><span class="status">Role management pending</span></div></section>
-<section class="view" id="messages"><div class="panel"><h2>Messages & Enquiries</h2><p>Centralise incoming client enquiries, investor requests and business communications.</p><span class="status">Messaging connection pending</span></div></section>
-<section class="view" id="reports"><div class="panel"><h2>Reports & Analytics</h2><p>Review business activity, operational summaries and management reports.</p><span class="status">Reporting connection pending</span></div></section>
-<section class="view" id="settings"><div class="panel"><h2>System Settings</h2><p>Manage company details, administrative preferences and security configuration.</p><span class="status">Configuration pending</span></div></section>
+<section class="view" id="investors">
+  <div class="panel"><h2>Investor Management</h2><p>Manage investor profiles, account records, documents and account status.</p><span class="status">Database connection pending</span></div>
+</section>
+
+<section class="view" id="clients">
+  <div class="panel"><h2>Client Management</h2><p>Manage client information, enquiries, service requests and communications.</p><span class="status">Database connection pending</span></div>
+</section>
+
+<section class="view" id="properties">
+  <div class="panel"><h2>Property Management</h2><p>Organise property listings, descriptions, prices, images and availability.</p><span class="status">Database connection pending</span></div>
+</section>
+
+<section class="view" id="investments">
+  <div class="panel"><h2>Investment Management</h2><p>Organise investment records, agreements, transactions and reporting.</p><span class="status">Database connection pending</span></div>
+</section>
+
+<section class="view" id="partnerships">
+  <div class="panel"><h2>Partnership Management</h2><p>Review partnership enquiries, applications and collaboration records.</p><span class="status">Database connection pending</span></div>
+</section>
+
+<section class="view" id="staff">
+  <div class="panel"><h2>Staff & Managers</h2><p>Organise staff profiles, manager accounts, responsibilities and access permissions.</p><span class="status">Role management pending</span></div>
+</section>
+
+<section class="view" id="messages">
+  <div class="panel"><h2>Messages & Enquiries</h2><p>Centralise incoming client enquiries, investor requests and business communications.</p><span class="status">Messaging connection pending</span></div>
+</section>
+
+<section class="view" id="reports">
+  <div class="panel"><h2>Reports & Analytics</h2><p>Review business activity, operational summaries and management reports.</p><span class="status">Reporting connection pending</span></div>
+</section>
+
+<section class="view" id="settings">
+  <div class="panel"><h2>System Settings</h2><p>Manage company details, administrative preferences and security configuration.</p><span class="status">Configuration pending</span></div>
+</section>
 
 <footer class="footer">
   © 2026 VANTAGE X GROUP LTD. All rights reserved.<br>
   Building Value. Creating Opportunities.
 </footer>
+
 </main>
 </div>
 
+<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 "use strict";
 
@@ -255,8 +273,8 @@ const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
 if (!window.supabase) {
-  alert("The security service could not load. Please refresh the page.");
-  throw new Error("Supabase library unavailable");
+  alert("Security service could not load. Please refresh the page.");
+  throw new Error("Supabase library unavailable.");
 }
 
 const supabaseClient = window.supabase.createClient(
@@ -264,72 +282,28 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
-/* PAGE ELEMENTS */
+/* ELEMENTS */
 const loginScreen = document.getElementById("loginScreen");
 const dashboard = document.getElementById("dashboard");
 const loginForm = document.getElementById("loginForm");
 const loginButton = document.getElementById("loginButton");
 const loginError = document.getElementById("loginError");
-const passwordFields = document.getElementById("passwordFields");
-const setupFields = document.getElementById("setupFields");
-const mfaFields = document.getElementById("mfaFields");
-const mfaCode = document.getElementById("mfaCode");
-const setupSecret = document.getElementById("setupSecret");
-const loginHeading = document.getElementById("loginHeading");
-const loginDescription = document.getElementById("loginDescription");
-const adminTag = document.getElementById("adminTag");
-const welcomeTitle = document.getElementById("welcomeTitle");
 const navigation = document.getElementById("navigation");
 
-let loginMode = "password";
-let pendingFactorId = null;
-let pendingChallengeId = null;
-let pendingProfile = null;
-let mfaInProgress = false;
+let isLoggingIn = false;
 let isAutoLocking = false;
 
-/* LOGIN SCREEN */
+/* SHOW LOGIN */
 function showLogin(message = "") {
   dashboard.classList.remove("authenticated");
   loginScreen.style.display = "flex";
+
   loginError.textContent = message;
   loginError.style.display = message ? "block" : "none";
 }
 
-function setLoginMode(mode) {
-  loginMode = mode;
-
-  passwordFields.style.display = mode === "password" ? "block" : "none";
-  setupFields.style.display = mode === "setup" ? "block" : "none";
-  mfaFields.style.display = mode === "mfa" ? "block" : "none";
-
-  document.getElementById("email").required = mode === "password";
-  document.getElementById("password").required = mode === "password";
-  mfaCode.required = mode === "mfa";
-
-  loginHeading.textContent =
-    mode === "password" ? "Administrator Login" :
-    mode === "setup" ? "Authenticator Setup" :
-    "Authenticator Verification";
-
-  loginDescription.textContent =
-    mode === "password"
-      ? "Sign in with your authorised administrator account."
-      : mode === "setup"
-      ? "Connect Google Authenticator before continuing."
-      : "Enter the current six-digit code from your authenticator app.";
-
-  loginButton.textContent =
-    mode === "password" ? "Sign In Securely" :
-    mode === "setup" ? "Continue to Verification" :
-    "Verify Code";
-
-  loginError.style.display = "none";
-  mfaCode.value = "";
-}
-
-/* ADMINISTRATOR PROFILE */
-async function verifyAdminProfile(user) {
+/* VERIFY ADMINISTRATOR */
+async function verifyAdminAccess(user) {
   const { data: profile, error } = await supabaseClient
     .from("admin_profiles")
     .select("full_name, role, is_active")
@@ -347,183 +321,165 @@ async function verifyAdminProfile(user) {
     profile.is_active !== true ||
     !permittedRoles.includes(profile.role)
   ) {
-    throw new Error("Access denied. This account is not an active authorised administrator.");
+    throw new Error(
+      "Access denied. Your account is not an authorised active administrator."
+    );
   }
 
   return profile;
 }
 
-/* CREATE MFA CHALLENGE */
-async function createMFAChallenge(factorId) {
-  const { data, error } = await supabaseClient.auth.mfa.challenge({
-    factorId
-  });
-
-  if (error) throw error;
-
-  pendingFactorId = factorId;
-  pendingChallengeId = data.id;
-}
-
-/* START MFA */
-async function startMFA(profile) {
-  pendingProfile = profile;
-  mfaInProgress = true;
-
-  const { data, error } = await supabaseClient.auth.mfa.listFactors();
-
-  if (error) throw error;
-
-  const verifiedFactors = (data.totp || []).filter(
-    factor => factor.status === "verified"
-  );
-
-  if (verifiedFactors.length > 0) {
-    await createMFAChallenge(verifiedFactors[0].id);
-    setLoginMode("mfa");
-    showLogin("Enter the six-digit code from Google Authenticator.");
-    mfaCode.focus();
-    return;
-  }
-
-  if ((data.totp || []).length > 0) {
-    throw new Error(
-      "An unfinished authenticator setup exists. Please contact your administrator to resolve it in Supabase."
-    );
-  }
-
-  /* FIRST-TIME ENROLLMENT */
-  const { data: enrollment, error: enrollError } =
-    await supabaseClient.auth.mfa.enroll({
-      factorType: "totp",
-      friendlyName: "VANTAGE X CEO Authenticator"
-    });
-
-  if (enrollError) throw enrollError;
-
-  pendingFactorId = enrollment.id;
-  setupSecret.value = enrollment.totp.secret;
-
-  setLoginMode("setup");
-  showLogin(
-    "Add this setup key to Google Authenticator. Then continue to enter the code."
-  );
-}
-
-/* COMPLETE MFA */
-async function finishMFA(code) {
-  if (!pendingFactorId) {
-    throw new Error("Authenticator session expired. Please sign in again.");
-  }
-
-  if (!pendingChallengeId) {
-    await createMFAChallenge(pendingFactorId);
-  }
-
-  const { error } = await supabaseClient.auth.mfa.verify({
-    factorId: pendingFactorId,
-    challengeId: pendingChallengeId,
-    code
-  });
-
-  if (error) {
-    pendingChallengeId = null;
-    throw new Error("Incorrect or expired code. Please try again.");
-  }
-
-  const { data: assurance, error: assuranceError } =
-    await supabaseClient.auth.mfa.getAuthenticatorAssuranceLevel();
-
-  if (assuranceError) throw assuranceError;
-
-  if (assurance.currentLevel !== "aal2") {
-    throw new Error("Second-factor verification was not confirmed.");
-  }
-
-  const profile = pendingProfile;
-
-  if (!profile) {
-    throw new Error("Administrator session expired. Please sign in again.");
-  }
-
-  pendingFactorId = null;
-  pendingChallengeId = null;
-  pendingProfile = null;
-  mfaInProgress = false;
-
-  setupSecret.value = "";
-  document.getElementById("password").value = "";
-  mfaCode.value = "";
-
-  showDashboard(profile);
-}
-
-/* SHOW DASHBOARD */
+/* OPEN DASHBOARD */
 function showDashboard(profile) {
   loginScreen.style.display = "none";
   dashboard.classList.add("authenticated");
-  adminTag.textContent = profile.role + " WORKSPACE";
-  welcomeTitle.textContent = "Welcome, " + profile.full_name;
+
+  document.getElementById("adminTag").textContent =
+    profile.role + " WORKSPACE";
+
+  document.getElementById("welcomeTitle").textContent =
+    "Welcome, " + profile.full_name;
 }
 
-/* LOGIN FORM */
+/* LOGIN */
 loginForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  if (loginButton.disabled) return;
+  if (isLoggingIn) return;
 
+  isLoggingIn = true;
   loginButton.disabled = true;
+  loginButton.textContent = "Signing In...";
   loginError.style.display = "none";
 
   try {
-    if (loginMode === "password") {
-      loginButton.textContent = "Authenticating...";
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
 
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
+    if (error) throw error;
 
-      if (error) throw error;
-      if (!data.user) throw new Error("Unable to identify your account.");
-
-      const profile = await verifyAdminProfile(data.user);
-      await startMFA(profile);
-
-    } else if (loginMode === "setup") {
-      await createMFAChallenge(pendingFactorId);
-      setLoginMode("mfa");
-      showLogin("Enter the six-digit code displayed by Google Authenticator.");
-      mfaCode.focus();
-
-    } else if (loginMode === "mfa") {
-      const code = mfaCode.value.trim();
-
-      if (!/^[0-9]{6}$/.test(code)) {
-        throw new Error("Please enter a valid six-digit code.");
-      }
-
-      loginButton.textContent = "Verifying...";
-      await finishMFA(code);
+    if (!data.user) {
+      throw new Error("Unable to identify your account.");
     }
+
+    const profile = await verifyAdminAccess(data.user);
+
+    document.getElementById("password").value = "";
+
+    showDashboard(profile);
 
   } catch (error) {
-    console.error("Authentication error:", error);
+    console.error("Login error:", error);
 
-    if (loginMode === "password") {
-      mfaInProgress = false;
-      pendingFactorId = null;
-      pendingChallengeId = null;
-      pendingProfile = null;
-    }
-
-    showLogin(error.message || "Authentication failed. Please try again.");
+    showLogin(
+      error.message || "Login failed. Please check your details and try again."
+    );
 
   } finally {
+    isLoggingIn = false;
     loginButton.disabled = false;
+    loginButton.textContent = "Sign In Securely";
+  }
+});
 
-    if (loginM
+/* SIGN OUT */
+document.getElementById("logoutButton").addEventListener("click", async function() {
+  showLogin();
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    showLogin("Sign-out could not be completed. Please refresh the page.");
+  }
+});
+
+/* AUTOMATIC SECURITY LOCK */
+async function lockDashboard() {
+  if (isAutoLocking) return;
+
+  isAutoLocking = true;
+
+  dashboard.classList.remove("authenticated");
+  loginScreen.style.display = "flex";
+
+  document.getElementById("password").value = "";
+
+  try {
+    await supabaseClient.auth.signOut({ scope: "local" });
+  } catch (error) {
+    console.error("Automatic lock error:", error);
+  }
+
+  isAutoLocking = false;
+}
+
+/* LOCK WHEN USER LEAVES PAGE */
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "hidden") {
+    lockDashboard();
+  }
+});
+
+window.addEventListener("pagehide", function() {
+  lockDashboard();
+});
+
+/* DASHBOARD NAVIGATION */
+const buttons = document.querySelectorAll(".nav-item");
+const views = document.querySelectorAll(".view");
+const pageTitle = document.getElementById("pageTitle");
+
+buttons.forEach(button => {
+  button.addEventListener("click", function() {
+    const target = button.dataset.view;
+
+    views.forEach(view => {
+      view.classList.toggle("active", view.id === target);
+    });
+
+    buttons.forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
+    pageTitle.textContent =
+      target === "overview"
+        ? "Executive Dashboard"
+        : button.textContent.trim();
+
+    navigation.classList.remove("open");
+  });
+});
+
+/* MOBILE MENU */
+document.getElementById("menuToggle").addEventListener("click", function() {
+  navigation.classList.toggle("open");
+});
+
+/* INITIALISE APPLICATION */
+async function initialiseDashboard() {
+  showLogin();
+
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+
+  try {
+    await supabaseClient.auth.signOut({ scope: "local" });
+  } catch (error) {
+    console.error("Session reset error:", error);
+  }
+}
+
+initialiseDashboard();
+
+</script>
+</body>
+  </html>
+  
