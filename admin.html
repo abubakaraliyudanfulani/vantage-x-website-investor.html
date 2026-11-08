@@ -4,239 +4,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VANTAGE X | Admin Dashboard</title>
+<title>VANTAGE X | Administration</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --navy:#091725;--navy2:#102638;--gold:#c9a45c;
-  --white:#fff;--bg:#f4f6f8;--border:#e5e9ed;
-  --muted:#788592;--red:#b42318;
+  --navy:#091725;
+  --navy2:#142d40;
+  --gold:#c9a45c;
+  --gold2:#e4c987;
+  --white:#fff;
+  --bg:#f4f6f8;
+  --muted:#71808d;
+  --border:#e1e6eb;
+  --red:#bd4545;
+  --green:#23845b;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#192b3b}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:#24313d;
+}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
+.hidden{display:none!important}
 
 /* LOGIN */
 #loginScreen{
-  min-height:100vh;display:flex;align-items:center;
-  justify-content:center;padding:20px;
-  background:linear-gradient(135deg,#06111d,#142d40)
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#06111d,#142d40);
 }
 .login-card{
-  width:100%;max-width:420px;background:white;
-  padding:35px 28px;border-radius:14px;
-  box-shadow:0 20px 60px #0005
+  width:100%;
+  max-width:430px;
+  background:white;
+  padding:35px 28px;
+  border-radius:14px;
+  box-shadow:0 20px 60px #0005;
 }
-.brand{text-align:center;margin-bottom:30px}
-.brand h1{color:var(--navy);font-size:24px;letter-spacing:2px;margin:0}
-.brand span{color:var(--gold);font-size:11px;letter-spacing:3px}
-.brand p{color:#78838d;font-size:12px}
+.brand{text-align:center;margin-bottom:28px}
+.brand h1{
+  color:var(--navy);
+  font-family:Georgia,serif;
+  font-size:25px;
+  letter-spacing:2px;
+  margin:0;
+}
+.brand span{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:3px;
+}
+.brand p{color:var(--muted);font-size:12px}
 .login-card h2{font-size:21px}
-.login-card .intro{color:var(--muted);font-size:13px}
-.login-card label{display:block;font-size:13px;font-weight:bold;margin:17px 0 8px}
+.login-card label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin:17px 0 8px;
+}
 .login-card input{
-  width:100%;padding:14px;border:1px solid #dce2e7;
-  border-radius:7px;outline:none
+  width:100%;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:7px;
 }
-.login-card input:focus{border-color:var(--gold)}
-#loginButton{
-  width:100%;padding:14px;margin-top:24px;border:0;
-  border-radius:7px;background:var(--navy);color:white;font-weight:bold
+.login-card button{
+  width:100%;
+  padding:14px;
+  margin-top:24px;
+  border:0;
+  border-radius:7px;
+  background:var(--navy);
+  color:white;
+  font-weight:bold;
 }
-#loginMessage{margin-top:15px;font-size:13px;color:var(--red);overflow-wrap:anywhere}
-.login-footer{text-align:center;margin-top:25px;color:#89939b;font-size:11px}
+.login-card button:disabled{opacity:.6}
+#loginMessage{
+  margin-top:15px;
+  font-size:13px;
+  color:var(--red);
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.login-footer{
+  text-align:center;
+  margin-top:25px;
+  color:#89939b;
+  font-size:11px;
+}
 
 /* DASHBOARD */
 #dashboard{display:none;min-height:100vh}
 #dashboard.authenticated{display:flex}
 .sidebar{
-  width:250px;min-width:250px;background:var(--navy);
-  color:white;min-height:100vh;padding:25px 15px
+  width:250px;
+  min-width:250px;
+  background:var(--navy);
+  color:white;
+  min-height:100vh;
+  padding:25px 15px;
 }
-.sidebar-brand{padding:5px 12px 25px;border-bottom:1px solid #ffffff20}
-.sidebar-brand h2{font-size:18px;letter-spacing:1px;margin:0}
-.sidebar-brand span{font-size:10px;letter-spacing:2px;color:var(--gold)}
-.sidebar-label{color:#8293a2;font-size:10px;letter-spacing:2px;padding:25px 12px 10px}
+.sidebar-brand{
+  padding:5px 12px 25px;
+  border-bottom:1px solid #ffffff20;
+}
+.sidebar-brand h2{
+  font-family:Georgia,serif;
+  font-size:19px;
+  letter-spacing:1px;
+  margin:0;
+}
+.sidebar-brand span{
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--gold);
+}
+.sidebar-label{
+  color:#8293a2;
+  font-size:10px;
+  letter-spacing:2px;
+  padding:25px 12px 10px;
+}
 .nav-button{
-  width:100%;display:block;padding:13px 12px;border:0;
-  background:transparent;color:#d5dce3;text-align:left;
-  border-radius:6px;margin-bottom:4px
+  width:100%;
+  display:block;
+  padding:13px 12px;
+  border:0;
+  background:transparent;
+  color:#d5dce3;
+  text-align:left;
+  border-radius:6px;
+  margin-bottom:4px;
 }
-.nav-button:hover,.nav-button.active{background:#ffffff14;color:#e4c987}
-.sidebar-bottom{margin-top:30px;border-top:1px solid #ffffff20;padding-top:15px}
+.nav-button:hover,.nav-button.active{
+  background:#ffffff14;
+  color:var(--gold2);
+}
+.sidebar-bottom{
+  margin-top:30px;
+  border-top:1px solid #ffffff20;
+  padding-top:15px;
+}
 #logoutButton{
-  width:100%;background:#ffffff12;border:1px solid #ffffff25;
-  padding:12px;color:white;border-radius:6px
+  width:100%;
+  background:#ffffff12;
+  border:1px solid #ffffff25;
+  padding:12px;
+  color:white;
+  border-radius:6px;
 }
 .main{flex:1;min-width:0}
 .topbar{
-  min-height:75px;background:white;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;padding:0 30px
+  min-height:75px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 30px;
+  gap:15px;
 }
 .topbar h2{font-size:18px;margin:0}
-.admin-info{font-size:12px;color:#687785;text-align:right}
-.admin-info strong{display:block;color:var(--navy);margin-bottom:4px}
+.admin-info{
+  font-size:12px;
+  color:var(--muted);
+  text-align:right;
+}
+.admin-info strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:4px;
+}
 .content{padding:30px}
 .view{display:none}
 .view.active{display:block}
 .welcome{margin-bottom:25px}
 .welcome h1{font-size:25px;margin:0 0 8px}
 .welcome p{color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-bottom:25px}
-.stat-card,.panel,.management-card{
-  background:white;border:1px solid var(--border);
-  border-radius:10px;padding:22px
+.panel,.management-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:22px;
+  margin-bottom:20px;
 }
-.stat-card span{color:var(--muted);font-size:12px}
-.stat-card h2{margin:12px 0 0;font-size:26px;color:var(--navy)}
-.panel h3,.management-card h3{margin-top:0;color:var(--navy)}
-.panel p,.management-card p{font-size:13px;color:var(--muted);line-height:1.7}
+.panel h3,.management-card h3{
+  margin-top:0;
+  color:var(--navy);
+}
+.panel p,.management-card p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.7;
+}
 .notice{
-  background:#fff9eb;border:1px solid #ead8ad;border-radius:8px;
-  padding:15px;color:#725a2d;font-size:13px;line-height:1.6
+  background:#fff9eb;
+  border:1px solid #ead8ad;
+  border-radius:8px;
+  padding:15px;
+  color:#725a2d;
+  font-size:13px;
+  line-height:1.6;
 }
-.management-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-#mobileMenu{
-  display:none;background:var(--navy);color:white;
-  border:0;padding:9px 12px;border-radius:5px
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
 }
-
-/* PROJECTS */
-.project-toolbar{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap;margin-bottom:20px
-}
-.primary-btn,.secondary-btn,.danger-btn{
-  padding:11px 16px;border:0;border-radius:6px;font-weight:bold
-}
-.primary-btn{background:var(--navy);color:white}
-.secondary-btn{background:#e9edf1;color:var(--navy)}
-.danger-btn{background:#fff0f0;color:#b42318}
-.project-form{
-  background:white;border:1px solid var(--border);
-  border-radius:10px;padding:22px;margin-bottom:25px
-}
-.project-form h3{margin-top:0}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.field{display:flex;flex-direction:column;gap:7px}
 .field.full{grid-column:1/-1}
-.field label{font-size:13px;font-weight:bold}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
 .field input,.field textarea,.field select{
-  width:100%;padding:12px;border:1px solid #dce2e7;
-  border-radius:6px;background:white;min-width:0
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  background:white;
 }
 .field textarea{min-height:110px;resize:vertical}
-.field small{color:var(--muted);font-size:11px}
-.form-actions,.project-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-#projectMessage{font-size:13px;margin-top:12px;line-height:1.5}
-.project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.primary-btn,.secondary-btn,.danger-btn{
+  padding:12px 17px;
+  border:0;
+  border-radius:6px;
+  font-weight:bold;
+  margin:5px 5px 5px 0;
+}
+.primary-btn{background:var(--navy);color:white}
+.secondary-btn{background:#edf0f3;color:var(--navy)}
+.danger-btn{background:#fbeaea;color:var(--red)}
+.primary-btn:disabled{opacity:.6}
+.project-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
 .project-card{
-  background:white;border:1px solid var(--border);
-  border-radius:10px;overflow:hidden
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
 }
 .project-card img{
-  width:100%;height:190px;object-fit:cover;background:#e9edf1
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  background:#e9edf0;
 }
-.project-card-content{padding:17px}
+.project-card-body{padding:17px}
 .project-card h3{margin:0 0 8px;color:var(--navy)}
-.project-card p{font-size:13px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
-.project-meta{font-size:12px;color:#647482;margin:8px 0}
-.status-tag{
-  display:inline-block;padding:5px 9px;border-radius:20px;
-  font-size:11px;background:#edf1f5;color:#34495b
+.project-card p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
 }
-.empty-state{
-  padding:30px;text-align:center;color:var(--muted);
-  background:white;border:1px dashed #cbd4dc;border-radius:10px;
-  grid-column:1/-1
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#edf0f3;
+  font-size:11px;
+  margin:5px 0;
 }
-#imagePreview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-#imagePreview img{width:85px;height:70px;object-fit:cover;border-radius:6px}
-#lockScreen{
-  display:none;position:fixed;inset:0;z-index:1000;
-  background:#06111df2;align-items:center;justify-content:center;padding:20px
+.status.published{background:#e5f5ed;color:var(--green)}
+#pageMessage{
+  font-size:13px;
+  margin:12px 0;
+  line-height:1.5;
 }
-.lock-card{
-  width:100%;max-width:380px;background:white;border-radius:12px;
-  padding:28px;text-align:center
+.success{color:var(--green)}
+.error{color:var(--red)}
+.empty{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  background:white;
+  border:1px dashed var(--border);
+  border-radius:10px;
 }
-.lock-card input{width:100%;padding:12px;margin:8px 0;border:1px solid var(--border);border-radius:6px}
-.lock-card button{width:100%;padding:12px;background:var(--navy);color:white;border:0;border-radius:6px}
-#lockMessage{color:var(--red);font-size:13px}
+.mobile-menu{
+  display:none;
+  background:var(--navy);
+  color:white;
+  border:0;
+  padding:9px 12px;
+  border-radius:5px;
+}
 
-@media(max-width:900px){
-  .sidebar{width:220px;min-width:220px}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:650px){
+@media(max-width:800px){
   #dashboard.authenticated{display:block}
-  .sidebar{display:none;width:100%;min-height:auto}
-  .sidebar.mobile-open{display:block}
-  .topbar{padding:0 15px;gap:10px}
-  #mobileMenu{display:block}
-  .content{padding:20px 15px}
-  .management-grid,.project-list{grid-template-columns:1fr}
+  .sidebar{
+    display:none;
+    width:100%;
+    min-width:0;
+    min-height:auto;
+  }
+  .sidebar.open{display:block}
+  .mobile-menu{display:block}
+  .topbar{padding:15px}
+  .content{padding:17px}
+  .project-list{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .field.full{grid-column:auto}
-  .stats{gap:10px}
-  .stat-card{padding:15px}
-  .admin-info{font-size:10px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
+<!-- LOGIN SCREEN -->
+<section id="loginScreen">
   <div class="login-card">
     <div class="brand">
       <h1>VANTAGE X</h1>
       <span>GROUP LTD</span>
       <p>ESTATES &amp; CO.</p>
     </div>
-    <h2>Admin Login</h2>
-    <p class="intro">Secure access to the management dashboard.</p>
+
+    <h2>Administration Login</h2>
+    <p style="color:#71808d;font-size:13px">
+      Sign in to access the VANTAGE X management system.
+    </p>
 
     <form id="loginForm">
       <label for="email">Email Address</label>
       <input type="email" id="email" autocomplete="username" required>
 
       <label for="password">Password</label>
-      <input type="password" id="password" autocomplete="current-password" required>
+      <input type="password" id="password"
+        autocomplete="current-password" required>
 
       <button type="submit" id="loginButton">Sign In</button>
       <div id="loginMessage" role="alert"></div>
     </form>
+
     <div class="login-footer">
       VANTAGE X GROUP LTD &copy; <span id="loginYear"></span>
     </div>
   </div>
-</div>
+</section>
 
-<!-- DASHBOARD -->
+<!-- ADMIN DASHBOARD -->
 <div id="dashboard">
+
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <h2>VANTAGE X</h2>
-      <span>ADMINISTRATION</span>
+      <span>GROUP LTD · ADMIN</span>
     </div>
 
     <div class="sidebar-label">MAIN MENU</div>
-    <button class="nav-button active" data-view="overview">Overview</button>
+    <button class="nav-button active" data-view="overview">Dashboard Overview</button>
     <button class="nav-button" data-view="projects">Projects Management</button>
-    <button class="nav-button" data-view="investors">Investors</button>
-    <button class="nav-button" data-view="clients">Clients</button>
-    <button class="nav-button" data-view="properties">Properties</button>
-    <button class="nav-button" data-view="investments">Investments</button>
-    <button class="nav-button" data-view="partnerships">Partnerships</button>
-    <button class="nav-button" data-view="staff">Staff &amp; Managers</button>
-    <button class="nav-button" data-view="messages">Messages</button>
-    <button class="nav-button" data-view="reports">Reports</button>
-    <button class="nav-button" data-view="settings">Settings</button>
+    <button class="nav-button" data-view="addProject">Add New Project</button>
+    <button class="nav-button" data-view="settings">Account Information</button>
 
     <div class="sidebar-bottom">
       <button id="logoutButton">Sign Out</button>
@@ -246,8 +378,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
   <main class="main">
     <header class="topbar">
       <div style="display:flex;align-items:center;gap:12px">
-        <button id="mobileMenu">☰</button>
-        <h2 id="pageTitle">Overview</h2>
+        <button class="mobile-menu" id="mobileMenu">Menu</button>
+        <h2 id="pageTitle">Dashboard Overview</h2>
       </div>
       <div class="admin-info">
         <strong id="adminName">Administrator</strong>
@@ -260,142 +392,147 @@ button:disabled{opacity:.55;cursor:not-allowed}
       <section class="view active" id="overview">
         <div class="welcome">
           <h1>Welcome to VANTAGE X</h1>
-          <p>Manage your company's administration from one place.</p>
+          <p>Manage company projects and website content from one place.</p>
         </div>
-        <div class="stats">
-          <div class="stat-card"><span>Total Investors</span><h2>—</h2></div>
-          <div class="stat-card"><span>Total Clients</span><h2>—</h2></div>
-          <div class="stat-card"><span>Projects</span><h2 id="projectCount">0</h2></div>
-          <div class="stat-card"><span>Staff Members</span><h2>—</h2></div>
-        </div>
+
         <div class="panel">
-          <h3>Administration Overview</h3>
-          <p>Your VANTAGE X management dashboard is connected to Supabase.</p>
-          <div class="notice">Manage company projects through the Projects Management section.</div>
+          <h3>Administration Centre</h3>
+          <p>
+            This dashboard allows authorized administrators to create,
+            update, publish and manage company projects.
+          </p>
+          <div class="notice">
+            Only publish project information and images that VANTAGE X
+            GROUP LTD is authorized to share.
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Project Management</h3>
+          <p id="overviewProjectCount">Loading project information...</p>
+          <button class="primary-btn" data-open-view="addProject">
+            Add a Project
+          </button>
+          <button class="secondary-btn" data-open-view="projects">
+            View Projects
+          </button>
         </div>
       </section>
 
-      <!-- PROJECT MANAGEMENT -->
       <section class="view" id="projects">
-        <div class="project-toolbar">
-          <div>
-            <h2 style="margin:0 0 5px">Projects Management</h2>
-            <p style="margin:0;color:#788592;font-size:13px">Create and manage company projects.</p>
-          </div>
-          <button class="primary-btn" id="addProjectButton">+ Add New Project</button>
+        <div class="welcome">
+          <h1>Projects Management</h1>
+          <p>View and manage your company projects.</p>
+        </div>
+        <div id="projectsMessage"></div>
+        <div id="projectList" class="project-list">
+          <div class="empty">Loading projects...</div>
+        </div>
+      </section>
+
+      <section class="view" id="addProject">
+        <div class="welcome">
+          <h1 id="projectFormTitle">Add New Project</h1>
+          <p>Enter the project details and upload its images.</p>
         </div>
 
-        <div class="project-form" id="projectFormPanel" hidden>
-          <h3 id="formHeading">Add New Project</h3>
+        <div class="panel">
           <form id="projectForm">
-            <input type="hidden" id="editingProjectId">
             <div class="form-grid">
-              <div class="field">
+
+              <div class="field full">
                 <label for="projectName">Project Name *</label>
-                <input id="projectName" maxlength="150" required placeholder="e.g. Vantage Luxury Residences">
+                <input id="projectName" required maxlength="150">
               </div>
-              <div class="field">
-                <label for="projectCategory">Project Category</label>
-                <select id="projectCategory">
-                  <option>Real Estate</option><option>Residential</option>
-                  <option>Commercial</option><option>Land Development</option>
-                  <option>Infrastructure</option><option>Other</option>
-                </select>
+
+              <div class="field full">
+                <label for="projectDescription">Description</label>
+                <textarea id="projectDescription"
+                  placeholder="Describe the project..."></textarea>
               </div>
+
               <div class="field">
                 <label for="projectLocation">Location</label>
                 <input id="projectLocation" placeholder="e.g. Kano, Nigeria">
               </div>
+
+              <div class="field">
+                <label for="projectCategory">Category</label>
+                <select id="projectCategory">
+                  <option value="Real Estate">Real Estate</option>
+                  <option value="Residential">Residential</option>
+                  <option value="Commercial">Commercial</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Business Development">Business Development</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
               <div class="field">
                 <label for="projectStatus">Project Status</label>
                 <select id="projectStatus">
-                  <option>Upcoming</option><option>Ongoing</option><option>Completed</option>
+                  <option value="Upcoming">Upcoming</option>
+                  <option value="Ongoing">Ongoing</option>
+                  <option value="Completed">Completed</option>
                 </select>
               </div>
+
               <div class="field">
-                <label for="projectPrice">Price / Budget (optional)</label>
-                <input id="projectPrice" placeholder="e.g. Contact us for pricing">
+                <label for="projectPrice">Price / Investment Information</label>
+                <input id="projectPrice"
+                  placeholder="Optional. Avoid unverified promises.">
               </div>
-              <div class="field">
+
+              <div class="field full">
                 <label for="coverImage">Cover Image</label>
-                <input type="file" id="coverImage" accept="image/jpeg,image/png,image/webp">
-                <small>JPG, PNG or WebP. Maximum 5 MB.</small>
+                <input type="file" id="coverImage" accept="image/*">
+                <small>Maximum image size: 5 MB.</small>
               </div>
+
               <div class="field full">
-                <label for="galleryImages">Project Gallery</label>
-                <input type="file" id="galleryImages" accept="image/jpeg,image/png,image/webp" multiple>
-                <small>Up to 10 images, maximum 5 MB each.</small>
-                <div id="imagePreview"></div>
+                <label for="galleryImages">Gallery Images</label>
+                <input type="file" id="galleryImages"
+                  accept="image/*" multiple>
+                <small>Maximum 10 gallery images, 5 MB each.</small>
               </div>
-              <div class="field full">
-                <label for="projectDescription">Project Description</label>
-                <textarea id="projectDescription" placeholder="Describe the project, its objectives and features."></textarea>
-              </div>
+
             </div>
-            <div class="form-actions">
-              <button type="submit" class="primary-btn" id="saveProjectButton">Save Project</button>
-              <button type="button" class="secondary-btn" id="cancelProjectButton">Cancel</button>
-            </div>
-            <div id="projectMessage" role="status"></div>
+
+            <div id="projectFormMessage"></div>
+
+            <button type="submit" class="primary-btn" id="saveProjectButton">
+              Save Project
+            </button>
+            <button type="button" class="secondary-btn" id="resetProjectButton">
+              Clear Form
+            </button>
           </form>
         </div>
-
-        <div class="project-toolbar">
-          <h3 style="margin:0">Your Projects</h3>
-          <button class="secondary-btn" id="refreshProjects">Refresh List</button>
-        </div>
-        <div class="project-list" id="projectList">
-          <div class="empty-state">Your projects will appear here.</div>
-        </div>
       </section>
 
-      <section class="view" id="investors"><h2>Investor Management</h2><div class="panel"><p>Investor records and enquiries will be integrated here.</p></div></section>
-      <section class="view" id="clients"><h2>Client Management</h2><div class="panel"><p>Manage client information and service enquiries.</p></div></section>
-      <section class="view" id="properties"><h2>Property Management</h2><div class="panel"><p>Manage property listings and enquiries here.</p></div></section>
-      <section class="view" id="investments"><h2>Investment Management</h2><div class="panel"><p>Manage investment information and documentation here.</p></div></section>
-      <section class="view" id="partnerships"><h2>Partnership Management</h2><div class="panel"><p>Manage business partnerships and collaboration enquiries.</p></div></section>
-      <section class="view" id="staff"><h2>Staff &amp; Managers</h2><div class="panel"><p>Manage authorised administrative personnel here.</p></div></section>
-      <section class="view" id="messages"><h2>Messages</h2><div class="panel"><p>Client and investor enquiries will appear here after integration.</p></div></section>
-      <section class="view" id="reports"><h2>Reports</h2><div class="panel"><p>Management reports will appear here after integration.</p></div></section>
       <section class="view" id="settings">
-        <h2>Dashboard Settings</h2>
+        <div class="welcome">
+          <h1>Account Information</h1>
+          <p>Details of the currently signed-in administrator.</p>
+        </div>
         <div class="panel">
-          <h3>Account Information</h3>
-          <p id="settingsName">Name: —</p>
-          <p id="settingsEmail">Email: —</p>
-          <p id="settingsRole">Role: —</p>
-          <button id="settingsLogout" class="primary-btn">Sign Out</button>
+          <p id="settingsName"></p>
+          <p id="settingsEmail"></p>
+          <p id="settingsRole"></p>
+          <p id="settingsStatus"></p>
         </div>
       </section>
+
     </div>
   </main>
-</div>
-
-<!-- AUTO-LOCK SCREEN -->
-<div id="lockScreen">
-  <div class="lock-card">
-    <h2>Dashboard Locked</h2>
-    <p>Enter your password to continue.</p>
-    <form id="unlockForm">
-      <input type="password" id="unlockPassword" autocomplete="current-password" placeholder="Account password" required>
-      <button type="submit" id="unlockButton">Unlock Dashboard</button>
-      <p id="lockMessage"></p>
-    </form>
-    <button type="button" id="lockSignOut" style="margin-top:10px;background:#eee;color:#222">Sign Out</button>
-  </div>
 </div>
 
 <script>
 "use strict";
 
-/* SUPABASE CONNECTION */
+/* SUPABASE CONFIGURATION */
 const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
 
 const $ = id => document.getElementById(id);
 
@@ -407,15 +544,20 @@ const loginMessage = $("loginMessage");
 const emailInput = $("email");
 const passwordInput = $("password");
 
+let supabaseClient = null;
 let currentAdmin = null;
-let projectsLoaded = false;
-let projectsLoading = false;
-let inactivityStart = null;
-let lockTimer = null;
+let editingProjectId = null;
 
-/* GENERAL HELPERS */
+$("loginYear").textContent = new Date().getFullYear();
+
 function setLoginMessage(message) {
   loginMessage.textContent = message || "";
+}
+
+function setProjectMessage(message, type = "") {
+  const element = $("projectFormMessage");
+  element.textContent = message || "";
+  element.className = type;
 }
 
 function showLogin(message = "") {
@@ -430,52 +572,53 @@ function showDashboard(profile, user) {
 
   $("adminName").textContent = profile.full_name || "Administrator";
   $("adminRole").textContent = profile.role;
-  $("settingsName").textContent = "Name: " + (profile.full_name || "Administrator");
-  $("settingsEmail").textContent = "Email: " + (user.email || "");
+  $("settingsName").textContent =
+    "Name: " + (profile.full_name || "Administrator");
+  $("settingsEmail").textContent =
+    "Email: " + (user.email || "");
   $("settingsRole").textContent = "Role: " + profile.role;
+  $("settingsStatus").textContent =
+    "Account status: " + (profile.is_active ? "Active" : "Inactive");
 
   loginScreen.style.display = "none";
   dashboard.style.display = "flex";
   dashboard.classList.add("authenticated");
 
-  setLoginMessage("");
   passwordInput.value = "";
-  startInactivityLock();
-
-  // Project loading must never prevent the dashboard from opening.
-  loadProjects().catch(error => {
-    console.error("Project loading error:", error);
-  });
+  loadProjects();
 }
 
-async function verifyAdmin(user) {
-  if (!user || !user.id) {
-    throw new Error("Authentication returned no user account.");
-  }
+function friendlyError(error) {
+  return error && error.message
+    ? error.message
+    : "An unexpected error occurred. Please try again.";
+}
 
-  const {data: profile, error} = await supabaseClient
+/* VERIFY ADMIN PROFILE */
+async function verifyAdmin(user) {
+  const {data, error} = await supabaseClient
     .from("admin_profiles")
     .select("full_name, role, is_active")
     .eq("user_id", user.id)
     .maybeSingle();
 
-  if (error) {
-    throw new Error("Profile verification failed: " + error.message);
+  if (error) throw error;
+
+  if (!data) {
+    throw new Error(
+      "Your login succeeded, but no administrator profile was found. Contact the CEO."
+    );
   }
 
-  if (!profile) {
-    throw new Error("No administrator profile was found for this account.");
-  }
-
-  if (profile.is_active !== true) {
+  if (!data.is_active) {
     throw new Error("Your administrator account is inactive.");
   }
 
-  if (!["CEO", "MANAGER", "STAFF"].includes(profile.role)) {
-    throw new Error("Your administrator role is not authorised.");
+  if (!["CEO", "MANAGER", "STAFF"].includes(data.role)) {
+    throw new Error("Your account does not have an authorized role.");
   }
 
-  return profile;
+  return data;
 }
 
 /* LOGIN */
@@ -489,8 +632,8 @@ loginForm.addEventListener("submit", async event => {
   setLoginMessage("Connecting to VANTAGE X...");
 
   try {
-    if (!window.supabase) {
-      throw new Error("Supabase library did not load. Check your internet connection and refresh.");
+    if (!supabaseClient) {
+      throw new Error("Supabase is not ready. Refresh the page and try again.");
     }
 
     const {data, error} = await supabaseClient.auth.signInWithPassword({
@@ -501,20 +644,487 @@ loginForm.addEventListener("submit", async event => {
     if (error) throw error;
 
     if (!data || !data.user) {
-      throw new Error("Login completed without returning an account. Please try again.");
+      throw new Error("No user account was returned. Please try again.");
     }
 
     setLoginMessage("Verifying administrator account...");
 
     const profile = await verifyAdmin(data.user);
-
-    // Only hide login after successful verification.
     showDashboard(profile, data.user);
 
   } catch (error) {
-    console.error("Login failed:", error);
-    showLogin(error.message || "Unable to sign in. Please try again.");
+    console.error("VANTAGE X login error:", error);
+    showLogin(friendlyError(error));
   } finally {
     loginButton.disabled = false;
     loginButton.textContent = "Sign In";
-          
+  }
+});
+
+/* NAVIGATION */
+function openView(viewId) {
+  const target = $(viewId);
+  if (!target) return;
+
+  document.querySelectorAll(".view").forEach(view => {
+    view.classList.remove("active");
+  });
+
+  target.classList.add("active");
+
+  document.querySelectorAll(".nav-button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.view === viewId
+    );
+  });
+
+  const titles = {
+    overview: "Dashboard Overview",
+    projects: "Projects Management",
+    addProject: "Add / Edit Project",
+    settings: "Account Information"
+  };
+
+  $("pageTitle").textContent = titles[viewId] || "VANTAGE X";
+  $("sidebar").classList.remove("open");
+
+  if (viewId === "projects") loadProjects();
+}
+
+document.querySelectorAll(".nav-button").forEach(button => {
+  button.addEventListener("click", () => {
+    openView(button.dataset.view);
+  });
+});
+
+document.querySelectorAll("[data-open-view]").forEach(button => {
+  button.addEventListener("click", () => {
+    openView(button.dataset.openView);
+  });
+});
+
+$("mobileMenu").addEventListener("click", () => {
+  $("sidebar").classList.toggle("open");
+});
+
+/* ROLE PERMISSIONS */
+function isManagerOrCEO() {
+  return currentAdmin &&
+    ["CEO", "MANAGER"].includes(currentAdmin.profile.role);
+}
+
+function isCEO() {
+  return currentAdmin &&
+    currentAdmin.profile.role === "CEO";
+}
+
+/* PROJECT IMAGE UPLOAD */
+async function uploadImage(file) {
+  if (!file) return null;
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please select an image file.");
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error("Each image must be 5 MB or smaller.");
+  }
+
+  const extension = file.name.split(".").pop()
+    .toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+
+  const filePath =
+    Date.now() + "-" +
+    Math.random().toString(36).slice(2) + "." + extension;
+
+  const {error} = await supabaseClient.storage
+    .from("project-images")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false,
+      contentType: file.type
+    });
+
+  if (error) throw error;
+
+  const {data} = supabaseClient.storage
+    .from("project-images")
+    .getPublicUrl(filePath);
+
+  return data.publicUrl;
+}
+
+/* SAVE PROJECT */
+$("projectForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentAdmin) {
+    setProjectMessage("Please sign in again.", "error");
+    return;
+  }
+
+  if (!isManagerOrCEO()) {
+    setProjectMessage(
+      "Staff accounts cannot create or edit projects.",
+      "error"
+    );
+    return;
+  }
+
+  const button = $("saveProjectButton");
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+  try {
+    const name = $("projectName").value.trim();
+
+    if (!name) throw new Error("Project name is required.");
+
+    const coverFile = $("coverImage").files[0];
+    const galleryFiles = Array.from(
+      $("galleryImages").files
+    );
+
+    if (galleryFiles.length > 10) {
+      throw new Error("You can upload a maximum of 10 gallery images.");
+    }
+
+    let coverUrl = null;
+    let galleryUrls = [];
+
+    if (coverFile) {
+      setProjectMessage("Uploading cover image...");
+      coverUrl = await uploadImage(coverFile);
+    }
+
+    if (galleryFiles.length) {
+      setProjectMessage("Uploading gallery images...");
+
+      for (const file of galleryFiles) {
+ 
+        const url = await uploadImage(file);
+        galleryUrls.push(url);
+      }
+    }
+
+    const projectData = {
+      project_name: name,
+      description: $("projectDescription").value.trim(),
+      location: $("projectLocation").value.trim(),
+      category: $("projectCategory").value,
+      status: $("projectStatus").value,
+      price: $("projectPrice").value.trim()
+    };
+
+    if (coverUrl) projectData.cover_image = coverUrl;
+    if (galleryUrls.length) projectData.gallery = galleryUrls;
+
+    let result;
+
+    if (editingProjectId) {
+      result = await supabaseClient
+        .from("projects")
+        .update(projectData)
+        .eq("id", editingProjectId);
+    } else {
+      result = await supabaseClient
+        .from("projects")
+        .insert(projectData);
+    }
+
+    if (result.error) throw result.error;
+
+    setProjectMessage(
+      editingProjectId
+        ? "Project updated successfully."
+        : "Project saved successfully.",
+      "success"
+    );
+
+    resetProjectForm();
+    await loadProjects();
+
+  } catch (error) {
+    console.error("Project save error:", error);
+    setProjectMessage(friendlyError(error), "error");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Save Project";
+  }
+});
+
+/* RESET PROJECT FORM */
+function resetProjectForm() {
+  $("projectForm").reset();
+  editingProjectId = null;
+  $("projectFormTitle").textContent = "Add New Project";
+  $("saveProjectButton").textContent = "Save Project";
+  setProjectMessage("");
+}
+
+$("resetProjectButton").addEventListener("click", resetProjectForm);
+
+/* LOAD PROJECTS */
+async function loadProjects() {
+  const list = $("projectList");
+
+  if (!currentAdmin) return;
+
+  list.innerHTML = '<div class="empty">Loading projects...</div>';
+
+  try {
+    const {data, error} = await supabaseClient
+      .from("projects")
+      .select("*")
+      .order("created_at", {ascending:false});
+
+    if (error) throw error;
+
+    const projects = data || [];
+
+    $("overviewProjectCount").textContent =
+      "You currently have " + projects.length +
+      " project(s) in the management system.";
+
+    if (!projects.length) {
+      list.innerHTML =
+        '<div class="empty">No projects have been added yet.</div>';
+      return;
+    }
+
+    list.innerHTML = "";
+
+    projects.forEach(project => {
+      const card = document.createElement("article");
+      card.className = "project-card";
+
+      const image = document.createElement("img");
+      image.alt = project.project_name || "Project image";
+      image.src = project.cover_image || "";
+      image.onerror = () => {
+        image.style.display = "none";
+      };
+      card.appendChild(image);
+
+      const body = document.createElement("div");
+      body.className = "project-card-body";
+
+      const heading = document.createElement("h3");
+      heading.textContent = project.project_name || "Untitled project";
+      body.appendChild(heading);
+
+      const description = document.createElement("p");
+      description.textContent =
+        project.description || "No description provided.";
+      body.appendChild(description);
+
+      const location = document.createElement("p");
+      location.textContent =
+        "Location: " + (project.location || "Not specified");
+      body.appendChild(location);
+
+      const status = document.createElement("span");
+      status.className = "status" +
+        (project.is_published ? " published" : "");
+      status.textContent = project.is_published ? "Published" : "Draft";
+      body.appendChild(status);
+
+      const details = document.createElement("p");
+      details.textContent =
+        (project.category || "Other") + " · " +
+        (project.status || "Upcoming");
+      body.appendChild(details);
+
+      if (isManagerOrCEO()) {
+        const edit = document.createElement("button");
+        edit.className = "secondary-btn";
+        edit.textContent = "Edit";
+        edit.addEventListener("click", () => editProject(project));
+        body.appendChild(edit);
+
+        const publish = document.createElement("button");
+        publish.className = "primary-btn";
+        publish.textContent =
+          project.is_published ? "Unpublish" : "Publish";
+        publish.addEventListener("click", () => togglePublish(project));
+        body.appendChild(publish);
+      }
+
+      if (isCEO()) {
+        const remove = document.createElement("button");
+        remove.className = "danger-btn";
+        remove.textContent = "Delete";
+        remove.addEventListener("click", () => deleteProject(project));
+        body.appendChild(remove);
+      }
+
+      card.appendChild(body);
+      list.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Project loading error:", error);
+    list.innerHTML =
+      '<div class="empty">Unable to load projects: ' +
+      escapeHTML(friendlyError(error)) + '</div>';
+  }
+}
+
+/* SAFE TEXT */
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[character]);
+}
+
+/* EDIT PROJECT */
+function editProject(project) {
+  if (!isManagerOrCEO()) return;
+
+  editingProjectId = project.id;
+
+  $("projectName").value = project.project_name || "";
+  $("projectDescription").value = project.description || "";
+  $("projectLocation").value = project.location || "";
+  $("projectCategory").value = project.category || "Other";
+  $("projectStatus").value = project.status || "Upcoming";
+  $("projectPrice").value = project.price || "";
+
+  $("projectFormTitle").textContent = "Edit Project";
+  $("saveProjectButton").textContent = "Update Project";
+
+  setProjectMessage(
+    "Select a new image only if you want to replace the existing one.",
+    "success"
+  );
+
+  openView("addProject");
+}
+
+/* PUBLISH / UNPUBLISH */
+async function togglePublish(project) {
+  if (!isManagerOrCEO()) return;
+
+  const action = project.is_published ? "unpublish" : "publish";
+
+  if (!confirm("Are you sure you want to " + action + " this project?")) {
+    return;
+  }
+
+  try {
+    const {error} = await supabaseClient
+      .from("projects")
+      .update({is_published: !project.is_published})
+      .eq("id", project.id);
+
+    if (error) throw error;
+
+    await loadProjects();
+
+  } catch (error) {
+    alert("Unable to change publishing status: " + friendlyError(error));
+  }
+}
+
+/* DELETE PROJECT */
+async function deleteProject(project) {
+  if (!isCEO()) return;
+
+  if (!confirm("Permanently delete " + project.project_name + "?")) {
+    return;
+  }
+
+  try {
+    const {error} = await supabaseClient
+      .from("projects")
+      .delete()
+      .eq("id", project.id);
+
+    if (error) throw error;
+
+    await loadProjects();
+
+  } catch (error) {
+    alert("Unable to delete project: " + friendlyError(error));
+  }
+}
+
+/* LOGOUT */
+$("logoutButton").addEventListener("click", async () => {
+  if (!confirm("Are you sure you want to sign out?")) return;
+
+  try {
+    const {error} = await supabaseClient.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+
+  currentAdmin = null;
+  dashboard.classList.remove("authenticated");
+  dashboard.style.display = "none";
+  loginScreen.style.display = "flex";
+  emailInput.value = "";
+  passwordInput.value = "";
+  setLoginMessage("You have signed out.");
+});
+
+/* INITIALIZE */
+async function initialiseDashboard() {
+  try {
+    if (!window.supabase) {
+      showLogin(
+        "Supabase library did not load. Check your internet connection and refresh."
+      );
+      return;
+    }
+
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      }
+    );
+
+    const {data, error} =
+      await supabaseClient.auth.getSession();
+
+    if (error) throw error;
+
+    if (data.session && data.session.user) {
+      const profile = await verifyAdmin(data.session.user);
+      showDashboard(profile, data.session.user);
+    } else {
+      showLogin();
+    }
+
+    supabaseClient.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === "SIGNED_OUT") {
+          currentAdmin = null;
+          showLogin();
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error("Dashboard initialization error:", error);
+    showLogin(friendlyError(error));
+  }
+}
+
+initialiseDashboard();
+
+</script>
+</body>
+</html>
