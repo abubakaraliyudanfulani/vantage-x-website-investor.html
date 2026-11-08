@@ -784,7 +784,10 @@ document.getElementById("settingsLogout").addEventListener("click", logout);
 
 async function lockDashboard() {
 
-  if (isLocking || !dashboard.classList.contains("authenticated")) {
+  if (
+    isLocking ||
+    !dashboard.classList.contains("authenticated")
+  ) {
     return;
   }
 
@@ -807,13 +810,34 @@ async function lockDashboard() {
 }
 
 document.addEventListener("visibilitychange", function() {
-  if (document.visibilityState === "hidden") {
-    lockDashboard();
-  }
-});
 
-window.addEventListener("pagehide", function() {
-  lockDashboard();
+  if (document.visibilityState === "hidden") {
+
+    sessionStorage.setItem(
+      "vantage_hidden_at",
+      String(Date.now())
+    );
+
+  } else {
+
+    const hiddenAt = Number(
+      sessionStorage.getItem("vantage_hidden_at") || 0
+    );
+
+    if (hiddenAt) {
+
+      const awayTime = Date.now() - hiddenAt;
+
+      sessionStorage.removeItem("vantage_hidden_at");
+
+      if (
+        awayTime >= 30000 &&
+        dashboard.classList.contains("authenticated")
+      ) {
+        lockDashboard();
+      }
+    }
+  }
 });
 
 /* ==========================================
