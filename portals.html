@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#091725">
+  <title>Portal Access | VANTAGE X GROUP LTD</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #091725;
+      --navy-light: #122638;
+      --gold: #c5a36a;
+      --gold-light: #e1c795;
+      --white: #ffffff;
+      --muted: #aab4be;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 7%;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .logo {
+      color: var(--gold-light);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .logo span {
+      display: block;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      margin-top: 5px;
+    }
+
+    .back {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 1150px;
+      width: 90%;
+      margin: 75px auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(35px, 6vw, 55px);
+      margin-bottom: 18px;
+    }
+
+    .intro p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .portal-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(197,163,106,.3);
+      border-radius: 7px;
+      overflow: hidden;
+      transition: .3s ease;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--gold);
+    }
+
+    .portal-image {
+      height: 190px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .investor-image {
+      background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .client-image {
+      background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .partner-image {
+      background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .portal-content {
+      padding: 27px 23px;
+    }
+
+    .number {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 13px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      color: var(--gold-light);
+      margin-bottom: 13px;
+    }
+
+    .portal-content p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 70px;
+      margin-bottom: 22px;
+    }
+
+    .portal-button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      color: var(--navy);
+      text-align: center;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-radius: 3px;
+    }
+
+    .portal-button:hover {
+      background: var(--gold-light);
+    }
+
+    .help {
+      text-align: center;
+      margin-top: 55px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .help a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 28px 15px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    @media(max-width: 850px) {
+      .portal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 600px) {
+      header {
+        padding: 20px 5%;
+      }
+
+      main {
+        margin: 50px auto;
+      }
+
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-image {
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      VANTAGE X GROUP LTD
+      <span>ESTATES & CO.</span>
+    </div>
+
+    <a href="index.html" class="back">← Home</a>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div class="eyebrow">WELCOME TO VANTAGE X GROUP LTD</div>
+
+      <h1>Choose Your Portal</h1>
+
+      <p>
+        Access the services and information relevant to you.
+        Select your account category below to continue.
+      </p>
+    </section>
+
+    <section class="portal-grid">
+
+      <article class="portal-card">
+        <div class="portal-image investor-image"></div>
+
+        <div class="portal-content">
+          <div class="number">01 / INVESTMENT</div>
+
+          <h2>Investor Portal</h2>
+
+          <p>
+            Access investor accounts, approved investment
+            information and authorised documents.
+          </p>
+
+          <a href="investor.html" class="portal-button">
+            ENTER INVESTOR PORTAL
+          </a>
+        </div>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-image client-image"></div>
+
+        <div class="portal-content">
+          <div class="number">02 / SERVICES</div>
+
+          <h2>Client Portal</h2>
+
+          <p>
+            Explore our services, submit enquiries and
+            follow up on your client requests.
+          </p>
+
+          <a href="mailto:vantagexgroupltd@gmail.com?subject=Client%20Portal%20Enquiry" class="portal-button">
+            CLIENT ACCESS
+          </a>
+        </div>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-image partner-image"></div>
+
+        <div class="portal-content">
+          <div class="number">03 / COLLABORATION</div>
+
+          <h2>Partnership Portal</h2>
+
+          <p>
+            Discover collaboration opportunities and
+            submit business partnership proposals.
+          </p>
+
+          <a href="mailto:vantagexgroupltd@gmail.com?subject=Partnership%20Enquiry" class="portal-button">
+            PARTNER WITH US
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="help">
+      Need assistance accessing our services?
+      <br>
+      Email:
+      <a href="mailto:vantagexgroupltd@gmail.com">
+        vantagexgroupltd@gmail.com
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> VANTAGE X GROUP LTD. All Rights Reserved.
+    <br>
+    Building Value. Creating Opportunities.
+    <br>
+    Kano State, Nigeria.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
