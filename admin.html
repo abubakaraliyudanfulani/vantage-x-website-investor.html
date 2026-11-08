@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#091725">
 <title>VANTAGE X | Executive Control Centre</title>
 
 <style>
@@ -16,37 +16,171 @@
   --muted:#aab6c2;
   --border:#263c50;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
   font-family:Arial,sans-serif;
   background:var(--navy);
   color:var(--white);
 }
-.layout{display:flex;min-height:100vh}
-.sidebar{
+
+/* LOGIN SCREEN */
+
+.login-screen {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at top right,#17334a,transparent 45%),
+    var(--dark);
+}
+
+.login-card {
+  width:100%;
+  max-width:420px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:35px 28px;
+  box-shadow:0 15px 45px rgba(0,0,0,.3);
+}
+
+.login-brand {
+  color:var(--gold);
+  font-size:27px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.login-subtitle {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
+  text-align:center;
+  margin:9px 0 30px;
+}
+
+.login-card h2 {
+  color:var(--white);
+  text-align:center;
+  font-size:21px;
+  margin-bottom:10px;
+}
+
+.login-description {
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.login-card label {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin:17px 0 8px;
+}
+
+.login-card input {
+  width:100%;
+  padding:14px;
+  background:var(--dark);
+  border:1px solid var(--border);
+  border-radius:7px;
+  color:var(--white);
+  font-size:14px;
+  outline:none;
+}
+
+.login-card input:focus {
+  border-color:var(--gold);
+}
+
+.login-button {
+  width:100%;
+  margin-top:25px;
+  padding:14px;
+  border:0;
+  border-radius:7px;
+  background:var(--gold);
+  color:var(--dark);
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.login-button:disabled {
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.login-error {
+  display:none;
+  color:#ffaaaa;
+  background:#3b2028;
+  border:1px solid #75404b;
+  border-radius:7px;
+  padding:12px;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:18px;
+}
+
+.login-footer {
+  color:#788795;
+  font-size:11px;
+  text-align:center;
+  margin-top:25px;
+  line-height:1.7;
+}
+
+/* DASHBOARD */
+
+.layout {
+  display:none;
+  min-height:100vh;
+}
+
+.layout.authenticated {
+  display:flex;
+}
+
+.sidebar {
   width:250px;
   flex-shrink:0;
   background:var(--dark);
   padding:27px 17px;
 }
-.brand{
+
+.brand {
   color:var(--gold);
   font-size:23px;
   font-weight:bold;
 }
-.brand-sub{
+
+.brand-sub {
   color:var(--muted);
   font-size:10px;
   letter-spacing:2px;
   margin:8px 0 35px;
 }
-.nav-label{
+
+.nav-label {
   color:#748597;
   font-size:10px;
   letter-spacing:1.5px;
   margin:24px 10px 10px;
 }
-.nav-item{
+
+.nav-item {
   display:block;
   width:100%;
   padding:13px 12px;
@@ -59,93 +193,147 @@ body{
   font-size:14px;
   cursor:pointer;
 }
-.nav-item:hover,.nav-item.active{
+
+.nav-item:hover,
+.nav-item.active {
   background:#172e42;
   color:var(--gold);
 }
-.main{
+
+.main {
   flex:1;
   min-width:0;
   padding:30px;
 }
-.topbar{
+
+.topbar {
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
   margin-bottom:30px;
 }
-.topbar h1{font-size:24px}
-.topbar p{
+
+.topbar h1 {
+  font-size:24px;
+}
+
+.topbar p {
   color:var(--muted);
   font-size:13px;
   margin-top:8px;
 }
-.admin-tag{
+
+.topbar-actions {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.admin-tag {
   color:var(--gold);
   border:1px solid var(--gold);
   padding:10px 15px;
   border-radius:25px;
   font-size:11px;
 }
-.view{display:none}
-.view.active{display:block}
-.welcome,.panel{
+
+.logout-button {
+  background:#3b2028;
+  color:#ffaaaa;
+  border:1px solid #75404b;
+  padding:10px 14px;
+  border-radius:25px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.view {
+  display:none;
+}
+
+.view.active {
+  display:block;
+}
+
+.welcome,
+.panel {
   background:var(--panel);
   border:1px solid var(--border);
   border-radius:12px;
   padding:24px;
   margin-bottom:22px;
 }
-.welcome h2,.panel h2{color:var(--gold);margin-bottom:12px}
-.welcome p,.panel p{
+
+.welcome h2,
+.panel h2 {
+  color:var(--gold);
+  margin-bottom:12px;
+}
+
+.welcome p,
+.panel p {
   color:var(--muted);
   line-height:1.7;
   font-size:13px;
 }
-.section-title{
+
+.section-title {
   font-size:17px;
   margin:27px 0 16px;
 }
-.cards{
+
+.cards {
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:15px;
 }
-.card{
+
+.card {
   background:var(--panel);
   border:1px solid var(--border);
   padding:20px;
   border-radius:10px;
 }
-.card p{color:var(--muted);font-size:12px}
-.card h3{
+
+.card p {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.card h3 {
   color:var(--gold);
   font-size:24px;
   margin-top:12px;
 }
-.management{
+
+.management {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:15px;
 }
-.management-item{
+
+.management-item {
   background:var(--panel);
   border:1px solid var(--border);
   padding:20px;
   border-radius:10px;
 }
-.management-item h3{
+
+.management-item h3 {
   color:var(--gold);
   font-size:15px;
   margin-bottom:10px;
 }
-.management-item p{
+
+.management-item p {
   color:var(--muted);
   font-size:12px;
   line-height:1.6;
 }
-.status{
+
+.status {
   display:inline-block;
   color:var(--gold);
   border:1px solid #947c50;
@@ -154,14 +342,16 @@ body{
   font-size:11px;
   margin-top:18px;
 }
-.footer{
+
+.footer {
   margin-top:40px;
   text-align:center;
   color:#788795;
   font-size:11px;
   line-height:1.8;
 }
-.menu-toggle{
+
+.menu-toggle {
   display:none;
   background:var(--panel);
   color:var(--gold);
@@ -169,176 +359,450 @@ body{
   padding:9px 13px;
   border-radius:6px;
 }
-@media(max-width:950px){
-  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .management{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+@media(max-width:950px) {
+  .cards {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .management {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
-@media(max-width:650px){
-  .layout{display:block}
-  .sidebar{width:100%;padding:20px}
-  .menu-toggle{display:block}
-  .navigation{display:none;margin-top:20px}
-  .navigation.open{display:block}
-  .main{padding:20px 15px}
-  .topbar{flex-wrap:wrap}
-  .cards,.management{grid-template-columns:1fr}
+
+@media(max-width:650px) {
+  .layout.authenticated {
+    display:block;
+  }
+
+  .sidebar {
+    width:100%;
+    padding:20px;
+  }
+
+  .menu-toggle {
+    display:block;
+  }
+
+  .navigation {
+    display:none;
+    margin-top:20px;
+  }
+
+  .navigation.open {
+    display:block;
+  }
+
+  .main {
+    padding:20px 15px;
+  }
+
+  .topbar {
+    flex-wrap:wrap;
+  }
+
+  .cards,
+  .management {
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="layout">
+<!-- LOGIN SCREEN -->
+
+<section class="login-screen" id="loginScreen">
+
+  <div class="login-card">
+
+    <div class="login-brand">VANTAGE X</div>
+
+    <div class="login-subtitle">
+      EXECUTIVE CONTROL CENTRE
+    </div>
+
+    <h2>Administrator Login</h2>
+
+    <p class="login-description">
+      Sign in with your authorised VANTAGE X
+      administrator account.
+    </p>
+
+    <form id="loginForm">
+
+      <label for="email">Email Address</label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your registered email"
+        autocomplete="username"
+        required
+      >
+
+      <label for="password">Password</label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton"
+      >
+        Sign In Securely
+      </button>
+
+    </form>
+
+    <div class="login-error" id="loginError"></div>
+
+    <div class="login-footer">
+      VANTAGE X GROUP LTD — ESTATES & CO.<br>
+      Authorised personnel only.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- EXECUTIVE DASHBOARD -->
+
+<div class="layout" id="dashboard">
 
 <aside class="sidebar">
-  <div class="brand">VANTAGE X</div>
-  <div class="brand-sub">EXECUTIVE CONTROL CENTRE</div>
 
-  <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+  <div class="brand">VANTAGE X</div>
+
+  <div class="brand-sub">
+    EXECUTIVE CONTROL CENTRE
+  </div>
+
+  <button class="menu-toggle" id="menuToggle">
+    ☰ Menu
+  </button>
 
   <nav class="navigation" id="navigation">
 
     <div class="nav-label">MAIN MENU</div>
-    <button class="nav-item active" data-view="overview">Overview</button>
-    <button class="nav-item" data-view="investors">Investors</button>
-    <button class="nav-item" data-view="clients">Clients</button>
-    <button class="nav-item" data-view="properties">Properties</button>
-    <button class="nav-item" data-view="investments">Investments</button>
+
+    <button class="nav-item active" data-view="overview">
+      Overview
+    </button>
+
+    <button class="nav-item" data-view="investors">
+      Investors
+    </button>
+
+    <button class="nav-item" data-view="clients">
+      Clients
+    </button>
+
+    <button class="nav-item" data-view="properties">
+      Properties
+    </button>
+
+    <button class="nav-item" data-view="investments">
+      Investments
+    </button>
 
     <div class="nav-label">MANAGEMENT</div>
-    <button class="nav-item" data-view="partnerships">Partnerships</button>
-    <button class="nav-item" data-view="staff">Staff & Managers</button>
-    <button class="nav-item" data-view="messages">Messages</button>
-    <button class="nav-item" data-view="reports">Reports</button>
+
+    <button class="nav-item" data-view="partnerships">
+      Partnerships
+    </button>
+
+    <button class="nav-item" data-view="staff">
+      Staff & Managers
+    </button>
+
+    <button class="nav-item" data-view="messages">
+      Messages
+    </button>
+
+    <button class="nav-item" data-view="reports">
+      Reports
+    </button>
 
     <div class="nav-label">SYSTEM</div>
-    <button class="nav-item" data-view="settings">Settings</button>
+
+    <button class="nav-item" data-view="settings">
+      Settings
+    </button>
 
   </nav>
+
 </aside>
+
 
 <main class="main">
 
 <header class="topbar">
+
   <div>
     <h1 id="pageTitle">Executive Dashboard</h1>
-    <p>VANTAGE X GROUP LTD — Management Overview</p>
+
+    <p>
+      VANTAGE X GROUP LTD — Management Overview
+    </p>
   </div>
-  <div class="admin-tag">CEO WORKSPACE</div>
+
+  <div class="topbar-actions">
+
+    <div class="admin-tag" id="adminTag">
+      ADMINISTRATOR
+    </div>
+
+    <button class="logout-button" id="logoutButton">
+      Sign Out
+    </button>
+
+  </div>
+
 </header>
 
+
 <!-- OVERVIEW -->
+
 <section class="view active" id="overview">
+
   <div class="welcome">
-    <h2>Welcome to Your Control Centre</h2>
+
+    <h2 id="welcomeTitle">
+      Welcome to Your Control Centre
+    </h2>
+
     <p>
       Manage your business operations, oversee activities
       and organise your organisation from one central workspace.
     </p>
-    <span class="status">Management workspace prototype</span>
+
+    <span class="status">
+      Authenticated management workspace
+    </span>
+
   </div>
 
-  <h2 class="section-title">Business Overview</h2>
+  <h2 class="section-title">
+    Business Overview
+  </h2>
 
   <div class="cards">
-    <div class="card"><p>Total Investors</p><h3>—</h3></div>
-    <div class="card"><p>Total Clients</p><h3>—</h3></div>
-    <div class="card"><p>Properties</p><h3>—</h3></div>
-    <div class="card"><p>Pending Enquiries</p><h3>—</h3></div>
+
+    <div class="card">
+      <p>Total Investors</p>
+      <h3>—</h3>
+    </div>
+
+    <div class="card">
+      <p>Total Clients</p>
+      <h3>—</h3>
+    </div>
+
+    <div class="card">
+      <p>Properties</p>
+      <h3>—</h3>
+    </div>
+
+    <div class="card">
+      <p>Pending Enquiries</p>
+      <h3>—</h3>
+    </div>
+
   </div>
 
-  <h2 class="section-title">Management Centre</h2>
+  <h2 class="section-title">
+    Management Centre
+  </h2>
 
   <div class="management">
-    <div class="management-item"><h3>Investor Management</h3><p>Organise investor accounts and records.</p></div>
-    <div class="management-item"><h3>Client Management</h3><p>Oversee client enquiries and relationships.</p></div>
-    <div class="management-item"><h3>Property Management</h3><p>Organise property listings and availability.</p></div>
-    <div class="management-item"><h3>Investment Management</h3><p>Manage investment records and agreements.</p></div>
-    <div class="management-item"><h3>Staff Management</h3><p>Organise staff accounts and responsibilities.</p></div>
-    <div class="management-item"><h3>Reports & Analytics</h3><p>Review business performance and activity.</p></div>
+
+    <div class="management-item">
+      <h3>Investor Management</h3>
+      <p>Organise investor accounts and records.</p>
+    </div>
+
+    <div class="management-item">
+      <h3>Client Management</h3>
+      <p>Oversee client enquiries and relationships.</p>
+    </div>
+
+    <div class="management-item">
+      <h3>Property Management</h3>
+      <p>Organise property listings and availability.</p>
+    </div>
+
+    <div class="management-item">
+      <h3>Investment Management</h3>
+      <p>Manage investment records and agreements.</p>
+    </div>
+
+    <div class="management-item">
+      <h3>Staff Management</h3>
+      <p>Organise staff accounts and responsibilities.</p>
+    </div>
+
+    <div class="management-item">
+      <h3>Reports & Analytics</h3>
+      <p>Review business performance and activity.</p>
+    </div>
+
   </div>
+
 </section>
+
 
 <!-- INVESTORS -->
+
 <section class="view" id="investors">
+
   <div class="panel">
     <h2>Investor Management</h2>
-    <p>Manage investor profiles, account records, documents and account status.</p>
+    <p>
+      Manage investor profiles, account records,
+      documents and account status.
+    </p>
     <span class="status">Database connection pending</span>
   </div>
+
 </section>
+
 
 <!-- CLIENTS -->
+
 <section class="view" id="clients">
+
   <div class="panel">
     <h2>Client Management</h2>
-    <p>Manage client information, enquiries, service requests and communications.</p>
+    <p>
+      Manage client information, enquiries,
+      service requests and communications.
+    </p>
     <span class="status">Database connection pending</span>
   </div>
+
 </section>
+
 
 <!-- PROPERTIES -->
+
 <section class="view" id="properties">
+
   <div class="panel">
     <h2>Property Management</h2>
-    <p>Organise property listings, descriptions, prices, images and availability.</p>
+    <p>
+      Organise property listings, descriptions,
+      prices, images and availability.
+    </p>
     <span class="status">Database connection pending</span>
   </div>
+
 </section>
+
 
 <!-- INVESTMENTS -->
+
 <section class="view" id="investments">
+
   <div class="panel">
     <h2>Investment Management</h2>
-    <p>Organise investment records, agreements, transactions and reporting.</p>
+    <p>
+      Organise investment records, agreements,
+      transactions and reporting.
+    </p>
     <span class="status">Database connection pending</span>
   </div>
+
 </section>
+
 
 <!-- PARTNERSHIPS -->
+
 <section class="view" id="partnerships">
+
   <div class="panel">
     <h2>Partnership Management</h2>
-    <p>Review partnership enquiries, applications and collaboration records.</p>
+    <p>
+      Review partnership enquiries,
+      applications and collaboration records.
+    </p>
     <span class="status">Database connection pending</span>
   </div>
+
 </section>
+
 
 <!-- STAFF -->
+
 <section class="view" id="staff">
+
   <div class="panel">
     <h2>Staff & Managers</h2>
-    <p>Organise staff profiles, manager accounts, responsibilities and access permissions.</p>
+    <p>
+      Organise staff profiles, manager accounts,
+      responsibilities and access permissions.
+    </p>
     <span class="status">Role management pending</span>
   </div>
+
 </section>
+
 
 <!-- MESSAGES -->
+
 <section class="view" id="messages">
+
   <div class="panel">
     <h2>Messages & Enquiries</h2>
-    <p>Centralise incoming client enquiries, investor requests and business communications.</p>
+    <p>
+      Centralise incoming client enquiries,
+      investor requests and business communications.
+    </p>
     <span class="status">Messaging connection pending</span>
   </div>
+
 </section>
+
 
 <!-- REPORTS -->
+
 <section class="view" id="reports">
+
   <div class="panel">
     <h2>Reports & Analytics</h2>
-    <p>Review business activity, operational summaries and management reports.</p>
+    <p>
+      Review business activity, operational summaries
+      and management reports.
+    </p>
     <span class="status">Reporting connection pending</span>
   </div>
+
 </section>
 
+
 <!-- SETTINGS -->
+
 <section class="view" id="settings">
+
   <div class="panel">
     <h2>System Settings</h2>
-    <p>Manage company details, administrative preferences and security configuration.</p>
+    <p>
+      Manage company details, administrative preferences
+      and security configuration.
+    </p>
     <span class="status">Configuration pending</span>
   </div>
+
 </section>
+
 
 <footer class="footer">
   © 2026 VANTAGE X GROUP LTD. All rights reserved.<br>
@@ -348,22 +812,273 @@ body{
 </main>
 </div>
 
+
+<!-- SUPABASE LIBRARY -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
+
+// ======================================
+// SUPABASE CONNECTION
+// ======================================
+
+const SUPABASE_URL =
+  "https://hwpxxbscoscumkmoqjgs.supabase.co";
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+
+// ======================================
+// PAGE ELEMENTS
+// ======================================
+
+const loginScreen = document.getElementById("loginScreen");
+const dashboard = document.getElementById("dashboard");
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+const loginError = document.getElementById("loginError");
+const logoutButton = document.getElementById("logoutButton");
+const adminTag = document.getElementById("adminTag");
+const welcomeTitle = document.getElementById("welcomeTitle");
+
 const buttons = document.querySelectorAll(".nav-item");
 const views = document.querySelectorAll(".view");
 const pageTitle = document.getElementById("pageTitle");
 const navigation = document.getElementById("navigation");
 
+
+// ======================================
+// SCREEN CONTROL
+// ======================================
+
+function showLogin(message = "") {
+
+  dashboard.classList.remove("authenticated");
+  loginScreen.style.display = "flex";
+
+  loginError.textContent = message;
+  loginError.style.display = message ? "block" : "none";
+
+}
+
+function showDashboard(profile) {
+
+  loginScreen.style.display = "none";
+  dashboard.classList.add("authenticated");
+
+  adminTag.textContent = profile.role + " WORKSPACE";
+
+  welcomeTitle.textContent =
+    "Welcome, " + profile.full_name;
+
+}
+
+
+// ======================================
+// VERIFY ADMIN ACCESS
+// ======================================
+
+async function verifyAdminAccess(user) {
+
+  const { data: profile, error } = await supabaseClient
+    .from("admin_profiles")
+    .select("full_name, role, is_active")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+
+    console.error("Admin verification error:", error);
+
+    await supabaseClient.auth.signOut();
+
+    showLogin(
+      "Unable to verify administrator access. Please try again."
+    );
+
+    return false;
+
+  }
+
+  const permittedRoles = ["CEO", "MANAGER", "STAFF"];
+
+  if (
+    !profile ||
+    profile.is_active !== true ||
+    !permittedRoles.includes(profile.role)
+  ) {
+
+    await supabaseClient.auth.signOut();
+
+    showLogin(
+      "Access denied. Your account is not an active authorised administrator."
+    );
+
+    return false;
+
+  }
+
+  showDashboard(profile);
+
+  return true;
+
+}
+
+
+// ======================================
+// ADMIN LOGIN
+// ======================================
+
+loginForm.addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  loginError.style.display = "none";
+
+  loginButton.disabled = true;
+  loginButton.textContent = "Authenticating...";
+
+  const email = document
+    .getElementById("email")
+    .value.trim();
+
+  const password = document
+    .getElementById("password")
+    .value;
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data.user) {
+      throw new Error("Unable to identify your account.");
+    }
+
+    await verifyAdminAccess(data.user);
+
+  } catch (error) {
+
+    console.error("Login error:", error);
+
+    showLogin(
+      error.message || "Login failed. Please check your details."
+    );
+
+  } finally {
+
+    loginButton.disabled = false;
+    loginButton.textContent = "Sign In Securely";
+
+  }
+
+});
+
+
+// ======================================
+// LOGOUT
+// ======================================
+
+logoutButton.addEventListener("click", async function() {
+
+  logoutButton.disabled = true;
+  logoutButton.textContent = "Signing Out...";
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  logoutButton.disabled = false;
+  logoutButton.textContent = "Sign Out";
+
+  if (error) {
+
+    alert("Unable to sign out. Please try again.");
+
+    return;
+
+  }
+
+  showLogin();
+
+});
+
+
+// ======================================
+// RESTORE EXISTING SESSION
+// ======================================
+
+async function initialiseDashboard() {
+
+  showLogin();
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.auth.getSession();
+
+    if (error) {
+      throw error;
+    }
+
+    if (data.session && data.session.user) {
+
+      await verifyAdminAccess(data.session.user);
+
+    }
+
+  } catch (error) {
+
+    console.error("Session error:", error);
+
+    showLogin(
+      "Unable to verify your session. Please sign in again."
+    );
+
+  }
+
+}
+
+
+// ======================================
+// NAVIGATION
+// ======================================
+
 buttons.forEach(button => {
+
   button.addEventListener("click", () => {
+
     const target = button.dataset.view;
 
     views.forEach(view => {
-      view.classList.toggle("active", view.id === target);
+
+      view.classList.toggle(
+        "active",
+        view.id === target
+      );
+
     });
 
     buttons.forEach(item => {
-      item.classList.toggle("active", item === button);
+
+      item.classList.toggle(
+        "active",
+        item === button
+      );
+
     });
 
     pageTitle.textContent =
@@ -372,14 +1087,55 @@ buttons.forEach(button => {
         : button.textContent.trim();
 
     navigation.classList.remove("open");
-    window.scrollTo({top: 0, behavior: "smooth"});
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
   });
+
 });
 
-document.getElementById("menuToggle").addEventListener("click", () => {
-  navigation.classList.toggle("open");
-});
+
+// ======================================
+// MOBILE MENU
+// ======================================
+
+document
+  .getElementById("menuToggle")
+  .addEventListener("click", () => {
+
+    navigation.classList.toggle("open");
+
+  });
+
+
+// ======================================
+// AUTHENTICATION STATE
+// ======================================
+
+supabaseClient.auth.onAuthStateChange(
+  (event) => {
+
+    if (event === "SIGNED_OUT") {
+
+      showLogin();
+
+    }
+
+  }
+);
+
+
+// ======================================
+// START APPLICATION
+// ======================================
+
+initialiseDashboard();
+
 </script>
 
 </body>
 </html>
+
