@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#091725">
+  <title>Investor Portal | VANTAGE X GROUP LTD</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #091725;
+      --navy-light: #122638;
+      --gold: #c5a36a;
+      --gold-light: #e1c795;
+      --white: #ffffff;
+      --muted: #aab4be;
+      --ivory: #f5f2ec;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 7%;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .logo span {
+      display: block;
+      font: 10px 'DM Sans', sans-serif;
+      letter-spacing: 3px;
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1100px;
+      margin: 70px auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 6vw, 55px);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .portal-card {
+      max-width: 470px;
+      margin: auto;
+      padding: 35px;
+      background: var(--navy-light);
+      border: 1px solid rgba(197,163,106,.35);
+      border-radius: 8px;
+    }
+
+    .portal-card h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-light);
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: var(--ivory);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 4px;
+      background: var(--navy);
+      color: white;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+    }
+
+    .portal-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .portal-button:hover {
+      background: var(--gold-light);
+    }
+
+    .switch-text {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 22px;
+    }
+
+    .switch-text a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .security-note {
+      text-align: center;
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    @media(max-width: 600px) {
+      header {
+        padding: 20px 5%;
+      }
+
+      main {
+        margin: 45px auto;
+      }
+
+      .portal-card {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      VANTAGE X GROUP LTD
+      <span>ESTATES & CO.</span>
+    </div>
+
+    <a href="index.html" class="back-link">
+      ← Back to Website
+    </a>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <div class="eyebrow">PRIVATE INVESTOR ACCESS</div>
+
+      <h1>Investor Portal</h1>
+
+      <p>
+        Welcome to the investor access centre of VANTAGE X GROUP LTD.
+        A dedicated space for investor account access, investment
+        information and authorised documents.
+      </p>
+    </section>
+
+    <section class="portal-card">
+
+      <h2>Investor Sign In</h2>
+
+      <p class="card-description">
+        Access to this portal is reserved for registered and authorised
+        investors.
+      </p>
+
+      <form id="loginForm">
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your registered email"
+          autocomplete="username"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button class="portal-button" type="submit">
+          SIGN IN
+        </button>
+
+      </form>
+
+      <p class="switch-text">
+        Don't have an investor account?
+        <a href="mailto:vantagexgroupltd@gmail.com?subject=Investor%20Account%20Enquiry">
+          Request Access
+        </a>
+      </p>
+
+      <p class="security-note">
+        Account access and private investor records will be protected
+        through secure authentication and authorised access controls.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> VANTAGE X GROUP LTD. All Rights Reserved.
+    <br>
+    Building Value. Creating Opportunities.
+    <br>
+    Kano State, Nigeria.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Secure login will be connected to Supabase
+    // after authentication and database security are configured.
+  </script>
+
+</body>
+</html>
