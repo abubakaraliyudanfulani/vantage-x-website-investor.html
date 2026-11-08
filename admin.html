@@ -8,20 +8,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root {
-  --navy:#091725;
-  --navy2:#102638;
-  --gold:#c9a45c;
-  --gold-light:#e4c987;
-  --white:#fff;
-  --background:#f4f6f8;
-  --border:#e5e9ed;
-  --muted:#788592;
+:root{
+  --navy:#091725;--navy2:#102638;--gold:#c9a45c;
+  --white:#fff;--bg:#f4f6f8;--border:#e5e9ed;
+  --muted:#788592;--red:#b42318;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--background);color:#192b3b}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#192b3b}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
 
 /* LOGIN */
 #loginScreen{
@@ -50,8 +46,7 @@ button{cursor:pointer}
   width:100%;padding:14px;margin-top:24px;border:0;
   border-radius:7px;background:var(--navy);color:white;font-weight:bold
 }
-#loginButton:disabled{opacity:.6}
-#loginMessage{margin-top:15px;font-size:13px;color:#b42318;overflow-wrap:anywhere}
+#loginMessage{margin-top:15px;font-size:13px;color:var(--red);overflow-wrap:anywhere}
 .login-footer{text-align:center;margin-top:25px;color:#89939b;font-size:11px}
 
 /* DASHBOARD */
@@ -70,7 +65,7 @@ button{cursor:pointer}
   background:transparent;color:#d5dce3;text-align:left;
   border-radius:6px;margin-bottom:4px
 }
-.nav-button:hover,.nav-button.active{background:#ffffff14;color:var(--gold-light)}
+.nav-button:hover,.nav-button.active{background:#ffffff14;color:#e4c987}
 .sidebar-bottom{margin-top:30px;border-top:1px solid #ffffff20;padding-top:15px}
 #logoutButton{
   width:100%;background:#ffffff12;border:1px solid #ffffff25;
@@ -104,16 +99,15 @@ button{cursor:pointer}
   padding:15px;color:#725a2d;font-size:13px;line-height:1.6
 }
 .management-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.management-card{border-top:3px solid var(--gold)}
 #mobileMenu{
   display:none;background:var(--navy);color:white;
   border:0;padding:9px 12px;border-radius:5px
 }
 
-/* PROJECT MANAGEMENT */
+/* PROJECTS */
 .project-toolbar{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;margin-bottom:20px
 }
 .primary-btn,.secondary-btn,.danger-btn{
   padding:11px 16px;border:0;border-radius:6px;font-weight:bold
@@ -135,15 +129,10 @@ button{cursor:pointer}
   border-radius:6px;background:white;min-width:0
 }
 .field textarea{min-height:110px;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{
-  outline:1px solid var(--gold);border-color:var(--gold)
-}
 .field small{color:var(--muted);font-size:11px}
-.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.form-actions,.project-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
 #projectMessage{font-size:13px;margin-top:12px;line-height:1.5}
-.project-list{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px
-}
+.project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .project-card{
   background:white;border:1px solid var(--border);
   border-radius:10px;overflow:hidden
@@ -153,9 +142,8 @@ button{cursor:pointer}
 }
 .project-card-content{padding:17px}
 .project-card h3{margin:0 0 8px;color:var(--navy)}
-.project-card p{font-size:13px;color:var(--muted);line-height:1.5}
+.project-card p{font-size:13px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
 .project-meta{font-size:12px;color:#647482;margin:8px 0}
-.project-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
 .status-tag{
   display:inline-block;padding:5px 9px;border-radius:20px;
   font-size:11px;background:#edf1f5;color:#34495b
@@ -167,6 +155,17 @@ button{cursor:pointer}
 }
 #imagePreview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 #imagePreview img{width:85px;height:70px;object-fit:cover;border-radius:6px}
+#lockScreen{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:#06111df2;align-items:center;justify-content:center;padding:20px
+}
+.lock-card{
+  width:100%;max-width:380px;background:white;border-radius:12px;
+  padding:28px;text-align:center
+}
+.lock-card input{width:100%;padding:12px;margin:8px 0;border:1px solid var(--border);border-radius:6px}
+.lock-card button{width:100%;padding:12px;background:var(--navy);color:white;border:0;border-radius:6px}
+#lockMessage{color:var(--red);font-size:13px}
 
 @media(max-width:900px){
   .sidebar{width:220px;min-width:220px}
@@ -191,6 +190,7 @@ button{cursor:pointer}
 
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
     <div class="brand">
@@ -217,8 +217,8 @@ button{cursor:pointer}
   </div>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dashboard">
-
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <h2>VANTAGE X</h2>
@@ -226,7 +226,6 @@ button{cursor:pointer}
     </div>
 
     <div class="sidebar-label">MAIN MENU</div>
-
     <button class="nav-button active" data-view="overview">Overview</button>
     <button class="nav-button" data-view="projects">Projects Management</button>
     <button class="nav-button" data-view="investors">Investors</button>
@@ -272,99 +271,71 @@ button{cursor:pointer}
         <div class="panel">
           <h3>Administration Overview</h3>
           <p>Your VANTAGE X management dashboard is connected to Supabase.</p>
-          <div class="notice">Project information is managed through the Projects Management section.</div>
+          <div class="notice">Manage company projects through the Projects Management section.</div>
         </div>
       </section>
 
       <!-- PROJECT MANAGEMENT -->
       <section class="view" id="projects">
-
         <div class="project-toolbar">
           <div>
             <h2 style="margin:0 0 5px">Projects Management</h2>
-            <p style="margin:0;color:#788592;font-size:13px">
-              Create and manage your company's projects.
-            </p>
+            <p style="margin:0;color:#788592;font-size:13px">Create and manage company projects.</p>
           </div>
           <button class="primary-btn" id="addProjectButton">+ Add New Project</button>
         </div>
 
         <div class="project-form" id="projectFormPanel" hidden>
           <h3 id="formHeading">Add New Project</h3>
-
           <form id="projectForm">
             <input type="hidden" id="editingProjectId">
-
             <div class="form-grid">
-
               <div class="field">
                 <label for="projectName">Project Name *</label>
-                <input id="projectName" maxlength="150" required
-                  placeholder="e.g. Vantage Luxury Residences">
+                <input id="projectName" maxlength="150" required placeholder="e.g. Vantage Luxury Residences">
               </div>
-
               <div class="field">
                 <label for="projectCategory">Project Category</label>
                 <select id="projectCategory">
-                  <option value="Real Estate">Real Estate</option>
-                  <option value="Residential">Residential</option>
-                  <option value="Commercial">Commercial</option>
-                  <option value="Land Development">Land Development</option>
-                  <option value="Infrastructure">Infrastructure</option>
-                  <option value="Other">Other</option>
+                  <option>Real Estate</option><option>Residential</option>
+                  <option>Commercial</option><option>Land Development</option>
+                  <option>Infrastructure</option><option>Other</option>
                 </select>
               </div>
-
               <div class="field">
                 <label for="projectLocation">Location</label>
                 <input id="projectLocation" placeholder="e.g. Kano, Nigeria">
               </div>
-
               <div class="field">
                 <label for="projectStatus">Project Status</label>
                 <select id="projectStatus">
-                  <option value="Upcoming">Upcoming</option>
-                  <option value="Ongoing">Ongoing</option>
-                  <option value="Completed">Completed</option>
+                  <option>Upcoming</option><option>Ongoing</option><option>Completed</option>
                 </select>
               </div>
-
               <div class="field">
                 <label for="projectPrice">Price / Budget (optional)</label>
                 <input id="projectPrice" placeholder="e.g. Contact us for pricing">
               </div>
-
               <div class="field">
                 <label for="coverImage">Cover Image</label>
                 <input type="file" id="coverImage" accept="image/jpeg,image/png,image/webp">
                 <small>JPG, PNG or WebP. Maximum 5 MB.</small>
               </div>
-
               <div class="field full">
                 <label for="galleryImages">Project Gallery</label>
-                <input type="file" id="galleryImages"
-                  accept="image/jpeg,image/png,image/webp" multiple>
-                <small>Select multiple photographs. Maximum 5 MB each, up to 10 images per project.</small>
+                <input type="file" id="galleryImages" accept="image/jpeg,image/png,image/webp" multiple>
+                <small>Up to 10 images, maximum 5 MB each.</small>
                 <div id="imagePreview"></div>
               </div>
-
               <div class="field full">
                 <label for="projectDescription">Project Description</label>
-                <textarea id="projectDescription"
-                  placeholder="Describe the project, its objectives, features and other important information."></textarea>
+                <textarea id="projectDescription" placeholder="Describe the project, its objectives and features."></textarea>
               </div>
-
             </div>
-
             <div class="form-actions">
-              <button type="submit" class="primary-btn" id="saveProjectButton">
-                Save Project
-              </button>
-              <button type="button" class="secondary-btn" id="cancelProjectButton">
-                Cancel
-              </button>
+              <button type="submit" class="primary-btn" id="saveProjectButton">Save Project</button>
+              <button type="button" class="secondary-btn" id="cancelProjectButton">Cancel</button>
             </div>
-
             <div id="projectMessage" role="status"></div>
           </form>
         </div>
@@ -373,53 +344,19 @@ button{cursor:pointer}
           <h3 style="margin:0">Your Projects</h3>
           <button class="secondary-btn" id="refreshProjects">Refresh List</button>
         </div>
-
         <div class="project-list" id="projectList">
-          <div class="empty-state">Loading projects...</div>
+          <div class="empty-state">Your projects will appear here.</div>
         </div>
-
       </section>
 
-      <section class="view" id="investors">
-        <h2>Investor Management</h2>
-        <div class="panel"><p>Investor records and enquiries will be integrated here.</p></div>
-      </section>
-
-      <section class="view" id="clients">
-        <h2>Client Management</h2>
-        <div class="panel"><p>Manage client information and service enquiries.</p></div>
-      </section>
-
-      <section class="view" id="properties">
-        <h2>Property Management</h2>
-        <div class="panel"><p>Manage property listings and enquiries here.</p></div>
-      </section>
-
-      <section class="view" id="investments">
-        <h2>Investment Management</h2>
-        <div class="panel"><p>Manage investment information and documentation here.</p></div>
-      </section>
-
-      <section class="view" id="partnerships">
-        <h2>Partnership Management</h2>
-        <div class="panel"><p>Manage business partnerships and collaboration enquiries.</p></div>
-      </section>
-
-      <section class="view" id="staff">
-        <h2>Staff &amp; Managers</h2>
-        <div class="panel"><p>Manage authorised administrative personnel here.</p></div>
-      </section>
-
-      <section class="view" id="messages">
-        <h2>Messages</h2>
-        <div class="panel"><p>Client and investor enquiries will appear here after integration.</p></div>
-      </section>
-
-      <section class="view" id="reports">
-        <h2>Reports</h2>
-        <div class="panel"><p>Management reports will appear here after integration.</p></div>
-      </section>
-
+      <section class="view" id="investors"><h2>Investor Management</h2><div class="panel"><p>Investor records and enquiries will be integrated here.</p></div></section>
+      <section class="view" id="clients"><h2>Client Management</h2><div class="panel"><p>Manage client information and service enquiries.</p></div></section>
+      <section class="view" id="properties"><h2>Property Management</h2><div class="panel"><p>Manage property listings and enquiries here.</p></div></section>
+      <section class="view" id="investments"><h2>Investment Management</h2><div class="panel"><p>Manage investment information and documentation here.</p></div></section>
+      <section class="view" id="partnerships"><h2>Partnership Management</h2><div class="panel"><p>Manage business partnerships and collaboration enquiries.</p></div></section>
+      <section class="view" id="staff"><h2>Staff &amp; Managers</h2><div class="panel"><p>Manage authorised administrative personnel here.</p></div></section>
+      <section class="view" id="messages"><h2>Messages</h2><div class="panel"><p>Client and investor enquiries will appear here after integration.</p></div></section>
+      <section class="view" id="reports"><h2>Reports</h2><div class="panel"><p>Management reports will appear here after integration.</p></div></section>
       <section class="view" id="settings">
         <h2>Dashboard Settings</h2>
         <div class="panel">
@@ -430,14 +367,28 @@ button{cursor:pointer}
           <button id="settingsLogout" class="primary-btn">Sign Out</button>
         </div>
       </section>
-
     </div>
   </main>
 </div>
 
-<script>
-/* SUPABASE CONNECTION */
+<!-- AUTO-LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-card">
+    <h2>Dashboard Locked</h2>
+    <p>Enter your password to continue.</p>
+    <form id="unlockForm">
+      <input type="password" id="unlockPassword" autocomplete="current-password" placeholder="Account password" required>
+      <button type="submit" id="unlockButton">Unlock Dashboard</button>
+      <p id="lockMessage"></p>
+    </form>
+    <button type="button" id="lockSignOut" style="margin-top:10px;background:#eee;color:#222">Sign Out</button>
+  </div>
+</div>
 
+<script>
+"use strict";
+
+/* SUPABASE CONNECTION */
 const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
@@ -457,57 +408,91 @@ const emailInput = $("email");
 const passwordInput = $("password");
 
 let currentAdmin = null;
-let isLocking = false;
 let projectsLoaded = false;
+let projectsLoading = false;
+let inactivityStart = null;
+let lockTimer = null;
 
-/* AUTHENTICATION */
+/* GENERAL HELPERS */
+function setLoginMessage(message) {
+  loginMessage.textContent = message || "";
+}
 
 function showLogin(message = "") {
   dashboard.classList.remove("authenticated");
+  dashboard.style.display = "none";
   loginScreen.style.display = "flex";
-  loginMessage.textContent = message;
+  setLoginMessage(message);
 }
 
 function showDashboard(profile, user) {
   currentAdmin = {profile, user};
 
-  $("adminName").textContent = profile.full_name;
+  $("adminName").textContent = profile.full_name || "Administrator";
   $("adminRole").textContent = profile.role;
-  $("settingsName").textContent = "Name: " + profile.full_name;
-  $("settingsEmail").textContent = "Email: " + user.email;
+  $("settingsName").textContent = "Name: " + (profile.full_name || "Administrator");
+  $("settingsEmail").textContent = "Email: " + (user.email || "");
   $("settingsRole").textContent = "Role: " + profile.role;
 
   loginScreen.style.display = "none";
+  dashboard.style.display = "flex";
   dashboard.classList.add("authenticated");
 
-  if (!projectsLoaded) loadProjects();
+  setLoginMessage("");
+  passwordInput.value = "";
+  startInactivityLock();
+
+  // Project loading must never prevent the dashboard from opening.
+  loadProjects().catch(error => {
+    console.error("Project loading error:", error);
+  });
 }
 
 async function verifyAdmin(user) {
+  if (!user || !user.id) {
+    throw new Error("Authentication returned no user account.");
+  }
+
   const {data: profile, error} = await supabaseClient
     .from("admin_profiles")
     .select("full_name, role, is_active")
     .eq("user_id", user.id)
     .maybeSingle();
 
-  if (error) throw new Error("Profile verification failed: " + error.message);
+  if (error) {
+    throw new Error("Profile verification failed: " + error.message);
+  }
 
-  if (!profile || profile.is_active !== true ||
-      !["CEO", "MANAGER", "STAFF"].includes(profile.role)) {
-    throw new Error("Your administrator account is not authorised.");
+  if (!profile) {
+    throw new Error("No administrator profile was found for this account.");
+  }
+
+  if (profile.is_active !== true) {
+    throw new Error("Your administrator account is inactive.");
+  }
+
+  if (!["CEO", "MANAGER", "STAFF"].includes(profile.role)) {
+    throw new Error("Your administrator role is not authorised.");
   }
 
   return profile;
 }
 
+/* LOGIN */
 loginForm.addEventListener("submit", async event => {
   event.preventDefault();
 
+  if (loginButton.disabled) return;
+
   loginButton.disabled = true;
   loginButton.textContent = "Signing in...";
-  loginMessage.textContent = "";
+  setLoginMessage("Connecting to VANTAGE X...");
 
   try {
+    if (!window.supabase) {
+      throw new Error("Supabase library did not load. Check your internet connection and refresh.");
+    }
+
     const {data, error} = await supabaseClient.auth.signInWithPassword({
       email: emailInput.value.trim(),
       password: passwordInput.value
@@ -515,67 +500,21 @@ loginForm.addEventListener("submit", async event => {
 
     if (error) throw error;
 
+    if (!data || !data.user) {
+      throw new Error("Login completed without returning an account. Please try again.");
+    }
+
+    setLoginMessage("Verifying administrator account...");
+
     const profile = await verifyAdmin(data.user);
+
+    // Only hide login after successful verification.
     showDashboard(profile, data.user);
 
-    emailInput.value = "";
-    passwordInput.value = "";
-
   } catch (error) {
-    console.error(error);
-    loginMessage.textContent = error.message || "Unable to sign in.";
+    console.error("Login failed:", error);
+    showLogin(error.message || "Unable to sign in. Please try again.");
   } finally {
     loginButton.disabled = false;
     loginButton.textContent = "Sign In";
-  }
-});
-
-async function initialiseDashboard() {
-  $("loginYear").textContent = new Date().getFullYear();
-  showLogin();
-
-  try {
-    const {data, error} = await supabaseClient.auth.getSession();
-    if (error) throw error;
-
-    if (!data.session) return;
-
-    const profile = await verifyAdmin(data.session.user);
-    showDashboard(profile, data.session.user);
-
-  } catch (error) {
-    console.error("Session restoration:", error);
-    showLogin("Session verification failed. Please sign in again.");
-  }
-}
-
-/* NAVIGATION */
-
-const navButtons = document.querySelectorAll(".nav-button");
-const views = document.querySelectorAll(".view");
-
-function openView(name) {
-  const selected = $(name);
-  if (!selected) return;
-
-  views.forEach(view => view.classList.remove("active"));
-  navButtons.forEach(button => button.classList.remove("active"));
-
-  selected.classList.add("active");
-
-  const activeButton = document.querySelector(
-    '.nav-button[data-view="' + name + '"]'
-  );
-
-  if (activeButton) {
-    activeButton.classList.add("active");
-    $("pageTitle").textContent = activeButton.textContent.trim();
-  }
-
-  $("sidebar").classList.remove("mobile-open");
-
-  if (name === "projects") loadProjects();
-}
-
-navButtons.forEach(button => {
-  button.addEven
+          
