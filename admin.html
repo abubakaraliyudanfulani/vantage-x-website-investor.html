@@ -1078,9 +1078,7 @@ $("logoutButton").addEventListener("click", async () => {
 async function initialiseDashboard() {
   try {
     if (!window.supabase) {
-      showLogin(
-        "Supabase library did not load. Check your internet connection and refresh."
-      );
+      showLogin("Supabase library did not load. Refresh and try again.");
       return;
     }
 
@@ -1091,13 +1089,15 @@ async function initialiseDashboard() {
         auth: {
           persistSession: true,
           autoRefreshToken: true,
-          detectSessionInUrl: true
+          detectSessionInUrl: false
         }
       }
     );
 
-    const {data, error} =
-      await supabaseClient.auth.getSession();
+    // Always begin by showing the login screen.
+    showLogin();
+
+    const { data, error } = await supabaseClient.auth.getSession();
 
     if (error) throw error;
 
@@ -1108,14 +1108,12 @@ async function initialiseDashboard() {
       showLogin();
     }
 
-    supabaseClient.auth.onAuthStateChange(
-      async (event, session) => {
-        if (event === "SIGNED_OUT") {
-          currentAdmin = null;
-          showLogin();
-        }
+    supabaseClient.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_OUT") {
+        currentAdmin = null;
+        showLogin();
       }
-    );
+    });
 
   } catch (error) {
     console.error("Dashboard initialization error:", error);
@@ -1124,7 +1122,7 @@ async function initialiseDashboard() {
 }
 
 initialiseDashboard();
-
-</script>
+  </script>
 </body>
 </html>
+
