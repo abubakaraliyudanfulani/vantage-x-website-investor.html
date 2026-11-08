@@ -6,14 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#091725">
 <title>VANTAGE X | Executive Control Centre</title>
+
 <style>
 :root {
-  --navy:#091725; --dark:#06111c; --panel:#102438;
-  --gold:#d1ad70; --white:#fff; --muted:#aab6c2;
+  --navy:#091725;
+  --dark:#06111c;
+  --panel:#102438;
+  --gold:#d1ad70;
+  --white:#fff;
+  --muted:#aab6c2;
   --border:#263c50;
 }
 * {margin:0;padding:0;box-sizing:border-box}
 body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
+
 .login-screen {
   min-height:100vh;display:flex;align-items:center;
   justify-content:center;padding:20px;
@@ -48,6 +54,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
   overflow-wrap:anywhere
 }
 .login-footer {color:#788795;font-size:11px;text-align:center;margin-top:25px;line-height:1.7}
+
 .layout {display:none;min-height:100vh}
 .layout.authenticated {display:flex}
 .sidebar {width:250px;flex-shrink:0;background:var(--dark);padding:27px 17px}
@@ -86,6 +93,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 .status {display:inline-block;color:var(--gold);border:1px solid #947c50;padding:7px 12px;border-radius:20px;font-size:11px;margin-top:18px}
 .footer {margin-top:40px;text-align:center;color:#788795;font-size:11px;line-height:1.8}
 .menu-toggle {display:none;background:var(--panel);color:var(--gold);border:1px solid var(--border);padding:9px 13px;border-radius:6px}
+
 @media(max-width:950px) {
   .cards {grid-template-columns:repeat(2,minmax(0,1fr))}
   .management {grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -102,12 +110,14 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 }
 </style>
 </head>
+
 <body>
 
 <section class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-brand">VANTAGE X</div>
     <div class="login-subtitle">EXECUTIVE CONTROL CENTRE</div>
+
     <h2 id="loginHeading">Administrator Login</h2>
     <p class="login-description" id="loginDescription">
       Sign in with your authorised administrator account.
@@ -117,8 +127,21 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
       <div id="passwordFields">
         <label for="email">Email Address</label>
         <input type="email" id="email" autocomplete="username" required>
+
         <label for="password">Password</label>
         <input type="password" id="password" autocomplete="current-password" required>
+      </div>
+
+      <div id="setupFields" style="display:none">
+        <p style="color:#d1ad70;font-size:13px;line-height:1.7;margin-bottom:12px">
+          Add the private setup key below to Google Authenticator.
+          Keep this key confidential.
+        </p>
+        <label for="setupSecret">Authenticator setup key</label>
+        <input id="setupSecret" type="text" readonly>
+        <button type="button" id="copySecretButton" class="login-button">
+          Copy Setup Key
+        </button>
       </div>
 
       <div id="mfaFields" style="display:none">
@@ -134,6 +157,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
     </form>
 
     <div class="login-error" id="loginError"></div>
+
     <div class="login-footer">
       VANTAGE X GROUP LTD — ESTATES & CO.<br>
       Authorised personnel only.
@@ -145,7 +169,9 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 <aside class="sidebar">
   <div class="brand">VANTAGE X</div>
   <div class="brand-sub">EXECUTIVE CONTROL CENTRE</div>
+
   <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+
   <nav class="navigation" id="navigation">
     <div class="nav-label">MAIN MENU</div>
     <button class="nav-item active" data-view="overview">Overview</button>
@@ -153,11 +179,13 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
     <button class="nav-item" data-view="clients">Clients</button>
     <button class="nav-item" data-view="properties">Properties</button>
     <button class="nav-item" data-view="investments">Investments</button>
+
     <div class="nav-label">MANAGEMENT</div>
     <button class="nav-item" data-view="partnerships">Partnerships</button>
     <button class="nav-item" data-view="staff">Staff & Managers</button>
     <button class="nav-item" data-view="messages">Messages</button>
     <button class="nav-item" data-view="reports">Reports</button>
+
     <div class="nav-label">SYSTEM</div>
     <button class="nav-item" data-view="settings">Settings</button>
   </nav>
@@ -181,6 +209,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
     <p>Manage your business operations, oversee activities and organise your organisation from one central workspace.</p>
     <span class="status">Authenticated management workspace</span>
   </div>
+
   <h2 class="section-title">Business Overview</h2>
   <div class="cards">
     <div class="card"><p>Total Investors</p><h3>—</h3></div>
@@ -188,6 +217,7 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
     <div class="card"><p>Properties</p><h3>—</h3></div>
     <div class="card"><p>Pending Enquiries</p><h3>—</h3></div>
   </div>
+
   <h2 class="section-title">Management Centre</h2>
   <div class="management">
     <div class="management-item"><h3>Investor Management</h3><p>Organise investor accounts and records.</p></div>
@@ -218,32 +248,47 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+"use strict";
+
+/* SUPABASE CONNECTION */
 const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
+if (!window.supabase) {
+  alert("The security service could not load. Please refresh the page.");
+  throw new Error("Supabase library unavailable");
+}
+
 const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL, SUPABASE_ANON_KEY
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
 );
 
+/* PAGE ELEMENTS */
 const loginScreen = document.getElementById("loginScreen");
 const dashboard = document.getElementById("dashboard");
 const loginForm = document.getElementById("loginForm");
 const loginButton = document.getElementById("loginButton");
 const loginError = document.getElementById("loginError");
 const passwordFields = document.getElementById("passwordFields");
+const setupFields = document.getElementById("setupFields");
 const mfaFields = document.getElementById("mfaFields");
 const mfaCode = document.getElementById("mfaCode");
+const setupSecret = document.getElementById("setupSecret");
 const loginHeading = document.getElementById("loginHeading");
 const loginDescription = document.getElementById("loginDescription");
 const adminTag = document.getElementById("adminTag");
 const welcomeTitle = document.getElementById("welcomeTitle");
 const navigation = document.getElementById("navigation");
 
-let mfaInProgress = false;
+let loginMode = "password";
 let pendingFactorId = null;
 let pendingChallengeId = null;
 let pendingProfile = null;
+let mfaInProgress = false;
+let isAutoLocking = false;
 
+/* LOGIN SCREEN */
 function showLogin(message = "") {
   dashboard.classList.remove("authenticated");
   loginScreen.style.display = "flex";
@@ -252,27 +297,38 @@ function showLogin(message = "") {
 }
 
 function setLoginMode(mode) {
-  const isMFA = mode === "mfa";
-  passwordFields.style.display = isMFA ? "none" : "block";
-  mfaFields.style.display = isMFA ? "block" : "none";
-  document.getElementById("email").required = !isMFA;
-  document.getElementById("password").required = !isMFA;
-  mfaCode.required = isMFA;
-  loginHeading.textContent = isMFA ? "Authenticator Verification" : "Administrator Login";
-  loginDescription.textContent = isMFA
-    ? "Enter the six-digit code from your authenticator app."
-    : "Sign in with your authorised administrator account.";
-  loginButton.textContent = isMFA ? "Verify Code" : "Sign In Securely";
+  loginMode = mode;
+
+  passwordFields.style.display = mode === "password" ? "block" : "none";
+  setupFields.style.display = mode === "setup" ? "block" : "none";
+  mfaFields.style.display = mode === "mfa" ? "block" : "none";
+
+  document.getElementById("email").required = mode === "password";
+  document.getElementById("password").required = mode === "password";
+  mfaCode.required = mode === "mfa";
+
+  loginHeading.textContent =
+    mode === "password" ? "Administrator Login" :
+    mode === "setup" ? "Authenticator Setup" :
+    "Authenticator Verification";
+
+  loginDescription.textContent =
+    mode === "password"
+      ? "Sign in with your authorised administrator account."
+      : mode === "setup"
+      ? "Connect Google Authenticator before continuing."
+      : "Enter the current six-digit code from your authenticator app.";
+
+  loginButton.textContent =
+    mode === "password" ? "Sign In Securely" :
+    mode === "setup" ? "Continue to Verification" :
+    "Verify Code";
+
   loginError.style.display = "none";
+  mfaCode.value = "";
 }
 
-function showDashboard(profile) {
-  loginScreen.style.display = "none";
-  dashboard.classList.add("authenticated");
-  adminTag.textContent = profile.role + " WORKSPACE";
-  welcomeTitle.textContent = "Welcome, " + profile.full_name;
-}
-
+/* ADMINISTRATOR PROFILE */
 async function verifyAdminProfile(user) {
   const { data: profile, error } = await supabaseClient
     .from("admin_profiles")
@@ -280,47 +336,63 @@ async function verifyAdminProfile(user) {
     .eq("user_id", user.id)
     .maybeSingle();
 
-  if (error) throw new Error("Unable to verify administrator access.");
+  if (error) {
+    throw new Error("Unable to verify administrator access. Please try again.");
+  }
+
   const permittedRoles = ["CEO", "MANAGER", "STAFF"];
 
-  if (!profile || profile.is_active !== true ||
-      !permittedRoles.includes(profile.role)) {
-    throw new Error("Access denied. Your account is not an active authorised administrator.");
+  if (
+    !profile ||
+    profile.is_active !== true ||
+    !permittedRoles.includes(profile.role)
+  ) {
+    throw new Error("Access denied. This account is not an active authorised administrator.");
   }
+
   return profile;
 }
 
+/* CREATE MFA CHALLENGE */
+async function createMFAChallenge(factorId) {
+  const { data, error } = await supabaseClient.auth.mfa.challenge({
+    factorId
+  });
+
+  if (error) throw error;
+
+  pendingFactorId = factorId;
+  pendingChallengeId = data.id;
+}
+
+/* START MFA */
 async function startMFA(profile) {
-  mfaInProgress = true;
   pendingProfile = profile;
+  mfaInProgress = true;
 
-  const { data: factorsData, error: factorsError } =
-    await supabaseClient.auth.mfa.listFactors();
+  const { data, error } = await supabaseClient.auth.mfa.listFactors();
 
-  if (factorsError) throw factorsError;
+  if (error) throw error;
 
-  const verifiedFactors = factorsData.totp.filter(
+  const verifiedFactors = (data.totp || []).filter(
     factor => factor.status === "verified"
   );
 
   if (verifiedFactors.length > 0) {
-    pendingFactorId = verifiedFactors[0].id;
-    const { data: challenge, error } =
-      await supabaseClient.auth.mfa.challenge({
-        factorId: pendingFactorId
-      });
-    if (error) throw error;
-
-    pendingChallengeId = challenge.id;
+    await createMFAChallenge(verifiedFactors[0].id);
     setLoginMode("mfa");
-    showLogin("Enter the current six-digit code from Google Authenticator.");
+    showLogin("Enter the six-digit code from Google Authenticator.");
+    mfaCode.focus();
     return;
   }
 
-  if (factorsData.totp.length > 0) {
-    throw new Error("An unfinished authenticator setup already exists. Contact your administrator or remove the unfinished factor in Supabase before trying again.");
+  if ((data.totp || []).length > 0) {
+    throw new Error(
+      "An unfinished authenticator setup exists. Please contact your administrator to resolve it in Supabase."
+    );
   }
 
+  /* FIRST-TIME ENROLLMENT */
   const { data: enrollment, error: enrollError } =
     await supabaseClient.auth.mfa.enroll({
       factorType: "totp",
@@ -330,42 +402,34 @@ async function startMFA(profile) {
   if (enrollError) throw enrollError;
 
   pendingFactorId = enrollment.id;
+  setupSecret.value = enrollment.totp.secret;
 
-  const secret = enrollment.totp.secret;
-
-  alert(
-    "FIRST-TIME AUTHENTICATOR SETUP\n\n" +
-    "Open Google Authenticator on this tablet.\n" +
-    "Choose Add account, then Enter a setup key.\n\n" +
-    "Account name: VANTAGE X CEO\n\n" +
-    "Setup key:\n" + secret +
-    "\n\nKeep this key private. Do not send it to anyone."
+  setLoginMode("setup");
+  showLogin(
+    "Add this setup key to Google Authenticator. Then continue to enter the code."
   );
-
-  const { data: challenge, error: challengeError } =
-    await supabaseClient.auth.mfa.challenge({
-      factorId: pendingFactorId
-    });
-
-  if (challengeError) throw challengeError;
-
-  pendingChallengeId = challenge.id;
-  setLoginMode("mfa");
-  showLogin("Add the setup key to Google Authenticator, then enter the six-digit code it generates.");
 }
 
+/* COMPLETE MFA */
 async function finishMFA(code) {
-  if (!pendingFactorId || !pendingChallengeId) {
-    throw new Error("The verification session has expired. Please sign in again.");
+  if (!pendingFactorId) {
+    throw new Error("Authenticator session expired. Please sign in again.");
+  }
+
+  if (!pendingChallengeId) {
+    await createMFAChallenge(pendingFactorId);
   }
 
   const { error } = await supabaseClient.auth.mfa.verify({
     factorId: pendingFactorId,
     challengeId: pendingChallengeId,
-    code: code
+    code
   });
 
-  if (error) throw new Error("Incorrect or expired authenticator code. Please try again.");
+  if (error) {
+    pendingChallengeId = null;
+    throw new Error("Incorrect or expired code. Please try again.");
+  }
 
   const { data: assurance, error: assuranceError } =
     await supabaseClient.auth.mfa.getAuthenticatorAssuranceLevel();
@@ -373,109 +437,93 @@ async function finishMFA(code) {
   if (assuranceError) throw assuranceError;
 
   if (assurance.currentLevel !== "aal2") {
-    throw new Error("Second-factor verification was not confirmed. Please try again.");
+    throw new Error("Second-factor verification was not confirmed.");
   }
 
   const profile = pendingProfile;
+
+  if (!profile) {
+    throw new Error("Administrator session expired. Please sign in again.");
+  }
+
   pendingFactorId = null;
   pendingChallengeId = null;
   pendingProfile = null;
   mfaInProgress = false;
 
+  setupSecret.value = "";
   document.getElementById("password").value = "";
   mfaCode.value = "";
+
   showDashboard(profile);
 }
 
+/* SHOW DASHBOARD */
+function showDashboard(profile) {
+  loginScreen.style.display = "none";
+  dashboard.classList.add("authenticated");
+  adminTag.textContent = profile.role + " WORKSPACE";
+  welcomeTitle.textContent = "Welcome, " + profile.full_name;
+}
+
+/* LOGIN FORM */
 loginForm.addEventListener("submit", async function(event) {
   event.preventDefault();
+
+  if (loginButton.disabled) return;
+
   loginButton.disabled = true;
   loginError.style.display = "none";
 
   try {
-    if (mfaFields.style.display !== "none") {
-      const code = mfaCode.value.trim();
-      if (!/^[0-9]{6}$/.test(code)) {
-        throw new Error("Enter a valid six-digit authenticator code.");
-      }
-      await finishMFA(code);
-    } else {
+    if (loginMode === "password") {
       loginButton.textContent = "Authenticating...";
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email, password
-      });
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
 
       if (error) throw error;
       if (!data.user) throw new Error("Unable to identify your account.");
 
       const profile = await verifyAdminProfile(data.user);
       await startMFA(profile);
+
+    } else if (loginMode === "setup") {
+      await createMFAChallenge(pendingFactorId);
+      setLoginMode("mfa");
+      showLogin("Enter the six-digit code displayed by Google Authenticator.");
+      mfaCode.focus();
+
+    } else if (loginMode === "mfa") {
+      const code = mfaCode.value.trim();
+
+      if (!/^[0-9]{6}$/.test(code)) {
+        throw new Error("Please enter a valid six-digit code.");
+      }
+
+      loginButton.textContent = "Verifying...";
+      await finishMFA(code);
     }
+
   } catch (error) {
     console.error("Authentication error:", error);
+
+    if (loginMode === "password") {
+      mfaInProgress = false;
+      pendingFactorId = null;
+      pendingChallengeId = null;
+      pendingProfile = null;
+    }
+
     showLogin(error.message || "Authentication failed. Please try again.");
+
   } finally {
     loginButton.disabled = false;
-    loginButton.textContent =
-      mfaFields.style.display !== "none" ? "Verify Code" : "Sign In Securely";
-  }
-});
 
-document.getElementById("logoutButton").addEventListener("click", async function() {
-  await supabaseClient.auth.signOut();
-  pendingFactorId = null;
-  pendingChallengeId = null;
-  pendingProfile = null;
-  mfaInProgress = false;
-  setLoginMode("password");
-  showLogin();
-});
-
-let isAutoLocking = false;
-
-async function lockDashboard() {
-  if (isAutoLocking || mfaInProgress) return;
-  isAutoLocking = true;
-
-  dashboard.classList.remove("authenticated");
-  loginScreen.style.display = "flex";
-  document.getElementById("password").value = "";
-  mfaCode.value = "";
-
-  try {
-    await supabaseClient.auth.signOut({ scope: "local" });
-  } catch (error) {
-    console.error("Security lock error:", error);
-  }
-
-  isAutoLocking = false;
-}
-
-document.addEventListener("visibilitychange", function() {
-  if (document.visibilityState === "hidden") lockDashboard();
-});
-
-window.addEventListener("pagehide", function() {
-  lockDashboard();
-});
-
-async function initialiseDashboard() {
-  setLoginMode("password");
-  showLogin();
-  await supabaseClient.auth.signOut({ scope: "local" });
-}
-
-const buttons = document.querySelectorAll(".nav-item");
-const views = document.querySelectorAll(".view");
-const pageTitle = document.getElementById("pageTitle");
-
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    const target = button.dataset.view;
-    views.forEach(view => view.classList.toggle("active", view.id === target));
-    buttons.forEach(item => item.classList.toggle("active", item === button));
-
-    pageTitle.textContent = button.textContent.trim() === "Overview
+    if (loginM
