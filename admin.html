@@ -1017,40 +1017,66 @@ logoutButton.addEventListener("click", async function() {
 });
 
 
+
 // ======================================
-// RESTORE EXISTING SESSION
+// AUTOMATIC ADMIN SECURITY LOCK
 // ======================================
 
+let isAutoLocking = false;
+
+async function lockDashboard() {
+
+  if (isAutoLocking) return;
+
+  isAutoLocking = true;
+
+  // Immediately hide the dashboard
+  dashboard.classList.remove("authenticated");
+  loginScreen.style.display = "flex";
+
+  // Clear the password field
+  document.getElementById("password").value = "";
+
+  // Clear the local Supabase session
+  try {
+    await supabaseClient.auth.signOut({
+      scope: "local"
+    });
+  } catch (error) {
+    console.error("Security lock error:", error);
+  }
+
+  isAutoLocking = false;
+}
+
+// Lock when browser is minimized,
+// another app is opened, or the tab is hidden.
+document.addEventListener("visibilitychange", function() {
+
+  if (document.visibilityState === "hidden") {
+    lockDashboard();
+  }
+
+});
+
+// Also lock when the page is left.
+window.addEventListener("pagehide", function() {
+  lockDashboard();
+});
+
+// Always require login when the page loads.
 async function initialiseDashboard() {
 
   showLogin();
 
-  try {
+  document.getElementById("password").value = "";
 
-    const { data, error } =
-      await supabaseClient.auth.getSession();
-
-    if (error) {
-      throw error;
-    }
-
-    if (data.session && data.session.user) {
-
-      await verifyAdminAccess(data.session.user);
-
-    }
-
-  } catch (error) {
-
-    console.error("Session error:", error);
-
-    showLogin(
-      "Unable to verify your session. Please sign in again."
-    );
-
-  }
+  await supabaseClient.auth.signOut({
+    scope: "local"
+  });
 
 }
+  
 
 
 // ======================================
