@@ -19,16 +19,24 @@
   --background: #f4f6f8;
   --border: #e5e9ed;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: var(--background);
   color: #192b3b;
 }
-button, input { font: inherit; }
+
+button, input {
+  font: inherit;
+}
 
 /* LOGIN */
+
 #loginScreen {
   min-height: 100vh;
   display: flex;
@@ -37,6 +45,7 @@ button, input { font: inherit; }
   padding: 20px;
   background: linear-gradient(135deg, #06111d, #142d40);
 }
+
 .login-card {
   width: 100%;
   max-width: 420px;
@@ -45,40 +54,48 @@ button, input { font: inherit; }
   border-radius: 14px;
   box-shadow: 0 20px 60px #0005;
 }
+
 .brand {
   text-align: center;
   margin-bottom: 30px;
 }
+
 .brand h1 {
   color: var(--navy);
   font-size: 24px;
   letter-spacing: 2px;
   margin: 0;
 }
+
 .brand span {
   color: var(--gold);
   font-size: 11px;
   letter-spacing: 3px;
 }
+
 .brand p {
   color: #78838d;
   font-size: 12px;
 }
+
 .login-card h2 {
   font-size: 21px;
   margin-bottom: 8px;
 }
+
 .login-card .intro {
   color: #71808d;
   font-size: 13px;
   margin-bottom: 25px;
 }
+
 .login-card label {
   display: block;
   font-size: 13px;
   font-weight: bold;
   margin: 17px 0 8px;
 }
+
 .login-card input {
   width: 100%;
   padding: 14px;
@@ -86,9 +103,11 @@ button, input { font: inherit; }
   border-radius: 7px;
   outline: none;
 }
+
 .login-card input:focus {
   border-color: var(--gold);
 }
+
 #loginButton {
   width: 100%;
   padding: 14px;
@@ -100,10 +119,12 @@ button, input { font: inherit; }
   font-weight: bold;
   cursor: pointer;
 }
+
 #loginButton:disabled {
   opacity: .6;
   cursor: wait;
 }
+
 #loginMessage {
   margin-top: 15px;
   font-size: 13px;
@@ -111,6 +132,7 @@ button, input { font: inherit; }
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
+
 .login-footer {
   text-align: center;
   margin-top: 25px;
@@ -119,13 +141,16 @@ button, input { font: inherit; }
 }
 
 /* DASHBOARD */
+
 #dashboard {
   display: none;
   min-height: 100vh;
 }
+
 #dashboard.authenticated {
   display: flex;
 }
+
 .sidebar {
   width: 250px;
   min-width: 250px;
@@ -134,26 +159,31 @@ button, input { font: inherit; }
   min-height: 100vh;
   padding: 25px 15px;
 }
+
 .sidebar-brand {
   padding: 5px 12px 25px;
   border-bottom: 1px solid #ffffff20;
 }
+
 .sidebar-brand h2 {
   font-size: 18px;
   letter-spacing: 1px;
   margin: 0;
 }
+
 .sidebar-brand span {
   font-size: 10px;
   letter-spacing: 2px;
   color: var(--gold);
 }
+
 .sidebar-label {
   color: #8293a2;
   font-size: 10px;
   letter-spacing: 2px;
   padding: 25px 12px 10px;
 }
+
 .nav-button {
   width: 100%;
   display: block;
@@ -166,16 +196,19 @@ button, input { font: inherit; }
   cursor: pointer;
   margin-bottom: 4px;
 }
+
 .nav-button:hover,
 .nav-button.active {
   background: #ffffff14;
   color: var(--gold-light);
 }
+
 .sidebar-bottom {
   margin-top: 30px;
   border-top: 1px solid #ffffff20;
   padding-top: 15px;
 }
+
 #logoutButton {
   width: 100%;
   background: #ffffff12;
@@ -185,12 +218,14 @@ button, input { font: inherit; }
   border-radius: 6px;
   cursor: pointer;
 }
+
 .main {
   flex: 1;
   min-width: 0;
 }
+
 .topbar {
-  height: 75px;
+  min-height: 75px;
   background: white;
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -198,87 +233,101 @@ button, input { font: inherit; }
   justify-content: space-between;
   padding: 0 30px;
 }
+
 .topbar h2 {
   font-size: 18px;
   margin: 0;
 }
+
 .admin-info {
   font-size: 12px;
   color: #687785;
   text-align: right;
 }
+
 .admin-info strong {
   display: block;
   color: var(--navy);
   margin-bottom: 4px;
 }
+
 .content {
   padding: 30px;
 }
+
 .welcome {
   margin-bottom: 25px;
 }
+
 .welcome h1 {
   font-size: 25px;
   margin: 0 0 8px;
 }
+
 .welcome p {
   color: #75828d;
   font-size: 14px;
   margin: 0;
 }
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 17px;
   margin-bottom: 25px;
 }
-.stat-card, .panel, .management-card {
+
+.stat-card,
+.panel,
+.management-card {
   background: white;
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 22px;
 }
+
 .stat-card span {
   color: #75828d;
   font-size: 12px;
 }
+
 .stat-card h2 {
   margin: 12px 0 0;
   font-size: 26px;
   color: var(--navy);
 }
-.panel h3, .management-card h3 {
+
+.panel h3,
+.management-card h3 {
   margin-top: 0;
   color: var(--navy);
 }
-.panel p, .management-card p {
+
+.panel p,
+.management-card p {
   font-size: 13px;
   color: #77838e;
   line-height: 1.7;
 }
+
 .management-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
+
 .management-card {
   border-top: 3px solid var(--gold);
 }
-.management-card button {
-  background: var(--navy);
-  color: white;
-  border: 0;
-  padding: 10px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 .view {
   display: none;
 }
+
 .view.active {
   display: block;
 }
+
 .notice {
   background: #fff9eb;
   border: 1px solid #ead8ad;
@@ -288,6 +337,7 @@ button, input { font: inherit; }
   font-size: 13px;
   line-height: 1.6;
 }
+
 #mobileMenu {
   display: none;
   background: var(--navy);
@@ -302,41 +352,52 @@ button, input { font: inherit; }
     width: 220px;
     min-width: 220px;
   }
+
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 @media(max-width: 650px) {
   #dashboard.authenticated {
     display: block;
   }
+
   .sidebar {
     display: none;
     width: 100%;
     min-height: auto;
   }
+
   .sidebar.mobile-open {
     display: block;
   }
+
   .topbar {
     padding: 0 15px;
     gap: 10px;
   }
+
   #mobileMenu {
     display: block;
   }
+
   .content {
     padding: 20px 15px;
   }
+
   .management-grid {
     grid-template-columns: 1fr;
   }
+
   .stats {
     gap: 10px;
   }
+
   .stat-card {
     padding: 15px;
   }
+
   .admin-info {
     font-size: 10px;
   }
@@ -347,8 +408,10 @@ button, input { font: inherit; }
 <body>
 
 <!-- LOGIN SCREEN -->
+
 <div id="loginScreen">
   <div class="login-card">
+
     <div class="brand">
       <h1>VANTAGE X</h1>
       <span>GROUP LTD</span>
@@ -359,6 +422,7 @@ button, input { font: inherit; }
     <p class="intro">Secure access to the management dashboard.</p>
 
     <form id="loginForm">
+
       <label for="email">Email Address</label>
       <input
         type="email"
@@ -378,19 +442,24 @@ button, input { font: inherit; }
       >
 
       <button type="submit" id="loginButton">Sign In</button>
+
       <div id="loginMessage" role="alert"></div>
+
     </form>
 
     <div class="login-footer">
       VANTAGE X GROUP LTD &copy; <span id="loginYear"></span>
     </div>
+
   </div>
 </div>
 
 <!-- ADMIN DASHBOARD -->
+
 <div id="dashboard">
 
   <aside class="sidebar" id="sidebar">
+
     <div class="sidebar-brand">
       <h2>VANTAGE X</h2>
       <span>ADMINISTRATION</span>
@@ -412,54 +481,67 @@ button, input { font: inherit; }
     <div class="sidebar-bottom">
       <button id="logoutButton">Sign Out</button>
     </div>
+
   </aside>
 
   <main class="main">
+
     <header class="topbar">
+
       <div style="display:flex;align-items:center;gap:12px">
         <button id="mobileMenu">☰</button>
         <h2 id="pageTitle">Overview</h2>
       </div>
+
       <div class="admin-info">
         <strong id="adminName">Administrator</strong>
         <span id="adminRole">ADMIN</span>
       </div>
+
     </header>
 
     <div class="content">
 
       <section class="view active" id="overview">
+
         <div class="welcome">
           <h1>Welcome to VANTAGE X</h1>
           <p>Manage your company's administration from one place.</p>
         </div>
 
         <div class="stats">
+
           <div class="stat-card">
             <span>Total Investors</span>
             <h2>—</h2>
           </div>
+
           <div class="stat-card">
             <span>Total Clients</span>
             <h2>—</h2>
           </div>
+
           <div class="stat-card">
             <span>Properties</span>
             <h2>—</h2>
           </div>
+
           <div class="stat-card">
             <span>Staff Members</span>
             <h2>—</h2>
           </div>
+
         </div>
 
         <div class="panel">
           <h3>Administration Overview</h3>
-          <p>Your dashboard login is connected to Supabase. The management sections are ready for future database integration.</p>
+          <p>Your dashboard login is connected to Supabase. Management sections are ready for future database integration.</p>
+
           <div class="notice">
-            Important: These dashboard figures are placeholders. No investor or financial records are being displayed yet.
+            Dashboard figures are placeholders. No investor or financial records are being displayed yet.
           </div>
         </div>
+
       </section>
 
       <section class="view" id="investors">
@@ -496,7 +578,7 @@ button, input { font: inherit; }
         <h2>Investment Management</h2>
         <div class="panel">
           <p>Manage investment information and related documentation.</p>
-          <div class="notice">Do not enter real financial or investor records until database permissions and security policies have been properly configured.</div>
+          <div class="notice">Do not enter real financial or investor records until database permissions are properly configured.</div>
         </div>
       </section>
 
@@ -536,7 +618,9 @@ button, input { font: inherit; }
           <p id="settingsName">Name: —</p>
           <p id="settingsEmail">Email: —</p>
           <p id="settingsRole">Role: —</p>
-          <button id="settingsLogout" style="background:#091725;color:white;border:0;padding:12px 18px;border-radius:5px">
+
+          <button id="settingsLogout"
+            style="background:#091725;color:white;border:0;padding:12px 18px;border-radius:5px">
             Sign Out
           </button>
         </div>
@@ -547,11 +631,13 @@ button, input { font: inherit; }
 </div>
 
 <script>
+
 /* ==========================================
    SUPABASE CONNECTION
 ========================================== */
 
-const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
+const SUPABASE_URL =
+  "https://hwpxxbscoscumkmoqjgs.supabase.co";
 
 const SUPABASE_ANON_KEY =
   "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
@@ -581,12 +667,15 @@ let isLocking = false;
 ========================================== */
 
 function showLogin(message = "") {
+
   dashboard.classList.remove("authenticated");
   loginScreen.style.display = "flex";
   loginMessage.textContent = message;
+
 }
 
 function showDashboard(profile, user) {
+
   currentAdmin = { profile, user };
 
   document.getElementById("adminName").textContent =
@@ -607,6 +696,41 @@ function showDashboard(profile, user) {
   loginScreen.style.display = "none";
   dashboard.classList.add("authenticated");
   loginMessage.textContent = "";
+
+}
+
+/* ==========================================
+   VERIFY ADMIN PROFILE
+========================================== */
+
+async function verifyAdmin(user) {
+
+  const { data: profile, error } = await supabaseClient
+    .from("admin_profiles")
+    .select("full_name, role, is_active")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error("Profile verification failed: " + error.message);
+  }
+
+  if (!profile) {
+    throw new Error("No administrator profile was found.");
+  }
+
+  if (profile.is_active !== true) {
+    throw new Error("Your administrator account is inactive.");
+  }
+
+  const allowedRoles = ["CEO", "MANAGER", "STAFF"];
+
+  if (!allowedRoles.includes(profile.role)) {
+    throw new Error("Your account does not have an authorised role.");
+  }
+
+  return profile;
+
 }
 
 /* ==========================================
@@ -614,16 +738,11 @@ function showDashboard(profile, user) {
 ========================================== */
 
 loginForm.addEventListener("submit", async function(event) {
+
   event.preventDefault();
 
   const email = emailInput.value.trim();
   const password = passwordInput.value;
-
-  if (!email || !password) {
-    loginMessage.textContent =
-      "Please enter your email and password.";
-    return;
-  }
 
   loginButton.disabled = true;
   loginButton.textContent = "Signing in...";
@@ -633,8 +752,8 @@ loginForm.addEventListener("submit", async function(event) {
 
     const { data, error } =
       await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
+        email,
+        password
       });
 
     if (error) {
@@ -642,41 +761,10 @@ loginForm.addEventListener("submit", async function(event) {
     }
 
     if (!data.user) {
-      throw new Error("Login succeeded but no user was returned.");
+      throw new Error("No user account was returned.");
     }
 
-    const { data: profile, error: profileError } =
-      await supabaseClient
-        .from("admin_profiles")
-        .select("full_name, role, is_active")
-        .eq("user_id", data.user.id)
-        .maybeSingle();
-
-    if (profileError) {
-      throw new Error(
-        "Profile verification failed: " + profileError.message
-      );
-    }
-
-    if (!profile) {
-      throw new Error(
-        "Your account has no admin profile. Contact the CEO."
-      );
-    }
-
-    if (profile.is_active !== true) {
-      throw new Error(
-        "Your admin account is inactive. Contact the CEO."
-      );
-    }
-
-    const allowedRoles = ["CEO", "MANAGER", "STAFF"];
-
-    if (!allowedRoles.includes(profile.role)) {
-      throw new Error(
-        "Your account does not have an authorised admin role."
-      );
-    }
+    const profile = await verifyAdmin(data.user);
 
     showDashboard(profile, data.user);
 
@@ -685,16 +773,10 @@ loginForm.addEventListener("submit", async function(event) {
 
   } catch (error) {
 
-    console.error("Admin login error:", error);
+    console.error("Login error:", error);
 
     loginMessage.textContent =
       error.message || "An unexpected login error occurred.";
-
-    try {
-      await supabaseClient.auth.signOut({ scope: "local" });
-    } catch (signOutError) {
-      console.error("Sign-out error:", signOutError);
-    }
 
   } finally {
 
@@ -702,7 +784,47 @@ loginForm.addEventListener("submit", async function(event) {
     loginButton.textContent = "Sign In";
 
   }
+
 });
+
+/* ==========================================
+   RESTORE LOGIN AFTER REFRESH
+========================================== */
+
+async function initialiseDashboard() {
+
+  document.getElementById("loginYear").textContent =
+    new Date().getFullYear();
+
+  showLogin();
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data.session) {
+      showLogin();
+      return;
+    }
+
+    const profile = await verifyAdmin(data.session.user);
+
+    showDashboard(profile, data.session.user);
+
+  } catch (error) {
+
+    console.error("Session restoration error:", error);
+
+    showLogin(
+      "Your session could not be verified. Please sign in again."
+    );
+
+  }
+
+}
 
 /* ==========================================
    NAVIGATION
@@ -717,13 +839,9 @@ function openView(viewName) {
 
   if (!selectedView) return;
 
-  views.forEach(view => {
-    view.classList.remove("active");
-  });
+  views.forEach(view => view.classList.remove("active"));
 
-  navButtons.forEach(button => {
-    button.classList.remove("active");
-  });
+  navButtons.forEach(button => button.classList.remove("active"));
 
   selectedView.classList.add("active");
 
@@ -736,28 +854,32 @@ function openView(viewName) {
   }
 
   document.getElementById("pageTitle").textContent =
-    activeButton
-      ? activeButton.textContent.trim()
-      : "Overview";
+    activeButton ? activeButton.textContent.trim() : "Overview";
 
   document.getElementById("sidebar").classList.remove("mobile-open");
+
 }
 
 navButtons.forEach(button => {
+
   button.addEventListener("click", function() {
     openView(this.dataset.view);
   });
+
 });
 
 document.getElementById("mobileMenu").addEventListener("click", function() {
+
   document.getElementById("sidebar").classList.toggle("mobile-open");
+
 });
 
 /* ==========================================
-   LOGOUT
+   MANUAL LOGOUT
 ========================================== */
 
 async function logout() {
+
   showLogin("You have signed out.");
 
   emailInput.value = "";
@@ -770,19 +892,29 @@ async function logout() {
   if (error) {
     console.error("Logout error:", error.message);
     loginMessage.textContent =
-      "Signed out of the dashboard, but session cleanup reported: " +
-      error.message;
+      "Sign-out error: " + error.message;
   }
+
 }
 
-document.getElementById("logoutButton").addEventListener("click", logout);
-document.getElementById("settingsLogout").addEventListener("click", logout);
+document.getElementById("logoutButton")
+  .addEventListener("click", logout);
+
+document.getElementById("settingsLogout")
+  .addEventListener("click", logout);
 
 /* ==========================================
-   AUTOMATIC SECURITY LOCK
+   AUTOMATIC LOCK WITHOUT SIGNING OUT
 ========================================== */
 
-async function lockDashboard() {
+let hiddenAt = null;
+
+/* Clear old lock timestamps when a page is freshly loaded.
+   This prevents a normal refresh from triggering an old lock. */
+
+sessionStorage.removeItem("vantage_hidden_at");
+
+function lockDashboard() {
 
   if (
     isLocking ||
@@ -793,103 +925,52 @@ async function lockDashboard() {
 
   isLocking = true;
 
-  showLogin("Your dashboard was locked. Please sign in again.");
+  showLogin("Dashboard locked. Please sign in again.");
 
   emailInput.value = "";
   passwordInput.value = "";
 
   currentAdmin = null;
 
-  try {
-    await supabaseClient.auth.signOut({ scope: "local" });
-  } catch (error) {
-    console.error("Automatic lock error:", error);
-  }
+  /* IMPORTANT:
+     Do not sign out of Supabase here.
+     The session must remain available for browser refresh. */
 
   isLocking = false;
+
 }
 
 document.addEventListener("visibilitychange", function() {
 
   if (document.visibilityState === "hidden") {
 
-    sessionStorage.setItem(
-      "vantage_hidden_at",
-      String(Date.now())
-    );
+    hiddenAt = Date.now();
 
-  } else {
+  } else if (hiddenAt !== null) {
 
-    const hiddenAt = Number(
-      sessionStorage.getItem("vantage_hidden_at") || 0
-    );
+    const awayTime = Date.now() - hiddenAt;
 
-    if (hiddenAt) {
+    hiddenAt = null;
 
-      const awayTime = Date.now() - hiddenAt;
+    if (
+      awayTime >= 30000 &&
+      dashboard.classList.contains("authenticated")
+    ) {
 
-      sessionStorage.removeItem("vantage_hidden_at");
+      lockDashboard();
 
-      if (
-        awayTime >= 30000 &&
-        dashboard.classList.contains("authenticated")
-      ) {
-        lockDashboard();
-      }
     }
+
   }
+
 });
 
 /* ==========================================
    INITIALISE
 ========================================== */
 
-async function initialiseDashboard() {
-
-  document.getElementById("loginYear").textContent =
-    new Date().getFullYear();
-
-  showLogin();
-
-  try {
-    const { data, error } =
-      await supabaseClient.auth.getSession();
-
-    if (error) throw error;
-
-    if (!data.session) {
-      showLogin();
-      return;
-    }
-
-    const { data: profile, error: profileError } =
-      await supabaseClient
-        .from("admin_profiles")
-        .select("full_name, role, is_active")
-        .eq("user_id", data.session.user.id)
-        .maybeSingle();
-
-    if (profileError) throw profileError;
-
-    if (
-      !profile ||
-      profile.is_active !== true ||
-      !["CEO", "MANAGER", "STAFF"].includes(profile.role)
-    ) {
-      await supabaseClient.auth.signOut({ scope: "local" });
-      showLogin("Your admin account could not be verified.");
-      return;
-    }
-
-    showDashboard(profile, data.session.user);
-
-  } catch (error) {
-    console.error("Dashboard restoration error:", error);
-    showLogin("Session verification failed. Please sign in again.");
-  }
-}
-
 initialiseDashboard();
+
 </script>
 
 </body>
