@@ -4,109 +4,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#091725">
-<title>VANTAGE X | Executive Control Centre</title>
+<title>VANTAGE X | Admin Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
-  --navy:#091725;
-  --dark:#06111c;
-  --panel:#102438;
-  --gold:#d1ad70;
-  --white:#fff;
-  --muted:#aab6c2;
-  --border:#263c50;
+  --navy: #091725;
+  --navy2: #102638;
+  --gold: #c9a45c;
+  --gold-light: #e4c987;
+  --white: #fff;
+  --muted: #aab5c0;
+  --background: #f4f6f8;
+  --border: #e5e9ed;
 }
-* {margin:0;padding:0;box-sizing:border-box}
-body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: #192b3b;
+}
+button, input { font: inherit; }
 
-.login-screen {
-  min-height:100vh;display:flex;align-items:center;
-  justify-content:center;padding:20px;
-  background:radial-gradient(circle at top right,#17334a,transparent 45%),var(--dark)
+/* LOGIN */
+#loginScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #06111d, #142d40);
 }
 .login-card {
-  width:100%;max-width:420px;background:var(--panel);
-  border:1px solid var(--border);border-radius:15px;
-  padding:35px 28px;box-shadow:0 15px 45px #0005
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 35px 28px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px #0005;
 }
-.login-brand {color:var(--gold);font-size:27px;font-weight:bold;text-align:center}
-.login-subtitle {color:var(--muted);font-size:10px;letter-spacing:2px;text-align:center;margin:9px 0 30px}
-.login-card h2 {text-align:center;font-size:21px;margin-bottom:10px}
-.login-description {color:var(--muted);font-size:13px;text-align:center;line-height:1.6;margin-bottom:25px}
-.login-card label {display:block;color:var(--muted);font-size:12px;margin:17px 0 8px}
+.brand {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.brand h1 {
+  color: var(--navy);
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.brand span {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+.brand p {
+  color: #78838d;
+  font-size: 12px;
+}
+.login-card h2 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+.login-card .intro {
+  color: #71808d;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+.login-card label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 17px 0 8px;
+}
 .login-card input {
-  width:100%;padding:14px;background:var(--dark);
-  border:1px solid var(--border);border-radius:7px;
-  color:var(--white);font-size:14px;outline:none
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #dce2e7;
+  border-radius: 7px;
+  outline: none;
 }
-.login-card input:focus {border-color:var(--gold)}
-.login-button {
-  width:100%;margin-top:25px;padding:14px;border:0;
-  border-radius:7px;background:var(--gold);color:var(--dark);
-  font-weight:bold;font-size:14px;cursor:pointer
+.login-card input:focus {
+  border-color: var(--gold);
 }
-.login-button:disabled {opacity:.6;cursor:not-allowed}
-.login-error {
-  display:none;color:#ffaaaa;background:#3b2028;
-  border:1px solid #75404b;border-radius:7px;
-  padding:12px;font-size:12px;line-height:1.5;margin-top:18px;
-  overflow-wrap:anywhere
+#loginButton {
+  width: 100%;
+  padding: 14px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--navy);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
-.login-footer {color:#788795;font-size:11px;text-align:center;margin-top:25px;line-height:1.7}
+#loginButton:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+#loginMessage {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #b42318;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #89939b;
+  font-size: 11px;
+}
 
-.layout {display:none;min-height:100vh}
-.layout.authenticated {display:flex}
-.sidebar {width:250px;flex-shrink:0;background:var(--dark);padding:27px 17px}
-.brand {color:var(--gold);font-size:23px;font-weight:bold}
-.brand-sub {color:var(--muted);font-size:10px;letter-spacing:2px;margin:8px 0 35px}
-.nav-label {color:#748597;font-size:10px;letter-spacing:1.5px;margin:24px 10px 10px}
-.nav-item {
-  display:block;width:100%;padding:13px 12px;margin:4px 0;
-  background:none;border:0;border-radius:7px;color:var(--muted);
-  text-align:left;font-size:14px;cursor:pointer
+/* DASHBOARD */
+#dashboard {
+  display: none;
+  min-height: 100vh;
 }
-.nav-item:hover,.nav-item.active {background:#172e42;color:var(--gold)}
-.main {flex:1;min-width:0;padding:30px}
-.topbar {display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:30px}
-.topbar h1 {font-size:24px}
-.topbar p {color:var(--muted);font-size:13px;margin-top:8px}
-.topbar-actions {display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.admin-tag {color:var(--gold);border:1px solid var(--gold);padding:10px 15px;border-radius:25px;font-size:11px}
-.logout-button {background:#3b2028;color:#ffaaaa;border:1px solid #75404b;padding:10px 14px;border-radius:25px;font-size:11px;cursor:pointer}
-.view {display:none}
-.view.active {display:block}
-.welcome,.panel {
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:12px;padding:24px;margin-bottom:22px
+#dashboard.authenticated {
+  display: flex;
 }
-.welcome h2,.panel h2 {color:var(--gold);margin-bottom:12px}
-.welcome p,.panel p {color:var(--muted);line-height:1.7;font-size:13px}
-.section-title {font-size:17px;margin:27px 0 16px}
-.cards {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
-.card,.management-item {background:var(--panel);border:1px solid var(--border);padding:20px;border-radius:10px}
-.card p,.management-item p {color:var(--muted);font-size:12px}
-.card h3 {color:var(--gold);font-size:24px;margin-top:12px}
-.management {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.management-item h3 {color:var(--gold);font-size:15px;margin-bottom:10px}
-.management-item p {line-height:1.6}
-.status {display:inline-block;color:var(--gold);border:1px solid #947c50;padding:7px 12px;border-radius:20px;font-size:11px;margin-top:18px}
-.footer {margin-top:40px;text-align:center;color:#788795;font-size:11px;line-height:1.8}
-.menu-toggle {display:none;background:var(--panel);color:var(--gold);border:1px solid var(--border);padding:9px 13px;border-radius:6px}
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: var(--navy);
+  color: white;
+  min-height: 100vh;
+  padding: 25px 15px;
+}
+.sidebar-brand {
+  padding: 5px 12px 25px;
+  border-bottom: 1px solid #ffffff20;
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin: 0;
+}
+.sidebar-brand span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+.sidebar-label {
+  color: #8293a2;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 25px 12px 10px;
+}
+.nav-button {
+  width: 100%;
+  display: block;
+  padding: 13px 12px;
+  border: 0;
+  background: transparent;
+  color: #d5dce3;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+.nav-button:hover,
+.nav-button.active {
+  background: #ffffff14;
+  color: var(--gold-light);
+}
+.sidebar-bottom {
+  margin-top: 30px;
+  border-top: 1px solid #ffffff20;
+  padding-top: 15px;
+}
+#logoutButton {
+  width: 100%;
+  background: #ffffff12;
+  border: 1px solid #ffffff25;
+  padding: 12px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  min-width: 0;
+}
+.topbar {
+  height: 75px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+.topbar h2 {
+  font-size: 18px;
+  margin: 0;
+}
+.admin-info {
+  font-size: 12px;
+  color: #687785;
+  text-align: right;
+}
+.admin-info strong {
+  display: block;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.content {
+  padding: 30px;
+}
+.welcome {
+  margin-bottom: 25px;
+}
+.welcome h1 {
+  font-size: 25px;
+  margin: 0 0 8px;
+}
+.welcome p {
+  color: #75828d;
+  font-size: 14px;
+  margin: 0;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 25px;
+}
+.stat-card, .panel, .management-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+}
+.stat-card span {
+  color: #75828d;
+  font-size: 12px;
+}
+.stat-card h2 {
+  margin: 12px 0 0;
+  font-size: 26px;
+  color: var(--navy);
+}
+.panel h3, .management-card h3 {
+  margin-top: 0;
+  color: var(--navy);
+}
+.panel p, .management-card p {
+  font-size: 13px;
+  color: #77838e;
+  line-height: 1.7;
+}
+.management-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.management-card {
+  border-top: 3px solid var(--gold);
+}
+.management-card button {
+  background: var(--navy);
+  color: white;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.view {
+  display: none;
+}
+.view.active {
+  display: block;
+}
+.notice {
+  background: #fff9eb;
+  border: 1px solid #ead8ad;
+  border-radius: 8px;
+  padding: 15px;
+  color: #725a2d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+#mobileMenu {
+  display: none;
+  background: var(--navy);
+  color: white;
+  border: 0;
+  padding: 9px 12px;
+  border-radius: 5px;
+}
 
-@media(max-width:950px) {
-  .cards {grid-template-columns:repeat(2,minmax(0,1fr))}
-  .management {grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
-@media(max-width:650px) {
-  .layout.authenticated {display:block}
-  .sidebar {width:100%;padding:20px}
-  .menu-toggle {display:block}
-  .navigation {display:none;margin-top:20px}
-  .navigation.open {display:block}
-  .main {padding:20px 15px}
-  .topbar {flex-wrap:wrap}
-  .cards,.management {grid-template-columns:1fr}
+@media(max-width: 650px) {
+  #dashboard.authenticated {
+    display: block;
+  }
+  .sidebar {
+    display: none;
+    width: 100%;
+    min-height: auto;
+  }
+  .sidebar.mobile-open {
+    display: block;
+  }
+  .topbar {
+    padding: 0 15px;
+    gap: 10px;
+  }
+  #mobileMenu {
+    display: block;
+  }
+  .content {
+    padding: 20px 15px;
+  }
+  .management-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    gap: 10px;
+  }
+  .stat-card {
+    padding: 15px;
+  }
+  .admin-info {
+    font-size: 10px;
+  }
 }
 </style>
 </head>
@@ -114,247 +347,289 @@ body {font-family:Arial,sans-serif;background:var(--navy);color:var(--white)}
 <body>
 
 <!-- LOGIN SCREEN -->
-<section class="login-screen" id="loginScreen">
+<div id="loginScreen">
   <div class="login-card">
-    <div class="login-brand">VANTAGE X</div>
-    <div class="login-subtitle">EXECUTIVE CONTROL CENTRE</div>
+    <div class="brand">
+      <h1>VANTAGE X</h1>
+      <span>GROUP LTD</span>
+      <p>ESTATES &amp; CO.</p>
+    </div>
 
-    <h2>Administrator Login</h2>
-    <p class="login-description">
-      Sign in with your authorised administrator account.
-    </p>
+    <h2>Admin Login</h2>
+    <p class="intro">Secure access to the management dashboard.</p>
 
     <form id="loginForm">
       <label for="email">Email Address</label>
-      <input type="email" id="email" autocomplete="username"
-        placeholder="Enter your email address" required>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        autocomplete="username"
+        required
+      >
 
       <label for="password">Password</label>
-      <input type="password" id="password"
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
         autocomplete="current-password"
-        placeholder="Enter your password" required>
+        required
+      >
 
-      <button type="submit" class="login-button" id="loginButton">
-        Sign In Securely
-      </button>
+      <button type="submit" id="loginButton">Sign In</button>
+      <div id="loginMessage" role="alert"></div>
     </form>
 
-    <div class="login-error" id="loginError"></div>
-
     <div class="login-footer">
-      VANTAGE X GROUP LTD — ESTATES & CO.<br>
-      Authorised personnel only.
+      VANTAGE X GROUP LTD &copy; <span id="loginYear"></span>
     </div>
   </div>
-</section>
-
-<!-- ADMIN DASHBOARD -->
-<div class="layout" id="dashboard">
-
-<aside class="sidebar">
-  <div class="brand">VANTAGE X</div>
-  <div class="brand-sub">EXECUTIVE CONTROL CENTRE</div>
-
-  <button class="menu-toggle" id="menuToggle">☰ Menu</button>
-
-  <nav class="navigation" id="navigation">
-    <div class="nav-label">MAIN MENU</div>
-    <button class="nav-item active" data-view="overview">Overview</button>
-    <button class="nav-item" data-view="investors">Investors</button>
-    <button class="nav-item" data-view="clients">Clients</button>
-    <button class="nav-item" data-view="properties">Properties</button>
-    <button class="nav-item" data-view="investments">Investments</button>
-
-    <div class="nav-label">MANAGEMENT</div>
-    <button class="nav-item" data-view="partnerships">Partnerships</button>
-    <button class="nav-item" data-view="staff">Staff & Managers</button>
-    <button class="nav-item" data-view="messages">Messages</button>
-    <button class="nav-item" data-view="reports">Reports</button>
-
-    <div class="nav-label">SYSTEM</div>
-    <button class="nav-item" data-view="settings">Settings</button>
-  </nav>
-</aside>
-
-<main class="main">
-
-<header class="topbar">
-  <div>
-    <h1 id="pageTitle">Executive Dashboard</h1>
-    <p>VANTAGE X GROUP LTD — Management Overview</p>
-  </div>
-
-  <div class="topbar-actions">
-    <div class="admin-tag" id="adminTag">ADMINISTRATOR</div>
-    <button class="logout-button" id="logoutButton">Sign Out</button>
-  </div>
-</header>
-
-<section class="view active" id="overview">
-  <div class="welcome">
-    <h2 id="welcomeTitle">Welcome to Your Control Centre</h2>
-    <p>Manage your business operations, oversee activities and organise your organisation from one central workspace.</p>
-    <span class="status">Authenticated management workspace</span>
-  </div>
-
-  <h2 class="section-title">Business Overview</h2>
-
-  <div class="cards">
-    <div class="card"><p>Total Investors</p><h3>—</h3></div>
-    <div class="card"><p>Total Clients</p><h3>—</h3></div>
-    <div class="card"><p>Properties</p><h3>—</h3></div>
-    <div class="card"><p>Pending Enquiries</p><h3>—</h3></div>
-  </div>
-
-  <h2 class="section-title">Management Centre</h2>
-
-  <div class="management">
-    <div class="management-item"><h3>Investor Management</h3><p>Organise investor accounts and records.</p></div>
-    <div class="management-item"><h3>Client Management</h3><p>Oversee client enquiries and relationships.</p></div>
-    <div class="management-item"><h3>Property Management</h3><p>Organise property listings and availability.</p></div>
-    <div class="management-item"><h3>Investment Management</h3><p>Manage investment records and agreements.</p></div>
-    <div class="management-item"><h3>Staff Management</h3><p>Organise staff accounts and responsibilities.</p></div>
-    <div class="management-item"><h3>Reports & Analytics</h3><p>Review business performance and activity.</p></div>
-  </div>
-</section>
-
-<section class="view" id="investors">
-  <div class="panel"><h2>Investor Management</h2><p>Manage investor profiles, account records, documents and account status.</p><span class="status">Database connection pending</span></div>
-</section>
-
-<section class="view" id="clients">
-  <div class="panel"><h2>Client Management</h2><p>Manage client information, enquiries, service requests and communications.</p><span class="status">Database connection pending</span></div>
-</section>
-
-<section class="view" id="properties">
-  <div class="panel"><h2>Property Management</h2><p>Organise property listings, descriptions, prices, images and availability.</p><span class="status">Database connection pending</span></div>
-</section>
-
-<section class="view" id="investments">
-  <div class="panel"><h2>Investment Management</h2><p>Organise investment records, agreements, transactions and reporting.</p><span class="status">Database connection pending</span></div>
-</section>
-
-<section class="view" id="partnerships">
-  <div class="panel"><h2>Partnership Management</h2><p>Review partnership enquiries, applications and collaboration records.</p><span class="status">Database connection pending</span></div>
-</section>
-
-<section class="view" id="staff">
-  <div class="panel"><h2>Staff & Managers</h2><p>Organise staff profiles, manager accounts, responsibilities and access permissions.</p><span class="status">Role management pending</span></div>
-</section>
-
-<section class="view" id="messages">
-  <div class="panel"><h2>Messages & Enquiries</h2><p>Centralise incoming client enquiries, investor requests and business communications.</p><span class="status">Messaging connection pending</span></div>
-</section>
-
-<section class="view" id="reports">
-  <div class="panel"><h2>Reports & Analytics</h2><p>Review business activity, operational summaries and management reports.</p><span class="status">Reporting connection pending</span></div>
-</section>
-
-<section class="view" id="settings">
-  <div class="panel"><h2>System Settings</h2><p>Manage company details, administrative preferences and security configuration.</p><span class="status">Configuration pending</span></div>
-</section>
-
-<footer class="footer">
-  © 2026 VANTAGE X GROUP LTD. All rights reserved.<br>
-  Building Value. Creating Opportunities.
-</footer>
-
-</main>
 </div>
 
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ADMIN DASHBOARD -->
+<div id="dashboard">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <h2>VANTAGE X</h2>
+      <span>ADMINISTRATION</span>
+    </div>
+
+    <div class="sidebar-label">MAIN MENU</div>
+
+    <button class="nav-button active" data-view="overview">Overview</button>
+    <button class="nav-button" data-view="investors">Investors</button>
+    <button class="nav-button" data-view="clients">Clients</button>
+    <button class="nav-button" data-view="properties">Properties</button>
+    <button class="nav-button" data-view="investments">Investments</button>
+    <button class="nav-button" data-view="partnerships">Partnerships</button>
+    <button class="nav-button" data-view="staff">Staff &amp; Managers</button>
+    <button class="nav-button" data-view="messages">Messages</button>
+    <button class="nav-button" data-view="reports">Reports</button>
+    <button class="nav-button" data-view="settings">Settings</button>
+
+    <div class="sidebar-bottom">
+      <button id="logoutButton">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button id="mobileMenu">☰</button>
+        <h2 id="pageTitle">Overview</h2>
+      </div>
+      <div class="admin-info">
+        <strong id="adminName">Administrator</strong>
+        <span id="adminRole">ADMIN</span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <section class="view active" id="overview">
+        <div class="welcome">
+          <h1>Welcome to VANTAGE X</h1>
+          <p>Manage your company's administration from one place.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span>Total Investors</span>
+            <h2>—</h2>
+          </div>
+          <div class="stat-card">
+            <span>Total Clients</span>
+            <h2>—</h2>
+          </div>
+          <div class="stat-card">
+            <span>Properties</span>
+            <h2>—</h2>
+          </div>
+          <div class="stat-card">
+            <span>Staff Members</span>
+            <h2>—</h2>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Administration Overview</h3>
+          <p>Your dashboard login is connected to Supabase. The management sections are ready for future database integration.</p>
+          <div class="notice">
+            Important: These dashboard figures are placeholders. No investor or financial records are being displayed yet.
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="investors">
+        <h2>Investor Management</h2>
+        <div class="panel">
+          <p>Manage investor records, enquiries and investor communications here.</p>
+          <div class="notice">Investor database integration has not yet been added.</div>
+        </div>
+      </section>
+
+      <section class="view" id="clients">
+        <h2>Client Management</h2>
+        <div class="panel">
+          <p>Manage client information and service enquiries.</p>
+          <div class="notice">Client database integration has not yet been added.</div>
+        </div>
+      </section>
+
+      <section class="view" id="properties">
+        <h2>Property Management</h2>
+        <div class="management-grid">
+          <div class="management-card">
+            <h3>Property Listings</h3>
+            <p>Manage property information and listings.</p>
+          </div>
+          <div class="management-card">
+            <h3>Property Enquiries</h3>
+            <p>Review property-related enquiries.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="investments">
+        <h2>Investment Management</h2>
+        <div class="panel">
+          <p>Manage investment information and related documentation.</p>
+          <div class="notice">Do not enter real financial or investor records until database permissions and security policies have been properly configured.</div>
+        </div>
+      </section>
+
+      <section class="view" id="partnerships">
+        <h2>Partnership Management</h2>
+        <div class="panel">
+          <p>Manage business partnerships and collaboration enquiries.</p>
+        </div>
+      </section>
+
+      <section class="view" id="staff">
+        <h2>Staff &amp; Managers</h2>
+        <div class="panel">
+          <p>Manage authorised administrative personnel and their roles.</p>
+          <div class="notice">Staff management actions have not yet been connected to the database.</div>
+        </div>
+      </section>
+
+      <section class="view" id="messages">
+        <h2>Messages</h2>
+        <div class="panel">
+          <p>Review client, investor and general enquiries.</p>
+        </div>
+      </section>
+
+      <section class="view" id="reports">
+        <h2>Reports</h2>
+        <div class="panel">
+          <p>Company activity and management reporting will appear here after integration.</p>
+        </div>
+      </section>
+
+      <section class="view" id="settings">
+        <h2>Dashboard Settings</h2>
+        <div class="panel">
+          <h3>Account Information</h3>
+          <p id="settingsName">Name: —</p>
+          <p id="settingsEmail">Email: —</p>
+          <p id="settingsRole">Role: —</p>
+          <button id="settingsLogout" style="background:#091725;color:white;border:0;padding:12px 18px;border-radius:5px">
+            Sign Out
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
 
 <script>
-"use strict";
+/* ==========================================
+   SUPABASE CONNECTION
+========================================== */
 
-/* SUPABASE CONNECTION */
 const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
-if (!window.supabase) {
-  alert("Security service could not load. Please refresh the page.");
-  throw new Error("Supabase library unavailable.");
-}
+const SUPABASE_ANON_KEY =
+  "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
 
-/* ELEMENTS */
+/* ==========================================
+   ELEMENTS
+========================================== */
+
 const loginScreen = document.getElementById("loginScreen");
 const dashboard = document.getElementById("dashboard");
 const loginForm = document.getElementById("loginForm");
 const loginButton = document.getElementById("loginButton");
-const loginError = document.getElementById("loginError");
-const navigation = document.getElementById("navigation");
+const loginMessage = document.getElementById("loginMessage");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
-let isLoggingIn = false;
-let isAutoLocking = false;
+let currentAdmin = null;
+let isLocking = false;
 
-/* SHOW LOGIN */
+/* ==========================================
+   SCREEN CONTROL
+========================================== */
+
 function showLogin(message = "") {
   dashboard.classList.remove("authenticated");
   loginScreen.style.display = "flex";
-
-  loginError.textContent = message;
-  loginError.style.display = message ? "block" : "none";
+  loginMessage.textContent = message;
 }
 
-/* VERIFY ADMINISTRATOR */
-async function verifyAdminAccess(user) {
-  const { data: profile, error } = await supabaseClient
-    .from("admin_profiles")
-    .select("full_name, role, is_active")
-    .eq("user_id", user.id)
-    .maybeSingle();
+function showDashboard(profile, user) {
+  currentAdmin = { profile, user };
 
-  if (error) {
-    throw new Error("Unable to verify administrator access. Please try again.");
-  }
+  document.getElementById("adminName").textContent =
+    profile.full_name;
 
-  const permittedRoles = ["CEO", "MANAGER", "STAFF"];
+  document.getElementById("adminRole").textContent =
+    profile.role;
 
-  if (
-    !profile ||
-    profile.is_active !== true ||
-    !permittedRoles.includes(profile.role)
-  ) {
-    throw new Error(
-      "Access denied. Your account is not an authorised active administrator."
-    );
-  }
+  document.getElementById("settingsName").textContent =
+    "Name: " + profile.full_name;
 
-  return profile;
-}
+  document.getElementById("settingsEmail").textContent =
+    "Email: " + user.email;
 
-/* OPEN DASHBOARD */
-function showDashboard(profile) {
+  document.getElementById("settingsRole").textContent =
+    "Role: " + profile.role;
+
   loginScreen.style.display = "none";
   dashboard.classList.add("authenticated");
-
-  document.getElementById("adminTag").textContent =
-    profile.role + " WORKSPACE";
-
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome, " + profile.full_name;
+  loginMessage.textContent = "";
 }
 
-/* LOGIN */
+/* ==========================================
+   LOGIN
+========================================== */
+
 loginForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  if (isLoggingIn) return;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
-  isLoggingIn = true;
+  if (!email || !password) {
+    loginMessage.textContent =
+      "Please enter your email and password.";
+    return;
+  }
+
   loginButton.disabled = true;
-  loginButton.textContent = "Signing In...";
-  loginError.style.display = "none";
+  loginButton.textContent = "Signing in...";
+  loginMessage.textContent = "";
 
   try {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
 
     const { data, error } =
       await supabaseClient.auth.signInWithPassword({
@@ -362,55 +637,165 @@ loginForm.addEventListener("submit", async function(event) {
         password: password
       });
 
-    if (error) throw error;
-
-    if (!data.user) {
-      throw new Error("Unable to identify your account.");
+    if (error) {
+      throw new Error("Login failed: " + error.message);
     }
 
-    const profile = await verifyAdminAccess(data.user);
+    if (!data.user) {
+      throw new Error("Login succeeded but no user was returned.");
+    }
 
-    document.getElementById("password").value = "";
+    const { data: profile, error: profileError } =
+      await supabaseClient
+        .from("admin_profiles")
+        .select("full_name, role, is_active")
+        .eq("user_id", data.user.id)
+        .maybeSingle();
 
-    showDashboard(profile);
+    if (profileError) {
+      throw new Error(
+        "Profile verification failed: " + profileError.message
+      );
+    }
+
+    if (!profile) {
+      throw new Error(
+        "Your account has no admin profile. Contact the CEO."
+      );
+    }
+
+    if (profile.is_active !== true) {
+      throw new Error(
+        "Your admin account is inactive. Contact the CEO."
+      );
+    }
+
+    const allowedRoles = ["CEO", "MANAGER", "STAFF"];
+
+    if (!allowedRoles.includes(profile.role)) {
+      throw new Error(
+        "Your account does not have an authorised admin role."
+      );
+    }
+
+    showDashboard(profile, data.user);
+
+    emailInput.value = "";
+    passwordInput.value = "";
 
   } catch (error) {
-    console.error("Login error:", error);
 
-    showLogin(
-      error.message || "Login failed. Please check your details and try again."
-    );
+    console.error("Admin login error:", error);
+
+    loginMessage.textContent =
+      error.message || "An unexpected login error occurred.";
+
+    try {
+      await supabaseClient.auth.signOut({ scope: "local" });
+    } catch (signOutError) {
+      console.error("Sign-out error:", signOutError);
+    }
 
   } finally {
-    isLoggingIn = false;
+
     loginButton.disabled = false;
-    loginButton.textContent = "Sign In Securely";
+    loginButton.textContent = "Sign In";
+
   }
 });
 
-/* SIGN OUT */
-document.getElementById("logoutButton").addEventListener("click", async function() {
-  showLogin();
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+const navButtons = document.querySelectorAll(".nav-button");
+const views = document.querySelectorAll(".view");
+
+function openView(viewName) {
+
+  const selectedView = document.getElementById(viewName);
+
+  if (!selectedView) return;
+
+  views.forEach(view => {
+    view.classList.remove("active");
+  });
+
+  navButtons.forEach(button => {
+    button.classList.remove("active");
+  });
+
+  selectedView.classList.add("active");
+
+  const activeButton = document.querySelector(
+    '.nav-button[data-view="' + viewName + '"]'
+  );
+
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+
+  document.getElementById("pageTitle").textContent =
+    activeButton
+      ? activeButton.textContent.trim()
+      : "Overview";
+
+  document.getElementById("sidebar").classList.remove("mobile-open");
+}
+
+navButtons.forEach(button => {
+  button.addEventListener("click", function() {
+    openView(this.dataset.view);
+  });
+});
+
+document.getElementById("mobileMenu").addEventListener("click", function() {
+  document.getElementById("sidebar").classList.toggle("mobile-open");
+});
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+async function logout() {
+  showLogin("You have signed out.");
+
+  emailInput.value = "";
+  passwordInput.value = "";
+
+  currentAdmin = null;
 
   const { error } = await supabaseClient.auth.signOut();
 
   if (error) {
-    showLogin("Sign-out could not be completed. Please refresh the page.");
+    console.error("Logout error:", error.message);
+    loginMessage.textContent =
+      "Signed out of the dashboard, but session cleanup reported: " +
+      error.message;
   }
-});
+}
 
-/* AUTOMATIC SECURITY LOCK */
+document.getElementById("logoutButton").addEventListener("click", logout);
+document.getElementById("settingsLogout").addEventListener("click", logout);
+
+/* ==========================================
+   AUTOMATIC SECURITY LOCK
+========================================== */
+
 async function lockDashboard() {
-  if (isAutoLocking) return;
 
-  isAutoLocking = true;
+  if (isLocking || !dashboard.classList.contains("authenticated")) {
+    return;
+  }
 
-  dashboard.classList.remove("authenticated");
-  loginScreen.style.display = "flex";
+  isLocking = true;
 
-  document.getElementById("password").value = "";
+  showLogin("Your dashboard was locked. Please sign in again.");
+
+  emailInput.value = "";
+  passwordInput.value = "";
+
+  currentAdmin = null;
 
   try {
     await supabaseClient.auth.signOut({ scope: "local" });
@@ -418,10 +803,9 @@ async function lockDashboard() {
     console.error("Automatic lock error:", error);
   }
 
-  isAutoLocking = false;
+  isLocking = false;
 }
 
-/* LOCK WHEN USER LEAVES PAGE */
 document.addEventListener("visibilitychange", function() {
   if (document.visibilityState === "hidden") {
     lockDashboard();
@@ -432,54 +816,27 @@ window.addEventListener("pagehide", function() {
   lockDashboard();
 });
 
-/* DASHBOARD NAVIGATION */
-const buttons = document.querySelectorAll(".nav-item");
-const views = document.querySelectorAll(".view");
-const pageTitle = document.getElementById("pageTitle");
+/* ==========================================
+   INITIALISE
+========================================== */
 
-buttons.forEach(button => {
-  button.addEventListener("click", function() {
-    const target = button.dataset.view;
-
-    views.forEach(view => {
-      view.classList.toggle("active", view.id === target);
-    });
-
-    buttons.forEach(item => {
-      item.classList.toggle("active", item === button);
-    });
-
-    pageTitle.textContent =
-      target === "overview"
-        ? "Executive Dashboard"
-        : button.textContent.trim();
-
-    navigation.classList.remove("open");
-  });
-});
-
-/* MOBILE MENU */
-document.getElementById("menuToggle").addEventListener("click", function() {
-  navigation.classList.toggle("open");
-});
-
-/* INITIALISE APPLICATION */
 async function initialiseDashboard() {
-  showLogin();
 
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
+  document.getElementById("loginYear").textContent =
+    new Date().getFullYear();
+
+  showLogin();
 
   try {
     await supabaseClient.auth.signOut({ scope: "local" });
   } catch (error) {
-    console.error("Session reset error:", error);
+    console.error("Initial session cleanup:", error);
   }
 }
 
 initialiseDashboard();
-
 </script>
+
 </body>
   </html>
   
