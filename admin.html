@@ -366,7 +366,8 @@ button{cursor:pointer}
 
     <div class="sidebar-label">MAIN MENU</div>
     <button class="nav-button active" data-view="overview">Dashboard Overview</button>
-    <button class="nav-button" data-view="projects">Projects Management</button>
+    <button class="nav-button" data-view="projects">Projects Management<button class="nav-button" data-view="investors">Investor Management</button>
+    </button>
     <button class="nav-button" data-view="addProject">Add New Project</button>
     <button class="nav-button" data-view="settings">Account Information</button>
 
@@ -420,6 +421,30 @@ button{cursor:pointer}
       </section>
 
       <section class="view" id="projects">
+        <section class="view" id="investors">
+
+  <div class="panel">
+    <h2>Investor Management</h2>
+    <p>Manage and monitor your company investors.</p>
+
+    <button class="primary-btn" data-open-view="addInvestor">
+      + Register New Investor
+    </button>
+
+    <div style="margin-top:25px;">
+      <input
+        type="text"
+        id="investorSearch"
+        placeholder="Search investors..."
+      >
+    </div>
+
+    <div id="investorList">
+      Loading investors...
+    </div>
+  </div>
+
+      </section>
         <div class="welcome">
           <h1>Projects Management</h1>
           <p>View and manage your company projects.</p>
@@ -429,7 +454,60 @@ button{cursor:pointer}
           <div class="empty">Loading projects...</div>
         </div>
       </section>
+<section class="view" id="addInvestor">
 
+  <div class="panel">
+    <h2 id="investorFormTitle">Register New Investor</h2>
+
+    <form id="investorForm">
+
+      <div class="form-grid">
+
+        <div>
+          <label>Full Name</label>
+          <input type="text" id="investorName" required>
+        </div>
+
+        <div>
+          <label>Email Address</label>
+          <input type="email" id="investorEmail">
+        </div>
+
+        <div>
+          <label>Phone Number</label>
+          <input type="tel" id="investorPhone">
+        </div>
+
+        <div>
+          <label>Investment Interest</label>
+          <input type="text" id="investorInterest">
+        </div>
+
+        <div>
+          <label>Investor Status</label>
+          <select id="investorStatus">
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+      </div>
+
+      <label>Notes</label>
+      <textarea id="investorNotes"></textarea>
+
+      <button type="submit" class="primary-btn">
+        Save Investor
+      </button>
+
+      <p id="investorMessage"></p>
+
+    </form>
+  </div>
+
+</section>
       <section class="view" id="addProject">
         <div class="welcome">
           <h1 id="projectFormTitle">Add New Project</h1>
@@ -662,6 +740,7 @@ loginForm.addEventListener("submit", async event => {
 });
 
 /* NAVIGATION */
+  
 function openView(viewId) {
   const target = $(viewId);
   if (!target) return;
@@ -683,6 +762,8 @@ function openView(viewId) {
     overview: "Dashboard Overview",
     projects: "Projects Management",
     addProject: "Add / Edit Project",
+    investors: "Investor Management",
+    addInvestor: "Register New Investor",
     settings: "Account Information"
   };
 
@@ -690,24 +771,8 @@ function openView(viewId) {
   $("sidebar").classList.remove("open");
 
   if (viewId === "projects") loadProjects();
+  if (viewId === "investors") loadInvestors();
 }
-
-document.querySelectorAll(".nav-button").forEach(button => {
-  button.addEventListener("click", () => {
-    openView(button.dataset.view);
-  });
-});
-
-document.querySelectorAll("[data-open-view]").forEach(button => {
-  button.addEventListener("click", () => {
-    openView(button.dataset.openView);
-  });
-});
-
-$("mobileMenu").addEventListener("click", () => {
-  $("sidebar").classList.toggle("open");
-});
-
 /* ROLE PERMISSIONS */
 function isManagerOrCEO() {
   return currentAdmin &&
@@ -981,7 +1046,137 @@ function escapeHTML(value) {
     "'":"&#039;"
   })[character]);
 }
+/* INVESTOR MANAGEMENT */
 
+async function loadInvestors() {
+  const list = $("investorList");
+  const count = $("overviewInvestorCount");
+
+  if (!list) return;
+
+  list.innerHTML = "Loading investors...";
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("investors")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    if (count) {
+      count.textContent = (data.length || 0) + " registered investors";
+    }
+
+    if (!data.length) {
+      list.innerHTML = "No investors registered yet.";
+      return;
+    }
+
+    list.innerHTML = data.map(investor => `
+      <div class="project-card">
+        <h3>${escapeHTML(investor.full_name)}</h3>
+        <p>Email: ${escapeHTML(investor.email || "Not provided")}</p>
+        <p>Phone: ${escapeHTML(investor.phone || "Not provided")}</p>
+        <p>Interest: ${escapeHTML(investor.investment_interest || "Not provided")}</p>
+        <p>Status: ${escapeHTML(investor.status || "New")}</p>
+      </div>
+    `).join("");
+
+  } catch (error) {
+    console.error(error);
+    list.innerHTML = "Unable to load investors: " + escapeHTML(friendlyError(error));
+        }
+     }
+  
+    /* REGISTER NEW INVESTOR */
+
+$("investorForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (!isManagerOrCEO()) {
+    alert("You don't have permission to register investors.");
+    return;
+  }
+
+  const message = $("investorMessage");
+  message.textContent = "Saving investor...";
+
+  try {
+    const { data: userData, error: userError } =
+      await supabaseClient.auth.getUser();
+
+    if (userError) throw userError;
+
+    const { error } = await supabaseClient
+      .from("investors")
+      .insert([{
+        full_name: $("investorName").value.trim(),
+        email: $("investorEmail").value.trim(),
+        phone: $("investorPhone").value.trim(),
+        investment_interest: $("investorInterest").value.trim(),
+        status: $("investorStatus").value,
+        notes: $("investorNotes").value.trim(),
+        created_by: userData.user.id
+      }]);
+
+    if (error) throw error;
+
+    message.textContent = "Investor registered successfully!";
+    $("investorForm").reset();
+
+    await loadInvestors();
+
+  } catch (error) {
+    console.error("Investor registration error:", error);
+    message.textContent = "Unable to save: " + friendlyError(error);
+  }
+});
+  
+  /* SEARCH INVESTORS */
+
+$("investorSearch").addEventListener("input", async function() {
+  const search = this.value.trim().toLowerCase();
+
+  const { data, error } = await supabaseClient
+    .from("investors")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const filtered = data.filter(investor =>
+    (investor.full_name || "").toLowerCase().includes(search) ||
+    (investor.email || "").toLowerCase().includes(search) ||
+    (investor.phone || "").toLowerCase().includes(search)
+  );
+
+  $("investorList").innerHTML = filtered.length
+    ? filtered.map(investor => `
+        <div class="project-card">
+          <h3>${escapeHTML(investor.full_name)}</h3>
+          <p>Email: ${escapeHTML(investor.email || "Not provided")}</p>
+          <p>Phone: ${escapeHTML(investor.phone || "Not provided")}</p>
+          <p>Status: ${escapeHTML(investor.status || "New")}</p>
+        </div>
+      `).join("")
+    : "No matching investors found.";
+});
+  }
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+    }
 /* EDIT PROJECT */
 function editProject(project) {
   if (!isManagerOrCEO()) return;
