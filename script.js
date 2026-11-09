@@ -193,8 +193,4 @@ container.appendChild(card);
   }
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadPublicProjects);
-} else {
-  loadPublicProjects();
-}
+loadPublicProjects();
