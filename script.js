@@ -150,7 +150,16 @@ async function loadPublicProjects() {
         info.appendChild(price);
       }
 
-      info.appendChild(enquiry);
+      const viewProject = document.createElement("a");
+
+viewProject.className = "service-link";
+viewProject.href =
+  "project.html?id=" + encodeURIComponent(project.id);
+
+viewProject.textContent = "VIEW PROJECT DETAILS →";
+
+info.appendChild(viewProject);
+info.appendChild(enquiry);
 
       card.append(image, info);
       container.appendChild(card);
