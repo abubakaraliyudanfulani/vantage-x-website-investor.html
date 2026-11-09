@@ -182,12 +182,15 @@ image.style.position = "relative";
 image.style.zIndex = "1";
 
 info.style.position = "relative";
+
+    console.error("Public projects error:", error);
 info.style.zIndex = "2";
 
 container.appendChild(card);
-  } catch (error) {
-    console.error("Public projects error:", error);
 
+}); // CLOSE PROJECT LOOP
+
+  } catch (error) {
     container.textContent =
       "Our projects could not be loaded. Please try again later.";
   }
