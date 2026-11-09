@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
 /* =====================================
    VANTAGE X — LIVE PUBLIC PROJECTS
 ===================================== */
@@ -55,8 +56,7 @@ async function loadPublicProjects() {
 
   if (!container) return;
 
-  const supabaseUrl =
-    "https://hwpxxbscoscumkmoqjgs.supabase.co";
+  const supabaseUrl = "https://hwpxxbscoscumkmoqjgs.supabase.co";
 
   const publishableKey =
     "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
@@ -68,6 +68,7 @@ async function loadPublicProjects() {
       supabaseUrl +
       "/rest/v1/projects?select=id,project_name,description,location,category,status,price,cover_image&is_published=eq.true&order=created_at.desc",
       {
+        method: "GET",
         headers: {
           apikey: publishableKey,
           Authorization: "Bearer " + publishableKey
@@ -76,7 +77,8 @@ async function loadPublicProjects() {
     );
 
     if (!response.ok) {
-      throw new Error("Unable to retrieve projects.");
+      const errorText = await response.text();
+      throw new Error("Supabase error " + response.status + ": " + errorText);
     }
 
     const projects = await response.json();
@@ -84,8 +86,7 @@ async function loadPublicProjects() {
     container.innerHTML = "";
 
     if (!projects.length) {
-      container.textContent =
-        "No published projects are available at the moment.";
+      container.textContent = "No published projects are available.";
       return;
     }
 
@@ -98,6 +99,7 @@ async function loadPublicProjects() {
       image.style.width = "100%";
       image.style.height = "220px";
       image.style.objectFit = "cover";
+      image.style.display = "block";
 
       if (project.cover_image) {
         image.src = project.cover_image;
@@ -124,6 +126,12 @@ async function loadPublicProjects() {
       location.textContent =
         "Location: " + (project.location || "Contact us");
 
+      const viewProject = document.createElement("a");
+      viewProject.className = "service-link";
+      viewProject.href =
+        "project.html?id=" + encodeURIComponent(project.id);
+      viewProject.textContent = "VIEW PROJECT DETAILS →";
+
       const enquiry = document.createElement("a");
       enquiry.className = "service-link";
       enquiry.href =
@@ -137,12 +145,7 @@ async function loadPublicProjects() {
       enquiry.rel = "noopener noreferrer";
       enquiry.textContent = "ENQUIRE ON WHATSAPP →";
 
-      info.append(
-        category,
-        title,
-        description,
-        location
-      );
+      info.append(category, title, description, location);
 
       if (project.price) {
         const price = document.createElement("p");
@@ -150,43 +153,28 @@ async function loadPublicProjects() {
         info.appendChild(price);
       }
 
-      const viewProject = document.createElement("a");
+      info.append(viewProject, enquiry);
 
-viewProject.className = "service-link";
-viewProject.href =
-  "project.html?id=" + encodeURIComponent(project.id);
+      card.append(image, info);
+      container.appendChild(card);
+    });
 
-viewProject.textContent = "VIEW PROJECT DETAILS →";
-      viewProject.style.display = "block";
-viewProject.style.position = "relative";
-viewProject.style.zIndex = "2";
-viewProject.style.marginTop = "15px";
-viewProject.style.padding = "12px 0";
-
-enquiry.style.display = "block";
-enquiry.style.position = "relative";
-enquiry.style.zIndex = "2";
-enquiry.style.marginTop = "10px";
-enquiry.style.padding = "12px 0";
-
-info.appendChild(viewProject);
-info.appendChild(enquiry);
-
-card.append(image, info);
-
-card.style.position = "relative";
-card.style.overflow = "visible";
-
-image.style.display = "block";
-image.style.position = "relative";
-image.style.zIndex = "1";
-
-info.style.position = "relative";
-
+  } catch (error) {
     console.error("Public projects error:", error);
-info.style.zIndex = "2";
 
-container.appendChild(card);
+    container.textContent =
+      "Project loading failed: " + error.message;
+  }
+}
+
+/* RUN AFTER THE PAGE IS READY */
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", loadPublicProjects);
+} else {
+  loadPublicProjects();
+}
+
 
 }); // CLOSE PROJECT LOOP
 
