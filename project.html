@@ -387,12 +387,19 @@ async function loadProjectDetails() {
 
         const image = document.createElement("img");
 
-        image.src = imageUrl;
-        image.alt = project.project_name + " gallery image";
-        image.loading = "lazy";
+image.src = imageUrl;
+image.alt = project.project_name + " gallery image";
+image.loading = "lazy";
 
-        gallery.appendChild(image);
+image.addEventListener("click", function() {
+  const viewer = document.getElementById("imageViewer");
+  const expandedImage = document.getElementById("expandedImage");
 
+  expandedImage.src = imageUrl;
+  viewer.classList.add("active");
+});
+
+gallery.appendChild(image);
       });
 
       content.appendChild(gallery);
