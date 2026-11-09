@@ -141,6 +141,47 @@ h1 {
   object-fit:cover;
   border-radius:8px;
   background:#ddd;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform:scale(1.02);
+}
+
+.image-viewer {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.image-viewer.active {
+  display:flex;
+}
+
+.image-viewer img {
+  max-width:95%;
+  max-height:85vh;
+  object-fit:contain;
+  border-radius:6px;
+}
+
+.image-viewer button {
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#c6a15b;
+  color:#091725;
+  border:none;
+  padding:12px 18px;
+  font-size:20px;
+  cursor:pointer;
+  border-radius:4px;
 }
 
 .btn {
