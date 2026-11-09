@@ -44,3 +44,124 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+/* =====================================
+   VANTAGE X — LIVE PUBLIC PROJECTS
+===================================== */
+
+async function loadPublicProjects() {
+  const container = document.getElementById("publicProjects");
+
+  if (!container) return;
+
+  const supabaseUrl =
+    "https://hwpxxbscoscumkmoqjgs.supabase.co";
+
+  const publishableKey =
+    "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
+
+  container.textContent = "Loading projects...";
+
+  try {
+    const response = await fetch(
+      supabaseUrl +
+      "/rest/v1/projects?select=id,project_name,description,location,category,status,price,cover_image&is_published=eq.true&order=created_at.desc",
+      {
+        headers: {
+          apikey: publishableKey,
+          Authorization: "Bearer " + publishableKey
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Unable to retrieve projects.");
+    }
+
+    const projects = await response.json();
+
+    container.innerHTML = "";
+
+    if (!projects.length) {
+      container.textContent =
+        "No published projects are available at the moment.";
+      return;
+    }
+
+    projects.forEach(function(project) {
+      const card = document.createElement("article");
+      card.className = "property-card";
+
+      const image = document.createElement("img");
+      image.alt = project.project_name || "VANTAGE X project";
+      image.style.width = "100%";
+      image.style.height = "220px";
+      image.style.objectFit = "cover";
+
+      if (project.cover_image) {
+        image.src = project.cover_image;
+      }
+
+      const info = document.createElement("div");
+      info.className = "property-info";
+
+      const category = document.createElement("span");
+      category.className = "service-number";
+      category.textContent =
+        (project.category || "PROPERTY") +
+        " / " +
+        (project.status || "AVAILABLE");
+
+      const title = document.createElement("h3");
+      title.textContent = project.project_name;
+
+      const description = document.createElement("p");
+      description.textContent =
+        project.description || "Contact us for more information.";
+
+      const location = document.createElement("p");
+      location.textContent =
+        "Location: " + (project.location || "Contact us");
+
+      const enquiry = document.createElement("a");
+      enquiry.className = "service-link";
+      enquiry.href =
+        "https://wa.me/2347084125531?text=" +
+        encodeURIComponent(
+          "Hello VANTAGE X GROUP LTD. I am interested in " +
+          project.project_name
+        );
+
+      enquiry.target = "_blank";
+      enquiry.rel = "noopener noreferrer";
+      enquiry.textContent = "ENQUIRE ON WHATSAPP →";
+
+      info.append(
+        category,
+        title,
+        description,
+        location
+      );
+
+      if (project.price) {
+        const price = document.createElement("p");
+        price.textContent = "Price: " + project.price;
+        info.appendChild(price);
+      }
+
+      info.appendChild(enquiry);
+
+      card.append(image, info);
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Public projects error:", error);
+
+    container.textContent =
+      "Our projects could not be loaded. Please try again later.";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadPublicProjects);
