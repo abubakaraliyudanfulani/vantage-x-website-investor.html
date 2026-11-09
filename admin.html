@@ -3,320 +3,358 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="wideth=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VANTAGE X | Administration</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root{
+:root {
   --navy:#091725;
   --navy2:#142d40;
-  --gold:#c9a45c;
-  --gold2:#e4c987;
-  --white:#fff;
-  --bg:#f4f6f8;
-  --muted:#71808d;
-  --border:#e1e6eb;
-  --red:#bd4545;
-  --green:#23845b;
+  --gold:#c6a15b;
+  --gold-light:#e6cc91;
+  --white:#ffffff;
+  --light:#f4f6f8;
+  --text:#263746;
+  --muted:#788795;
+  --border:#e2e7ec;
+  --danger:#b83232;
+  --success:#19734b;
 }
-*{box-sizing:border-box}
-body{
+
+* { box-sizing:border-box; }
+
+body {
   margin:0;
   font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:#24313d;
+  background:var(--light);
+  color:var(--text);
 }
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
 
-/* LOGIN */
-#loginScreen{
+button,input,textarea,select {
+  font:inherit;
+}
+
+button { cursor:pointer; }
+
+.hidden { display:none !important; }
+
+#loginScreen {
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:linear-gradient(135deg,#06111d,#142d40);
+  background:linear-gradient(145deg,var(--navy),var(--navy2));
 }
-.login-card{
+
+.login-card {
+  background:white;
   width:100%;
   max-width:430px;
-  background:white;
-  padding:35px 28px;
+  padding:35px;
   border-radius:14px;
-  box-shadow:0 20px 60px #0005;
+  box-shadow:0 20px 60px #0004;
 }
-.brand{text-align:center;margin-bottom:28px}
-.brand h1{
-  color:var(--navy);
-  font-family:Georgia,serif;
-  font-size:25px;
-  letter-spacing:2px;
+
+.brand {
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.brand h1 {
   margin:0;
+  letter-spacing:3px;
+  color:var(--navy);
+  font-size:25px;
 }
-.brand span{
+
+.brand span {
   color:var(--gold);
-  font-size:11px;
+  font-size:12px;
   letter-spacing:3px;
 }
-.brand p{color:var(--muted);font-size:12px}
-.login-card h2{font-size:21px}
-.login-card label{
+
+.login-card h2 {
+  text-align:center;
+  margin-bottom:25px;
+  color:var(--navy);
+}
+
+.field {
+  margin-bottom:16px;
+}
+
+.field label {
   display:block;
   font-size:13px;
   font-weight:bold;
-  margin:17px 0 8px;
+  margin-bottom:7px;
 }
-.login-card input{
+
+.field input,
+.field textarea,
+.field select {
   width:100%;
-  padding:14px;
+  padding:12px;
   border:1px solid var(--border);
   border-radius:7px;
+  background:white;
+  outline:none;
 }
-.login-card button{
-  width:100%;
-  padding:14px;
-  margin-top:24px;
-  border:0;
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color:var(--gold);
+}
+
+.field textarea {
+  min-height:110px;
+  resize:vertical;
+}
+
+.btn {
+  border:none;
   border-radius:7px;
+  padding:12px 18px;
+  font-weight:bold;
   background:var(--navy);
   color:white;
-  font-weight:bold;
 }
-.login-card button:disabled{opacity:.6}
-#loginMessage{
-  margin-top:15px;
+
+.btn:hover { opacity:.9; }
+
+.btn-gold {
+  background:var(--gold);
+  color:var(--navy);
+}
+
+.btn-danger { background:var(--danger); }
+
+.btn-success { background:var(--success); }
+
+.btn-light {
+  background:#e9eef2;
+  color:var(--navy);
+}
+
+.btn-block { width:100%; }
+
+.message {
+  margin-top:14px;
   font-size:13px;
-  color:var(--red);
   line-height:1.5;
   overflow-wrap:anywhere;
 }
-.login-footer{
-  text-align:center;
-  margin-top:25px;
-  color:#89939b;
-  font-size:11px;
-}
+
+.message.error { color:var(--danger); }
+.message.success { color:var(--success); }
 
 /* DASHBOARD */
-#dashboard{display:none;min-height:100vh}
-#dashboard.authenticated{display:flex}
-.sidebar{
-  width:250px;
-  min-width:250px;
+
+#dashboard {
+  min-height:100vh;
+}
+
+.topbar {
   background:var(--navy);
   color:white;
-  min-height:100vh;
-  padding:25px 15px;
-}
-.sidebar-brand{
-  padding:5px 12px 25px;
-  border-bottom:1px solid #ffffff20;
-}
-.sidebar-brand h2{
-  font-family:Georgia,serif;
-  font-size:19px;
-  letter-spacing:1px;
-  margin:0;
-}
-.sidebar-brand span{
-  font-size:10px;
-  letter-spacing:2px;
-  color:var(--gold);
-}
-.sidebar-label{
-  color:#8293a2;
-  font-size:10px;
-  letter-spacing:2px;
-  padding:25px 12px 10px;
-}
-.nav-button{
-  width:100%;
-  display:block;
-  padding:13px 12px;
-  border:0;
-  background:transparent;
-  color:#d5dce3;
-  text-align:left;
-  border-radius:6px;
-  margin-bottom:4px;
-}
-.nav-button:hover,.nav-button.active{
-  background:#ffffff14;
-  color:var(--gold2);
-}
-.sidebar-bottom{
-  margin-top:30px;
-  border-top:1px solid #ffffff20;
-  padding-top:15px;
-}
-#logoutButton{
-  width:100%;
-  background:#ffffff12;
-  border:1px solid #ffffff25;
-  padding:12px;
-  color:white;
-  border-radius:6px;
-}
-.main{flex:1;min-width:0}
-.topbar{
-  min-height:75px;
-  background:white;
-  border-bottom:1px solid var(--border);
+  padding:16px 22px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:15px 30px;
   gap:15px;
+  flex-wrap:wrap;
 }
-.topbar h2{font-size:18px;margin:0}
-.admin-info{
-  font-size:12px;
-  color:var(--muted);
-  text-align:right;
+
+.topbar h2 {
+  margin:0;
+  font-size:19px;
+  letter-spacing:2px;
 }
-.admin-info strong{
-  display:block;
-  color:var(--navy);
-  margin-bottom:4px;
+
+.topbar small {
+  color:var(--gold-light);
 }
-.content{padding:30px}
-.view{display:none}
-.view.active{display:block}
-.welcome{margin-bottom:25px}
-.welcome h1{font-size:25px;margin:0 0 8px}
-.welcome p{color:var(--muted);font-size:14px}
-.panel,.management-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:22px;
-  margin-bottom:20px;
+
+.layout {
+  display:flex;
+  min-height:calc(100vh - 65px);
 }
-.panel h3,.management-card h3{
-  margin-top:0;
-  color:var(--navy);
+
+.sidebar {
+  width:235px;
+  background:var(--navy2);
+  padding:20px 12px;
+  flex-shrink:0;
 }
-.panel p,.management-card p{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.7;
-}
-.notice{
-  background:#fff9eb;
-  border:1px solid #ead8ad;
-  border-radius:8px;
-  padding:15px;
-  color:#725a2d;
-  font-size:13px;
-  line-height:1.6;
-}
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:15px;
-}
-.field.full{grid-column:1/-1}
-.field label{
-  display:block;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-.field input,.field textarea,.field select{
+
+.sidebar button {
   width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:7px;
-  background:white;
-}
-.field textarea{min-height:110px;resize:vertical}
-.primary-btn,.secondary-btn,.danger-btn{
-  padding:12px 17px;
+  display:block;
+  padding:13px;
+  margin-bottom:7px;
+  text-align:left;
   border:0;
   border-radius:6px;
-  font-weight:bold;
-  margin:5px 5px 5px 0;
+  background:transparent;
+  color:white;
 }
-.primary-btn{background:var(--navy);color:white}
-.secondary-btn{background:#edf0f3;color:var(--navy)}
-.danger-btn{background:#fbeaea;color:var(--red)}
-.primary-btn:disabled{opacity:.6}
-.project-list{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
+
+.sidebar button:hover,
+.sidebar button.active {
+  background:var(--gold);
+  color:var(--navy);
 }
-.project-card{
+
+.content {
+  flex:1;
+  padding:25px;
+  min-width:0;
+}
+
+.view { display:none; }
+.view.active { display:block; }
+
+.page-heading {
+  margin-bottom:22px;
+}
+
+.page-heading h2 {
+  margin:0 0 7px;
+  color:var(--navy);
+}
+
+.page-heading p {
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.panel {
   background:white;
   border:1px solid var(--border);
   border-radius:10px;
-  overflow:hidden;
+  padding:20px;
+  margin-bottom:20px;
 }
-.project-card img{
-  width:100%;
-  height:190px;
-  object-fit:cover;
-  background:#e9edf0;
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:15px;
 }
-.project-card-body{padding:17px}
-.project-card h3{margin:0 0 8px;color:var(--navy)}
-.project-card p{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.5;
-}
-.status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#edf0f3;
-  font-size:11px;
-  margin:5px 0;
-}
-.status.published{background:#e5f5ed;color:var(--green)}
-#pageMessage{
-  font-size:13px;
-  margin:12px 0;
-  line-height:1.5;
-}
-.success{color:var(--green)}
-.error{color:var(--red)}
-.empty{
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
+
+.stat {
   background:white;
-  border:1px dashed var(--border);
+  border:1px solid var(--border);
   border-radius:10px;
+  padding:20px;
 }
-.mobile-menu{
-  display:none;
-  background:var(--navy);
-  color:white;
-  border:0;
-  padding:9px 12px;
+
+.stat strong {
+  display:block;
+  font-size:26px;
+  color:var(--gold);
+  margin-top:10px;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+
+.full-width { grid-column:1/-1; }
+
+.actions {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.table-wrap {
+  overflow-x:auto;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:550px;
+}
+
+th,td {
+  text-align:left;
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+
+th {
+  background:#f5f7f9;
+  color:var(--navy);
+}
+
+.project-image {
+  width:75px;
+  height:55px;
+  object-fit:cover;
   border-radius:5px;
 }
 
-@media(max-width:800px){
-  #dashboard.authenticated{display:block}
-  .sidebar{
-    display:none;
+.status {
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#edf1f4;
+  font-size:11px;
+}
+
+.status.published {
+  background:#e1f3e9;
+  color:var(--success);
+}
+
+.status.unpublished {
+  background:#fff0e0;
+  color:#99600e;
+}
+
+.empty {
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+}
+
+@media(max-width:750px) {
+  .layout { display:block; }
+
+  .sidebar {
     width:100%;
-    min-width:0;
-    min-height:auto;
+    display:flex;
+    overflow-x:auto;
+    padding:10px;
+    gap:5px;
   }
-  .sidebar.open{display:block}
-  .mobile-menu{display:block}
-  .topbar{padding:15px}
-  .content{padding:17px}
-  .project-list{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
+
+  .sidebar button {
+    min-width:max-content;
+    width:auto;
+    margin:0;
+    padding:11px;
+    font-size:12px;
+  }
+
+  .content { padding:15px; }
+
+  .form-grid { grid-template-columns:1fr; }
+
+  .full-width { grid-column:auto; }
+
+  .login-card { padding:25px; }
 }
 </style>
 </head>
@@ -324,231 +362,219 @@ button{cursor:pointer}
 <body>
 
 <!-- LOGIN SCREEN -->
+
 <section id="loginScreen">
   <div class="login-card">
+
     <div class="brand">
       <h1>VANTAGE X</h1>
-      <span>GROUP LTD</span>
-      <p>ESTATES &amp; CO.</p>
+      <span>GROUP LTD · ESTATES & CO.</span>
     </div>
 
-    <h2>Administration Login</h2>
-    <p style="color:#71808d;font-size:13px">
-      Sign in to access the VANTAGE X management system.
-    </p>
+    <h2>Administrator Login</h2>
 
     <form id="loginForm">
-      <label for="email">Email Address</label>
-      <input type="email" id="email" autocomplete="username" required>
 
-      <label for="password">Password</label>
-      <input type="password" id="password"
-        autocomplete="current-password" required>
+      <div class="field">
+        <label for="loginEmail">Email Address</label>
+        <input
+          id="loginEmail"
+          type="email"
+          autocomplete="username"
+          placeholder="Enter your admin email"
+          required>
+      </div>
 
-      <button type="submit" id="loginButton">Sign In</button>
-      <div id="loginMessage" role="alert"></div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+          required>
+      </div>
+
+      <button class="btn btn-gold btn-block" id="loginButton" type="submit">
+        Sign In
+      </button>
+
+      <div id="loginMessage" class="message" role="status"></div>
+
     </form>
 
-    <div class="login-footer">
-      VANTAGE X GROUP LTD &copy; <span id="loginYear"></span>
-    </div>
   </div>
 </section>
 
+  
 <!-- ADMIN DASHBOARD -->
-<div id="dashboard">
 
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">
+<section id="dashboard" class="hidden">
+
+  <header class="topbar">
+    <div>
       <h2>VANTAGE X</h2>
-      <span>GROUP LTD · ADMIN</span>
+      <small>ADMINISTRATION PANEL</small>
     </div>
 
-    <div class="sidebar-label">MAIN MENU</div>
-    <button class="nav-button active" data-view="overview">Dashboard Overview</button>
-    <button class="nav-button" data-view="projects">Projects Management</button>
-
-<button class="nav-button" data-view="investors">Investor Management</button>
-    <button class="nav-button" data-view="addProject">Add New Project</button>
-    <button class="nav-button" data-view="settings">Account Information</button>
-
-    <div class="sidebar-bottom">
-      <button id="logoutButton">Sign Out</button>
+    <div>
+      <span id="adminName">Administrator</span>
+      <span id="adminRole"></span>
+      <button class="btn btn-gold" id="logoutButton" type="button">
+        Sign Out
+      </button>
     </div>
-  </aside>
+  </header>
 
-  <main class="main">
-    <header class="topbar">
-      <div style="display:flex;align-items:center;gap:12px">
-        <button class="mobile-menu" id="mobileMenu">Menu</button>
-        <h2 id="pageTitle">Dashboard Overview</h2>
-      </div>
-      <div class="admin-info">
-        <strong id="adminName">Administrator</strong>
-        <span id="adminRole">ADMIN</span>
-      </div>
-    </header>
+  <div class="layout">
 
-    <div class="content">
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar">
+
+      <button class="active" data-view="overview">Dashboard</button>
+      <button data-view="projects">All Projects</button>
+      <button data-view="addProject">Add Project</button>
+      <button data-view="investors">Investors</button>
+      <button data-view="addInvestor">Register Investor</button>
+
+    </nav>
+
+    <main class="content">
+
+      <!-- OVERVIEW -->
 
       <section class="view active" id="overview">
-        <div class="welcome">
-          <h1>Welcome to VANTAGE X</h1>
-          <p>Manage company projects and website content from one place.</p>
+
+        <div class="page-heading">
+          <h2>Welcome to VANTAGE X</h2>
+          <p>Manage your company's projects and investor records.</p>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            Total Projects
+            <strong id="projectCount">0</strong>
+          </div>
+
+          <div class="stat">
+            Published Projects
+            <strong id="publishedCount">0</strong>
+          </div>
+
+          <div class="stat">
+            Registered Investors
+            <strong id="overviewInvestorCount">—</strong>
+          </div>
+
+        </div>
+
+        <div class="panel" style="margin-top:20px">
+          <h3>Administration</h3>
+          <p>
+            Use the navigation menu to manage company projects
+            and investor information.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- PROJECT LIST -->
+
+      <section class="view" id="projects">
+
+        <div class="page-heading">
+          <h2>Projects Management</h2>
+          <p>View, edit, publish and manage your projects.</p>
         </div>
 
         <div class="panel">
-          <h3>Administration Centre</h3>
-          <p>
-            This dashboard allows authorized administrators to create,
-            update, publish and manage company projects.
-          </p>
-          <div class="notice">
-            Only publish project information and images that VANTAGE X
-            GROUP LTD is authorized to share.
+          <div class="actions">
+
+            <button class="btn btn-gold" id="newProjectButton" type="button">
+              + Add New Project
+            </button>
+
+            <button class="btn btn-light" id="refreshProjectsButton" type="button">
+              Refresh
+            </button>
+
           </div>
         </div>
 
         <div class="panel">
-          <h3>Project Management</h3>
-          <p id="overviewProjectCount">Loading project information...</p>
-          <button class="primary-btn" data-open-view="addProject">
-            Add a Project
-          </button>
-          <button class="secondary-btn" data-open-view="projects">
-            View Projects
-          </button>
+
+          <div class="table-wrap">
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Project</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Publication</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="projectList">
+                <tr>
+                  <td colspan="6" class="empty">Loading projects...</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
         </div>
+
+        <div id="projectListMessage" class="message"></div>
+
       </section>
 
-      <section class="view" id="projects">
-        <section class="view" id="investors">
+      <!-- ADD / EDIT PROJECT -->
 
-  <div class="panel">
-    <h2>Investor Management</h2>
-    <p>Manage and monitor your company investors.</p>
-
-    <button class="primary-btn" data-open-view="addInvestor">
-      + Register New Investor
-    </button>
-
-    <div style="margin-top:25px;">
-      <input
-        type="text"
-        id="investorSearch"
-        placeholder="Search investors..."
-      >
-    </div>
-
-    <div id="investorList">
-      Loading investors...
-    </div>
-  </div>
-
-      </section>
-        <div class="welcome">
-          <h1>Projects Management</h1>
-          <p>View and manage your company projects.</p>
-        </div>
-        <div id="projectsMessage"></div>
-        <div id="projectList" class="project-list">
-          <div class="empty">Loading projects...</div>
-        </div>
-      </section>
-<section class="view" id="addInvestor">
-
-  <div class="panel">
-    <h2 id="investorFormTitle">Register New Investor</h2>
-
-    <form id="investorForm">
-
-      <div class="form-grid">
-
-        <div>
-          <label>Full Name</label>
-          <input type="text" id="investorName" required>
-        </div>
-
-        <div>
-          <label>Email Address</label>
-          <input type="email" id="investorEmail">
-        </div>
-
-        <div>
-          <label>Phone Number</label>
-          <input type="tel" id="investorPhone">
-        </div>
-
-        <div>
-          <label>Investment Interest</label>
-          <input type="text" id="investorInterest">
-        </div>
-
-        <div>
-          <label>Investor Status</label>
-          <select id="investorStatus">
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
-        </div>
-
-      </div>
-
-      <label>Notes</label>
-      <textarea id="investorNotes"></textarea>
-
-      <button type="submit" class="primary-btn">
-        Save Investor
-      </button>
-
-      <p id="investorMessage"></p>
-
-    </form>
-  </div>
-
-</section>
       <section class="view" id="addProject">
-        <div class="welcome">
-          <h1 id="projectFormTitle">Add New Project</h1>
-          <p>Enter the project details and upload its images.</p>
+
+        <div class="page-heading">
+          <h2 id="projectFormTitle">Add New Project</h2>
+          <p>Enter the details of your real estate project.</p>
         </div>
 
         <div class="panel">
+
           <form id="projectForm">
+
+            <input type="hidden" id="projectId">
+
             <div class="form-grid">
 
-              <div class="field full">
-                <label for="projectName">Project Name *</label>
-                <input id="projectName" required maxlength="150">
-              </div>
-
-              <div class="field full">
-                <label for="projectDescription">Description</label>
-                <textarea id="projectDescription"
-                  placeholder="Describe the project..."></textarea>
+              <div class="field">
+                <label>Project Name *</label>
+                <input id="projectName" required>
               </div>
 
               <div class="field">
-                <label for="projectLocation">Location</label>
+                <label>Location</label>
                 <input id="projectLocation" placeholder="e.g. Kano, Nigeria">
               </div>
 
               <div class="field">
-                <label for="projectCategory">Category</label>
+                <label>Category</label>
                 <select id="projectCategory">
-                  <option value="Real Estate">Real Estate</option>
                   <option value="Residential">Residential</option>
                   <option value="Commercial">Commercial</option>
+                  <option value="Land">Land</option>
                   <option value="Investment">Investment</option>
-                  <option value="Business Development">Business Development</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
 
               <div class="field">
-                <label for="projectStatus">Project Status</label>
+                <label>Project Status</label>
                 <select id="projectStatus">
                   <option value="Upcoming">Upcoming</option>
                   <option value="Ongoing">Ongoing</option>
@@ -557,127 +583,299 @@ button{cursor:pointer}
               </div>
 
               <div class="field">
-                <label for="projectPrice">Price / Investment Information</label>
-                <input id="projectPrice"
-                  placeholder="Optional. Avoid unverified promises.">
+                <label>Price (optional)</label>
+                <input id="projectPrice" placeholder="e.g. ₦50,000,000">
               </div>
 
-              <div class="field full">
-                <label for="coverImage">Cover Image</label>
-                <input type="file" id="coverImage" accept="image/*">
-                <small>Maximum image size: 5 MB.</small>
+              <div class="field">
+                <label>Cover Image</label>
+                <input id="projectImage" type="file" accept="image/*">
               </div>
 
-              <div class="field full">
-                <label for="galleryImages">Gallery Images</label>
-                <input type="file" id="galleryImages"
-                  accept="image/*" multiple>
-                <small>Maximum 10 gallery images, 5 MB each.</small>
+              <div class="field full-width">
+                <label>Additional Gallery Images</label>
+                <input id="projectGallery" type="file" accept="image/*" multiple>
+              </div>
+
+              <div class="field full-width">
+                <label>Project Description</label>
+                <textarea id="projectDescription"
+                  placeholder="Describe the project..."></textarea>
               </div>
 
             </div>
 
-            <div id="projectFormMessage"></div>
+            <div class="actions">
 
-            <button type="submit" class="primary-btn" id="saveProjectButton">
-              Save Project
-            </button>
-            <button type="button" class="secondary-btn" id="resetProjectButton">
-              Clear Form
-            </button>
+              <button class="btn btn-gold" id="saveProjectButton" type="submit">
+                Save Project
+              </button>
+
+              <button class="btn btn-light" id="resetProjectButton" type="button">
+                Clear Form
+              </button>
+
+              <button class="btn btn-light" id="cancelProjectButton" type="button">
+                Back to Projects
+              </button>
+
+            </div>
+
+            <div id="projectMessage" class="message"></div>
+
           </form>
+
         </div>
       </section>
 
-      <section class="view" id="settings">
-        <div class="welcome">
-          <h1>Account Information</h1>
-          <p>Details of the currently signed-in administrator.</p>
+      
+      <!-- INVESTORS LIST -->
+
+      <section class="view" id="investors">
+
+        <div class="page-heading">
+          <h2>Investors Management</h2>
+          <p>View and search registered investors.</p>
         </div>
+
         <div class="panel">
-          <p id="settingsName"></p>
-          <p id="settingsEmail"></p>
-          <p id="settingsRole"></p>
-          <p id="settingsStatus"></p>
+
+          <div class="field">
+            <label>Search Investors</label>
+            <input id="investorSearch"
+              placeholder="Search by name, email or phone...">
+          </div>
+
+          <div class="table-wrap">
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Interest</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody id="investorList">
+                <tr>
+                  <td colspan="5" class="empty">Loading investors...</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <div id="investorListMessage" class="message"></div>
+
         </div>
+
       </section>
 
-    </div>
-  </main>
-</div>
+
+      <!-- REGISTER INVESTOR -->
+
+      <section class="view" id="addInvestor">
+
+        <div class="page-heading">
+          <h2>Register New Investor</h2>
+          <p>Add an investor to the company's records.</p>
+        </div>
+
+        <div class="panel">
+
+          <form id="investorForm">
+
+            <div class="form-grid">
+
+              <div class="field">
+                <label>Full Name *</label>
+                <input id="investorName" required>
+              </div>
+
+              <div class="field">
+                <label>Email Address *</label>
+                <input id="investorEmail" type="email" required>
+              </div>
+
+              <div class="field">
+                <label>Phone Number</label>
+                <input id="investorPhone">
+              </div>
+
+              <div class="field">
+                <label>Investment Interest</label>
+                <input id="investorInterest"
+                  placeholder="e.g. Residential property">
+              </div>
+
+              <div class="field">
+                <label>Investor Status</label>
+                <select id="investorStatus">
+                  <option value="Prospective">Prospective</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+
+              <div class="field full-width">
+                <label>Notes</label>
+                <textarea id="investorNotes"></textarea>
+              </div>
+
+            </div>
+
+            <button class="btn btn-gold"
+              type="submit"
+              id="saveInvestorButton">
+              Register Investor
+            </button>
+
+            <div id="investorMessage" class="message"></div>
+
+          </form>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
 
 <script>
 "use strict";
 
-/* SUPABASE CONFIGURATION */
-const SUPABASE_URL = "https://hwpxxbscoscumkmoqjgs.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
+/* SUPABASE CONNECTION */
 
-const $ = id => document.getElementById(id);
+const SUPABASE_URL =
+  "https://hwpxxbscoscumkmoqjgs.supabase.co";
 
-const loginScreen = $("loginScreen");
-const dashboard = $("dashboard");
-const loginForm = $("loginForm");
-const loginButton = $("loginButton");
-const loginMessage = $("loginMessage");
-const emailInput = $("email");
-const passwordInput = $("password");
+const SUPABASE_ANON_KEY =
+  "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
+
+const BUCKET_NAME = "project-images";
 
 let supabaseClient = null;
 let currentAdmin = null;
-let editingProjectId = null;
+let currentUser = null;
 
-$("loginYear").textContent = new Date().getFullYear();
 
-function setLoginMessage(message) {
-  loginMessage.textContent = message || "";
+/* ELEMENT HELPER */
+
+const $ = id => document.getElementById(id);
+
+
+/* SAFE HTML */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[character]);
 }
 
-function setProjectMessage(message, type = "") {
-  const element = $("projectFormMessage");
-  element.textContent = message || "";
-  element.className = type;
+
+/* FRIENDLY ERROR */
+
+function friendlyError(error) {
+  if (!error) return "An unexpected error occurred.";
+  if (error.message) return error.message;
+  return String(error);
 }
 
-function showLogin(message = "") {
-  dashboard.classList.remove("authenticated");
-  dashboard.style.display = "none";
-  loginScreen.style.display = "flex";
-  setLoginMessage(message);
+
+/* MESSAGE */
+
+function setMessage(id, message, type = "") {
+  const element = $(id);
+  if (!element) return;
+
+  element.textContent = message;
+  element.className = "message " + type;
+}
+
+
+/* SCREEN MANAGEMENT */
+
+function showLogin(message = "", type = "error") {
+  $("dashboard").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+
+  $("loginButton").disabled = false;
+  $("loginButton").textContent = "Sign In";
+
+  setMessage("loginMessage", message, type);
 }
 
 function showDashboard(profile, user) {
-  currentAdmin = {profile, user};
+  currentAdmin = profile;
+  currentUser = user;
 
-  $("adminName").textContent = profile.full_name || "Administrator";
-  $("adminRole").textContent = profile.role;
-  $("settingsName").textContent =
-    "Name: " + (profile.full_name || "Administrator");
-  $("settingsEmail").textContent =
-    "Email: " + (user.email || "");
-  $("settingsRole").textContent = "Role: " + profile.role;
-  $("settingsStatus").textContent =
-    "Account status: " + (profile.is_active ? "Active" : "Inactive");
+  $("loginScreen").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
 
-  loginScreen.style.display = "none";
-  dashboard.style.display = "flex";
-  dashboard.classList.add("authenticated");
+  $("adminName").textContent =
+    profile.full_name || user.email || "Administrator";
 
-  passwordInput.value = "";
+  $("adminRole").textContent = " | " + profile.role;
+
+  openView("overview");
+
   loadProjects();
+  loadInvestorCount();
 }
 
-function friendlyError(error) {
-  return error && error.message
-    ? error.message
-    : "An unexpected error occurred. Please try again.";
+
+/* NAVIGATION */
+
+function openView(viewName) {
+
+  document.querySelectorAll(".view").forEach(view => {
+    view.classList.remove("active");
+  });
+
+  document.querySelectorAll(".sidebar button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.view === viewName
+    );
+  });
+
+  const target = $(viewName);
+  if (target) target.classList.add("active");
+
+  if (viewName === "projects") loadProjects();
+  if (viewName === "investors") loadInvestors();
 }
+
+
+/* ROLE CHECKS */
+
+function isCEO() {
+  return currentAdmin?.role === "CEO";
+}
+
+function isManagerOrCEO() {
+  return ["CEO", "MANAGER"].includes(currentAdmin?.role);
+}
+
 
 /* VERIFY ADMIN PROFILE */
+
 async function verifyAdmin(user) {
-  const {data, error} = await supabaseClient
+
+  const { data, error } = await supabaseClient
     .from("admin_profiles")
-    .select("full_name, role, is_active")
+    .select("user_id, full_name, role, is_active")
     .eq("user_id", user.id)
     .maybeSingle();
 
@@ -685,7 +883,7 @@ async function verifyAdmin(user) {
 
   if (!data) {
     throw new Error(
-      "Your login succeeded, but no administrator profile was found. Contact the CEO."
+      "Your account does not have an administrator profile."
     );
   }
 
@@ -694,189 +892,112 @@ async function verifyAdmin(user) {
   }
 
   if (!["CEO", "MANAGER", "STAFF"].includes(data.role)) {
-    throw new Error("Your account does not have an authorized role.");
+    throw new Error("Your administrator role is not recognised.");
   }
 
   return data;
 }
 
-/* LOGIN */
-loginForm.addEventListener("submit", async event => {
-  alert("LOGIN BUTTON EVENT IS WORKING");
-  event.preventDefault();
 
-  if (loginButton.disabled) return;
+/* NAVIGATION BUTTONS */
 
-  loginButton.disabled = true;
-  loginButton.textContent = "Signing in...";
-  setLoginMessage("Connecting to VANTAGE X...");
-
-  try {
-    if (!supabaseClient) {
-      throw new Error("Supabase is not ready. Refresh the page and try again.");
-    }
-
-    const {data, error} = await supabaseClient.auth.signInWithPassword({
-      email: emailInput.value.trim(),
-      password: passwordInput.value
-    });
-
-    if (error) throw error;
-
-    if (!data || !data.user) {
-      throw new Error("No user account was returned. Please try again.");
-    }
-
-    setLoginMessage("Verifying administrator account...");
-
-    const profile = await verifyAdmin(data.user);
-    showDashboard(profile, data.user);
-
-  } catch (error) {
-    console.error("VANTAGE X login error:", error);
-    showLogin(friendlyError(error));
-  } finally {
-    loginButton.disabled = false;
-    loginButton.textContent = "Sign In";
-  }
+document.querySelectorAll(".sidebar button").forEach(button => {
+  button.addEventListener("click", () => {
+    openView(button.dataset.view);
+  });
 });
 
-/* NAVIGATION */
-  
-function openView(viewId) {
-  const target = $(viewId);
-  if (!target) return;
+$("newProjectButton").addEventListener("click", () => {
+  resetProjectForm();
+  openView("addProject");
+});
 
-  document.querySelectorAll(".view").forEach(view => {
-    view.classList.remove("active");
-  });
+$("refreshProjectsButton").addEventListener("click", loadProjects);
 
-  target.classList.add("active");
+$("cancelProjectButton").addEventListener("click", () => {
+  openView("projects");
+});
 
-  document.querySelectorAll(".nav-button").forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.view === viewId
-    );
-  });
+$("resetProjectButton").addEventListener("click", resetProjectForm);
 
-  const titles = {
-    overview: "Dashboard Overview",
-    projects: "Projects Management",
-    addProject: "Add / Edit Project",
-    investors: "Investor Management",
-    addInvestor: "Register New Investor",
-    settings: "Account Information"
-  };
 
-  $("pageTitle").textContent = titles[viewId] || "VANTAGE X";
-  $("sidebar").classList.remove("open");
+/* PROJECT FORM RESET */
 
-  if (viewId === "projects") loadProjects();
-  if (viewId === "investors") loadInvestors();
-}
-/* ROLE PERMISSIONS */
-function isManagerOrCEO() {
-  return currentAdmin &&
-    ["CEO", "MANAGER"].includes(currentAdmin.profile.role);
+function resetProjectForm() {
+
+  $("projectForm").reset();
+
+  $("projectId").value = "";
+
+  $("projectFormTitle").textContent = "Add New Project";
+
+  $("saveProjectButton").textContent = "Save Project";
+
+  $("projectImage").value = "";
+  $("projectGallery").value = "";
+
+  setMessage("projectMessage", "");
 }
 
-function isCEO() {
-  return currentAdmin &&
-    currentAdmin.profile.role === "CEO";
-}
 
-/* PROJECT IMAGE UPLOAD */
-async function uploadImage(file) {
+/* UPLOAD IMAGE */
+
+async function uploadProjectImage(file) {
+
   if (!file) return null;
 
   if (!file.type.startsWith("image/")) {
-    throw new Error("Please select an image file.");
+    throw new Error("Please select a valid image file.");
   }
 
-  if (file.size > 5 * 1024 * 1024) {
-    throw new Error("Each image must be 5 MB or smaller.");
-  }
-
-  const extension = file.name.split(".").pop()
-    .toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
   const filePath =
-    Date.now() + "-" +
-    Math.random().toString(36).slice(2) + "." + extension;
+    currentUser.id + "/" + Date.now() + "-" + safeName;
 
-  const {error} = await supabaseClient.storage
-    .from("project-images")
+  const { error } = await supabaseClient.storage
+    .from(BUCKET_NAME)
     .upload(filePath, file, {
       cacheControl: "3600",
-      upsert: false,
-      contentType: file.type
+      upsert: false
     });
 
   if (error) throw error;
 
-  const {data} = supabaseClient.storage
-    .from("project-images")
+  const { data } = supabaseClient.storage
+    .from(BUCKET_NAME)
     .getPublicUrl(filePath);
 
   return data.publicUrl;
 }
 
+
 /* SAVE PROJECT */
+
 $("projectForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
-  if (!currentAdmin) {
-    setProjectMessage("Please sign in again.", "error");
-    return;
-  }
-
   if (!isManagerOrCEO()) {
-    setProjectMessage(
-      "Staff accounts cannot create or edit projects.",
+    setMessage(
+      "projectMessage",
+      "You do not have permission to manage projects.",
       "error"
     );
     return;
   }
 
   const button = $("saveProjectButton");
+
   button.disabled = true;
   button.textContent = "Saving...";
 
   try {
-    const name = $("projectName").value.trim();
 
-    if (!name) throw new Error("Project name is required.");
+    const projectId = $("projectId").value;
 
-    const coverFile = $("coverImage").files[0];
-    const galleryFiles = Array.from(
-      $("galleryImages").files
-    );
-
-    if (galleryFiles.length > 10) {
-      throw new Error("You can upload a maximum of 10 gallery images.");
-    }
-
-    let coverUrl = null;
-    let galleryUrls = [];
-
-    if (coverFile) {
-      setProjectMessage("Uploading cover image...");
-      coverUrl = await uploadImage(coverFile);
-    }
-
-    if (galleryFiles.length) {
-      setProjectMessage("Uploading gallery images...");
-
-      for (const file of galleryFiles) {
- 
-        const url = await uploadImage(file);
-        galleryUrls.push(url);
-      }
-    }
-
-    const projectData = {
-      project_name: name,
+    const project = {
+      project_name: $("projectName").value.trim(),
       description: $("projectDescription").value.trim(),
       location: $("projectLocation").value.trim(),
       category: $("projectCategory").value,
@@ -884,175 +1005,498 @@ $("projectForm").addEventListener("submit", async event => {
       price: $("projectPrice").value.trim()
     };
 
-    if (coverUrl) projectData.cover_image = coverUrl;
-    if (galleryUrls.length) projectData.gallery = galleryUrls;
+    if (!project.project_name) {
+      throw new Error("Project name is required.");
+    }
+
+    const coverFile = $("projectImage").files[0];
+
+    if (coverFile) {
+      project.cover_image = await uploadProjectImage(coverFile);
+    }
+
+    const galleryFiles = Array.from(
+      $("projectGallery").files
+    );
+
+    if (galleryFiles.length) {
+
+      const uploadedGallery = [];
+
+      for (const file of galleryFiles) {
+        const imageUrl = await uploadProjectImage(file);
+        if (imageUrl) uploadedGallery.push(imageUrl);
+      }
+
+      let existingGallery = [];
+
+      if (projectId) {
+        const { data: oldProject, error: oldError } =
+          await supabaseClient
+            .from("projects")
+            .select("gallery")
+            .eq("id", projectId)
+            .single();
+
+        if (oldError) throw oldError;
+
+        existingGallery = oldProject.gallery || [];
+      }
+
+      project.gallery = [...existingGallery, ...uploadedGallery];
+    }
 
     let result;
 
-    if (editingProjectId) {
+    if (projectId) {
+
       result = await supabaseClient
         .from("projects")
-        .update(projectData)
-        .eq("id", editingProjectId);
+        .update(project)
+        .eq("id", projectId);
+
     } else {
+
       result = await supabaseClient
         .from("projects")
-        .insert(projectData);
+        .insert([project]);
+
     }
 
     if (result.error) throw result.error;
 
-    setProjectMessage(
-      editingProjectId
+    setMessage(
+      "projectMessage",
+      projectId
         ? "Project updated successfully."
-        : "Project saved successfully.",
+        : "Project created successfully.",
       "success"
     );
 
     resetProjectForm();
+
     await loadProjects();
 
+    openView("projects");
+
   } catch (error) {
+
     console.error("Project save error:", error);
-    setProjectMessage(friendlyError(error), "error");
+
+    setMessage(
+      "projectMessage",
+      "Unable to save project: " + friendlyError(error),
+      "error"
+    );
+
   } finally {
+
     button.disabled = false;
-    button.textContent = "Save Project";
+    button.textContent = $("projectId").value
+      ? "Update Project"
+      : "Save Project";
+
   }
+
 });
 
-/* RESET PROJECT FORM */
-function resetProjectForm() {
-  $("projectForm").reset();
-  editingProjectId = null;
-  $("projectFormTitle").textContent = "Add New Project";
-  $("saveProjectButton").textContent = "Save Project";
-  setProjectMessage("");
-}
-
-$("resetProjectButton").addEventListener("click", resetProjectForm);
 
 /* LOAD PROJECTS */
+
 async function loadProjects() {
-  const list = $("projectList");
 
   if (!currentAdmin) return;
 
-  list.innerHTML = '<div class="empty">Loading projects...</div>';
+  const list = $("projectList");
+
+  list.innerHTML =
+    '<tr><td colspan="6" class="empty">Loading projects...</td></tr>';
 
   try {
-    const {data, error} = await supabaseClient
+
+    const { data, error } = await supabaseClient
       .from("projects")
       .select("*")
-      .order("created_at", {ascending:false});
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
 
     const projects = data || [];
 
-    $("overviewProjectCount").textContent =
-      "You currently have " + projects.length +
-      " project(s) in the management system.";
+    $("projectCount").textContent = projects.length;
+
+    $("publishedCount").textContent =
+      projects.filter(project => project.is_published).length;
 
     if (!projects.length) {
       list.innerHTML =
-        '<div class="empty">No projects have been added yet.</div>';
+        '<tr><td colspan="6" class="empty">No projects have been added yet.</td></tr>';
       return;
     }
 
-    list.innerHTML = "";
+    list.innerHTML = projects.map(project => `
 
-    projects.forEach(project => {
-      const card = document.createElement("article");
-      card.className = "project-card";
+      <tr>
 
-      const image = document.createElement("img");
-      image.alt = project.project_name || "Project image";
-      image.src = project.cover_image || "";
-      image.onerror = () => {
-        image.style.display = "none";
-      };
-      card.appendChild(image);
+        <td>
+          ${
+            project.cover_image
+              ? `<img class="project-image"
+                   src="${escapeHTML(project.cover_image)}"
+                   alt="Project image">`
+              : "No image"
+          }
+        </td>
 
-      const body = document.createElement("div");
-      body.className = "project-card-body";
+        <td>${escapeHTML(project.project_name)}</td>
 
-      const heading = document.createElement("h3");
-      heading.textContent = project.project_name || "Untitled project";
-      body.appendChild(heading);
+        <td>${escapeHTML(project.location || "Not specified")}</td>
 
-      const description = document.createElement("p");
-      description.textContent =
-        project.description || "No description provided.";
-      body.appendChild(description);
+        <td>${escapeHTML(project.status || "Upcoming")}</td>
 
-      const location = document.createElement("p");
-      location.textContent =
-        "Location: " + (project.location || "Not specified");
-      body.appendChild(location);
+        <td>
+          <span class="status ${
+            project.is_published ? "published" : "unpublished"
+          }">
+            ${project.is_published ? "Published" : "Unpublished"}
+          </span>
+        </td>
 
-      const status = document.createElement("span");
-      status.className = "status" +
-        (project.is_published ? " published" : "");
-      status.textContent = project.is_published ? "Published" : "Draft";
-      body.appendChild(status);
+        <td>
+          <div class="actions">
 
-      const details = document.createElement("p");
-      details.textContent =
-        (project.category || "Other") + " · " +
-        (project.status || "Upcoming");
-      body.appendChild(details);
+            <button class="btn btn-light"
+              type="button"
+              onclick="editProject('${project.id}')">
+              Edit
+            </button>
 
-      if (isManagerOrCEO()) {
-        const edit = document.createElement("button");
-        edit.className = "secondary-btn";
-        edit.textContent = "Edit";
-        edit.addEventListener("click", () => editProject(project));
-        body.appendChild(edit);
+            <button class="btn btn-gold"
+              type="button"
+              onclick="togglePublish('${project.id}')">
+              ${project.is_published ? "Unpublish" : "Publish"}
+            </button>
 
-        const publish = document.createElement("button");
-        publish.className = "primary-btn";
-        publish.textContent =
-          project.is_published ? "Unpublish" : "Publish";
-        publish.addEventListener("click", () => togglePublish(project));
-        body.appendChild(publish);
-      }
+            ${
+              isCEO()
+                ? `<button class="btn btn-danger"
+                    type="button"
+                    onclick="deleteProject('${project.id}')">
+                    Delete
+                   </button>`
+                : ""
+            }
 
-      if (isCEO()) {
-        const remove = document.createElement("button");
-        remove.className = "danger-btn";
-        remove.textContent = "Delete";
-        remove.addEventListener("click", () => deleteProject(project));
-        body.appendChild(remove);
-      }
+          </div>
+        </td>
 
-      card.appendChild(body);
-      list.appendChild(card);
-    });
+      </tr>
+
+    `).join("");
 
   } catch (error) {
-    console.error("Project loading error:", error);
-    list.innerHTML =
-      '<div class="empty">Unable to load projects: ' +
-      escapeHTML(friendlyError(error)) + '</div>';
+
+    console.error("Load projects error:", error);
+
+    list.innerHTML = `
+      <tr>
+        <td colspan="6" class="empty">
+          Unable to load projects: ${escapeHTML(friendlyError(error))}
+        </td>
+      </tr>
+    `;
+
   }
+
 }
 
-/* SAFE TEXT */
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[character]);
+
+/* EDIT PROJECT */
+
+async function editProject(id) {
+
+  if (!isManagerOrCEO()) {
+    alert("You do not have permission to edit projects.");
+    return;
+  }
+
+  try {
+
+    const { data: project, error } = await supabaseClient
+      .from("projects")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) throw error;
+
+    $("projectId").value = project.id;
+    $("projectName").value = project.project_name || "";
+    $("projectDescription").value = project.description || "";
+    $("projectLocation").value = project.location || "";
+    $("projectCategory").value = project.category || "Residential";
+    $("projectStatus").value = project.status || "Upcoming";
+    $("projectPrice").value = project.price || "";
+
+    $("projectImage").value = "";
+    $("projectGallery").value = "";
+
+    $("projectFormTitle").textContent = "Edit Project";
+    $("saveProjectButton").textContent = "Update Project";
+
+    setMessage(
+      "projectMessage",
+      "Select a new image only if you want to replace the existing one.",
+      "success"
+    );
+
+    openView("addProject");
+
+  } catch (error) {
+
+    alert("Unable to open project: " + friendlyError(error));
+
+  }
+
 }
-/* INVESTOR MANAGEMENT */
+
+
+/* PUBLISH / UNPUBLISH */
+
+async function togglePublish(id) {
+
+  if (!isManagerOrCEO()) {
+    alert("You do not have permission to publish projects.");
+    return;
+  }
+
+  try {
+
+    const { data: project, error: fetchError } =
+      await supabaseClient
+        .from("projects")
+        .select("is_published")
+        .eq("id", id)
+        .single();
+
+    if (fetchError) throw fetchError;
+
+    const { error } = await supabaseClient
+      .from("projects")
+      .update({
+        is_published: !project.is_published
+      })
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await loadProjects();
+
+  } catch (error) {
+
+    alert("Unable to change publication status: " + friendlyError(error));
+
+  }
+
+}
+
+
+/* DELETE PROJECT */
+
+async function deleteProject(id) {
+
+  if (!isCEO()) {
+    alert("Only the CEO can delete projects.");
+    return;
+  }
+
+  if (!confirm("Are you sure you want to delete this project?")) {
+    return;
+  }
+
+  try {
+
+    const { error } = await supabaseClient
+      .from("projects")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await loadProjects();
+
+    alert("Project deleted successfully.");
+
+  } catch (error) {
+
+    alert("Unable to delete project: " + friendlyError(error));
+
+  }
+
+}
+</script>
+
+  <script>
+/* ==============================
+   LOGIN
+============================== */
+
+$("loginForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const email = $("loginEmail").value.trim();
+  const password = $("loginPassword").value;
+
+  if (!email || !password) {
+    setMessage("loginMessage", "Enter your email and password.", "error");
+    return;
+  }
+
+  $("loginButton").disabled = true;
+  $("loginButton").textContent = "Signing in...";
+  setMessage("loginMessage", "Verifying your account...");
+
+  try {
+    if (!supabaseClient) {
+      throw new Error("Connection is not ready. Refresh the page.");
+    }
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if (error) throw error;
+
+    if (!data.user) {
+      throw new Error("Login could not be completed.");
+    }
+
+    const profile = await verifyAdmin(data.user);
+
+    $("loginPassword").value = "";
+
+    showDashboard(profile, data.user);
+
+  } catch (error) {
+    console.error("Login error:", error);
+
+    $("loginPassword").value = "";
+
+    showLogin(friendlyError(error), "error");
+
+  } finally {
+    $("loginButton").disabled = false;
+    $("loginButton").textContent = "Sign In";
+  }
+});
+
+
+/* ==============================
+   LOGOUT
+============================== */
+
+$("logoutButton").addEventListener("click", async function() {
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) throw error;
+
+    currentAdmin = null;
+    currentUser = null;
+
+    showLogin("You have signed out successfully.", "success");
+
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert(friendlyError(error));
+  }
+});
+
+
+/* ==============================
+   REGISTER INVESTOR
+============================== */
+
+$("investorForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (!isManagerOrCEO()) {
+    alert("You don't have permission to register investors.");
+    return;
+  }
+
+  const button = $("saveInvestorButton");
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Saving...";
+  }
+
+  try {
+    const { data: userData, error: userError } =
+      await supabaseClient.auth.getUser();
+
+    if (userError) throw userError;
+
+    if (!userData.user) {
+      throw new Error("Your session has expired. Please sign in again.");
+    }
+
+    const investor = {
+      full_name: $("investorName").value.trim(),
+      email: $("investorEmail").value.trim(),
+      phone: $("investorPhone").value.trim(),
+      investment_interest: $("investorInterest").value,
+      status: $("investorStatus").value,
+      notes: $("investorNotes").value.trim(),
+      created_by: userData.user.id
+    };
+
+    const { error } = await supabaseClient
+      .from("investors")
+      .insert([investor]);
+
+    if (error) throw error;
+
+    $("investorForm").reset();
+
+    setMessage(
+      "investorMessage",
+      "Investor registered successfully.",
+      "success"
+    );
+
+    await loadInvestors();
+    await loadInvestorCount();
+
+  } catch (error) {
+    console.error("Investor registration error:", error);
+
+    setMessage(
+      "investorMessage",
+      friendlyError(error),
+      "error"
+    );
+
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Register Investor";
+    }
+  }
+});
+
+
+/* ==============================
+   LOAD INVESTORS
+============================== */
 
 async function loadInvestors() {
-  const list = $("investorList");
-  const count = $("overviewInvestorCount");
+  if (!currentAdmin) return;
+
+  const list = $("investorsList");
 
   if (!list) return;
 
@@ -1066,217 +1510,115 @@ async function loadInvestors() {
 
     if (error) throw error;
 
-    if (count) {
-      count.textContent = (data.length || 0) + " registered investors";
+    renderInvestors(data || []);
+
+    const search = $("investorSearch");
+
+    if (search) {
+      search.oninput = function() {
+        const term = search.value.toLowerCase().trim();
+
+        const filtered = (data || []).filter(function(investor) {
+          return (
+            (investor.full_name || "").toLowerCase().includes(term) ||
+            (investor.email || "").toLowerCase().includes(term) ||
+            (investor.phone || "").toLowerCase().includes(term)
+          );
+        });
+
+        renderInvestors(filtered);
+      };
     }
 
-    if (!data.length) {
-      list.innerHTML = "No investors registered yet.";
-      return;
-    }
+  } catch (error) {
+    console.error("Load investors error:", error);
 
-    list.innerHTML = data.map(investor => `
-      <div class="project-card">
-        <h3>${escapeHTML(investor.full_name)}</h3>
-        <p>Email: ${escapeHTML(investor.email || "Not provided")}</p>
-        <p>Phone: ${escapeHTML(investor.phone || "Not provided")}</p>
-        <p>Interest: ${escapeHTML(investor.investment_interest || "Not provided")}</p>
-        <p>Status: ${escapeHTML(investor.status || "New")}</p>
+    list.innerHTML =
+      "Unable to load investors: " +
+      escapeHTML(friendlyError(error));
+  }
+}
+
+
+/* ==============================
+   DISPLAY INVESTORS
+============================== */
+
+function renderInvestors(investors) {
+  const list = $("investorsList");
+
+  if (!list) return;
+
+  if (!investors.length) {
+    list.innerHTML = "No investors found.";
+    return;
+  }
+
+  list.innerHTML = investors.map(function(investor) {
+    return `
+      <div class="investor-card">
+        <h3>${escapeHTML(investor.full_name || "Unnamed")}</h3>
+
+        <p>
+          Email:
+          ${escapeHTML(investor.email || "Not provided")}
+        </p>
+
+        <p>
+          Phone:
+          ${escapeHTML(investor.phone || "Not provided")}
+        </p>
+
+        <p>
+          Interest:
+          ${escapeHTML(investor.investment_interest || "Not specified")}
+        </p>
+
+        <p>
+          Status:
+          ${escapeHTML(investor.status || "Pending")}
+        </p>
       </div>
-    `).join("");
+    `;
+  }).join("");
+}
 
-  } catch (error) {
-    console.error(error);
-    list.innerHTML = "Unable to load investors: " + escapeHTML(friendlyError(error));
-        }
-     }
-  
-    /* REGISTER NEW INVESTOR */
 
-$("investorForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+/* ==============================
+   INVESTOR COUNT
+============================== */
 
-  if (!isManagerOrCEO()) {
-    alert("You don't have permission to register investors.");
-    return;
-  }
+async function loadInvestorCount() {
+  const countElement = $("investorCount");
 
-  const message = $("investorMessage");
-  message.textContent = "Saving investor...";
+  if (!countElement) return;
 
   try {
-    const { data: userData, error: userError } =
-      await supabaseClient.auth.getUser();
-
-    if (userError) throw userError;
-
-    const { error } = await supabaseClient
+    const { count, error } = await supabaseClient
       .from("investors")
-      .insert([{
-        full_name: $("investorName").value.trim(),
-        email: $("investorEmail").value.trim(),
-        phone: $("investorPhone").value.trim(),
-        investment_interest: $("investorInterest").value.trim(),
-        status: $("investorStatus").value,
-        notes: $("investorNotes").value.trim(),
-        created_by: userData.user.id
-      }]);
+      .select("*", { count: "exact", head: true });
 
     if (error) throw error;
 
-    message.textContent = "Investor registered successfully!";
-    $("investorForm").reset();
-
-    await loadInvestors();
+    countElement.textContent = count ?? 0;
 
   } catch (error) {
-    console.error("Investor registration error:", error);
-    message.textContent = "Unable to save: " + friendlyError(error);
-  }
-});
-  
-  /* SEARCH INVESTORS */
-
-$("investorSearch").addEventListener("input", async function() {
-  const search = this.value.trim().toLowerCase();
-
-  const { data, error } = await supabaseClient
-    .from("investors")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  const filtered = data.filter(investor =>
-    (investor.full_name || "").toLowerCase().includes(search) ||
-    (investor.email || "").toLowerCase().includes(search) ||
-    (investor.phone || "").toLowerCase().includes(search)
-  );
-
-  $("investorList").innerHTML = filtered.length
-    ? filtered.map(investor => `
-        <div class="project-card">
-          <h3>${escapeHTML(investor.full_name)}</h3>
-          <p>Email: ${escapeHTML(investor.email || "Not provided")}</p>
-          <p>Phone: ${escapeHTML(investor.phone || "Not provided")}</p>
-          <p>Status: ${escapeHTML(investor.status || "New")}</p>
-        </div>
-      `).join("")
-    : "No matching investors found.";
-});
+    console.error("Investor count error:", error);
+    countElement.textContent = "—";
   }
 }
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
-    }
-/* EDIT PROJECT */
-function editProject(project) {
-  if (!isManagerOrCEO()) return;
 
-  editingProjectId = project.id;
+/* ==============================
+   INITIALISE DASHBOARD
+============================== */
 
-  $("projectName").value = project.project_name || "";
-  $("projectDescription").value = project.description || "";
-  $("projectLocation").value = project.location || "";
-  $("projectCategory").value = project.category || "Other";
-  $("projectStatus").value = project.status || "Upcoming";
-  $("projectPrice").value = project.price || "";
-
-  $("projectFormTitle").textContent = "Edit Project";
-  $("saveProjectButton").textContent = "Update Project";
-
-  setProjectMessage(
-    "Select a new image only if you want to replace the existing one.",
-    "success"
-  );
-
-  openView("addProject");
-}
-
-/* PUBLISH / UNPUBLISH */
-async function togglePublish(project) {
-  if (!isManagerOrCEO()) return;
-
-  const action = project.is_published ? "unpublish" : "publish";
-
-  if (!confirm("Are you sure you want to " + action + " this project?")) {
-    return;
-  }
-
-  try {
-    const {error} = await supabaseClient
-      .from("projects")
-      .update({is_published: !project.is_published})
-      .eq("id", project.id);
-
-    if (error) throw error;
-
-    await loadProjects();
-
-  } catch (error) {
-    alert("Unable to change publishing status: " + friendlyError(error));
-  }
-}
-
-/* DELETE PROJECT */
-async function deleteProject(project) {
-  if (!isCEO()) return;
-
-  if (!confirm("Permanently delete " + project.project_name + "?")) {
-    return;
-  }
-
-  try {
-    const {error} = await supabaseClient
-      .from("projects")
-      .delete()
-      .eq("id", project.id);
-
-    if (error) throw error;
-
-    await loadProjects();
-
-  } catch (error) {
-    alert("Unable to delete project: " + friendlyError(error));
-  }
-}
-
-/* LOGOUT */
-$("logoutButton").addEventListener("click", async () => {
-  if (!confirm("Are you sure you want to sign out?")) return;
-
-  try {
-    const {error} = await supabaseClient.auth.signOut();
-    if (error) throw error;
-  } catch (error) {
-    console.error("Logout error:", error);
-  }
-
-  currentAdmin = null;
-  dashboard.classList.remove("authenticated");
-  dashboard.style.display = "none";
-  loginScreen.style.display = "flex";
-  emailInput.value = "";
-  passwordInput.value = "";
-  setLoginMessage("You have signed out.");
-});
-
-/* INITIALIZE */
 async function initialiseDashboard() {
   try {
     if (!window.supabase) {
-      showLogin("Supabase library did not load. Refresh and try again.");
-      return;
+      throw new Error(
+        "Supabase library did not load. Check your internet connection."
+      );
     }
 
     supabaseClient = window.supabase.createClient(
@@ -1291,35 +1633,46 @@ async function initialiseDashboard() {
       }
     );
 
-    // Always begin by showing the login screen.
     showLogin();
 
-    const { data, error } = await supabaseClient.auth.getSession();
+    const { data, error } =
+      await supabaseClient.auth.getSession();
 
     if (error) throw error;
 
     if (data.session && data.session.user) {
       const profile = await verifyAdmin(data.session.user);
+
       showDashboard(profile, data.session.user);
+
     } else {
       showLogin();
     }
 
-    supabaseClient.auth.onAuthStateChange((event) => {
+    supabaseClient.auth.onAuthStateChange(function(event) {
       if (event === "SIGNED_OUT") {
         currentAdmin = null;
+        currentUser = null;
         showLogin();
       }
     });
 
   } catch (error) {
-    console.error("Dashboard initialization error:", error);
-    showLogin(friendlyError(error));
+    console.error("Dashboard initialisation error:", error);
+
+    showLogin(friendlyError(error), "error");
   }
 }
 
+
+/* START APPLICATION */
+
 initialiseDashboard();
-  </script>
+
+</script>
+
 </body>
 </html>
-
+  
+      
+      
