@@ -431,7 +431,31 @@ gallery.appendChild(image);
 
   }
 }
+  
+/* IMAGE VIEWER CONTROLS */
 
+const imageViewer = document.getElementById("imageViewer");
+const expandedImage = document.getElementById("expandedImage");
+const closeImageViewer = document.getElementById("closeImageViewer");
+
+closeImageViewer.addEventListener("click", function() {
+  imageViewer.classList.remove("active");
+  expandedImage.src = "";
+});
+
+imageViewer.addEventListener("click", function(event) {
+  if (event.target === imageViewer) {
+    imageViewer.classList.remove("active");
+    expandedImage.src = "";
+  }
+});
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    imageViewer.classList.remove("active");
+    expandedImage.src = "";
+  }
+});
 loadProjectDetails();
 </script>
 
