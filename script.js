@@ -157,14 +157,34 @@ viewProject.href =
   "project.html?id=" + encodeURIComponent(project.id);
 
 viewProject.textContent = "VIEW PROJECT DETAILS →";
+      viewProject.style.display = "block";
+viewProject.style.position = "relative";
+viewProject.style.zIndex = "2";
+viewProject.style.marginTop = "15px";
+viewProject.style.padding = "12px 0";
+
+enquiry.style.display = "block";
+enquiry.style.position = "relative";
+enquiry.style.zIndex = "2";
+enquiry.style.marginTop = "10px";
+enquiry.style.padding = "12px 0";
 
 info.appendChild(viewProject);
 info.appendChild(enquiry);
 
-      card.append(image, info);
-      container.appendChild(card);
-    });
+card.append(image, info);
 
+card.style.position = "relative";
+card.style.overflow = "visible";
+
+image.style.display = "block";
+image.style.position = "relative";
+image.style.zIndex = "1";
+
+info.style.position = "relative";
+info.style.zIndex = "2";
+
+container.appendChild(card);
   } catch (error) {
     console.error("Public projects error:", error);
 
