@@ -1635,6 +1635,7 @@ async function initialiseDashboard() {
         }
       }
     );
+    setupBackgroundLogout();
 
     showLogin();
 
@@ -1671,7 +1672,45 @@ async function initialiseDashboard() {
 /* START APPLICATION */
 
 initialiseDashboard();
+    
+/* =====================================
+   AUTOMATIC BACKGROUND LOGOUT
+===================================== */
 
+function setupBackgroundLogout() {
+  let hiddenAt = null;
+  let logoutTimer = null;
+
+  document.addEventListener("visibilitychange", async function () {
+
+    if (document.hidden) {
+
+      if (!currentUser) return;
+
+      hiddenAt = Date.now();
+
+      logoutTimer = setTimeout(async function () {
+        if (document.hidden && currentUser) {
+          await supabaseClient.auth.signOut();
+        }
+      }, 5 * 60 * 1000);
+
+    } else {
+
+      if (hiddenAt !== null) {
+        const elapsed = Date.now() - hiddenAt;
+
+        clearTimeout(logoutTimer);
+
+        if (elapsed >= 5 * 60 * 1000 && currentUser) {
+          await supabaseClient.auth.signOut();
+        }
+      }
+
+      hiddenAt = null;
+    }
+  });
+}
 </script>
 
 </body>
