@@ -184,15 +184,7 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", loadPublicProjects);
 } else {
   loadPublicProjects();
+
+
 }
-
-
-}); // CLOSE PROJECT LOOP
-
-  } catch (error) {
-    container.textContent =
-      "Our projects could not be loaded. Please try again later.";
-  }
-}
-
-loadPublicProjects();
+  
