@@ -1637,7 +1637,6 @@ async function initialiseDashboard() {
     );
     setupBackgroundLogout();
 
-    showLogin();
 
     const { data, error } =
       await supabaseClient.auth.getSession();
