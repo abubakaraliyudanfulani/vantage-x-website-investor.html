@@ -1640,11 +1640,6 @@ async function initialiseDashboard() {
     const { data, error } =
       await supabaseClient.auth.getSession();
 
-    alert(
-  data.session
-    ? "EXISTING SESSION FOUND"
-    : "NO SESSION FOUND"
-);
     if (error) throw error;
 
     if (data.session && data.session.user) {
