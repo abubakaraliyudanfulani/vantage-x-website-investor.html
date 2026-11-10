@@ -156,7 +156,26 @@ async function loadPublicProjects() {
       info.append(viewProject, enquiry);
 
       card.append(image, info);
+      
       container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Public projects error:", error);
+
+    container.textContent =
+      "Project loading failed: " + error.message;
+  }
+}
+
+/* RUN AFTER THE PAGE IS READY */
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", loadPublicProjects);
+} else {
+  loadPublicProjects();
+}
+
     });
 
   } catch (error) {
