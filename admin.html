@@ -1564,6 +1564,29 @@ async function loadInvestors() {
   }
 }
 
+    /* COUNT REGISTERED INVESTORS */
+
+async function loadInvestorCount() {
+  if (!currentAdmin) return;
+
+  const countElement = $("overviewInvestorCount");
+
+  if (!countElement) return;
+
+  try {
+    const { count, error } = await supabaseClient
+      .from("investors")
+      .select("*", { count: "exact", head: true });
+
+    if (error) throw error;
+
+    countElement.textContent = count ?? 0;
+
+  } catch (error) {
+    console.error("Investor count error:", error);
+    countElement.textContent = "—";
+  }
+}
 
 /* ==============================
    DISPLAY INVESTORS
