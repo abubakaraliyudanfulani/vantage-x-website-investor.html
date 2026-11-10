@@ -468,6 +468,21 @@ th {
             <strong id="overviewInvestorCount">—</strong>
           </div>
 
+          <div class="stat">
+  Unpublished Projects
+  <strong id="unpublishedCount">0</strong>
+</div>
+
+<div class="stat">
+  Ongoing Projects
+  <strong id="ongoingCount">0</strong>
+</div>
+
+<div class="stat">
+  Completed Projects
+  <strong id="completedCount">0</strong>
+</div>
+          
         </div>
 
         <div class="panel" style="margin-top:20px">
@@ -1126,8 +1141,17 @@ async function loadProjects() {
 
     $("projectCount").textContent = projects.length;
 
-    $("publishedCount").textContent =
-      projects.filter(project => project.is_published).length;
+$("publishedCount").textContent =
+  projects.filter(project => project.is_published).length;
+
+$("unpublishedCount").textContent =
+  projects.filter(project => !project.is_published).length;
+
+$("ongoingCount").textContent =
+  projects.filter(project => project.status === "Ongoing").length;
+
+$("completedCount").textContent =
+  projects.filter(project => project.status === "Completed").length;
 
     if (!projects.length) {
       list.innerHTML =
