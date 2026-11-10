@@ -168,14 +168,6 @@ async function loadPublicProjects() {
   }
 }
 
-/* RUN AFTER THE PAGE IS READY */
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadPublicProjects);
-} else {
-  loadPublicProjects();
-}
-
     });
 
   } catch (error) {
