@@ -1628,9 +1628,9 @@ async function initialiseDashboard() {
       SUPABASE_ANON_KEY,
       {
         auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: false
+  persistSession: false,
+  autoRefreshToken: true,
+  detectSessionInUrl: false
         }
       }
     );
