@@ -1,15 +1,19 @@
 
+/* =====================================
+   VANTAGE X — WEBSITE FUNCTIONS
+===================================== */
+
+// MOBILE NAVIGATION AND COPYRIGHT
+
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menuToggle");
   const navigation = document.getElementById("navigation");
 
-  // Mobile navigation
   if (menuToggle && navigation) {
     menuToggle.addEventListener("click", function () {
       navigation.classList.toggle("active");
     });
 
-    // Close menu after selecting a link
     navigation.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         navigation.classList.remove("active");
@@ -17,34 +21,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Automatically update copyright year
   const year = document.getElementById("year");
 
   if (year) {
     year.textContent = new Date().getFullYear();
   }
 
-  // Reveal sections smoothly when scrolling
+  // SCROLL ANIMATIONS
+
   const sections = document.querySelectorAll(
     ".section, .service-card, .property-card"
   );
 
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
     sections.forEach(function (section) {
       observer.observe(section);
     });
   }
 });
-
 
 
 /* =====================================
@@ -56,7 +62,8 @@ async function loadPublicProjects() {
 
   if (!container) return;
 
-  const supabaseUrl = "https://hwpxxbscoscumkmoqjgs.supabase.co";
+  const supabaseUrl =
+    "https://hwpxxbscoscumkmoqjgs.supabase.co";
 
   const publishableKey =
     "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
@@ -78,7 +85,13 @@ async function loadPublicProjects() {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error("Supabase error " + response.status + ": " + errorText);
+
+      throw new Error(
+        "Supabase error " +
+        response.status +
+        ": " +
+        errorText
+      );
     }
 
     const projects = await response.json();
@@ -86,16 +99,22 @@ async function loadPublicProjects() {
     container.innerHTML = "";
 
     if (!projects.length) {
-      container.textContent = "No published projects are available.";
+      container.textContent =
+        "No published projects are available.";
       return;
     }
 
-    projects.forEach(function(project) {
+    projects.forEach(function (project) {
       const card = document.createElement("article");
       card.className = "property-card";
 
+      // PROJECT IMAGE
+
       const image = document.createElement("img");
-      image.alt = project.project_name || "VANTAGE X project";
+
+      image.alt =
+        project.project_name || "VANTAGE X project";
+
       image.style.width = "100%";
       image.style.height = "220px";
       image.style.objectFit = "cover";
@@ -105,11 +124,14 @@ async function loadPublicProjects() {
         image.src = project.cover_image;
       }
 
+      // PROJECT INFORMATION
+
       const info = document.createElement("div");
       info.className = "property-info";
 
       const category = document.createElement("span");
       category.className = "service-number";
+
       category.textContent =
         (project.category || "PROPERTY") +
         " / " +
@@ -119,21 +141,53 @@ async function loadPublicProjects() {
       title.textContent = project.project_name;
 
       const description = document.createElement("p");
+
       description.textContent =
-        project.description || "Contact us for more information.";
+        project.description ||
+        "Contact us for more information.";
 
       const location = document.createElement("p");
+
       location.textContent =
-        "Location: " + (project.location || "Contact us");
+        "Location: " +
+        (project.location || "Contact us");
+
+      // PROJECT PRICE
+
+      info.append(
+        category,
+        title,
+        description,
+        location
+      );
+
+      if (project.price) {
+        const price = document.createElement("p");
+
+        price.textContent = "Price: " + project.price;
+
+        info.appendChild(price);
+      }
+
+      // VIEW PROJECT DETAILS
 
       const viewProject = document.createElement("a");
+
       viewProject.className = "service-link";
+
       viewProject.href =
-        "project.html?id=" + encodeURIComponent(project.id);
-      viewProject.textContent = "VIEW PROJECT DETAILS →";
+        "project.html?id=" +
+        encodeURIComponent(project.id);
+
+      viewProject.textContent =
+        "VIEW PROJECT DETAILS →";
+
+      // WHATSAPP ENQUIRY
 
       const enquiry = document.createElement("a");
+
       enquiry.className = "service-link";
+
       enquiry.href =
         "https://wa.me/2347084125531?text=" +
         encodeURIComponent(
@@ -143,20 +197,14 @@ async function loadPublicProjects() {
 
       enquiry.target = "_blank";
       enquiry.rel = "noopener noreferrer";
-      enquiry.textContent = "ENQUIRE ON WHATSAPP →";
 
-      info.append(category, title, description, location);
-
-      if (project.price) {
-        const price = document.createElement("p");
-        price.textContent = "Price: " + project.price;
-        info.appendChild(price);
-      }
+      enquiry.textContent =
+        "ENQUIRE ON WHATSAPP →";
 
       info.append(viewProject, enquiry);
 
       card.append(image, info);
-      
+
       container.appendChild(card);
     });
 
@@ -168,23 +216,16 @@ async function loadPublicProjects() {
   }
 }
 
-    });
 
-  } catch (error) {
-    console.error("Public projects error:", error);
-
-    container.textContent =
-      "Project loading failed: " + error.message;
-  }
-}
-
-/* RUN AFTER THE PAGE IS READY */
+/* =====================================
+   RUN PUBLIC PROJECTS
+===================================== */
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadPublicProjects);
+  document.addEventListener(
+    "DOMContentLoaded",
+    loadPublicProjects
+  );
 } else {
   loadPublicProjects();
-
-
 }
-  
