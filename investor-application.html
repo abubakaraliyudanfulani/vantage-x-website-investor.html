@@ -742,23 +742,28 @@
 
       y += 18;
 
-      /* WATERMARK */
+            /* REPEATED COMPANY WATERMARK */
 
       doc.saveGraphicsState();
 
       doc.setTextColor(242, 238, 230);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(29);
+      doc.setFontSize(18);
 
-      doc.text(
-        "VANTAGE X GROUP LTD",
-        pageWidth / 2,
-        155,
-        {
-          align: "center",
-          angle: 35
+      for (let row = 0; row < 5; row++) {
+        for (let col = 0; col < 2; col++) {
+
+          doc.text(
+            "VANTAGE X GROUP LTD",
+            35 + (col * 105),
+            75 + (row * 48),
+            {
+              angle: 35
+            }
+          );
+
         }
-      );
+      }
 
       doc.restoreGraphicsState();
 
@@ -829,6 +834,15 @@
 
       addField(
         "Phone Number",
+              addField(
+        "Investor Type",
+        application.investor_type || "Not provided"
+      );
+
+      addField(
+        "Proposed Investment Amount",
+        application.proposed_investment_amount || "Not specified"
+      );
         application.phone
       );
 
