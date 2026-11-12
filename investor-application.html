@@ -900,6 +900,7 @@
       applicationForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
+        applicationMessage.style.display = "block";
 
         submitButton.disabled = true;
         submitButton.textContent = "SUBMITTING APPLICATION...";
