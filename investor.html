@@ -10,293 +10,315 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --navy: #091725;
-      --navy-light: #122638;
+      --navy-light: #142b40;
       --gold: #c5a36a;
       --gold-light: #e1c795;
       --white: #ffffff;
-      --muted: #aab4be;
+      --background: #f3f5f7;
+      --text: #182838;
+      --muted: #71808e;
+      --border: #dfe4e9;
+      --success: #246b3b;
+      --danger: #a52c2c;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
       min-height: 100vh;
+      background: var(--background);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
       display: flex;
       flex-direction: column;
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 20px 7%;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-
-    .brand-logo img {
-      display: block;
-      width: 120px;
-      max-width: 35vw;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .back-link {
-      color: var(--gold-light);
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    main {
-      flex: 1;
-      width: 92%;
-      max-width: 1050px;
-      margin: 55px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .portal-layout {
+    .site-header {
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 430px;
-      gap: 55px;
-      align-items: center;
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      padding: 25px 18px;
+      text-align: center;
     }
 
-    .welcome-content .eyebrow {
-      color: var(--gold);
+    .company-name {
+      color: var(--gold-light);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(21px, 5vw, 31px);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+    }
+
+    .company-descriptor {
+      margin-top: 5px;
+      color: #ffffff;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 4px;
-      margin-bottom: 18px;
+      letter-spacing: 5px;
     }
 
-    .welcome-content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1.15;
-      font-weight: 600;
-      margin-bottom: 20px;
+    .company-tagline {
+      margin-top: 12px;
+      color: #d8e0e7;
+      font-size: 12px;
+      letter-spacing: .3px;
     }
 
-    .welcome-content h1 span {
-      color: var(--gold-light);
+    .header-accent {
+      width: 48px;
+      height: 2px;
+      margin: 16px auto 0;
+      background: var(--gold);
     }
 
-    .welcome-content p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.9;
-      max-width: 520px;
-    }
-
-    .company-contact {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,.12);
-    }
-
-    .company-contact strong {
-      display: block;
-      color: var(--gold-light);
-      font-size: 13px;
-      margin-bottom: 7px;
-      letter-spacing: 1px;
-    }
-
-    .company-contact a {
-      color: var(--muted);
-      font-size: 13px;
-      text-decoration: none;
-    }
-
-    .login-card {
+    .main-content {
+      flex: 1;
       width: 100%;
-      padding: 35px 30px;
-      background: var(--navy-light);
-      border: 1px solid rgba(197,163,106,.4);
-      border-radius: 9px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 45px 15px;
     }
 
-    .login-card h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold-light);
+    .portal-card {
+      width: 100%;
+      max-width: 465px;
+      padding: 35px;
+      background: var(--white);
+      border: 1px solid #e7eaed;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(9, 23, 37, .08);
+    }
+
+    .portal-heading {
+      margin-bottom: 26px;
+      text-align: center;
+    }
+
+    .portal-heading h1 {
+      color: var(--navy);
+      font-family: "Playfair Display", serif;
       font-size: 27px;
-      margin-bottom: 10px;
+      font-weight: 600;
     }
 
-    .card-description {
+    .portal-heading p {
+      margin-top: 9px;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
+    }
+
+    .portal-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
       margin-bottom: 27px;
+      padding: 5px;
+      background: #f0f2f4;
+      border-radius: 5px;
     }
 
-    label {
-      display: block;
-      color: var(--white);
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    input {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255,255,255,.17);
-      border-radius: 4px;
-      background: var(--navy);
-      color: var(--white);
-      font: inherit;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: var(--gold);
-    }
-
-    .portal-button {
-      display: block;
-      width: 100%;
-      padding: 15px;
+    .tab-button {
+      padding: 12px 8px;
       border: none;
       border-radius: 4px;
-      background: var(--gold);
-      color: var(--navy);
+      background: transparent;
+      color: #687582;
+      font-family: inherit;
       font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .tab-button.active {
+      background: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 2px 7px rgba(9, 23, 37, .15);
+    }
+
+    .auth-panel {
+      display: none;
+    }
+
+    .auth-panel.active {
+      display: block;
+    }
+
+    .form-heading {
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .form-description {
+      margin-bottom: 23px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .form-group input {
+      display: block;
+      width: 100%;
+      height: 48px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      outline: none;
+      background: #ffffff;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .form-group input::placeholder {
+      color: #9aa5ae;
+    }
+
+    .form-group input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(197, 163, 106, .12);
+    }
+
+    .password-input {
+      padding-right: 75px !important;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--navy-light);
+      font-family: inherit;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
     }
 
-    .portal-button:hover {
-      background: var(--gold-light);
+    .forgot-password-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -7px;
+      margin-bottom: 20px;
     }
 
-    .portal-button:disabled {
-      opacity: .6;
+    .text-link {
+      border: none;
+      background: transparent;
+      color: #8c6b36;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      display: block;
+      width: 100%;
+      min-height: 49px;
+      padding: 14px;
+      border: none;
+      border-radius: 4px;
+      background: var(--navy);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .primary-button:hover {
+      background: var(--navy-light);
+    }
+
+    .primary-button:disabled {
+      opacity: .55;
       cursor: not-allowed;
     }
 
-    .register-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 25px 0;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .register-divider::before,
-    .register-divider::after {
-      content: "";
-      height: 1px;
-      flex: 1;
-      background: rgba(255,255,255,.13);
-    }
-
-    .register-button {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--gold);
-      border-radius: 4px;
-      color: var(--gold-light);
-      text-align: center;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    .register-button:hover {
-      background: rgba(197,163,106,.12);
-    }
-
-    .message {
-      display: none;
-      margin-top: 18px;
-      padding: 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .message.error {
-      display: block;
-      color: #ffb5b5;
-      background: rgba(200,60,60,.12);
-      border: 1px solid rgba(200,60,60,.35);
-    }
-
     .security-note {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 22px;
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.7;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    footer {
-      padding: 25px 15px;
-      border-top: 1px solid rgba(255,255,255,.1);
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 2;
+      font-size: 10px;
       text-align: center;
     }
 
-    @media (max-width: 800px) {
-      main {
-        margin: 35px auto;
-      }
-
-      .portal-layout {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        max-width: 500px;
-      }
-
-      .welcome-content {
-        text-align: center;
-      }
-
-      .welcome-content p {
-        margin: auto;
-      }
-
-      .company-contact {
-        margin-top: 20px;
-      }
+    .security-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4b9a68;
     }
 
-    @media (max-width: 480px) {
-      header {
-        padding: 17px 5%;
+    .site-footer {
+      padding: 20px 15px;
+      background: var(--navy);
+      color: #d5dce3;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    .site-footer strong {
+      color: var(--gold-light);
+      letter-spacing: .5px;
+    }
+
+    @media (max-width: 520px) {
+      .main-content {
+        padding: 27px 12px;
       }
 
-      .login-card {
+      .portal-card {
         padding: 27px 20px;
       }
 
-      main {
-        width: 90%;
+      .portal-heading h1 {
+        font-size: 24px;
+      }
+
+      .company-descriptor {
+        letter-spacing: 3px;
       }
     }
   </style>
@@ -304,141 +326,861 @@
 
 <body>
 
-  <header>
-    <div class="brand-logo">
-      <img src="vantage-x-logo.png"
-           alt="VANTAGE X GROUP LTD Logo">
+  <header class="site-header">
+    <div class="company-name">
+      VANTAGE X GROUP LTD
     </div>
 
-    <a href="index.html" class="back-link">
-      ← Back to Website
-    </a>
+    <div class="company-descriptor">
+      ESTATES &amp; CO.
+    </div>
+
+    <p class="company-tagline">
+      Building Value. Creating Opportunities.
+    </p>
+
+    <div class="header-accent"></div>
   </header>
 
-  <main>
-    <div class="portal-layout">
+  <main class="main-content">
 
-      <section class="welcome-content">
+    <section class="portal-card">
 
-        <div class="eyebrow">
-          PRIVATE INVESTOR ACCESS
-        </div>
-
-        <h1>
-          Welcome to<br>
-          <span>Investor Portal</span>
-        </h1>
-
+      <div class="portal-heading">
+        <h1>Investor Portal</h1>
         <p>
-          Access the investor services of VANTAGE X GROUP LTD.
-          Existing investors can securely sign in, while new
-          applicants can begin their registration process.
+          Secure access to your VANTAGE X investor account.
+          Register or sign in to continue.
         </p>
+      </div>
 
-        <div class="company-contact">
-          <strong>VANTAGE X GROUP LTD</strong>
-          <a href="mailto:vantagexgroupltd@gmail.com">
-            vantagexgroupltd@gmail.com
-          </a>
-        </div>
+      <div class="portal-tabs">
+        <button
+          type="button"
+          class="tab-button active"
+          id="loginTab"
+        >
+          SIGN IN
+        </button>
 
-      </section>
+        <button
+          type="button"
+          class="tab-button"
+          id="registerTab"
+        >
+          REGISTER
+        </button>
+      </div>
 
-      <section class="login-card">
+      <section
+        class="auth-panel active"
+        id="loginPanel"
+      >
 
-        <h2>Investor Sign In</h2>
+        <h2 class="form-heading">
+          Welcome Back
+        </h2>
 
-        <p class="card-description">
-          Already registered? Enter your account details
-          to access your private investor dashboard.
+        <p class="form-description">
+          Enter your registered email address and password
+          to access your investor account.
         </p>
 
         <form id="loginForm">
 
-          <label for="email">Email Address</label>
+          <div class="form-group">
+            <label for="loginEmail">
+              EMAIL ADDRESS
+            </label>
 
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter your registered email"
-            autocomplete="username"
-            required
-          >
+            <input
+              type="email"
+              id="loginEmail"
+              name="email"
+              placeholder="Enter your email address"
+              autocomplete="email"
+              required
+            >
+          </div>
 
-          <label for="password">Password</label>
+          <div class="form-group">
+            <label for="loginPassword">
+              PASSWORD
+            </label>
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            required
-          >
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                class="password-input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="loginPassword"
+              >
+                SHOW
+              </button>
+            </div>
+          </div>
+
+          <div class="forgot-password-row">
+            <button
+              type="button"
+              class="text-link"
+              id="forgotPasswordButton"
+            >
+              Forgot password?
+            </button>
+          </div>
 
           <button
-            class="portal-button"
-            id="loginButton"
             type="submit"
+            class="primary-button"
+            id="loginButton"
           >
-            SIGN IN
+            SIGN IN TO YOUR ACCOUNT
           </button>
 
         </form>
 
-        <div id="loginMessage" class="message"></div>
+            </section>
 
-        <div class="register-divider">
-          NEW TO VANTAGE X?
-        </div>
+      <section
+        class="auth-panel"
+        id="registerPanel"
+      >
 
-        <a
-          href="investor-application.html"
-          class="register-button"
-        >
-          REGISTER AS A NEW INVESTOR
-        </a>
+        <h2 class="form-heading">
+          Create Your Account
+        </h2>
 
-        <p class="security-note">
-          Investor account access is reserved for approved
-          and authorised applicants.
+        <p class="form-description">
+          New to VANTAGE X? Register your account to begin
+          your investor application.
+        </p>
+
+        <form id="registerForm">
+
+          <div class="form-group">
+            <label for="registerFullName">
+              FULL NAME
+            </label>
+
+            <input
+              type="text"
+              id="registerFullName"
+              name="full_name"
+              placeholder="Enter your full legal name"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">
+              EMAIL ADDRESS
+            </label>
+
+            <input
+              type="email"
+              id="registerEmail"
+              name="email"
+              placeholder="Enter your active email address"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">
+              CREATE PASSWORD
+            </label>
+
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="registerPassword"
+                name="password"
+                class="password-input"
+                placeholder="Create a secure password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+              >
+
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="registerPassword"
+              >
+                SHOW
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">
+              CONFIRM PASSWORD
+            </label>
+
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirm_password"
+                class="password-input"
+                placeholder="Enter your password again"
+                autocomplete="new-password"
+                minlength="8"
+                required
+              >
+
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="confirmPassword"
+              >
+                SHOW
+              </button>
+            </div>
+          </div>
+
+          <p class="form-description">
+            Your password must contain at least 8 characters.
+            Keep it private and do not share it with anyone.
+          </p>
+
+          <button
+            type="submit"
+            class="primary-button"
+            id="registerButton"
+          >
+            CREATE INVESTOR ACCOUNT
+          </button>
+
+        </form>
+
+      </section>
+
+      <section
+        class="auth-panel"
+        id="forgotPasswordPanel"
+      >
+
+        <h2 class="form-heading">
+          Reset Your Password
+        </h2>
+
+        <p class="form-description">
+          Enter the email address linked to your account.
+          We will send you a password reset link.
+        </p>
+
+        <form id="forgotPasswordForm">
+
+          <div class="form-group">
+            <label for="resetEmail">
+              EMAIL ADDRESS
+            </label>
+
+            <input
+              type="email"
+              id="resetEmail"
+              name="email"
+              placeholder="Enter your registered email"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="primary-button"
+            id="resetPasswordButton"
+          >
+            SEND PASSWORD RESET LINK
+          </button>
+
+        </form>
+
+        <p style="text-align:center; margin-top:18px;">
+          <button
+            type="button"
+            class="text-link"
+            id="backToLoginButton"
+          >
+            Back to Sign In
+          </button>
         </p>
 
       </section>
 
-    </div>
+      <div
+        id="authMessage"
+        class="message"
+        role="status"
+        aria-live="polite"
+        style="display:none; margin-top:20px; padding:14px; border-radius:4px; font-size:12px; line-height:1.8;"
+      ></div>
+
+      <div class="security-note">
+        <span class="security-dot"></span>
+        SECURE INVESTOR ACCESS
+      </div>
+
+    </section>
+
   </main>
 
-  <footer>
-    © <span id="year"></span> VANTAGE X GROUP LTD. All Rights Reserved.
+  <footer class="site-footer">
+    <strong>VANTAGE X GROUP LTD — ESTATES &amp; CO.</strong>
     <br>
     Building Value. Creating Opportunities.
     <br>
-    Kano State, Nigeria.
+    Kano State, Nigeria
+    <br>
+    © <span id="year"></span> VANTAGE X GROUP LTD.
+    All rights reserved.
   </footer>
 
+  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    "use strict";
+
+    // ==========================================
+    // VANTAGE X GROUP LTD
+    // SUPABASE AUTHENTICATION CONFIGURATION
+    // ==========================================
 
     const SUPABASE_URL =
       "https://hwpxxbscoscumkmoqjgs.supabase.co";
 
     const SUPABASE_KEY =
-      "sb_publishable_AO9n1jSq-xCpG21VhpZkQ_n4zNpMuv";
+      "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
 
-    const supabaseClient = supabase.createClient(
+    const PORTAL_URL =
+      "https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/investor.html";
+
+    const APPLICATION_URL =
+      "https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/investor-application.html";
+
+    const DASHBOARD_URL =
+      "https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/investor-dashboard.html";
+
+    const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY,
       {
         auth: {
           persistSession: true,
           autoRefreshToken: true,
-          detectSessionInUrl: false
+          detectSessionInUrl: true
         }
       }
     );
+
+    // ==========================================
+    // PAGE ELEMENTS
+    // ==========================================
+
+    const loginTab =
+      document.getElementById("loginTab");
+
+    const registerTab =
+      document.getElementById("registerTab");
+
+    const loginPanel =
+      document.getElementById("loginPanel");
+
+    const registerPanel =
+      document.getElementById("registerPanel");
+
+    const forgotPasswordPanel =
+      document.getElementById("forgotPasswordPanel");
+
+    const authMessage =
+      document.getElementById("authMessage");
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // ==========================================
+    // MESSAGE DISPLAY
+    // ==========================================
+
+    function showAuthMessage(type, message) {
+      authMessage.style.display = "block";
+      authMessage.textContent = message;
+
+      if (type === "success") {
+        authMessage.style.background = "#edf8f0";
+        authMessage.style.border = "1px solid #b7dfc1";
+        authMessage.style.color = "#246b3b";
+      } else if (type === "error") {
+        authMessage.style.background = "#fff0f0";
+        authMessage.style.border = "1px solid #edc1c1";
+        authMessage.style.color = "#9b2929";
+      } else {
+        authMessage.style.background = "#f0f5fa";
+        authMessage.style.border = "1px solid #cbd8e5";
+        authMessage.style.color = "#294b68";
+      }
+    }
+
+    function clearAuthMessage() {
+      authMessage.style.display = "none";
+      authMessage.textContent = "";
+    }
+
+    // ==========================================
+    // SWITCH BETWEEN PORTAL PANELS
+    // ==========================================
+
+    function showPanel(panelName) {
+      loginPanel.classList.remove("active");
+      registerPanel.classList.remove("active");
+      forgotPasswordPanel.classList.remove("active");
+
+      loginTab.classList.remove("active");
+      registerTab.classList.remove("active");
+
+      if (panelName === "login") {
+        loginPanel.classList.add("active");
+        loginTab.classList.add("active");
+      }
+
+      if (panelName === "register") {
+        registerPanel.classList.add("active");
+        registerTab.classList.add("active");
+      }
+
+      if (panelName === "forgot") {
+        forgotPasswordPanel.classList.add("active");
+      }
+
+      clearAuthMessage();
+    }
+
+    // ==========================================
+    // PASSWORD SHOW / HIDE
+    // ==========================================
+
+    document.addEventListener("click", function (event) {
+      const button = event.target.closest(".toggle-password");
+
+      if (!button) {
+        return;
+      }
+
+      const inputId = button.getAttribute("data-target");
+      const passwordInput = document.getElementById(inputId);
+
+      if (!passwordInput) {
+        return;
+      }
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        button.textContent = "HIDE";
+      } else {
+        passwordInput.type = "password";
+        button.textContent = "SHOW";
+      }
+    });
+
+    // ==========================================
+    // BUTTON LOADING STATE
+    // ==========================================
+
+    function setButtonLoading(button, isLoading, loadingText, normalText) {
+      button.disabled = isLoading;
+
+      button.textContent = isLoading
+        ? loadingText
+        : normalText;
+    }
+
+    // ==========================================
+    // PASSWORD RECOVERY PANEL
+    // ==========================================
+
+    const recoveryPanel = document.createElement("section");
+
+    recoveryPanel.className = "auth-panel";
+    recoveryPanel.id = "passwordRecoveryPanel";
+
+    recoveryPanel.innerHTML = `
+      <h2 class="form-heading">
+        Create a New Password
+      </h2>
+
+      <p class="form-description">
+        Enter and confirm your new password to secure your account.
+      </p>
+
+      <form id="newPasswordForm">
+
+        <div class="form-group">
+          <label for="newPassword">
+            NEW PASSWORD
+          </label>
+
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="newPassword"
+              class="password-input"
+              placeholder="Enter your new password"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="newPassword"
+            >
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmNewPassword">
+            CONFIRM NEW PASSWORD
+          </label>
+
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="confirmNewPassword"
+              class="password-input"
+              placeholder="Enter your new password again"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="confirmNewPassword"
+            >
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="primary-button"
+          id="saveNewPasswordButton"
+        >
+          UPDATE PASSWORD
+        </button>
+
+      </form>
+    `;
+
+    forgotPasswordPanel.insertAdjacentElement(
+      "afterend",
+      recoveryPanel
+    );
+
+    // ==========================================
+    // URL AND SESSION HELPERS
+    // ==========================================
+
+    function getPortalParameters() {
+      return new URLSearchParams(window.location.search);
+    }
+
+    async function getCurrentSession() {
+      const { data, error } =
+        await supabaseClient.auth.getSession();
+
+      if (error) {
+        throw error;
+      }
+
+      return data.session;
+    }
+
+    // ==========================================
+    // EMAIL VERIFICATION RETURN HANDLING
+    // ==========================================
+
+    async function handleEmailVerification() {
+      const params = getPortalParameters();
+
+      if (params.get("verified") !== "1") {
+        return false;
+      }
+
+      try {
+        const session = await getCurrentSession();
+
+        if (!session || !session.user.email_confirmed_at) {
+          showAuthMessage(
+            "error",
+            "Your email verification could not be confirmed. Please use the verification link sent to your email again."
+          );
+
+          return true;
+        }
+
+        showAuthMessage(
+          "success",
+          "Your email address has been verified successfully. You can now continue to your investor application."
+        );
+
+        window.history.replaceState(
+          {},
+          document.title,
+          PORTAL_URL
+        );
+
+        setTimeout(function () {
+          window.location.href = APPLICATION_URL;
+        }, 2500);
+
+        return true;
+
+      } catch (error) {
+        console.error(
+          "Email verification error:",
+          error
+        );
+
+        showAuthMessage(
+          "error",
+          "We could not complete email verification. Please try again."
+        );
+
+        return true;
+      }
+    }
+
+    // ==========================================
+    // PASSWORD RESET RETURN HANDLING
+    // ==========================================
+
+    async function handlePasswordRecovery() {
+      const params = getPortalParameters();
+      const hash = window.location.hash;
+
+      const isRecovery =
+        params.get("type") === "recovery" ||
+        hash.includes("type=recovery");
+
+      if (!isRecovery) {
+        return false;
+      }
+
+      try {
+        const session = await getCurrentSession();
+
+        if (!session) {
+          showAuthMessage(
+            "error",
+            "Your password reset link is invalid or has expired. Please request another reset link."
+          );
+
+          return true;
+        }
+
+        loginPanel.classList.remove("active");
+        registerPanel.classList.remove("active");
+        forgotPasswordPanel.classList.remove("active");
+        recoveryPanel.classList.add("active");
+
+        loginTab.classList.remove("active");
+        registerTab.classList.remove("active");
+
+        clearAuthMessage();
+
+        return true;
+
+      } catch (error) {
+        console.error(
+          "Password recovery error:",
+          error
+        );
+
+        showAuthMessage(
+          "error",
+          "Unable to verify your password reset link. Please request another one."
+        );
+
+        return true;
+      }
+    }
+            </script>
+
+  
+  <script>
+    // ==========================================
+    // TAB BUTTON EVENTS
+    // ==========================================
+
+    loginTab.addEventListener("click", function () {
+      showPanel("login");
+    });
+
+    registerTab.addEventListener("click", function () {
+      showPanel("register");
+    });
+
+    document
+      .getElementById("forgotPasswordButton")
+      .addEventListener("click", function () {
+        showPanel("forgot");
+      });
+
+    document
+      .getElementById("backToLoginButton")
+      .addEventListener("click", function () {
+        showPanel("login");
+      });
+
+    // ==========================================
+    // NEW INVESTOR REGISTRATION
+    // ==========================================
+
+    const registerForm =
+      document.getElementById("registerForm");
+
+    const registerButton =
+      document.getElementById("registerButton");
+
+    registerForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+        clearAuthMessage();
+
+        const fullName =
+          document.getElementById("registerFullName")
+            .value.trim();
+
+        const email =
+          document.getElementById("registerEmail")
+            .value.trim().toLowerCase();
+
+        const password =
+          document.getElementById("registerPassword")
+            .value;
+
+        const confirmPassword =
+          document.getElementById("confirmPassword")
+            .value;
+
+        if (fullName.length < 2) {
+          showAuthMessage(
+            "error",
+            "Please enter your full name."
+          );
+          return;
+        }
+
+        if (password.length < 8) {
+          showAuthMessage(
+            "error",
+            "Your password must contain at least 8 characters."
+          );
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showAuthMessage(
+            "error",
+            "Your passwords do not match. Please check and try again."
+          );
+          return;
+        }
+
+        setButtonLoading(
+          registerButton,
+          true,
+          "CREATING ACCOUNT...",
+          "CREATE INVESTOR ACCOUNT"
+        );
+
+        try {
+          const { data, error } =
+            await supabaseClient.auth.signUp({
+              email: email,
+              password: password,
+
+              options: {
+                data: {
+                  full_name: fullName,
+                  account_type: "investor"
+                },
+
+                emailRedirectTo:
+                  PORTAL_URL + "?verified=1"
+              }
+            });
+
+          if (error) {
+            throw error;
+          }
+
+          if (data.session) {
+            showAuthMessage(
+              "success",
+              "Your account has been created and your email is verified. You will now continue to the investor application."
+            );
+
+            setTimeout(function () {
+              window.location.href = APPLICATION_URL;
+            }, 2000);
+
+          } else {
+            showAuthMessage(
+              "success",
+              "Your registration has been received. Please check your email inbox for the VANTAGE X verification link. Also check your spam or junk folder. Verify your email before continuing to the investor application."
+            );
+
+            registerForm.reset();
+          }
+
+        } catch (error) {
+          console.error(
+            "Investor registration error:",
+            error
+          );
+
+          showAuthMessage(
+            "error",
+            error.message ||
+            "Account registration failed. Please try again."
+          );
+
+        } finally {
+          setButtonLoading(
+            registerButton,
+            false,
+            "CREATING ACCOUNT...",
+            "CREATE INVESTOR ACCOUNT"
+          );
+        }
+      }
+    );
+
+    // ==========================================
+    // EXISTING INVESTOR SIGN-IN
+    // ==========================================
 
     const loginForm =
       document.getElementById("loginForm");
@@ -446,57 +1188,290 @@
     const loginButton =
       document.getElementById("loginButton");
 
-    const loginMessage =
-      document.getElementById("loginMessage");
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+        clearAuthMessage();
 
-    loginForm.addEventListener("submit", async function(event) {
-      event.preventDefault();
-
-      loginButton.disabled = true;
-      loginButton.textContent = "SIGNING IN...";
-
-      loginMessage.className = "message";
-      loginMessage.textContent = "";
-
-      try {
         const email =
-          document.getElementById("email").value.trim();
+          document.getElementById("loginEmail")
+            .value.trim().toLowerCase();
 
         const password =
-          document.getElementById("password").value;
+          document.getElementById("loginPassword")
+            .value;
 
-        const { data, error } =
-          await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
+        setButtonLoading(
+          loginButton,
+          true,
+          "SIGNING IN...",
+          "SIGN IN TO YOUR ACCOUNT"
+        );
 
-        if (error) throw error;
+        try {
+          const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
 
-        if (!data.session) {
-          throw new Error("A valid login session was not created.");
+          if (error) {
+            throw error;
+          }
+
+          if (!data.user.email_confirmed_at) {
+            await supabaseClient.auth.signOut();
+
+            throw new Error(
+              "Please verify your email address before signing in."
+            );
+          }
+
+          showAuthMessage(
+            "success",
+            "Sign-in successful. Opening your investor account..."
+          );
+
+          setTimeout(function () {
+            window.location.href = DASHBOARD_URL;
+          }, 1200);
+
+        } catch (error) {
+          console.error(
+            "Investor sign-in error:",
+            error
+          );
+
+          showAuthMessage(
+            "error",
+            error.message ||
+            "Unable to sign in. Please check your details and try again."
+          );
+
+        } finally {
+          setButtonLoading(
+            loginButton,
+            false,
+            "SIGNING IN...",
+            "SIGN IN TO YOUR ACCOUNT"
+          );
+        }
+      }
+    );
+
+    // ==========================================
+    // FORGOT PASSWORD REQUEST
+    // ==========================================
+
+    const forgotPasswordForm =
+      document.getElementById("forgotPasswordForm");
+
+    const resetPasswordButton =
+      document.getElementById("resetPasswordButton");
+
+    forgotPasswordForm.addEventListener(
+      "submit",
+      async function (event) {
+        event.preventDefault();
+        clearAuthMessage();
+
+        const email =
+          document.getElementById("resetEmail")
+            .value.trim().toLowerCase();
+
+        setButtonLoading(
+          resetPasswordButton,
+          true,
+          "SENDING EMAIL...",
+          "SEND PASSWORD RESET LINK"
+        );
+
+        try {
+          const { error } =
+            await supabaseClient.auth.resetPasswordForEmail(
+              email,
+              {
+                redirectTo: PORTAL_URL
+              }
+            );
+
+          if (error) {
+            throw error;
+          }
+
+          showAuthMessage(
+            "success",
+            "If an account exists for this email address, a password reset link has been sent. Please check your inbox and spam folder."
+          );
+
+          forgotPasswordForm.reset();
+
+        } catch (error) {
+          console.error(
+            "Password reset request error:",
+            error
+          );
+
+          showAuthMessage(
+            "error",
+            error.message ||
+            "We could not send the password reset email. Please try again."
+          );
+
+        } finally {
+          setButtonLoading(
+            resetPasswordButton,
+            false,
+            "SENDING EMAIL...",
+            "SEND PASSWORD RESET LINK"
+          );
+        }
+      }
+    );
+
+    // ==========================================
+    // SAVE NEW PASSWORD
+    // ==========================================
+
+    recoveryPanel.addEventListener(
+      "submit",
+      async function (event) {
+        if (event.target.id !== "newPasswordForm") {
+          return;
         }
 
-        window.location.href = "investor-dashboard.html";
+        event.preventDefault();
+        clearAuthMessage();
+
+        const newPassword =
+          document.getElementById("newPassword").value;
+
+        const confirmNewPassword =
+          document.getElementById("confirmNewPassword").value;
+
+        const saveButton =
+          document.getElementById("saveNewPasswordButton");
+
+        if (newPassword.length < 8) {
+          showAuthMessage(
+            "error",
+            "Your new password must contain at least 8 characters."
+          );
+          return;
+        }
+
+        if (newPassword !== confirmNewPassword) {
+          showAuthMessage(
+            "error",
+            "The passwords do not match."
+          );
+          return;
+        }
+
+        setButtonLoading(
+          saveButton,
+          true,
+          "UPDATING PASSWORD...",
+          "UPDATE PASSWORD"
+        );
+
+        try {
+          const { error } =
+            await supabaseClient.auth.updateUser({
+              password: newPassword
+            });
+
+          if (error) {
+            throw error;
+          }
+
+          showAuthMessage(
+            "success",
+            "Your password has been updated successfully. You can now sign in with your new password."
+          );
+
+          document.getElementById("newPasswordForm").reset();
+
+          await supabaseClient.auth.signOut();
+
+          setTimeout(function () {
+            window.history.replaceState(
+              {},
+              document.title,
+              PORTAL_URL
+            );
+
+            showPanel("login");
+          }, 2500);
+
+        } catch (error) {
+          console.error(
+            "Password update error:",
+            error
+          );
+
+          showAuthMessage(
+            "error",
+            error.message ||
+            "Password update failed. Please request a new reset link."
+          );
+
+        } finally {
+          setButtonLoading(
+            saveButton,
+            false,
+            "UPDATING PASSWORD...",
+            "UPDATE PASSWORD"
+          );
+        }
+      }
+    );
+
+    // ==========================================
+    // CHECK EMAIL VERIFICATION / RECOVERY LINKS
+    // ==========================================
+
+    async function initializeInvestorPortal() {
+      try {
+        const recoveryHandled =
+          await handlePasswordRecovery();
+
+        if (recoveryHandled) {
+          return;
+        }
+
+        const verificationHandled =
+          await handleEmailVerification();
+
+        if (verificationHandled) {
+          return;
+        }
+
+        const session = await getCurrentSession();
+
+        if (session) {
+          showAuthMessage(
+            "info",
+            "You are already signed in. Select Sign In to continue to your investor account."
+          );
+        }
 
       } catch (error) {
-        console.error("Investor sign-in error:", error);
+        console.error(
+          "Portal initialization error:",
+          error
+        );
 
-        loginMessage.className = "message error";
-        loginMessage.textContent =
-          "Sign-in failed. Please check your email and password, or contact the company for assistance.";
-
-        loginButton.disabled = false;
-        loginButton.textContent = "SIGN IN";
+        showAuthMessage(
+          "error",
+          "The portal could not verify your current session. Please refresh the page."
+        );
       }
-    });
+    }
 
-    // Restore an existing investor session.
-    supabaseClient.auth.getSession().then(function(result) {
-      if (result.data.session) {
-        window.location.href = "investor-dashboard.html";
-      }
-    });
+    initializeInvestorPortal();
+
   </script>
 
 </body>
