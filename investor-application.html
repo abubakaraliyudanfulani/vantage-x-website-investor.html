@@ -511,6 +511,88 @@
     );
 
     const applicationForm =
+  document.getElementById("investorApplicationForm");
+    
+    // ==========================================
+    // VERIFY AUTHENTICATED INVESTOR
+    // ==========================================
+
+    let currentInvestor = null;
+
+    const investorSessionCheck = (async function () {
+      try {
+        const { data, error } =
+          await supabaseClient.auth.getSession();
+
+        if (error) {
+          throw error;
+        }
+
+        const session = data.session;
+
+        if (
+          !session ||
+          !session.user ||
+          !session.user.email_confirmed_at
+        ) {
+          submitButton.disabled = true;
+
+          showMessage(
+            "error",
+            "Please sign in with your verified investor account before submitting an application. Redirecting to the investor portal..."
+          );
+
+          setTimeout(function () {
+            window.location.replace("investor.html");
+          }, 2500);
+
+          return null;
+        }
+
+        currentInvestor = session.user;
+
+        // Automatically fill registered details
+        const nameField =
+          document.getElementById("appFullName");
+
+        const emailField =
+          document.getElementById("appEmail");
+
+        if (nameField && !nameField.value) {
+          nameField.value =
+            currentInvestor.user_metadata?.full_name || "";
+        }
+
+        if (emailField && !emailField.value) {
+          emailField.value =
+            currentInvestor.email || "";
+        }
+
+        return currentInvestor;
+
+      } catch (error) {
+        console.error(
+          "Investor authentication error:",
+          error
+        );
+
+        submitButton.disabled = true;
+
+        showMessage(
+          "error",
+          "We could not verify your investor account. Please sign in again."
+        );
+
+        setTimeout(function () {
+          window.location.replace("investor.html");
+        }, 2500);
+
+        return null;
+      }
+    })();
+    
+
+    const applicationForm =
       document.getElementById("investorApplicationForm");
 
     const submitButton =
@@ -530,6 +612,85 @@
       applicationMessage.style.display = "block";
     }
 
+    
+    // ==========================================
+    // VERIFY AUTHENTICATED INVESTOR
+    // ==========================================
+
+    let currentInvestor = null;
+
+    const investorSessionCheck = (async function () {
+      try {
+        const { data, error } =
+          await supabaseClient.auth.getSession();
+
+        if (error) {
+          throw error;
+        }
+
+        const session = data.session;
+
+        if (
+          !session ||
+          !session.user ||
+          !session.user.email_confirmed_at
+        ) {
+          submitButton.disabled = true;
+
+          showMessage(
+            "error",
+            "Please sign in with your verified investor account before submitting an application. Redirecting to the investor portal..."
+          );
+
+          setTimeout(function () {
+            window.location.replace("investor.html");
+          }, 2500);
+
+          return null;
+        }
+
+        currentInvestor = session.user;
+
+        const nameField =
+          document.getElementById("appFullName");
+
+        const emailField =
+          document.getElementById("appEmail");
+
+        if (nameField && !nameField.value) {
+          nameField.value =
+            currentInvestor.user_metadata?.full_name || "";
+        }
+
+        if (emailField && !emailField.value) {
+          emailField.value =
+            currentInvestor.email || "";
+        }
+
+        return currentInvestor;
+
+      } catch (error) {
+        console.error(
+          "Investor authentication error:",
+          error
+        );
+
+        submitButton.disabled = true;
+
+        showMessage(
+          "error",
+          "We could not verify your investor account. Please sign in again."
+        );
+
+        setTimeout(function () {
+          window.location.replace("investor.html");
+        }, 2500);
+
+        return null;
+      }
+    })();
+
+    
     // Create the acknowledgement PDF
     async function downloadAcknowledgement() {
       if (!savedApplication || !savedReference) {
@@ -953,7 +1114,15 @@
         }
 
         try {
-          const applicationId = crypto.randomUUID();
+  const authenticatedInvestor = await investorSessionCheck;
+
+  if (!authenticatedInvestor) {
+    throw new Error(
+      "Your investor account could not be verified. Please sign in again."
+    );
+  }
+
+  const applicationId = crypto.randomUUID();
 
           const reference =
             "VX-" +
@@ -966,14 +1135,15 @@
           const application = {
             id: applicationId,
 
+            user_id: authenticatedInvestor.id,
+            
             full_name:
               document.getElementById("appFullName").value.trim(),
 
             company_name:
               document.getElementById("appCompany").value.trim() || null,
 
-            email:
-              document.getElementById("appEmail").value.trim(),
+            email: authenticatedInvestor.email,
 
             phone:
               document.getElementById("appPhone").value.trim(),
