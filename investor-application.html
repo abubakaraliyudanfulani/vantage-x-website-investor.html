@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>Investor Application | VANTAGE X GROUP LTD</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #091725;
+      --gold: #c5a36a;
+      --gold-light: #e1c795;
+      --muted: #687582;
+      --border: #e3e6e9;
+      --paper: #ffffff;
+      --background: #f1f3f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 25px 12px 45px;
+    }
+
+    .top-navigation {
+      max-width: 850px;
+      margin: 0 auto 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-navigation a {
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .application-sheet {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 45px 55px;
+      background: var(--paper);
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 12px 45px rgba(0,0,0,.07);
+    }
+
+    .application-sheet::before {
+      content: "VANTAGE X GROUP LTD";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      white-space: nowrap;
+      font-size: clamp(25px, 6vw, 55px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(197,163,106,.075);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .letterhead {
+      position: relative;
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .letterhead img {
+      display: block;
+      width: 125px;
+      max-width: 45%;
+      height: auto;
+      max-height: 105px;
+      object-fit: contain;
+      margin: 0 auto 12px;
+    }
+
+    .letterhead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4vw, 29px);
+      letter-spacing: 2px;
+      color: var(--navy);
+    }
+
+    .company-descriptor {
+      margin-top: 5px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .company-email {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .document-title {
+      position: relative;
+      text-align: center;
+      margin: 32px 0;
+    }
+
+    .document-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 9px;
+    }
+
+    .document-title p {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .section-heading {
+      position: relative;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--navy);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin: 28px 0 22px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d9dfe4;
+      border-radius: 3px;
+      background: rgba(255,255,255,.94);
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(197,163,106,.12);
+    }
+
+    textarea {
+      min-height: 125px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .form-notice {
+      position: relative;
+      margin-top: 28px;
+      padding: 16px;
+      border-left: 3px solid var(--gold);
+      background: #f8f8f7;
+      color: #59636d;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .submit-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px;
+      border: none;
+      border-radius: 3px;
+      background: var(--navy);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: #19354c;
+    }
+
+    .submit-button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      position: relative;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .message.success {
+      display: block;
+      background: #edf8f0;
+      border: 1px solid #b7dfc1;
+      color: #246b3b;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      border: 1px solid #edc1c1;
+      color: #9b2929;
+    }
+
+    .document-footer {
+      position: relative;
+      margin-top: 38px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    @media(max-width: 600px) {
+      body {
+        padding: 12px 8px 30px;
+      }
+
+      .application-sheet {
+        padding: 28px 19px;
+      }
+
+      .document-title h2 {
+        font-size: 23px;
+      }
+
+      .letterhead img {
+        width: 105px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="top-navigation">
+    <a href="investor.html">← Back to Investor Portal</a>
+    <a href="index.html">Company Website</a>
+  </nav>
+
+  <main class="application-sheet">
+
+    <!-- COMPANY LETTERHEAD -->
+
+    <header class="letterhead">
+
+      <img
+        src="vantage-x-logo.png"
+        alt="VANTAGE X GROUP LTD Logo"
+      >
+
+      <h1>VANTAGE X GROUP LTD</h1>
+
+      <div class="company-descriptor">
+        ESTATES &amp; CO.
+      </div>
+
+      <p class="tagline">
+        Building Value. Creating Opportunities.
+      </p>
+
+      <a
+        class="company-email"
+        href="mailto:vantagexgroupltd@gmail.com"
+      >
+        vantagexgroupltd@gmail.com
+      </a>
+
+    </header>
+
+    <!-- APPLICATION TITLE -->
+
+    <section class="document-title">
+
+      <h2>Investor Registration Form</h2>
+
+      <p>
+        Official investor application document.
+        Please provide accurate information in the fields below.
+        All applications are subject to company review and approval.
+      </p>
+
+    </section>
+
+    <!-- APPLICATION FORM -->
+
+    <form id="investorApplicationForm">
+
+      <h3 class="section-heading">
+        APPLICANT INFORMATION
+      </h3>
+
+      <div class="form-group">
+        <label for="appFullName">Full Name *</label>
+
+        <input
+          type="text"
+          id="appFullName"
+          name="full_name"
+          placeholder="Enter your full legal name"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="appCompany">
+          Company Name <span class="optional">(Optional)</span>
+        </label>
+
+        <input
+          type="text"
+          id="appCompany"
+          name="company_name"
+          placeholder="Enter your company or organisation name"
+          autocomplete="organization"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="appEmail">Email Address *</label>
+
+        <input
+          type="email"
+          id="appEmail"
+          name="email"
+          placeholder="Enter your active email address"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="appPhone">Phone Number *</label>
+
+        <input
+          type="tel"
+          id="appPhone"
+          name="phone"
+          placeholder="Enter your active phone number"
+          autocomplete="tel"
+          required
+        >
+      </div>
+
+      <h3 class="section-heading">
+        INVESTMENT INFORMATION
+      </h3>
+
+      <div class="form-group">
+        <label for="appInterest">
+          Investment Interest / Enquiry
+        </label>
+
+        <textarea
+          id="appInterest"
+          name="investment_interest"
+          placeholder="Describe the type of investment or property opportunity you are interested in. You may also mention your proposed investment range."
+        ></textarea>
+      </div>
+
+      <div class="form-notice">
+        <strong>IMPORTANT NOTICE</strong><br>
+
+        Submission of this form constitutes an application
+        for consideration only. It does not create an investment
+        agreement, guarantee returns, confirm approval, establish
+        ownership, or constitute evidence of funds or investment
+        allocation. Any investment arrangement will be subject
+        to separate documentation and applicable requirements.
+      </div>
+
+      <button
+        type="submit"
+        class="submit-button"
+        id="submitButton"
+      >
+        SUBMIT INVESTOR APPLICATION
+      </button>
+
+    </form>
+
+    <div
+      id="applicationMessage"
+      class="message"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <footer class="document-footer">
+      VANTAGE X GROUP LTD<br>
+      Building Value. Creating Opportunities.<br>
+      Kano State, Nigeria.<br>
+      © <span id="year"></span> All Rights Reserved.
+    </footer>
+
+  </main>
+
+  <!-- PDF LIBRARY -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- SUPABASE LIBRARY -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    /* SUPABASE CONFIGURATION */
+
+    const SUPABASE_URL =
+      "https://hwpxxbscoscumkmoqjgs.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_AO9n1jSq-xCpG21VhpZkQ_n4zNpMuv";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    /* ELEMENTS */
+
+    const applicationForm =
+      document.getElementById("investorApplicationForm");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const applicationMessage =
+      document.getElementById("applicationMessage");
+
+    /* GENERATE PDF ACKNOWLEDGEMENT */
+
+    async function downloadAcknowledgement(
+      application,
+      reference,
+      submittedAt
+    ) {
+
+      if (!window.jspdf || !window.jspdf.jsPDF) {
+        throw new Error("The PDF library could not be loaded. Please try again.");
+      }
+
+      const { jsPDF } = window.jspdf;
+
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+      });
+
+      const pageWidth = 210;
+      const margin = 18;
+      let y = 18;
+
+      /* COMPANY LOGO */
+
+      try {
+
+        const logo = new Image();
+
+        logo.src = "vantage-x-logo.png";
+
+        await logo.decode();
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = logo.naturalWidth;
+        canvas.height = logo.naturalHeight;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(logo, 0, 0);
+
+        const logoData = canvas.toDataURL("image/png");
+
+        const ratio = logo.naturalWidth / logo.naturalHeight;
+
+        const logoWidth = Math.min(38, 24 * ratio);
+        const logoHeight = logoWidth / ratio;
+
+        doc.addImage(
+          logoData,
+          "PNG",
+          margin,
+          y,
+          logoWidth,
+          logoHeight
+        );
+
+      } catch (logoError) {
+
+        console.warn("PDF logo could not be loaded:", logoError);
+
+      }
+
+      /* COMPANY LETTERHEAD */
+
+      doc.setTextColor(9, 23, 37);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(16);
+
+      doc.text(
+        "VANTAGE X GROUP LTD",
+        pageWidth / 2,
+        23,
+        { align: "center" }
+      );
+
+      doc.setFontSize(8);
+      doc.setTextColor(150, 115, 57);
+
+      doc.text(
+        "ESTATES & CO.",
+        pageWidth / 2,
+        29,
+        { align: "center" }
+      );
+
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(90, 100, 110);
+
+      doc.text(
+        "Building Value. Creating Opportunities.",
+        pageWidth / 2,
+        35,
+        { align: "center" }
+      );
+
+      doc.setFontSize(8);
+
+      doc.text(
+        "vantagexgroupltd@gmail.com",
+        pageWidth / 2,
+        40,
+        { align: "center" }
+      );
+
+      doc.setDrawColor(197, 163, 106);
+      doc.setLineWidth(0.7);
+
+      doc.line(
+        margin,
+        47,
+        pageWidth - margin,
+        47
+      );
+
+      /* DOCUMENT TITLE */
+
+      y = 61;
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(17);
+      doc.setTextColor(9, 23, 37);
+
+      doc.text(
+        "APPLICATION ACKNOWLEDGEMENT",
+        pageWidth / 2,
+        y,
+        { align: "center" }
+      );
+
+      y += 12;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(90, 100, 110);
+
+      doc.text(
+        "Confirmation of receipt of investor application",
+        pageWidth / 2,
+        y,
+        { align: "center" }
+      );
+
+      y += 18;
+
+      /* WATERMARK */
+
+      doc.saveGraphicsState();
+
+      doc.setTextColor(242, 238, 230);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(29);
+
+      doc.text(
+        "VANTAGE X GROUP LTD",
+        pageWidth / 2,
+        155,
+        {
+          align: "center",
+          angle: 35
+        }
+      );
+
+      doc.restoreGraphicsState();
+
+      /* REFERENCE DETAILS */
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(10);
+      doc.setTextColor(9, 23, 37);
+
+      doc.text("APPLICATION DETAILS", margin, y);
+
+      y += 10;
+
+      function addField(label, value) {
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(9);
+        doc.setTextColor(9, 23, 37);
+
+        doc.text(label, margin, y);
+
+        y += 6;
+
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(65, 75, 85);
+
+        const lines = doc.splitTextToSize(
+          String(value || "Not provided"),
+          pageWidth - margin * 2
+        );
+
+        doc.text(lines, margin, y);
+
+        y += lines.length * 5 + 6;
+      }
+
+      addField("Application Reference", reference);
+
+      addField(
+        "Date Submitted",
+        submittedAt.toLocaleString("en-NG", {
+          dateStyle: "long",
+          timeStyle: "short"
+        })
+      );
+
+      addField("Applicant Name", application.full_name);
+
+      addField(
+        "Company / Organisation",
+        application.company_name || "Not provided"
+      );
+
+      addField("Email Address", application.email);
+
+      addField("Phone Number", application.phone);
+
+      addField(
+        "Investment Interest",
+        application.investment_interest || "Not specified"
+      );
+
+      addField("Application Status", "PENDING REVIEW");
+
+      /* ACKNOWLEDGEMENT STATEMENT */
+
+      y += 4;
+
+      if (y > 225) {
+        doc.addPage();
+        y = 25;
+      }
+
+      doc.setDrawColor(197, 163, 106);
+      doc.line(margin, y, pageWidth - margin, y);
+
+      y += 10;
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(10);
+      doc.setTextColor(9, 23, 37);
+
+      doc.text("ACKNOWLEDGEMENT STATEMENT", margin, y);
+
+      y += 8;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(65, 75, 85);
+
+      const statement =
+        "VANTAGE X GROUP LTD acknowledges receipt of the investor application identified above. The application is subject to review and any further communication from the company. This document confirms receipt of an application only. It is not an approval letter, investment agreement, investment certificate, proof of payment, evidence of ownership, guarantee of returns or confirmation of investment allocation.";
+
+      const statementLines = doc.splitTextToSize(
+        statement,
+        pageWidth - margin * 2
+      );
+
+      doc.text(statementLines, margin, y);
+
+      /* PDF FOOTER */
+
+      doc.setFontSize(8);
+      doc.setTextColor(120, 130, 140);
+
+      doc.text(
+        "VANTAGE X GROUP LTD | Kano State, Nigeria",
+        pageWidth / 2,
+        285,
+        { align: "center" }
+      );
+
+      doc.save("VANTAGE-X-Application-Acknowledgement.pdf");
+    }
+
+    /* APPLICATION SUBMISSION */
+
+    applicationForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+        submitButton.disabled = true;
+        submitButton.textContent = "SUBMITTING APPLICATION...";
+
+        applicationMessage.className = "message";
+        applicationMessage.textContent = "";
+
+        try {
+
+          const applicationId = crypto.randomUUID();
+
+          const reference =
+            "VX-" +
+            new Date().getFullYear() +
+            "-" +
+            applicationId.substring(0, 8).toUpperCase();
+
+          const submittedAt = new Date();
+
+          const application = {
+
+            id: applicationId,
+
+            full_name:
+              document.getElementById("appFullName").value.trim(),
+
+            company_name:
+              document.getElementById("appCompany").value.trim() || null,
+
+            email:
+              document.getElementById("appEmail").value.trim(),
+
+            phone:
+              document.getElementById("appPhone").value.trim(),
+
+            investment_interest:
+              document.getElementById("appInterest").value.trim() || null
+
+          };
+
+          const { error } = await supabaseClient
+            .from("investor_applications")
+            .insert([application]);
+
+          if (error) {
+            throw error;
+          }
+
+          applicationMessage.className = "message success";
+
+          applicationMessage.textContent =
+            "Your application has been successfully received. " +
+            "Reference: " + reference +
+            ". Your application is awaiting company review. " +
+            "Your acknowledgement PDF is being prepared.";
+
+          applicationForm.reset();
+
+          /* DOWNLOAD PDF AFTER SUCCESSFUL DATABASE INSERT */
+
+          try {
+
+            await downloadAcknowledgement(
+              application,
+              reference,
+              submittedAt
+            );
+
+            applicationMessage.textContent +=
+              " Your acknowledgement PDF has been downloaded.";
+
+          } catch (pdfError) {
+
+            console.error("PDF generation error:", pdfError);
+
+            applicationMessage.textContent +=
+              " Your application is saved, but the PDF could not be generated. Please try again or contact the company with your reference number: " +
+              reference;
+
+          }
+
+        } catch (error) {
+
+          console.error("Application submission error:", error);
+
+          applicationMessage.className = "message error";
+
+          applicationMessage.textContent =
+            "Application submission failed: " + error.message;
+
+        } finally {
+
+          submitButton.disabled = false;
+
+          submitButton.textContent =
+            "SUBMIT INVESTOR APPLICATION";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
