@@ -10,7 +10,50 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+.application-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
 
+.application-card::before {
+  content: "VANTAGE X GROUP LTD";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: clamp(25px, 6vw, 48px);
+  font-weight: 800;
+  color: rgba(190, 155, 85, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.application-brand {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.application-brand img {
+  width: 130px;
+  max-width: 45%;
+  height: auto;
+  object-fit: contain;
+}
+
+.application-brand h3 {
+  color: var(--gold-light);
+  font-size: 17px;
+  letter-spacing: 2px;
+  margin: 12px 0 5px;
+}
+
+.application-brand p {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
   <style>
     :root {
       --navy: #091725;
@@ -282,6 +325,58 @@
 
     </section>
 
+<section class="portal-card application-card">
+
+  <h2>Investor Registration</h2>
+
+  <p class="card-description">
+    Apply for investor account registration with VANTAGE X GROUP LTD.
+    All applications are subject to review and approval.
+  </p>
+
+  <div class="application-brand">
+    <img src="vantage-x-logo.png"
+         alt="VANTAGE X GROUP LTD Logo">
+    <h3>VANTAGE X GROUP LTD</h3>
+    <p>Building Value. Creating Opportunities.</p>
+  </div>
+
+  <form id="investorApplicationForm">
+
+    <label for="appFullName">Full Name</label>
+    <input type="text" id="appFullName"
+           placeholder="Enter your full name" required>
+
+    <label for="appCompany">Company Name (Optional)</label>
+    <input type="text" id="appCompany"
+           placeholder="Enter company name">
+
+    <label for="appEmail">Email Address</label>
+    <input type="email" id="appEmail"
+           placeholder="Enter your email" required>
+
+    <label for="appPhone">Phone Number</label>
+    <input type="tel" id="appPhone"
+           placeholder="Enter phone number" required>
+
+    <label for="appInterest">Investment Interest</label>
+    <textarea id="appInterest"
+              placeholder="Tell us about your investment interest"
+              rows="4"></textarea>
+
+    <button class="portal-button" type="submit">
+      SUBMIT APPLICATION
+    </button>
+
+  </form>
+
+  <p class="security-note">
+    Submission does not constitute an investment, guarantee of returns,
+    or confirmation of investment allocation.
+  </p>
+
+</section>
+    
   </main>
 
   <footer>
@@ -292,13 +387,72 @@
     Kano State, Nigeria.
   </footer>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    // Secure login will be connected to Supabase
-    // after authentication and database security are configured.
-  </script>
+<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+  const SUPABASE_URL =
+    "https://hwpxxbscoscumkmoqjgs.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_AO9n1jSq-xCpG21VhpZkQ_n4zNpMuv";
+
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const applicationForm =
+    document.getElementById("investorApplicationForm");
+
+  if (applicationForm) {
+    applicationForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const button = applicationForm.querySelector(
+        'button[type="submit"]'
+      );
+
+      button.disabled = true;
+      button.textContent = "SUBMITTING...";
+
+      try {
+        const application = {
+          full_name: document.getElementById("appFullName").value.trim(),
+          company_name: document.getElementById("appCompany").value.trim() || null,
+          email: document.getElementById("appEmail").value.trim(),
+          phone: document.getElementById("appPhone").value.trim(),
+          investment_interest: document.getElementById("appInterest").value.trim() || null
+        };
+
+        const { error } = await supabaseClient
+          .from("investor_applications")
+          .insert([application]);
+
+        if (error) throw error;
+
+        alert(
+          "Your application has been submitted successfully. " +
+          "It is now awaiting review by VANTAGE X GROUP LTD."
+        );
+
+        applicationForm.reset();
+
+      } catch (error) {
+        console.error("Application submission error:", error);
+        alert("Submission failed: " + error.message);
+
+      } finally {
+        button.disabled = false;
+        button.textContent = "SUBMIT APPLICATION";
+      }
+    });
+  }
+</script>
+  
 
 </body>
 </html>
