@@ -1537,6 +1537,12 @@ async function loadInvestors() {
 
     renderInvestors(data || []);
 
+    const countElement = $("overviewInvestorCount");
+
+if (countElement) {
+  countElement.textContent = (data || []).length;
+}
+
     const search = $("investorSearch");
 
     if (search) {
