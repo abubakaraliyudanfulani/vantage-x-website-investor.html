@@ -836,8 +836,30 @@
         application.email
       );
 
-      addField(
-        "Phone Number",
+    addField(
+  "Phone Number",
+  application.phone
+);
+
+addField(
+  "Investor Type",
+  application.investor_type || "Not provided"
+);
+
+addField(
+  "Proposed Investment Amount",
+  application.proposed_investment_amount || "Not specified"
+);
+
+addField(
+  "Investment Interest",
+  application.investment_interest || "Not specified"
+);
+
+addField(
+  "Application Status",
+  "PENDING REVIEW"
+);
               addField(
         "Investor Type",
         application.investor_type || "Not provided"
