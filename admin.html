@@ -1123,6 +1123,7 @@ $("projectForm").addEventListener("submit", async event => {
 async function loadProjects() {
 
   if (!currentAdmin) return;
+  console.log("Current admin:", currentAdmin);
 
   const list = $("projectList");
 
