@@ -844,10 +844,11 @@ function showDashboard(profile, user) {
 
   $("adminRole").textContent = " | " + profile.role;
 
-  openView("overview");
+    openView("overview");
 
   loadProjects();
   loadInvestorCount();
+  loadInvestors();
 }
 
 
