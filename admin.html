@@ -1527,7 +1527,8 @@ async function loadInvestors() {
 
   if (!list) return;
 
-  list.innerHTML = "Loading investors...";
+  list.innerHTML = "Loading investors... Please wait.";
+console.log("Starting investor loading...");
 
   try {
     const { data, error } = await supabaseClient
@@ -1535,7 +1536,11 @@ async function loadInvestors() {
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+  list.innerHTML = "SUPABASE ERROR: " + error.message;
+  console.error("Investor error:", error);
+  return;
+    }
 
     renderInvestors(data || []);
 
