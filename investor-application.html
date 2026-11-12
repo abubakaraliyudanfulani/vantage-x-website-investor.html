@@ -888,9 +888,30 @@
         { align: "center" }
       );
 
-      doc.save(
-        "VANTAGE-X-Application-Acknowledgement.pdf"
-      );
+  const pdfBlob = doc.output("blob");
+
+const pdfFile = new File(
+  [pdfBlob],
+  "VANTAGE-X-Application-Acknowledgement.pdf",
+  { type: "application/pdf" }
+);
+
+const downloadUrl = URL.createObjectURL(pdfFile);
+
+const downloadLink = document.createElement("a");
+
+downloadLink.href = downloadUrl;
+downloadLink.download = pdfFile.name;
+
+document.body.appendChild(downloadLink);
+
+downloadLink.click();
+
+downloadLink.remove();
+
+setTimeout(() => {
+  URL.revokeObjectURL(downloadUrl);
+}, 10000);
     }
 
     
