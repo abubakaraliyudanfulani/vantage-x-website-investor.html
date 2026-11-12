@@ -4,17 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#091725">
 
   <title>Investor Application | VANTAGE X GROUP LTD</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --navy: #091725;
+      --navy-light: #142b40;
       --gold: #c5a36a;
       --gold-light: #e1c795;
       --muted: #687582;
@@ -53,6 +55,10 @@
       font-weight: 600;
     }
 
+    .top-navigation a:hover {
+      color: var(--gold);
+    }
+
     .application-sheet {
       position: relative;
       isolation: isolate;
@@ -65,6 +71,8 @@
       border: 1px solid #e5e5e5;
       box-shadow: 0 12px 45px rgba(0,0,0,.07);
     }
+
+    /* COMPANY WATERMARK */
 
     .application-sheet::before {
       content: "VANTAGE X GROUP LTD";
@@ -81,49 +89,17 @@
       z-index: -1;
     }
 
+    /* NAVY COMPANY LETTERHEAD */
 
-.letterhead {
-  position: relative;
-  text-align: center;
-  padding: 30px 15px 26px;
-  margin: -45px -55px 0;
-  margin-bottom: 0;
-  background: var(--navy);
-  border-bottom: 3px solid var(--gold);
-  color: #ffffff;
-  border-radius: 0;
-}
-
-.letterhead h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(20px, 4vw, 29px);
-  letter-spacing: 2px;
-  color: #ffffff;
-}
-
-.company-descriptor {
-  margin-top: 5px;
-  color: var(--gold-light);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 4px;
-}
-
-.tagline {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #ffffff;
-  letter-spacing: 1px;
-}
-
-.company-email {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--gold-light);
-  text-decoration: none;
-}
-    
+    .letterhead {
+      position: relative;
+      text-align: center;
+      padding: 30px 15px 27px;
+      margin: -45px -55px 0;
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      color: #ffffff;
+    }
 
     .letterhead img {
       display: block;
@@ -132,40 +108,46 @@
       height: auto;
       max-height: 105px;
       object-fit: contain;
-      margin: 0 auto 12px;
+      margin: 0 auto 14px;
     }
 
-    
-.letterhead h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(20px, 4vw, 29px);
-  letter-spacing: 2px;
-  color: #ffffff !important;
-}
+    .letterhead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4vw, 29px);
+      letter-spacing: 2px;
+      color: #ffffff !important;
+      line-height: 1.4;
+    }
 
-.company-descriptor {
-  margin-top: 5px;
-  color: #e1c795 !important;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 4px;
-}
+    .company-descriptor {
+      margin-top: 5px;
+      color: var(--gold-light) !important;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
 
-.tagline {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #ffffff !important;
-  letter-spacing: 1px;
-}
+    .tagline {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #ffffff !important;
+      letter-spacing: 1px;
+    }
 
-.company-email {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: #e1c795 !important;
-  text-decoration: none;
-}
-    
+    .company-email {
+      display: inline-block;
+      margin-top: 9px;
+      font-size: 12px;
+      color: var(--gold-light) !important;
+      text-decoration: none;
+    }
+
+    .company-email:hover {
+      color: #ffffff !important;
+      text-decoration: underline;
+    }
+
+    /* DOCUMENT TITLE */
 
     .document-title {
       position: relative;
@@ -185,6 +167,8 @@
       line-height: 1.8;
       color: var(--muted);
     }
+
+    /* FORM HEADINGS */
 
     .section-heading {
       position: relative;
@@ -222,7 +206,7 @@
       padding: 13px 14px;
       border: 1px solid #d9dfe4;
       border-radius: 3px;
-      background: rgba(255,255,255,.94);
+      background: rgba(255,255,255,.96);
       color: var(--navy);
       font-family: inherit;
       font-size: 13px;
@@ -241,6 +225,8 @@
       line-height: 1.7;
     }
 
+    /* IMPORTANT NOTICE */
+
     .form-notice {
       position: relative;
       margin-top: 28px;
@@ -252,6 +238,8 @@
       line-height: 1.8;
     }
 
+    /* SUBMIT BUTTON */
+
     .submit-button {
       position: relative;
       display: block;
@@ -261,21 +249,24 @@
       border: none;
       border-radius: 3px;
       background: var(--navy);
-      color: white;
+      color: #ffffff;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 1px;
       cursor: pointer;
+      transition: background .2s ease;
     }
 
     .submit-button:hover {
-      background: #19354c;
+      background: var(--navy-light);
     }
 
     .submit-button:disabled {
       opacity: .6;
       cursor: not-allowed;
     }
+
+    /* SUBMISSION MESSAGES */
 
     .message {
       display: none;
@@ -301,6 +292,8 @@
       color: #9b2929;
     }
 
+    /* DOCUMENT FOOTER */
+
     .document-footer {
       position: relative;
       margin-top: 38px;
@@ -312,7 +305,10 @@
       line-height: 1.9;
     }
 
+    /* MOBILE RESPONSIVENESS */
+
     @media(max-width: 600px) {
+
       body {
         padding: 12px 8px 30px;
       }
@@ -321,12 +317,38 @@
         padding: 28px 19px;
       }
 
-      .document-title h2 {
-        font-size: 23px;
+      .letterhead {
+        margin: -28px -19px 0;
+        padding: 25px 12px 23px;
       }
 
       .letterhead img {
         width: 105px;
+      }
+
+      .letterhead h1 {
+        font-size: 21px;
+        letter-spacing: 1px;
+      }
+
+      .company-descriptor {
+        letter-spacing: 3px;
+      }
+
+      .tagline {
+        font-size: 11px;
+      }
+
+      .company-email {
+        font-size: 11px;
+      }
+
+      .document-title h2 {
+        font-size: 23px;
+      }
+
+      .top-navigation a {
+        font-size: 11px;
       }
     }
   </style>
@@ -392,6 +414,7 @@
       </h3>
 
       <div class="form-group">
+
         <label for="appFullName">Full Name *</label>
 
         <input
@@ -402,9 +425,11 @@
           autocomplete="name"
           required
         >
+
       </div>
 
       <div class="form-group">
+
         <label for="appCompany">
           Company Name <span class="optional">(Optional)</span>
         </label>
@@ -416,9 +441,11 @@
           placeholder="Enter your company or organisation name"
           autocomplete="organization"
         >
+
       </div>
 
       <div class="form-group">
+
         <label for="appEmail">Email Address *</label>
 
         <input
@@ -429,9 +456,11 @@
           autocomplete="email"
           required
         >
+
       </div>
 
       <div class="form-group">
+
         <label for="appPhone">Phone Number *</label>
 
         <input
@@ -442,6 +471,7 @@
           autocomplete="tel"
           required
         >
+
       </div>
 
       <h3 class="section-heading">
@@ -449,6 +479,7 @@
       </h3>
 
       <div class="form-group">
+
         <label for="appInterest">
           Investment Interest / Enquiry
         </label>
@@ -458,9 +489,11 @@
           name="investment_interest"
           placeholder="Describe the type of investment or property opportunity you are interested in. You may also mention your proposed investment range."
         ></textarea>
+
       </div>
 
       <div class="form-notice">
+
         <strong>IMPORTANT NOTICE</strong><br>
 
         Submission of this form constitutes an application
@@ -469,6 +502,7 @@
         ownership, or constitute evidence of funds or investment
         allocation. Any investment arrangement will be subject
         to separate documentation and applicable requirements.
+
       </div>
 
       <button
@@ -489,10 +523,12 @@
     ></div>
 
     <footer class="document-footer">
+
       VANTAGE X GROUP LTD<br>
       Building Value. Creating Opportunities.<br>
       Kano State, Nigeria.<br>
       © <span id="year"></span> All Rights Reserved.
+
     </footer>
 
   </main>
@@ -543,7 +579,9 @@
     ) {
 
       if (!window.jspdf || !window.jspdf.jsPDF) {
-        throw new Error("The PDF library could not be loaded. Please try again.");
+        throw new Error(
+          "The PDF library could not be loaded. Please try again."
+        );
       }
 
       const { jsPDF } = window.jspdf;
@@ -579,7 +617,8 @@
 
         const logoData = canvas.toDataURL("image/png");
 
-        const ratio = logo.naturalWidth / logo.naturalHeight;
+        const ratio =
+          logo.naturalWidth / logo.naturalHeight;
 
         const logoWidth = Math.min(38, 24 * ratio);
         const logoHeight = logoWidth / ratio;
@@ -595,7 +634,10 @@
 
       } catch (logoError) {
 
-        console.warn("PDF logo could not be loaded:", logoError);
+        console.warn(
+          "PDF logo could not be loaded:",
+          logoError
+        );
 
       }
 
@@ -701,13 +743,17 @@
 
       doc.restoreGraphicsState();
 
-      /* REFERENCE DETAILS */
+      /* APPLICATION DETAILS */
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
       doc.setTextColor(9, 23, 37);
 
-      doc.text("APPLICATION DETAILS", margin, y);
+      doc.text(
+        "APPLICATION DETAILS",
+        margin,
+        y
+      );
 
       y += 10;
 
@@ -734,7 +780,10 @@
         y += lines.length * 5 + 6;
       }
 
-      addField("Application Reference", reference);
+      addField(
+        "Application Reference",
+        reference
+      );
 
       addField(
         "Date Submitted",
@@ -744,23 +793,35 @@
         })
       );
 
-      addField("Applicant Name", application.full_name);
+      addField(
+        "Applicant Name",
+        application.full_name
+      );
 
       addField(
         "Company / Organisation",
         application.company_name || "Not provided"
       );
 
-      addField("Email Address", application.email);
+      addField(
+        "Email Address",
+        application.email
+      );
 
-      addField("Phone Number", application.phone);
+      addField(
+        "Phone Number",
+        application.phone
+      );
 
       addField(
         "Investment Interest",
         application.investment_interest || "Not specified"
       );
 
-      addField("Application Status", "PENDING REVIEW");
+      addField(
+        "Application Status",
+        "PENDING REVIEW"
+      );
 
       /* ACKNOWLEDGEMENT STATEMENT */
 
@@ -772,7 +833,13 @@
       }
 
       doc.setDrawColor(197, 163, 106);
-      doc.line(margin, y, pageWidth - margin, y);
+
+      doc.line(
+        margin,
+        y,
+        pageWidth - margin,
+        y
+      );
 
       y += 10;
 
@@ -780,7 +847,11 @@
       doc.setFontSize(10);
       doc.setTextColor(9, 23, 37);
 
-      doc.text("ACKNOWLEDGEMENT STATEMENT", margin, y);
+      doc.text(
+        "ACKNOWLEDGEMENT STATEMENT",
+        margin,
+        y
+      );
 
       y += 8;
 
@@ -810,14 +881,16 @@
         { align: "center" }
       );
 
-      doc.save("VANTAGE-X-Application-Acknowledgement.pdf");
+      doc.save(
+        "VANTAGE-X-Application-Acknowledgement.pdf"
+      );
     }
 
-    /* APPLICATION SUBMISSION */
+    
+    <!-- APPLICATION SUBMISSION -->
 
-    applicationForm.addEventListener(
-      "submit",
-      async function(event) {
+    <script>
+      applicationForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
@@ -825,7 +898,7 @@
         submitButton.textContent = "SUBMITTING APPLICATION...";
 
         applicationMessage.className = "message";
-        applicationMessage.textContent = "";
+        applicationMessage.textContent = "Please wait while your application is being submitted.";
 
         try {
 
@@ -840,24 +913,12 @@
           const submittedAt = new Date();
 
           const application = {
-
             id: applicationId,
-
-            full_name:
-              document.getElementById("appFullName").value.trim(),
-
-            company_name:
-              document.getElementById("appCompany").value.trim() || null,
-
-            email:
-              document.getElementById("appEmail").value.trim(),
-
-            phone:
-              document.getElementById("appPhone").value.trim(),
-
-            investment_interest:
-              document.getElementById("appInterest").value.trim() || null
-
+            full_name: document.getElementById("appFullName").value.trim(),
+            company_name: document.getElementById("appCompany").value.trim() || null,
+            email: document.getElementById("appEmail").value.trim(),
+            phone: document.getElementById("appPhone").value.trim(),
+            investment_interest: document.getElementById("appInterest").value.trim() || null
           };
 
           const { error } = await supabaseClient
@@ -878,7 +939,7 @@
 
           applicationForm.reset();
 
-          /* DOWNLOAD PDF AFTER SUCCESSFUL DATABASE INSERT */
+          /* DOWNLOAD APPLICATION ACKNOWLEDGEMENT PDF */
 
           try {
 
@@ -896,7 +957,8 @@
             console.error("PDF generation error:", pdfError);
 
             applicationMessage.textContent +=
-              " Your application is saved, but the PDF could not be generated. Please try again or contact the company with your reference number: " +
+              " Your application is saved, but the PDF could not be generated. " +
+              "Please contact the company with your reference number: " +
               reference;
 
           }
@@ -908,7 +970,8 @@
           applicationMessage.className = "message error";
 
           applicationMessage.textContent =
-            "Application submission failed: " + error.message;
+            "Application submission failed: " +
+            error.message;
 
         } finally {
 
@@ -919,10 +982,8 @@
 
         }
 
-      }
-    );
+      });
+    </script>
 
-  </script>
-
-</body>
+  </body>
 </html>
