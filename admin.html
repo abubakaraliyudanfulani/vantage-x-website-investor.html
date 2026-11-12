@@ -1521,11 +1521,20 @@ $("investorForm").addEventListener("submit", async function(event) {
 ============================== */
 
 async function loadInvestors() {
-  if (!currentAdmin) return;
-
   const list = $("investorsList");
 
-  if (!list) return;
+  if (!list) {
+    console.log("Investor list element not found.");
+    return;
+  }
+
+  if (!currentAdmin) {
+    list.innerHTML = "ERROR: Admin session not detected.";
+    console.log("Current admin is missing.");
+    return;
+  }
+
+  console.log("Investor admin session:", currentAdmin);
 
   list.innerHTML = "Loading investors... Please wait.";
 console.log("Starting investor loading...");
