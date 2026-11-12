@@ -1538,8 +1538,10 @@ async function loadInvestors() {
 
   list.innerHTML = "Loading investors... Please wait.";
 console.log("Starting investor loading...");
+  list.innerHTML = "Database request started...";
 
   try {
+    console.log("Sending request to investors table...");
     const { data, error } = await supabaseClient
       .from("investors")
       .select("*")
