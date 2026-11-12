@@ -86,15 +86,23 @@
       border-bottom: 1px solid rgba(255,255,255,.1);
     }
 
-  .brand-logo img {
+  .brand-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 55%;
+}
+
+.brand-logo img {
   display: block;
-  width: 180px;
-  max-width: 55vw;
+  width: 120px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
   border: none;
   border-radius: 0;
-  }
+}
 
     .back-link {
       color: var(--gold-light);
@@ -102,11 +110,12 @@
       font-size: 13px;
     }
 
-    main {
-      width: 90%;
-      max-width: 1100px;
-      margin: 70px auto;
-    }
+main {
+  width: 92%;
+  max-width: 760px;
+  margin: 40px auto;
+  box-sizing: border-box;
+}
 
     .intro {
       text-align: center;
@@ -137,12 +146,16 @@
     }
 
     .portal-card {
-      max-width: 470px;
-      margin: auto;
-      padding: 35px;
-      background: var(--navy-light);
-      border: 1px solid rgba(197,163,106,.35);
-      border-radius: 8px;
+  width: 100%;
+  max-width: 620px;
+  margin: 30px auto;
+  padding: 30px 24px;
+  box-sizing: border-box;
+  background: var(--navy-light);
+  border: 1px solid rgba(197,163,106,.35);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
     }
 
     .portal-card h2 {
