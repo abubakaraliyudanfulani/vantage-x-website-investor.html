@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#091725">
+
+  <title>Investor Dashboard | VANTAGE X GROUP LTD</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #172536;
+      min-height: 100vh;
+    }
+
+    .top-header {
+      background: #091725;
+      color: white;
+      padding: 22px 6%;
+      border-bottom: 3px solid #c5a36a;
+    }
+
+    .company-name {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .company-descriptor {
+      color: #d2b47c;
+      font-size: 11px;
+      margin-top: 5px;
+      letter-spacing: 2px;
+    }
+
+    .company-tagline {
+      color: #dce3e9;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .dashboard-container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 35px auto;
+    }
+
+    .welcome-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .welcome-card h1 {
+      font-size: 23px;
+      color: #091725;
+      margin-bottom: 8px;
+    }
+
+    .welcome-card p {
+      color: #687582;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .logout-button {
+      background: #091725;
+      color: white;
+      border: 1px solid #c5a36a;
+      border-radius: 7px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background: #18334b;
+    }
+
+    .section-heading {
+      font-size: 17px;
+      color: #091725;
+      margin: 28px 0 15px;
+    }
+
+    .status-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+      border-left: 4px solid #c5a36a;
+    }
+
+    .status-label {
+      color: #71808e;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .status-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #a87524;
+    }
+
+    .status-description {
+      color: #687582;
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .details-card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf0f2;
+      font-size: 14px;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #75818d;
+      font-weight: 600;
+    }
+
+    .detail-value {
+      color: #172536;
+      font-weight: 600;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      display: none;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: #a12626;
+    }
+
+    .message.success {
+      display: block;
+      background: #edf8f0;
+      color: #206b37;
+    }
+
+    .message.info {
+      display: block;
+      background: #edf4fb;
+      color: #24547b;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 45px 15px;
+      color: #687582;
+      font-size: 14px;
+    }
+
+    .empty-state {
+      background: white;
+      border-radius: 12px;
+      padding: 30px 22px;
+      text-align: center;
+      color: #687582;
+      line-height: 1.7;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #77838e;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .top-header {
+        padding: 20px;
+      }
+
+      .dashboard-container {
+        width: 94%;
+        margin: 22px auto;
+      }
+
+      .welcome-card {
+        padding: 20px;
+      }
+
+      .welcome-card h1 {
+        font-size: 20px;
+      }
+
+      .logout-button {
+        width: 100%;
+      }
+
+      .detail-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .detail-value {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="top-header">
+    <div class="company-name">
+      VANTAGE X GROUP LTD
+    </div>
+
+    <div class="company-descriptor">
+      ESTATES & CO.
+    </div>
+
+    <div class="company-tagline">
+      Building Value. Creating Opportunities.
+    </div>
+  </header>
+
+  <main class="dashboard-container">
+
+    <section class="welcome-card">
+      <div>
+        <h1 id="welcomeName">Welcome, Investor</h1>
+
+        <p>
+          Welcome to your private investor account.
+          View your application information and review status here.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="logout-button"
+        id="logoutButton"
+      >
+        SIGN OUT
+      </button>
+    </section>
+
+    <h2 class="section-heading">
+      Application Overview
+    </h2>
+
+    <section class="status-card">
+      <div class="status-label">
+        CURRENT APPLICATION STATUS
+      </div>
+
+      <div class="status-value" id="applicationStatus">
+        LOADING...
+      </div>
+
+      <p
+        class="status-description"
+        id="statusDescription"
+      >
+        Please wait while your application information is retrieved.
+      </p>
+    </section>
+
+    <h2 class="section-heading">
+      Your Application Details
+    </h2>
+
+    <section class="details-card" id="applicationDetails">
+
+      <div class="loading" id="loadingMessage">
+        Loading your investor information...
+      </div>
+
+    </section>
+
+    <div
+      class="message"
+      id="dashboardMessage"
+      role="status"
+    ></div>
+
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span>
+    VANTAGE X GROUP LTD. All rights reserved.
+    <br><br>
+    Kano State, Nigeria
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    "use strict";
+
+    // ==========================================
+    // VANTAGE X GROUP LTD
+    // PRIVATE INVESTOR DASHBOARD
+    // ==========================================
+
+    const SUPABASE_URL =
+      "https://hwpxxbscoscumkmoqjgs.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_AO9n1jSq-xCpG21VhpzWkQ_n4zNpMuv";
+
+    const APPLICATION_URL =
+      "https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/investor-application.html";
+
+    const PORTAL_URL =
+      "https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/investor.html";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      }
+    );
+
+    // ==========================================
+    // DASHBOARD ELEMENTS
+    // ==========================================
+
+    const welcomeName =
+      document.getElementById("welcomeName");
+
+    const applicationStatus =
+      document.getElementById("applicationStatus");
+
+    const statusDescription =
+      document.getElementById("statusDescription");
+
+    const applicationDetails =
+      document.getElementById("applicationDetails");
+
+    const dashboardMessage =
+      document.getElementById("dashboardMessage");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // ==========================================
+    // MESSAGE DISPLAY
+    // ==========================================
+
+    function showDashboardMessage(type, message) {
+      dashboardMessage.className =
+        "message " + type;
+
+      dashboardMessage.textContent = message;
+      dashboardMessage.style.display = "block";
+    }
+
+    function hideDashboardMessage() {
+      dashboardMessage.style.display = "none";
+    }
+
+    // ==========================================
+    // SAFE DETAIL DISPLAY
+    // ==========================================
+
+    function addDetail(label, value) {
+      const row = document.createElement("div");
+      row.className = "detail-row";
+
+      const labelElement =
+        document.createElement("div");
+
+      labelElement.className = "detail-label";
+      labelElement.textContent = label;
+
+      const valueElement =
+        document.createElement("div");
+
+      valueElement.className = "detail-value";
+      valueElement.textContent =
+        value || "Not provided";
+
+      row.appendChild(labelElement);
+      row.appendChild(valueElement);
+
+      applicationDetails.appendChild(row);
+    }
+  </script>
+
+  
+  <script>
+    // ==========================================
+    // LOAD INVESTOR APPLICATION
+    // ==========================================
+
+    async function loadInvestorDashboard() {
+      hideDashboardMessage();
+
+      try {
+        const { data: sessionData, error: sessionError } =
+          await supabaseClient.auth.getSession();
+
+        if (sessionError) {
+          throw sessionError;
+        }
+
+        const session = sessionData.session;
+
+        // Require an authenticated, verified investor
+        if (
+          !session ||
+          !session.user ||
+          !session.user.email_confirmed_at
+        ) {
+          await supabaseClient.auth.signOut();
+
+          window.location.replace(PORTAL_URL);
+          return;
+        }
+
+        const investor = session.user;
+
+        const investorName =
+          investor.user_metadata?.full_name ||
+          investor.email ||
+          "Investor";
+
+        welcomeName.textContent =
+          "Welcome, " + investorName;
+
+        // Retrieve only this investor's application
+        const { data: application, error } =
+          await supabaseClient
+            .from("investor_applications")
+            .select(
+              "id, full_name, company_name, email, phone, investor_type, proposed_investment_amount, investment_interest, status, created_at, reviewed_at, review_notes"
+            )
+            .eq("user_id", investor.id)
+            .order("created_at", {
+              ascending: false
+            })
+            .limit(1)
+            .maybeSingle();
+
+        if (error) {
+          throw error;
+        }
+
+        // No application submitted yet
+        if (!application) {
+          applicationStatus.textContent =
+            "NO APPLICATION";
+
+          applicationStatus.style.color =
+            "#687582";
+
+          statusDescription.textContent =
+            "Your account is active, but you have not submitted an investor application yet.";
+
+          applicationDetails.innerHTML = "";
+
+          const emptyState =
+            document.createElement("div");
+
+          emptyState.className = "empty-state";
+
+          const message =
+            document.createElement("p");
+
+          message.textContent =
+            "Welcome to VANTAGE X GROUP LTD. Submit your investor application to begin the company review process.";
+
+          const applyLink =
+            document.createElement("a");
+
+          applyLink.href = APPLICATION_URL;
+          applyLink.textContent =
+            "SUBMIT INVESTOR APPLICATION";
+
+          applyLink.style.display = "inline-block";
+          applyLink.style.marginTop = "18px";
+          applyLink.style.padding = "13px 20px";
+          applyLink.style.background = "#091725";
+          applyLink.style.color = "#ffffff";
+          applyLink.style.borderRadius = "7px";
+          applyLink.style.textDecoration = "none";
+          applyLink.style.fontWeight = "bold";
+          applyLink.style.fontSize = "13px";
+
+          emptyState.appendChild(message);
+          emptyState.appendChild(applyLink);
+
+          applicationDetails.appendChild(emptyState);
+
+          return;
+        }
+
+        // Format application status
+        const status =
+          String(application.status || "pending")
+            .toLowerCase();
+
+        if (
+          !["pending", "approved", "rejected"].includes(status)
+        ) {
+          throw new Error(
+            "Your application has an unrecognized status. Please contact the company."
+          );
+        }
+
+        const statusLabels = {
+          pending: "PENDING REVIEW",
+          approved: "APPROVED",
+          rejected: "REJECTED"
+        };
+
+        const statusDescriptions = {
+          pending:
+            "Your application has been received and is awaiting company review. Please check your dashboard for updates.",
+
+          approved:
+            "Your application has been approved by the company. Please follow any official instructions communicated to you.",
+
+          rejected:
+            "Your application has not been approved. Please review any company feedback displayed below."
+        };
+
+        applicationStatus.textContent =
+          statusLabels[status];
+
+        statusDescription.textContent =
+          statusDescriptions[status];
+
+        if (status === "approved") {
+          applicationStatus.style.color = "#24743c";
+        } else if (status === "rejected") {
+          applicationStatus.style.color = "#a12626";
+        } else {
+          applicationStatus.style.color = "#a87524";
+        }
+
+        // Generate the application reference
+        const applicationDate =
+          new Date(application.created_at);
+
+        const applicationReference =
+          "VX-" +
+          applicationDate.getFullYear() +
+          "-" +
+          application.id
+            .substring(0, 8)
+            .toUpperCase();
+
+        // Display application information
+        applicationDetails.innerHTML = "";
+
+        addDetail(
+          "Application Reference",
+          applicationReference
+        );
+
+        addDetail(
+          "Full Name",
+          application.full_name
+        );
+
+        addDetail(
+          "Email Address",
+          application.email
+        );
+
+        addDetail(
+          "Phone Number",
+          application.phone
+        );
+
+        addDetail(
+          "Company / Organisation",
+          application.company_name
+        );
+
+        addDetail(
+          "Investor Type",
+          application.investor_type
+        );
+
+        addDetail(
+          "Proposed Investment Amount",
+          application.proposed_investment_amount
+        );
+
+        addDetail(
+          "Investment Interest",
+          application.investment_interest
+        );
+
+        addDetail(
+          "Date Submitted",
+          applicationDate.toLocaleString()
+        );
+
+        addDetail(
+          "Application Status",
+          statusLabels[status]
+        );
+
+        if (status === "rejected" && application.review_notes) {
+          addDetail(
+            "Company Feedback",
+            application.review_notes
+          );
+        }
+
+        if (application.reviewed_at) {
+          addDetail(
+            "Last Review Date",
+            new Date(
+              application.reviewed_at
+            ).toLocaleString()
+          );
+        }
+
+      } catch (error) {
+        console.error(
+          "Investor dashboard loading error:",
+          error
+        );
+
+        showDashboardMessage(
+          "error",
+          "We could not load your application information. Please refresh the page or contact VANTAGE X GROUP LTD. Error: " +
+          error.message
+        );
+      }
+    }
+  </script>
+
+  <script>
+  // LOGOUT
+  logoutButton.addEventListener("click", async function () {
+    logoutButton.disabled = true;
+    logoutButton.textContent = "SIGNING OUT...";
+
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) {
+        throw error;
+      }
+
+      window.location.replace(PORTAL_URL);
+
+    } catch (error) {
+      showDashboardMessage(
+        "error",
+        "Unable to sign out: " + error.message
+      );
+
+      logoutButton.disabled = false;
+      logoutButton.textContent = "LOG OUT";
+    }
+  });
+
+  // LOAD THE INVESTOR'S DASHBOARD
+  loadInvestorDashboard();
+</script>
+
+</body>
+</html>
