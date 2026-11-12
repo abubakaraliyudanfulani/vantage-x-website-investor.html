@@ -953,13 +953,15 @@ setTimeout(() => {
           const submittedAt = new Date();
 
           const application = {
-            id: applicationId,
-            full_name: document.getElementById("appFullName").value.trim(),
-            company_name: document.getElementById("appCompany").value.trim() || null,
-            email: document.getElementById("appEmail").value.trim(),
-            phone: document.getElementById("appPhone").value.trim(),
-            investment_interest: document.getElementById("appInterest").value.trim() || null
-          };
+  id: applicationId,
+  full_name: document.getElementById("appFullName").value.trim(),
+  company_name: document.getElementById("appCompany").value.trim() || null,
+  email: document.getElementById("appEmail").value.trim(),
+  phone: document.getElementById("appPhone").value.trim(),
+  investor_type: document.getElementById("appInvestorType").value,
+  proposed_investment_amount: document.getElementById("appInvestmentAmount").value.trim() || null,
+  investment_interest: document.getElementById("appInterest").value.trim() || null
+};
 
           const { error } = await supabaseClient
             .from("investor_applications")
