@@ -520,78 +520,8 @@
     let currentInvestor = null;
 
     const investorSessionCheck = (async function () {
-      try {
-        const { data, error } =
-          await supabaseClient.auth.getSession();
-
-        if (error) {
-          throw error;
-        }
-
-        const session = data.session;
-
-        if (
-          !session ||
-          !session.user ||
-          !session.user.email_confirmed_at
-        ) {
-          submitButton.disabled = true;
-
-          showMessage(
-            "error",
-            "Please sign in with your verified investor account before submitting an application. Redirecting to the investor portal..."
-          );
-
-          setTimeout(function () {
-            window.location.replace("investor.html");
-          }, 2500);
-
-          return null;
-        }
-
-        currentInvestor = session.user;
-
-        // Automatically fill registered details
-        const nameField =
-          document.getElementById("appFullName");
-
-        const emailField =
-          document.getElementById("appEmail");
-
-        if (nameField && !nameField.value) {
-          nameField.value =
-            currentInvestor.user_metadata?.full_name || "";
-        }
-
-        if (emailField && !emailField.value) {
-          emailField.value =
-            currentInvestor.email || "";
-        }
-
-        return currentInvestor;
-
-      } catch (error) {
-        console.error(
-          "Investor authentication error:",
-          error
-        );
-
-        submitButton.disabled = true;
-
-        showMessage(
-          "error",
-          "We could not verify your investor account. Please sign in again."
-        );
-
-        setTimeout(function () {
-          window.location.replace("investor.html");
-        }, 2500);
-
-        return null;
-      }
-    })();
     
-
+    
     const applicationForm =
       document.getElementById("investorApplicationForm");
 
