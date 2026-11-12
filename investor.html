@@ -10,64 +10,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
-/* INVESTOR APPLICATION BRANDING */
-
-.application-card {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.application-card::before {
-  content: "VANTAGE X GROUP LTD";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-30deg);
-  font-size: clamp(22px, 5vw, 40px);
-  font-weight: 800;
-  color: rgba(197, 163, 106, 0.06);
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.application-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.application-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  margin: 25px auto;
-}
-
-.application-brand img {
-  display: block;
-  width: 100px;
-  max-width: 35%;
-  max-height: 100px;
-  height: auto;
-  object-fit: contain;
-}
-
-.application-brand h3 {
-  color: var(--gold-light);
-  font-size: 17px;
-  letter-spacing: 2px;
-  margin: 12px 0 5px;
-}
-
-.application-brand p {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
   
   <style>
     :root {
