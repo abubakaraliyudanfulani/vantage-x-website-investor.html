@@ -813,7 +813,7 @@ console.log("Supabase client:", supabaseClient);
         y += lines.length * 5 + 6;
       }
 
-      addField(
+            addField(
         "Application Reference",
         reference
       );
@@ -841,31 +841,12 @@ console.log("Supabase client:", supabaseClient);
         application.email
       );
 
-    addField(
-  "Phone Number",
-  application.phone
-);
+      addField(
+        "Phone Number",
+        application.phone
+      );
 
-addField(
-  "Investor Type",
-  application.investor_type || "Not provided"
-);
-
-addField(
-  "Proposed Investment Amount",
-  application.proposed_investment_amount || "Not specified"
-);
-
-addField(
-  "Investment Interest",
-  application.investment_interest || "Not specified"
-);
-
-addField(
-  "Application Status",
-  "PENDING REVIEW"
-);
-              addField(
+      addField(
         "Investor Type",
         application.investor_type || "Not provided"
       );
@@ -873,8 +854,6 @@ addField(
       addField(
         "Proposed Investment Amount",
         application.proposed_investment_amount || "Not specified"
-      );
-        application.phone
       );
 
       addField(
