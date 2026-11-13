@@ -2000,20 +2000,19 @@ async function openApplicationReview(applicationId) {
     const { data, error } = await supabaseClient
       .from("investor_applications")
       .select(`
-        id,
-        full_name,
-        company_name,
-        email,
-        phone,
-        investor_type,
-        proposed_investment_amount,
-        investment_interest,
-        status,
-        status,
-archived_at,
-review_notes
-        review_notes
-      `)
+        .select(`
+  id,
+  full_name,
+  company_name,
+  email,
+  phone,
+  investor_type,
+  proposed_investment_amount,
+  investment_interest,
+  status,
+  archived_at,
+  review_notes
+`)
       .eq("id", applicationId)
       .maybeSingle();
 
