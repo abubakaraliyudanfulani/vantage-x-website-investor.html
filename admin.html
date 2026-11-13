@@ -746,6 +746,79 @@ th {
 </section>
 
       
+<!-- APPLICATION REVIEW WINDOW -->
+
+<div id="applicationReviewModal" style="display:none;">
+
+  <div class="panel">
+
+    <h2>Review Investor Application</h2>
+
+    <p>Examine the applicant's information before making a decision.</p>
+
+    <div class="field">
+      <label>Applicant Name</label>
+      <p id="reviewFullName">—</p>
+    </div>
+
+    <div class="field">
+      <label>Company Name</label>
+      <p id="reviewCompanyName">—</p>
+    </div>
+
+    <div class="field">
+      <label>Email Address</label>
+      <p id="reviewEmail">—</p>
+    </div>
+
+    <div class="field">
+      <label>Phone Number</label>
+      <p id="reviewPhone">—</p>
+    </div>
+
+    <div class="field">
+      <label>Investor Type</label>
+      <p id="reviewInvestorType">—</p>
+    </div>
+
+    <div class="field">
+      <label>Proposed Investment Amount</label>
+      <p id="reviewAmount">—</p>
+    </div>
+
+    <div class="field">
+      <label>Investment Interest</label>
+      <p id="reviewInterest">—</p>
+    </div>
+
+    <div class="field">
+      <label>CEO Review Notes</label>
+      <textarea
+        id="reviewNotes"
+        rows="4"
+        placeholder="Enter your review comments..."
+      ></textarea>
+    </div>
+
+    <div id="reviewMessage" class="message"></div>
+
+    <button type="button" id="approveApplicationButton">
+      APPROVE APPLICATION
+    </button>
+
+    <button type="button" id="rejectApplicationButton">
+      REJECT APPLICATION
+    </button>
+
+    <button type="button" id="closeReviewButton">
+      CLOSE
+    </button>
+
+  </div>
+
+</div>
+      
+      
       <!-- REGISTER INVESTOR -->
 
       <section class="view" id="addInvestor">
