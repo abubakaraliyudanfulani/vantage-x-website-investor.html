@@ -923,12 +923,24 @@ function openView(viewName) {
   });
 
   const target = $(viewName);
-  if (target) target.classList.add("active");
 
-  if (viewName === "projects") loadProjects();
-  if (viewName === "investors") loadInvestors();
+  if (target) {
+    target.classList.add("active");
+  }
+
+  if (viewName === "projects") {
+    loadProjects();
+  }
+
+  if (viewName === "investors") {
+    loadInvestors();
+  }
+
+  if (viewName === "applications") {
+    loadApplications();
+  }
+
 }
-
 
 /* ROLE CHECKS */
 
