@@ -2193,7 +2193,38 @@ async function initialiseDashboard() {
   }
 }
 
+/* =====================================
+   APPLICATION REVIEW BUTTONS
+===================================== */
 
+// APPROVE APPLICATION
+const approveApplicationButton = $("approveApplicationButton");
+
+if (approveApplicationButton) {
+  approveApplicationButton.addEventListener("click", function () {
+    updateApplicationDecision("approved");
+  });
+}
+
+// REJECT APPLICATION
+const rejectApplicationButton = $("rejectApplicationButton");
+
+if (rejectApplicationButton) {
+  rejectApplicationButton.addEventListener("click", function () {
+    updateApplicationDecision("rejected");
+  });
+}
+
+// CLOSE REVIEW WINDOW
+const closeReviewButton = $("closeReviewButton");
+
+if (closeReviewButton) {
+  closeReviewButton.addEventListener("click", function () {
+    $("applicationReviewModal").style.display = "none";
+    selectedApplicationForReview = null;
+  });
+}
+    
 /* START APPLICATION */
 
 initialiseDashboard();
