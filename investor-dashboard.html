@@ -293,8 +293,15 @@
         LOADING...
       </div>
 
-      <p
-        <div
+    <p
+  class="status-description"
+  id="statusDescription"
+>
+  Please wait while your application information is retrieved.
+</p>
+
+<!-- CEO DECISION NOTIFICATION -->
+<div
   id="decisionNotification"
   style="
     display:none;
@@ -305,37 +312,31 @@
   "
 >
   <h3 id="notificationTitle"></h3>
-
   <p id="notificationMessage"></p>
-
   <p id="notificationDate"></p>
-
   <p id="notificationNotes"></p>
-    </div>
-        class="status-description"
-        id="statusDescription"
-      >
-        Please wait while your application information is retrieved.
-      </p>
-    </section>
+</div>
 
-    <h2 class="section-heading">
-      Your Application Details
-    </h2>
+</section>
 
-    <section class="details-card" id="applicationDetails">
+<h2 class="section-heading">
+  Your Application Details
+</h2>
 
-      <div class="loading" id="loadingMessage">
-        Loading your investor information...
-      </div>
+<section class="details-card" id="applicationDetails">
 
-    </section>
+  <div class="loading" id="loadingMessage">
+    Loading your investor information...
+  </div>
 
-    <div
-      class="message"
-      id="dashboardMessage"
-      role="status"
-    ></div>
+</section>
+
+<div
+  class="message"
+  id="dashboardMessage"
+  role="status"
+></div>  
+  
 
   </main>
 
