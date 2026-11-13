@@ -2028,7 +2028,9 @@ review_notes
 
 if (archiveButton) {
   archiveButton.style.display =
-    data.status === "rejected" ? "inline-block" : "none";
+    data.status === "rejected" && !data.archived_at
+  ? "inline-block"
+  : "none";
 }
     $("reviewFullName").textContent =
       data.full_name || "Not provided";
