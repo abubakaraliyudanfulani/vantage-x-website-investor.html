@@ -558,6 +558,79 @@
           return;
         }
 
+        // ==========================================
+// DISPLAY CEO DECISION NOTIFICATION
+// ==========================================
+
+const decisionNotification =
+  document.getElementById("decisionNotification");
+
+const notificationTitle =
+  document.getElementById("notificationTitle");
+
+const notificationMessage =
+  document.getElementById("notificationMessage");
+
+const notificationDate =
+  document.getElementById("notificationDate");
+
+const notificationNotes =
+  document.getElementById("notificationNotes");
+
+const currentStatus =
+  String(application.status || "pending").toLowerCase();
+
+decisionNotification.style.display = "block";
+
+if (currentStatus === "approved") {
+
+  decisionNotification.style.background = "#e5f5eb";
+  decisionNotification.style.border = "1px solid #24743c";
+
+  notificationTitle.textContent = "APPLICATION APPROVED";
+  notificationTitle.style.color = "#24743c";
+
+  notificationMessage.textContent =
+    "Congratulations! Your investor application has been approved by the CEO of VANTAGE X GROUP LTD.";
+
+} else if (currentStatus === "rejected") {
+
+  decisionNotification.style.background = "#fff0f0";
+  decisionNotification.style.border = "1px solid #a12626";
+
+  notificationTitle.textContent = "APPLICATION NOT APPROVED";
+  notificationTitle.style.color = "#a12626";
+
+  notificationMessage.textContent =
+    "Thank you for your interest in VANTAGE X GROUP LTD. After reviewing your application, the company has decided not to approve it at this time.";
+
+} else {
+
+  decisionNotification.style.background = "#fff8e8";
+  decisionNotification.style.border = "1px solid #c6a15b";
+
+  notificationTitle.textContent = "APPLICATION UNDER REVIEW";
+  notificationTitle.style.color = "#a87524";
+
+  notificationMessage.textContent =
+    "Your application has been received and is currently awaiting the CEO's decision.";
+}
+
+if (application.reviewed_at) {
+  notificationDate.textContent =
+    "Decision date: " +
+    new Date(application.reviewed_at).toLocaleString();
+} else {
+  notificationDate.textContent = "";
+}
+
+if (application.review_notes) {
+  notificationNotes.textContent =
+    "CEO Feedback: " + application.review_notes;
+} else {
+  notificationNotes.textContent = "";
+}
+        
         // Format application status
         const status =
           String(application.status || "pending")
