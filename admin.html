@@ -1858,6 +1858,98 @@ async function loadApplications() {
   }
 }
 
+   
+// ==========================================
+// OPEN INVESTOR APPLICATION FOR REVIEW
+// ==========================================
+
+    let selectedApplicationForReview = null;
+async function openApplicationReview(applicationId) {
+
+  const modal = $("applicationReviewModal");
+  const message = $("reviewMessage");
+
+  if (!currentAdmin) {
+    alert("Administrator session not detected.");
+    return;
+  }
+
+  if (!modal) {
+    alert("Application review window not found.");
+    return;
+  }
+
+  message.textContent = "Loading application details...";
+  message.className = "message info";
+
+  modal.style.display = "block";
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("investor_applications")
+      .select(`
+        id,
+        full_name,
+        company_name,
+        email,
+        phone,
+        investor_type,
+        proposed_investment_amount,
+        investment_interest,
+        status,
+        review_notes
+      `)
+      .eq("id", applicationId)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      throw new Error("Application not found.");
+    }
+
+    selectedApplicationForReview = data;
+    $("reviewFullName").textContent =
+      data.full_name || "Not provided";
+
+    $("reviewCompanyName").textContent =
+      data.company_name || "Not provided";
+
+    $("reviewEmail").textContent =
+      data.email || "Not provided";
+
+    $("reviewPhone").textContent =
+      data.phone || "Not provided";
+
+    $("reviewInvestorType").textContent =
+      data.investor_type || "Not specified";
+
+    $("reviewAmount").textContent =
+      data.proposed_investment_amount || "Not specified";
+
+    $("reviewInterest").textContent =
+      data.investment_interest || "Not specified";
+
+    $("reviewNotes").value =
+      data.review_notes || "";
+
+    message.textContent =
+      "Application loaded. Current status: " + data.status;
+
+    message.className = "message info";
+
+  } catch (error) {
+
+    console.error("Application review error:", error);
+
+    message.textContent =
+      "Unable to load application: " + error.message;
+
+    message.className = "message error";
+  }
+}
+
     
     /* COUNT REGISTERED INVESTORS */
 
