@@ -2021,6 +2021,12 @@ async function openApplicationReview(applicationId) {
     }
 
     selectedApplicationForReview = data;
+    const archiveButton = $("archiveApplicationButton");
+
+if (archiveButton) {
+  archiveButton.style.display =
+    data.status === "rejected" ? "inline-block" : "none";
+}
     $("reviewFullName").textContent =
       data.full_name || "Not provided";
 
