@@ -1655,6 +1655,129 @@ if (countElement) {
   }
 }
 
+    
+// ==========================================
+// LOAD INVESTOR APPLICATIONS
+// ==========================================
+
+async function loadApplications() {
+
+  const list = $("applicationsList");
+
+  if (!list) {
+    console.log("Applications list element not found.");
+    return;
+  }
+
+  if (!currentAdmin) {
+    list.innerHTML =
+      '<tr><td colspan="7">Admin session not detected.</td></tr>';
+    return;
+  }
+
+  list.innerHTML =
+    '<tr><td colspan="7">Loading applications...</td></tr>';
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("investor_applications")
+      .select(`
+        id,
+        user_id,
+        full_name,
+        company_name,
+        email,
+        phone,
+        investor_type,
+        proposed_investment_amount,
+        investment_interest,
+        status,
+        created_at,
+        reviewed_at,
+        review_notes
+      `)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Applications error:", error);
+
+      list.innerHTML =
+        '<tr><td colspan="7">Unable to load applications: ' +
+        escapeHTML(error.message) +
+        '</td></tr>';
+
+      return;
+    }
+
+    function renderApplications(applications) {
+
+      if (!applications.length) {
+        list.innerHTML =
+          '<tr><td colspan="7">No investor applications found.</td></tr>';
+        return;
+      }
+
+      list.innerHTML = applications.map(function(application) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(application.full_name || "Unnamed")}</td>
+
+            <td>${escapeHTML(application.email || "Not provided")}</td>
+
+            <td>${escapeHTML(application.phone || "Not provided")}</td>
+
+            <td>${escapeHTML(application.investor_type || "Not specified")}</td>
+
+            <td>${escapeHTML(application.proposed_investment_amount || "Not specified")}</td>
+
+            <td>${escapeHTML(application.status || "Pending")}</td>
+
+            <td>Review setup pending</td>
+          </tr>
+        `;
+
+      }).join("");
+    }
+
+    renderApplications(data || []);
+
+    const search = $("applicationSearch");
+
+    if (search) {
+
+      search.oninput = function() {
+
+        const term = search.value.toLowerCase().trim();
+
+        const filtered = (data || []).filter(function(application) {
+
+          return (
+            (application.full_name || "").toLowerCase().includes(term) ||
+            (application.email || "").toLowerCase().includes(term) ||
+            (application.phone || "").toLowerCase().includes(term)
+          );
+
+        });
+
+        renderApplications(filtered);
+      };
+    }
+
+    console.log("Investor applications loaded:", data);
+
+  } catch (error) {
+
+    console.error("Load applications error:", error);
+
+    list.innerHTML =
+      '<tr><td colspan="7">Unable to load applications.</td></tr>';
+
+  }
+}
+
+    
     /* COUNT REGISTERED INVESTORS */
 
 async function loadInvestorCount() {
