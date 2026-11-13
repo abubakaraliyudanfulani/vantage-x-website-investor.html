@@ -700,6 +700,11 @@ if (status === "rejected") {
   reapplyButton.style.fontWeight = "bold";
   reapplyButton.style.fontSize = "13px";
 
+  const existingReapplyButton =
+  decisionNotification.querySelector(".reapply-button");
+
+if (!existingReapplyButton) {
+  reapplyButton.className = "reapply-button";
   decisionNotification.appendChild(reapplyButton);
 }
         // Generate the application reference
