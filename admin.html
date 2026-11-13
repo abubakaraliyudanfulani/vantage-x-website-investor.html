@@ -2127,6 +2127,21 @@ async function updateApplicationDecision(newStatus) {
       );
     }
 
+    // RECORD CEO ACTIVITY IN AUDIT LOG
+const { error: logError } = await supabaseClient
+  .from("admin_activity_logs")
+  .insert({
+    actor_id: currentAdmin.user_id,
+    action: "application_" + newStatus,
+    description:
+      "CEO " + newStatus +
+      " investor application ID: " +
+      selectedApplicationForReview.id
+  });
+
+if (logError) {
+  console.error("Audit logging failed:", logError);
+}
     selectedApplicationForReview.status = newStatus;
 
     message.textContent =
