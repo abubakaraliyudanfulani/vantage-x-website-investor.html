@@ -692,6 +692,60 @@ th {
       </section>
 
 
+<!-- INVESTOR APPLICATIONS -->
+
+<section class="view" id="applications">
+
+  <div class="page-heading">
+    <h2>Investor Applications</h2>
+    <p>Review, manage and process investor applications submitted to VANTAGE X GROUP LTD.</p>
+  </div>
+
+  <div class="panel">
+
+    <div class="field">
+      <label>Search Applications</label>
+      <input
+        id="applicationSearch"
+        type="search"
+        placeholder="Search by applicant name, email or phone..."
+      >
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Applicant Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Investor Type</th>
+            <th>Proposed Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="applicationsList">
+          <tr>
+            <td colspan="7" class="empty">
+              Loading investor applications...
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div id="applicationsMessage" class="message"></div>
+
+  </div>
+
+</section>
+
+      
       <!-- REGISTER INVESTOR -->
 
       <section class="view" id="addInvestor">
