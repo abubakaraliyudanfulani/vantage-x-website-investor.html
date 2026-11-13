@@ -1734,7 +1734,15 @@ async function loadApplications() {
 
             <td>${escapeHTML(application.status || "Pending")}</td>
 
-            <td>Review setup pending</td>
+            <td>
+  <button
+    type="button"
+    class="review-button"
+    onclick="openApplicationReview('${escapeHTML(application.id)}')"
+  >
+    Review
+  </button>
+</td>
           </tr>
         `;
 
