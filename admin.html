@@ -356,6 +356,110 @@ th {
 
   .login-card { padding:25px; }
 }
+
+  /* =====================================
+   INVESTOR APPLICATION REVIEW MODAL
+===================================== */
+
+#applicationReviewModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 15, 25, 0.78);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#applicationReviewModal .panel {
+  width: 100%;
+  max-width: 650px;
+  margin: 35px auto;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+#applicationReviewModal h2 {
+  color: var(--navy);
+  margin-top: 0;
+}
+
+#applicationReviewModal p {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+#applicationReviewModal .field {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+#applicationReviewModal .field label {
+  color: var(--muted);
+}
+
+#applicationReviewModal .field p {
+  color: var(--navy);
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+#applicationReviewModal textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  resize: vertical;
+}
+
+#approveApplicationButton,
+#rejectApplicationButton,
+#closeReviewButton {
+  border: none;
+  border-radius: 7px;
+  padding: 12px 16px;
+  margin: 6px 4px 0 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#approveApplicationButton {
+  background: var(--success);
+  color: white;
+}
+
+#rejectApplicationButton {
+  background: var(--danger);
+  color: white;
+}
+
+#closeReviewButton {
+  background: #e9eef2;
+  color: var(--navy);
+}
+
+#approveApplicationButton:hover,
+#rejectApplicationButton:hover,
+#closeReviewButton:hover {
+  opacity: 0.85;
+}
+
+@media(max-width:600px) {
+  #applicationReviewModal {
+    padding: 10px;
+  }
+
+  #applicationReviewModal .panel {
+    margin: 15px auto;
+    padding: 18px;
+  }
+
+  #applicationReviewModal button {
+    width: 100%;
+    margin: 6px 0;
+  }
+}
 </style>
 </head>
 
