@@ -2054,6 +2054,70 @@ async function openApplicationReview(applicationId) {
   }
 }
 
+    // ==========================================
+// ARCHIVE REJECTED APPLICATION
+// ==========================================
+
+async function archiveRejectedApplication() {
+
+  if (!currentAdmin) {
+    alert("CEO session not detected.");
+    return;
+  }
+
+  if (!selectedApplicationForReview) {
+    alert("No application selected.");
+    return;
+  }
+
+  if (selectedApplicationForReview.status !== "rejected") {
+    alert("Only rejected applications can be archived.");
+    return;
+  }
+
+  const confirmed = confirm(
+    "Are you sure you want to archive this rejected application?"
+  );
+
+  if (!confirmed) return;
+
+  try {
+
+    const { data, error } = await supabaseClient.rpc(
+      "archive_rejected_application",
+      {
+        p_id: selectedApplicationForReview.id
+      }
+    );
+
+    if (error) throw error;
+
+    if (!data) {
+      alert("Application could not be archived.");
+      return;
+    }
+
+    await supabaseClient
+      .from("admin_activity_logs")
+      .insert({
+        actor_id: currentAdmin.user_id,
+        action: "application_archived",
+        description:
+          "CEO archived rejected application ID: " +
+          selectedApplicationForReview.id
+      });
+
+    alert("Application archived successfully.");
+
+    location.reload();
+
+  } catch (error) {
+
+    console.error("Archive error:", error);
+
+    alert("Unable to archive application: " + error.message);
+  }
+}
    
 // ==========================================
 // APPROVE OR REJECT INVESTOR APPLICATION
