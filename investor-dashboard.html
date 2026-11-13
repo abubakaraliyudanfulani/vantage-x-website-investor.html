@@ -676,6 +676,32 @@ if (application.review_notes) {
           applicationStatus.style.color = "#a87524";
         }
 
+        // ==========================================
+// ALLOW REAPPLICATION AFTER REJECTION
+// ==========================================
+
+if (status === "rejected") {
+
+  const reapplyButton =
+    document.createElement("a");
+
+  reapplyButton.href = APPLICATION_URL;
+
+  reapplyButton.textContent =
+    "APPLY AGAIN";
+
+  reapplyButton.style.display = "inline-block";
+  reapplyButton.style.marginTop = "18px";
+  reapplyButton.style.padding = "13px 22px";
+  reapplyButton.style.background = "#091725";
+  reapplyButton.style.color = "#ffffff";
+  reapplyButton.style.borderRadius = "7px";
+  reapplyButton.style.textDecoration = "none";
+  reapplyButton.style.fontWeight = "bold";
+  reapplyButton.style.fontSize = "13px";
+
+  decisionNotification.appendChild(reapplyButton);
+}
         // Generate the application reference
         const applicationDate =
           new Date(application.created_at);
