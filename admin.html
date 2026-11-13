@@ -1950,6 +1950,99 @@ async function openApplicationReview(applicationId) {
   }
 }
 
+   
+// ==========================================
+// APPROVE OR REJECT INVESTOR APPLICATION
+// ==========================================
+
+async function updateApplicationDecision(newStatus) {
+
+  const message = $("reviewMessage");
+
+  if (!currentAdmin || !currentAdmin.user_id) {
+    message.textContent = "Administrator identity could not be verified.";
+    message.className = "message error";
+    return;
+  }
+
+  if (String(currentAdmin.role).toUpperCase() !== "CEO") {
+    message.textContent = "Only the CEO can approve or reject applications.";
+    message.className = "message error";
+    return;
+  }
+
+  if (!selectedApplicationForReview) {
+    message.textContent = "Please select an application first.";
+    message.className = "message error";
+    return;
+  }
+
+  if (!["approved", "rejected"].includes(newStatus)) {
+    message.textContent = "Invalid application decision.";
+    message.className = "message error";
+    return;
+  }
+
+  if (selectedApplicationForReview.status !== "pending") {
+    message.textContent = "This application has already been reviewed.";
+    message.className = "message error";
+    return;
+  }
+
+  const reviewNotes = $("reviewNotes").value.trim();
+
+  const decision = newStatus === "approved" ? "approve" : "reject";
+
+  if (!confirm("Are you sure you want to " + decision + " this application?")) {
+    return;
+  }
+
+  message.textContent = "Saving CEO decision...";
+  message.className = "message info";
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("investor_applications")
+      .update({
+        status: newStatus,
+        reviewed_at: new Date().toISOString(),
+        reviewed_by: currentAdmin.user_id,
+        review_notes: reviewNotes || null
+      })
+      .eq("id", selectedApplicationForReview.id)
+      .eq("status", "pending")
+      .select("id, status")
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      throw new Error(
+        "No application was updated. It may already have been reviewed or your account may not have permission."
+      );
+    }
+
+    selectedApplicationForReview.status = newStatus;
+
+    message.textContent =
+      "Application successfully " + newStatus + ".";
+
+    message.className = "message success";
+
+    await loadApplications();
+
+  } catch (error) {
+
+    console.error("Application decision error:", error);
+
+    message.textContent =
+      "Decision failed: " + error.message;
+
+    message.className = "message error";
+  }
+}
+
     
     /* COUNT REGISTERED INVESTORS */
 
