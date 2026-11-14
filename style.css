@@ -87,15 +87,18 @@ button {
 
 .header .logo {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  flex: 0 0 310px;
-  width: 310px;
+  flex: 0 0 330px;
+  width: 330px;
+  min-width: 330px;
   height: 65px;
-  gap: 12px;
+  gap: 15px;
   margin: 0;
   padding: 0;
   overflow: visible;
+  position: relative;
   text-decoration: none;
 }
 
