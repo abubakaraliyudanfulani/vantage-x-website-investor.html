@@ -1279,36 +1279,199 @@ button {
   }
 }
 
+
 /* =========================================
-   CONTACT SECTION
+   CONTACT — PREMIUM CORPORATE DESIGN
 ========================================= */
 
-.contact {
+#contact.contact {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 8%;
+  background:
+    linear-gradient(
+      135deg,
+      #071725,
+      #102b3e
+    );
+  color: #ffffff;
+}
+
+#contact.contact::before {
+  content: "X";
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  color: rgba(210, 173, 112, 0.045);
+  font-family: var(--heading);
+  font-size: clamp(250px, 40vw, 520px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.contact-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1350px;
+  margin: auto;
+}
+
+/* CONTACT INTRODUCTION */
+
+.contact-heading {
+  max-width: 850px;
+  margin: 0 auto 70px;
   text-align: center;
-  background: var(--navy);
 }
 
-.contact h2 {
-  max-width: 750px;
-  margin: 0 auto 20px;
+.contact .eyebrow {
+  color: #d1ad72;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
 }
 
-.contact > p:not(.eyebrow) {
-  max-width: 620px;
-  margin: 0 auto;
-  color: #aebac4;
-  font-size: 13px;
+.contact-heading h2 {
+  color: #ffffff;
+  font-family: var(--heading);
+  font-size: clamp(42px, 5.5vw, 70px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 25px;
 }
 
-.contact-email {
+.contact-heading h2 span {
+  display: block;
+  color: #d1ad72;
+}
+
+.contact-description {
+  max-width: 720px;
+  margin: auto;
+  color: #bdc9d2;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* CONTACT INFORMATION CARDS */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 23px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 290px;
+  padding: 35px 28px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(210, 173, 112, 0.22);
+  transition: transform 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  border-color: #c9a46b;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.contact-label {
+  color: #d1ad72;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  margin-bottom: 24px;
+}
+
+.contact-card h3 {
+  color: #ffffff;
+  font-family: var(--heading);
+  font-size: 27px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.contact-card p {
+  color: #bdc9d2;
+  font-size: 12px;
+  line-height: 2;
+  margin-bottom: 25px;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: auto;
+  color: #dfbd83;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  border-bottom: 1px solid #b8945c;
+  padding-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.contact-link span {
+  font-size: 17px;
+}
+
+.contact-location {
   display: inline-block;
-  margin: 25px 0 30px;
-  color: var(--gold-light);
-  font-size: 16px;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 5px;
+  width: fit-content;
+  margin-top: auto;
+  padding-bottom: 8px;
+  color: #dfbd83;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid #b8945c;
 }
+
+/* FINAL CORPORATE MESSAGE */
+
+.contact-bottom {
+  max-width: 900px;
+  margin: 95px auto 0;
+  padding: 55px 30px;
+  text-align: center;
+  border-top: 1px solid rgba(210, 173, 112, 0.3);
+  border-bottom: 1px solid rgba(210, 173, 112, 0.3);
+}
+
+.contact-bottom h3 {
+  color: #ffffff;
+  font-family: var(--heading);
+  font-size: clamp(32px, 4vw, 45px);
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.contact-bottom > p:not(.eyebrow) {
+  max-width: 650px;
+  margin: auto;
+  color: #bdc9d2;
+  font-size: 13px;
+  line-height: 2;
+}
+
 
 /* =========================================
    FOOTER
