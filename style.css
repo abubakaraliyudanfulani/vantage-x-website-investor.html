@@ -1086,10 +1086,11 @@ min-width: 0;
   }
 
   .header .logo img {
-  width: 75px;
-  height: 60px;
-  flex: 0 0 75px;
-  max-width: none;
+  display: block;
+  width: 240px;
+  height: auto;
+  max-width: 100%;
+  flex: 0 1 240px;
   object-fit: contain;
   object-position: left center;
   }
