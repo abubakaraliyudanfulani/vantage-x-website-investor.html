@@ -2133,6 +2133,63 @@ if (archiveButton) {
 // LOAD ARCHIVED INVESTOR APPLICATIONS
 // ==========================================
 
+    let selectedArchivedApplication = null;
+
+async function openArchivedApplicationDetails(applicationId) {
+
+  const modal = $("archivedApplicationModal");
+  const message = $("archivedDetailsMessage");
+
+  if (!currentAdmin) {
+    alert("Administrator session not detected.");
+    return;
+  }
+
+  message.textContent = "Loading archived application...";
+  message.className = "message info";
+  modal.style.display = "block";
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("investor_applications")
+      .select("*")
+      .eq("id", applicationId)
+      .not("archived_at", "is", null)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      throw new Error("Archived application not found.");
+    }
+
+    selectedArchivedApplication = data;
+
+    $("archiveFullName").textContent = data.full_name || "Not provided";
+    $("archiveCompanyName").textContent = data.company_name || "Not provided";
+    $("archiveEmail").textContent = data.email || "Not provided";
+    $("archivePhone").textContent = data.phone || "Not provided";
+    $("archiveInvestorType").textContent = data.investor_type || "Not specified";
+    $("archiveAmount").textContent = data.proposed_investment_amount || "Not specified";
+    $("archiveInterest").textContent = data.investment_interest || "Not specified";
+    $("archiveStatus").textContent = data.status || "Unknown";
+    $("archiveReviewNotes").textContent = data.review_notes || "No review notes recorded.";
+    $("archiveDate").textContent = data.archived_at
+      ? new Date(data.archived_at).toLocaleString()
+      : "Unknown";
+
+    message.textContent = "";
+
+  } catch (error) {
+
+    console.error("Archived application details error:", error);
+
+    message.textContent = error.message;
+    message.className = "message error";
+
+  }
+}
 async function loadArchivedApplications() {
 
   const list = $("archivesList");
