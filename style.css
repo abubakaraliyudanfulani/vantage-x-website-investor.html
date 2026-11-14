@@ -103,12 +103,12 @@ button {
 }
 .header .logo img {
   display: block;
-  width: 350px;
-  height: auto;
-  max-width: 100%;
-  flex: 0 1 350px;
+  width: 115px;
+  height: 65px;
+  max-width: 115px;
+  flex: 0 0 115px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
   position: relative;
   z-index: 2;
 }
