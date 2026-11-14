@@ -689,56 +689,131 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  gap: 12px;
+  padding: 15px 28px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
+.services-footer .btn-primary:hover {
+  background: #ffffff;
+  transform: translateY(-3px);
+}
+   
 /* =========================================
-   PROPERTY PORTFOLIO
+   PROPERTY OPPORTUNITIES — PREMIUM DESIGN
 ========================================= */
 
-.properties {
-  background: #f1eee8;
+#properties.properties {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #f8f6f0 0%,
+    #ffffff 52%,
+    #eee9df 100%
+  );
   color: var(--navy);
+  padding: 120px 8%;
+}
+
+#properties.properties::before {
+  content: "X";
+  position: absolute;
+  top: 25px;
+  right: 4%;
+  font-family: var(--heading);
+  font-size: clamp(200px, 32vw, 440px);
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(198, 163, 101, 0.045);
+  pointer-events: none;
+}
+
+.properties-heading {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 0 auto 65px;
+  text-align: center;
 }
 
 .properties .eyebrow {
   color: #94713b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.properties-heading h2 {
+  color: #091b2b;
+  font-family: var(--heading);
+  font-size: clamp(42px, 5.5vw, 70px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  margin-bottom: 22px;
+}
+
+.properties-heading h2 span {
+  display: block;
+  color: #a17d45;
 }
 
 .properties .section-description {
+  max-width: 650px;
+  margin: 0 auto;
   color: #66727c;
+  font-size: 14px;
+  line-height: 2;
 }
 
 .property-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  gap: 25px;
+  max-width: 1350px;
+  margin: auto;
 }
 
 .property-card {
   position: relative;
-  min-height: 410px;
+  min-height: 460px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  padding: 30px;
+  padding: 32px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 45px rgba(9, 27, 43, 0.12);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
 }
 
 .property-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 55px rgba(9, 27, 43, 0.2);
 }
 
 .property-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(4, 13, 21, 0.96),
-    rgba(4, 13, 21, 0.35) 55%,
-    rgba(4, 13, 21, 0.05)
+    rgba(4, 13, 21, 0.97) 0%,
+    rgba(4, 13, 21, 0.72) 40%,
+    rgba(4, 13, 21, 0.12) 100%
   );
   transition: background 0.4s ease;
 }
@@ -747,66 +822,96 @@ button {
   background: linear-gradient(
     to top,
     rgba(4, 13, 21, 0.98),
-    rgba(4, 13, 21, 0.2) 70%
+    rgba(4, 13, 21, 0.45) 65%,
+    rgba(4, 13, 21, 0.08)
   );
 }
 
-/* Luxury mansion */
+/* PROPERTY IMAGES */
 
 .property-one {
-  background-image:
-    url('https://images.unsplash.com/photo-1600585154340-be6161a56c0?auto=format&fit=crop&w=1200&q=90');
+  background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56c0?auto=format&fit=crop&w=1200&q=90');
 }
-
-/* Premium modern apartment */
 
 .property-two {
-  background-image:
-    url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=90');
+  background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=90');
 }
-
-/* Contemporary residential architecture */
 
 .property-three {
-  background-image:
-    url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=90');
+  background-image: url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=90');
 }
+
+/* PROPERTY INFORMATION */
 
 .property-info {
   position: relative;
   z-index: 2;
+  width: 100%;
+}
+
+.property-category {
+  display: inline-block;
+  color: #e0bd80;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  line-height: 1.8;
+  margin-bottom: 17px;
 }
 
 .property-info h3 {
+  color: #ffffff;
   font-family: var(--heading);
-  font-size: 32px;
+  font-size: clamp(27px, 2.5vw, 35px);
   font-weight: 500;
-  color: var(--white);
-  margin-bottom: 10px;
+  line-height: 1.2;
+  margin-bottom: 14px;
 }
 
 .property-info p {
   color: #e0d7c9;
   font-size: 12px;
-  line-height: 1.9;
-  margin-bottom: 20px;
+  line-height: 2;
+  margin-bottom: 25px;
 }
 
 .property-info .service-link {
-  display: inline-block;
-  color: var(--gold-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5c58e;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 1.5px;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 7px;
+  letter-spacing: 1.6px;
+  border-bottom: 1px solid #b8945c;
+  padding-bottom: 9px;
+  transition: all 0.3s ease;
 }
 
-.portfolio-note {
-  margin-top: 25px;
-  color: #78838b;
-  font-size: 10px;
+.property-info .service-link:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  gap: 16px;
 }
+
+/* PORTFOLIO DISCLOSURE */
+
+.portfolio-note {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 35px auto 0;
+  padding: 18px 22px;
+  border-left: 2px solid #b8945c;
+  background: rgba(255, 255, 255, 0.65);
+  color: #68737c;
+  font-size: 11px;
+  line-height: 1.9;
+  text-align: center;
+}
+   
+
+
 
 /* =========================================
    INVESTMENT SECTION
