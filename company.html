@@ -947,6 +947,15 @@
 
   <!-- FOOTER -->
 
+  <div style="text-align:center; padding:35px 20px; background:#f5f2ec;">
+  <button
+    onclick="downloadCompanyProfilePDF()"
+    class="profile-button"
+    type="button"
+  >
+    DOWNLOAD COMPANY PROFILE PDF
+  </button>
+  </div>
   <footer class="profile-footer">
 
     <p>
@@ -967,6 +976,344 @@
   <script src="script.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+async function downloadCompanyProfilePDF() {
+
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF service is unavailable. Please refresh the page.");
+    return;
+  }
+
+  try {
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4"
+    });
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 18;
+    const contentWidth = pageWidth - margin * 2;
+    let y = 20;
+
+    // LOAD CEO PHOTOGRAPH
+    let ceoImage = null;
+
+    try {
+      const image = new Image();
+      image.src = "ceo-founder.png";
+
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+      });
+
+      ceoImage = image;
+    } catch (error) {
+      console.warn("CEO photograph could not load:", error);
+    }
+
+    // PAGE HEADER
+    function addHeader() {
+      doc.setFillColor(9, 23, 37);
+      doc.rect(0, 0, pageWidth, 35, "F");
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(15);
+      doc.text("VANTAGE X GROUP LTD", margin, 15);
+
+      doc.setTextColor(225, 199, 149);
+      doc.setFontSize(9);
+      doc.text("ESTATES & CO.", margin, 22);
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.text(
+        "Building Value. Creating Opportunities.",
+        margin,
+        28
+      );
+
+      doc.setDrawColor(197, 163, 106);
+      doc.setLineWidth(1);
+      doc.line(0, 35, pageWidth, 35);
+
+      y = 47;
+    }
+
+    // PAGE FOOTER
+    function addFooter() {
+      const count = doc.internal.getNumberOfPages();
+
+      for (let i = 1; i <= count; i++) {
+        doc.setPage(i);
+
+        doc.setDrawColor(197, 163, 106);
+        doc.line(margin, pageHeight - 15,
+          pageWidth - margin, pageHeight - 15);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(7);
+        doc.setTextColor(110, 120, 130);
+
+        doc.text(
+          "VANTAGE X GROUP LTD | KANO STATE, NIGERIA",
+          pageWidth / 2,
+          pageHeight - 10,
+          { align: "center" }
+        );
+
+        doc.text(
+          "Page " + i + " of " + count,
+          pageWidth - margin,
+          pageHeight - 10,
+          { align: "right" }
+        );
+      }
+    }
+
+    // NEW PAGE
+    function newPage() {
+      doc.addPage();
+      addHeader();
+    }
+
+    // SECTION HEADING
+    function heading(title) {
+      if (y > pageHeight - 35) newPage();
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.setTextColor(148, 113, 59);
+      doc.text(title, margin, y);
+
+      y += 9;
+    }
+
+    // PARAGRAPH
+    function paragraph(content) {
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(75, 88, 99);
+
+      const lines = doc.splitTextToSize(
+        content,
+        contentWidth
+      );
+
+      for (const line of lines) {
+        if (y > pageHeight - 23) newPage();
+
+        doc.text(line, margin, y);
+        y += 5;
+      }
+
+      y += 4;
+    }
+
+    // BULLET LIST
+    function bullets(items) {
+      for (const item of items) {
+        paragraph("• " + item);
+      }
+    }
+
+    // COVER / INTRODUCTION
+    addHeader();
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.setTextColor(9, 23, 37);
+
+    doc.text(
+      "COMPANY PROFILE",
+      pageWidth / 2,
+      y + 12,
+      { align: "center" }
+    );
+
+    y += 27;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(148, 113, 59);
+
+    doc.text(
+      "ESTATES & CO. | KANO STATE, NIGERIA",
+      pageWidth / 2,
+      y,
+      { align: "center" }
+    );
+
+    y += 18;
+
+    heading("01 — COMPANY OVERVIEW");
+
+    paragraph(
+      "VANTAGE X GROUP LTD is a Nigerian business focused on real estate, investment opportunities and professional corporate services."
+    );
+
+    paragraph(
+      "Our aim is to connect people with valuable property opportunities, support informed investment decisions and build meaningful business relationships."
+    );
+
+    paragraph(
+      "We believe sustainable growth comes from professionalism, transparency, strategic thinking and long-term value creation."
+    );
+
+    heading("02 — VISION");
+
+    paragraph(
+      "To become a respected and trusted business group recognized for excellence in real estate, responsible investment opportunities and sustainable business development across Nigeria and beyond."
+    );
+
+    heading("03 — MISSION");
+
+    paragraph(
+      "To create meaningful value by connecting people with property opportunities, promoting informed investment decisions, delivering professional services and building lasting partnerships."
+    );
+
+    heading("04 — CORE VALUES");
+
+    bullets([
+      "Integrity — Honesty, transparency and ethical business practices.",
+      "Excellence — High standards in our services and operations.",
+      "Trust — Building confidence through responsible conduct.",
+      "Innovation — Embracing modern ideas and technology.",
+      "Accountability — Taking responsibility for our decisions.",
+      "Long-Term Value — Prioritizing sustainable opportunities."
+    ]);
+
+    heading("05 — OUR SERVICES");
+
+    bullets([
+      "Real Estate Services",
+      "Investment Opportunities",
+      "Business Development",
+      "Corporate Services",
+      "Strategic Partnerships"
+    ]);
+
+    heading("06 — STRATEGIC OBJECTIVES");
+
+    bullets([
+      "Establish a strong real estate presence.",
+      "Promote responsible investment practices.",
+      "Build strategic business partnerships.",
+      "Strengthen corporate operations.",
+      "Embrace technology and digital development.",
+      "Explore opportunities across Nigeria and beyond."
+    ]);
+
+    heading("07 — GOVERNANCE & COMPLIANCE");
+
+    paragraph(
+      "We recognize the importance of responsible leadership, proper documentation, transparency and accountability. Our principles include accurate business information, responsible decision-making, proper business records, clear contractual terms and compliance with applicable Nigerian laws."
+    );
+
+    paragraph(
+      "Where a business activity requires regulatory approval or licensing, the necessary authorization must be obtained before that activity is undertaken."
+    );
+
+    paragraph(
+      "No investment return should be understood as guaranteed. All opportunities are subject to their documented terms and associated risks."
+    );
+
+    heading("08 — CLIENT & INVESTOR RELATIONS");
+
+    paragraph(
+      "We aim to build lasting relationships through professional communication, transparency, respect and responsible service."
+    );
+
+    bullets([
+      "Clear communication with clients.",
+      "Relevant information for prospective investors.",
+      "Properly documented agreements.",
+      "Respect for confidentiality.",
+      "Fair handling of complaints.",
+      "Mutually beneficial partnerships."
+    ]);
+
+    // FOUNDER PROFILE
+    newPage();
+
+    heading("09 — FOUNDER & CHIEF EXECUTIVE OFFICER");
+
+    if (ceoImage) {
+      const ratio = ceoImage.width / ceoImage.height;
+      const imageWidth = 65;
+      const imageHeight = imageWidth / ratio;
+
+      doc.addImage(
+        ceoImage,
+        "PNG",
+        margin,
+        y,
+        imageWidth,
+        imageHeight
+      );
+
+      y += imageHeight + 12;
+    }
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.setTextColor(9, 23, 37);
+
+    doc.text("Abubakar Aliyu", margin, y);
+    y += 8;
+
+    doc.setFontSize(9);
+    doc.setTextColor(148, 113, 59);
+
+    doc.text(
+      "FOUNDER & CHIEF EXECUTIVE OFFICER",
+      margin,
+      y
+    );
+
+    y += 10;
+
+    paragraph(
+      "Abubakar Aliyu is the Founder and Chief Executive Officer of VANTAGE X GROUP LTD. His vision is to build a respected business group focused on real estate, responsible investment opportunities, strategic partnerships and long-term value creation."
+    );
+
+    paragraph(
+      "Through a commitment to professionalism, integrity and continuous development, he aims to build meaningful relationships with clients, investors and business partners."
+    );
+
+    heading("10 — CONTACT INFORMATION");
+
+    paragraph("VANTAGE X GROUP LTD — ESTATES & CO.");
+    paragraph("Location: Kano State, Nigeria");
+    paragraph("Email: vantagexgroupltd@gmail.com");
+    paragraph("Website: https://abubakaraliyudanfulani.github.io/vantage-x-website-investor.html/");
+
+    // DISCLAIMER
+    heading("IMPORTANT NOTICE");
+
+    paragraph(
+      "This company profile provides general information about VANTAGE X GROUP LTD. It is not an investment offer, investment agreement, guarantee of returns or confirmation of regulatory approval. All business and investment activities remain subject to applicable laws and documented terms."
+    );
+
+    // FOOTERS AND DOWNLOAD
+    addFooter();
+
+    doc.save("VANTAGE-X-GROUP-LTD-Company-Profile.pdf");
+
+  } catch (error) {
+    console.error("Company profile PDF error:", error);
+    alert("Unable to generate the Company Profile PDF. Please try again.");
+  }
+}
+        </script>
+  
 </body>
 </html>
 
