@@ -850,6 +850,57 @@ th {
 
 </section>
 
+   
+<!-- ARCHIVED INVESTOR APPLICATIONS -->
+
+<section class="view" id="archives">
+
+  <div class="page-heading">
+    <h2>Archived Applications</h2>
+    <p>View rejected investor applications archived by the CEO.</p>
+  </div>
+
+  <div class="panel">
+
+    <div class="actions">
+      <button
+        class="btn btn-light"
+        id="refreshArchivesButton"
+        type="button">
+        Refresh Archives
+      </button>
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Applicant Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Investor Type</th>
+            <th>Proposed Amount</th>
+            <th>Archived Date</th>
+          </tr>
+        </thead>
+
+        <tbody id="archivesList">
+          <tr>
+            <td colspan="6" class="empty">
+              Loading archived applications...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div id="archivesMessage" class="message"></div>
+
+  </div>
+
+</section>
       
 <!-- APPLICATION REVIEW WINDOW -->
 
