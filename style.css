@@ -1840,5 +1840,111 @@ button {
   line-height: 1.9;
   text-align: left;
 }
+
+   
+/* INVESTMENT SECTION — MOBILE RESPONSIVE */
+
+#investment.investment {
+  padding: 85px 7%;
+}
+
+.investment-heading {
+  margin-bottom: 45px;
+}
+
+.investment-heading h2 {
+  font-size: clamp(36px, 10vw, 49px);
+  line-height: 1.15;
+}
+
+.investment-description {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.investment-grid {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.investment-card {
+  min-height: auto;
+  padding: 30px 24px;
+}
+
+.investment-card h3 {
+  font-size: 27px;
+}
+
+.investment-card p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.investment-card a {
+  font-size: 9px;
+}
+
+.investment-process {
+  margin-top: 65px;
+  padding: 40px 22px;
+}
+
+.investment-process-heading {
+  margin-bottom: 35px;
+}
+
+.investment-process-heading h3 {
+  font-size: 30px;
+}
+
+.investment-steps {
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.investment-step {
+  padding-top: 17px;
+}
+
+.investment-step span {
+  font-size: 26px;
+}
+
+.investment-step h4 {
+  font-size: 14px;
+}
+
+.investment-step p {
+  font-size: 11px;
+}
+
+.investment-cta {
+  margin-top: 65px;
+  padding: 42px 22px;
+}
+
+.investment-cta h3 {
+  font-size: 32px;
+}
+
+.investment-cta > p:not(.eyebrow) {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.investment-cta .btn-primary {
+  width: 100%;
+  padding: 15px 18px;
+  font-size: 9px;
+  line-height: 1.8;
+}
+
+.investment-disclaimer {
+  margin-top: 25px;
+  padding: 16px;
+  font-size: 10px;
+  line-height: 1.9;
+}
    
    }
