@@ -1131,4 +1131,45 @@ button {
     padding: 13px 17px;
     font-size: 11px;
   }
+   .hero {
+  min-height: 100svh;
+  padding: 145px 7% 75px;
+  align-items: center;
+  background-position: 58% center;
+}
+
+.hero-content {
+  max-width: 100%;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 11vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin-bottom: 22px;
+}
+
+.hero-description {
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  gap: 12px;
+}
+
+.btn-primary,
+.btn-outline {
+  min-height: 49px;
+  padding: 13px 19px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.hero-location {
+  margin-top: 38px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+}
    }
