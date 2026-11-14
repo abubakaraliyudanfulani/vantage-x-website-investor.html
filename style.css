@@ -2276,5 +2276,62 @@ button {
   font-size: 12px;
   line-height: 1.9;
 }
+
+   
+/* FOOTER — MOBILE RESPONSIVE */
+
+.footer {
+  padding: 65px 7% 25px;
+}
+
+.footer-container {
+  grid-template-columns: 1fr;
+  gap: 38px;
+  padding-bottom: 45px;
+}
+
+.footer-brand h3 {
+  font-size: 17px;
+}
+
+.footer-description {
+  max-width: 100%;
+  font-size: 11px;
+}
+
+.footer-column {
+  gap: 13px;
+}
+
+.footer-column h4 {
+  margin-bottom: 8px;
+}
+
+.footer-column a {
+  font-size: 11px;
+}
+
+.footer-contact a {
+  overflow-wrap: anywhere;
+}
+
+.footer-legal {
+  gap: 16px 22px;
+  margin-bottom: 20px;
+}
+
+.footer-legal a {
+  font-size: 9px;
+}
+
+.footer-bottom p {
+  font-size: 9px;
+}
+
+.footer-bottom .footer-signature {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  line-height: 2;
+}
    
    }
