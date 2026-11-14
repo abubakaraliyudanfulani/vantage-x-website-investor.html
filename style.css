@@ -92,6 +92,26 @@ button {
   transition: color 0.3s ease;
 }
 
+.logo {
+  display: flex;
+  flex-direction: column;
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.logo img {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .logo::after {
   content: "ESTATES & CO.";
   display: block;
