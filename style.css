@@ -171,23 +171,28 @@ button {
    HERO / LUXURY HOMEPAGE
 ========================================= */
 
+
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 165px 9% 100px;
+  padding: 175px 9% 110px;
+  overflow: hidden;
 
   background:
     linear-gradient(
       90deg,
-      rgba(5, 17, 29, 0.96) 0%,
-      rgba(5, 17, 29, 0.78) 48%,
-      rgba(5, 17, 29, 0.24) 100%
+      rgba(5, 15, 27, 0.97) 0%,
+      rgba(5, 15, 27, 0.84) 42%,
+      rgba(5, 15, 27, 0.48) 72%,
+      rgba(5, 15, 27, 0.25) 100%
     ),
     url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=90')
     center 55% / cover no-repeat;
 }
+
 
 .hero::after {
   content: '';
