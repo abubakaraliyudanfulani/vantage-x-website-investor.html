@@ -104,10 +104,11 @@ button {
 
 .header .logo img {
   display: block;
-  width: 58px;
-  height: 58px;
-  flex: 0 0 58px;
+  width: 85px;
+  height: 65px;
+  flex: 0 0 85px;
   object-fit: contain;
+  object-position: left center;
   position: relative;
   z-index: 2;
 }
