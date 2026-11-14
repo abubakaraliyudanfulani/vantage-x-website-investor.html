@@ -235,6 +235,12 @@ button {
   margin-bottom: 28px;
 }
 
+.hero h1 span {
+  display: inline-block;
+  color: var(--gold);
+  font-weight: 500;
+}
+
 .hero-description {
   max-width: 570px;
   color: #d2d9df;
