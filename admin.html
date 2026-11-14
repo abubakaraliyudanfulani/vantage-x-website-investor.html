@@ -2637,6 +2637,254 @@ if (closeArchivedDetailsButton) {
     
 /* START APPLICATION */
 
+    // ======================================
+// GENERATE ARCHIVED APPLICATION PDF
+// ======================================
+
+async function downloadArchivedApplicationPDF() {
+
+  const app = selectedArchivedApplication;
+
+  if (!app) {
+    alert("No archived application is selected.");
+    return;
+  }
+
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF service could not load. Please refresh the page.");
+    return;
+  }
+
+  try {
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4"
+    });
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 18;
+    const contentWidth = pageWidth - margin * 2;
+
+    // WATERMARK
+    doc.setTextColor(245, 242, 235);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(24);
+    doc.text(
+      "VANTAGE X GROUP LTD",
+      pageWidth / 2,
+      155,
+      { align: "center", angle: 35 }
+    );
+
+    // COMPANY LETTERHEAD
+    doc.setFillColor(9, 23, 37);
+    doc.rect(0, 0, pageWidth, 44, "F");
+
+    doc.setDrawColor(197, 163, 106);
+    doc.setLineWidth(1.2);
+    doc.line(0, 44, pageWidth, 44);
+
+    // COMPANY LOGO
+    try {
+      const logo = new Image();
+      logo.src = "vantage-x-logo.png";
+
+      await new Promise(function(resolve, reject) {
+        logo.onload = resolve;
+        logo.onerror = reject;
+      });
+
+      doc.addImage(logo, "PNG", margin, 8, 27, 27);
+
+    } catch (logoError) {
+      console.warn("Company logo could not be added:", logoError);
+    }
+
+    // COMPANY NAME
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+
+    doc.text(
+      "VANTAGE X GROUP LTD",
+      pageWidth / 2 + 10,
+      17,
+      { align: "center" }
+    );
+
+    doc.setTextColor(225, 199, 149);
+    doc.setFontSize(9);
+
+    doc.text(
+      "ESTATES & CO.",
+      pageWidth / 2 + 10,
+      24,
+      { align: "center" }
+    );
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+
+    doc.text(
+      "Building Value. Creating Opportunities.",
+      pageWidth / 2 + 10,
+      31,
+      { align: "center" }
+    );
+
+    doc.setTextColor(225, 199, 149);
+
+    doc.text(
+      "vantagexgroupltd@gmail.com",
+      pageWidth / 2 + 10,
+      38,
+      { align: "center" }
+    );
+
+    // DOCUMENT HEADING
+    let y = 58;
+
+    doc.setTextColor(9, 23, 37);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+
+    doc.text(
+      "ARCHIVED APPLICATION RECORD",
+      pageWidth / 2,
+      y,
+      { align: "center" }
+    );
+
+    y += 15;
+
+    // APPLICATION DETAILS
+    const submittedDate = app.created_at
+      ? new Date(app.created_at).toLocaleString()
+      : "Not available";
+
+    const archivedDate = app.archived_at
+      ? new Date(app.archived_at).toLocaleString()
+      : "Not available";
+
+    const fields = [
+      ["Full Name", app.full_name],
+      ["Company / Organisation", app.company_name],
+      ["Email Address", app.email],
+      ["Phone Number", app.phone],
+      ["Investor Type", app.investor_type],
+      ["Proposed Investment Amount", app.proposed_investment_amount],
+      ["Investment Interest", app.investment_interest],
+      ["Application Status", app.status],
+      ["Date Submitted", submittedDate],
+      ["Archived Date", archivedDate],
+      ["CEO Review Notes", app.review_notes]
+    ];
+
+    doc.setFontSize(9);
+
+    for (const field of fields) {
+
+      const label = field[0];
+      const value = String(field[1] || "Not provided");
+
+      if (y > pageHeight - 35) {
+        doc.addPage();
+        y = 25;
+      }
+
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(65, 75, 85);
+
+      doc.text(label + ":", margin, y);
+
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(20, 35, 48);
+
+      const wrappedValue = doc.splitTextToSize(
+        value,
+        contentWidth - 58
+      );
+
+      doc.text(wrappedValue, margin + 58, y);
+
+      y += Math.max(7, wrappedValue.length * 5);
+    }
+
+    // LEGAL DISCLAIMER
+    const legalText =
+      "IMPORTANT: This document is an archived record of an investor application. It is not an investment agreement, approval letter, investment certificate, proof of funds, ownership document, confirmation of investment allocation, or guarantee of capital or returns.";
+
+    const legalLines = doc.splitTextToSize(
+      legalText,
+      contentWidth
+    );
+
+    if (y + legalLines.length * 5 + 20 > pageHeight - 15) {
+      doc.addPage();
+      y = 25;
+    }
+
+    y += 7;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8);
+    doc.setTextColor(130, 55, 45);
+
+    doc.text(legalLines, margin, y);
+
+    // FOOTER ON EVERY PAGE
+    const pageCount = doc.internal.getNumberOfPages();
+
+    for (let page = 1; page <= pageCount; page++) {
+
+      doc.setPage(page);
+
+      const footerY = pageHeight - 12;
+
+      doc.setDrawColor(197, 163, 106);
+      doc.line(
+        margin,
+        footerY - 5,
+        pageWidth - margin,
+        footerY - 5
+      );
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7);
+      doc.setTextColor(110, 120, 130);
+
+      doc.text(
+        "VANTAGE X GROUP LTD | Kano State, Nigeria",
+        pageWidth / 2,
+        footerY,
+        { align: "center" }
+      );
+    }
+
+    // SAVE PDF
+    const safeReference = String(
+      app.application_reference || app.id
+    ).replace(/[^a-zA-Z0-9-]/g, "");
+
+    doc.save(
+      "VANTAGE-X-Archived-Application-" +
+      safeReference +
+      ".pdf"
+    );
+
+  } catch (error) {
+
+    console.error("Archived PDF generation error:", error);
+
+    alert("Unable to generate the archived application PDF.");
+  }
+}
 initialiseDashboard();
     
 /* =====================================
