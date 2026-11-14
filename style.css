@@ -896,15 +896,6 @@ button {
   gap: 8px;
 }
 
-.header .logo img {
-  width: 70px;
-  height: 60px;
-  flex: 0 0 70px;
-  max-width: none;
-  object-fit: contain;
-  object-position: left center;
-}
-
 .header .logo-text strong {
   font-size: 11px;
   letter-spacing: 1px;
