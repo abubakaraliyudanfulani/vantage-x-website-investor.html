@@ -80,31 +80,22 @@ button {
   -webkit-backdrop-filter: blur(18px);
 }
 
-.logo {
+/* OFFICIAL COMPANY LOGO */
+
+.header .logo {
   display: flex;
-  flex-direction: column;
-  color: var(--white);
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  line-height: 1.25;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 190px;
+  width: 190px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-decoration: none;
 }
 
-.logo {
-  display: flex;
-  flex-direction: column;
-  color: var(--white);
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  line-height: 1.25;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.logo img {
+.header .logo img {
   display: block;
   width: 170px;
   max-width: 100%;
@@ -113,18 +104,8 @@ button {
   object-position: left center;
 }
 
-.logo::after {
-  content: "ESTATES & CO.";
-  display: block;
-  margin-top: 5px;
-  color: var(--gold);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 4px;
-}
-
-.logo:hover {
-  color: var(--gold-light);
+.header .logo::after {
+  content: none;
 }
 
 .navigation {
