@@ -1220,4 +1220,44 @@ button {
   font-size: 9px;
   letter-spacing: 2.5px;
 }
+
+   /* ABOUT SECTION — MOBILE */
+
+.about {
+  padding: 85px 7%;
+}
+
+.about-container {
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.about h2 {
+  font-size: clamp(36px, 10vw, 48px);
+  line-height: 1.15;
+}
+
+.about-description {
+  font-size: 13px;
+  line-height: 1.95;
+}
+
+.about-info-card {
+  padding: 25px 22px;
+}
+
+.about-info-card h3 {
+  font-size: 25px;
+}
+
+.about-bottom {
+  margin-top: 50px;
+  padding: 38px 20px;
+}
+
+.about-bottom span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
    }
