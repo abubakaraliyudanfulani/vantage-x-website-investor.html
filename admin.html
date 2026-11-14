@@ -2186,6 +2186,14 @@ async function loadArchivedApplications() {
           <td>${escapeHTML(application.investor_type || "Not specified")}</td>
           <td>${escapeHTML(application.proposed_investment_amount || "Not specified")}</td>
           <td>${escapeHTML(archivedDate)}</td>
+          <td>
+  <button
+    type="button"
+    onclick="openArchivedApplicationDetails('${escapeHTML(application.id)}')"
+  >
+    VIEW DETAILS
+  </button>
+</td>
         </tr>
       `;
 
