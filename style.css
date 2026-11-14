@@ -1080,22 +1080,25 @@ button {
 @media (max-width: 650px) {
 
      .header .logo {
-    flex: 0 0 220px;
-    width: 220px;
-    min-width: 220px;
-    height: 55px;
-    gap: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 1 260px;
+  width: 260px;
+  min-width: 0;
+  height: 55px;
+  gap: 8px;
+}
 
-  .header .logo img {
+.header .logo img {
   display: block;
-  width: 240px;
-  height: auto;
-  max-width: 100%;
-  flex: 0 1 240px;
+  width: 75px;
+  height: 50px;
+  max-width: 75px;
+  flex: 0 0 75px;
   object-fit: contain;
-  object-position: left center;
-  }
+  object-position: center;
+}
 
   .header .logo-text strong {
     font-size: 11px;
