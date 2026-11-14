@@ -290,13 +290,13 @@ button {
 }
 
 .hero-description {
-  max-width: 650px;
-  color: #d5dce3;
+  max-width: 680px;
+  color: #dce2e8;
   font-size: 15px;
   font-weight: 400;
-  line-height: 2.1;
-  letter-spacing: 0.2px;
-  margin-bottom: 40px;
+  line-height: 2;
+  letter-spacing: 0.3px;
+  margin-bottom: 42px;
 }
 
 .hero-buttons {
