@@ -2000,7 +2000,6 @@ async function openApplicationReview(applicationId) {
     const { data, error } = await supabaseClient
       .from("investor_applications")
       .select(`
-        .select(`
   id,
   full_name,
   company_name,
