@@ -118,6 +118,9 @@ button {
   justify-content: center;
   line-height: 1.2;
   white-space: nowrap;
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
 }
 
 .header .logo-text strong {
