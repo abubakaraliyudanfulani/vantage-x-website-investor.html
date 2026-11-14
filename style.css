@@ -1364,4 +1364,68 @@ button {
   letter-spacing: 2px;
   line-height: 1.8;
 }
+
+   /* SERVICES — MOBILE RESPONSIVE */
+
+#services.services {
+  padding: 85px 7%;
+}
+
+.services-heading {
+  margin-bottom: 42px;
+}
+
+.services-heading h2 {
+  font-size: clamp(34px, 9vw, 45px);
+  line-height: 1.18;
+}
+
+.services-heading .section-description {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+#services .service-grid {
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+#services .service-image {
+  height: 220px;
+}
+
+#services .service-content {
+  padding: 27px 23px 30px;
+}
+
+#services .service-card h3 {
+  font-size: 27px;
+}
+
+#services .service-card p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+#services .service-features li {
+  font-size: 11px;
+}
+
+.services-footer {
+  margin-top: 55px;
+  padding: 40px 22px;
+}
+
+.services-footer h3 {
+  font-size: 29px;
+}
+
+.services-footer p:not(.eyebrow) {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.services-footer .btn-primary {
+  max-width: 100%;
+}
    }
