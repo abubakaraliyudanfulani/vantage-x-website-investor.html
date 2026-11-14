@@ -90,9 +90,9 @@ button {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  flex: 0 0 330px;
-  width: 330px;
-  min-width: 330px;
+  flex: 0 1 380px;
+width: 380px;
+min-width: 0;
   height: 65px;
   gap: 15px;
   margin: 0;
