@@ -271,13 +271,15 @@ button {
 }
 
 .hero h1 {
-  max-width: 780px;
+  max-width: 850px;
   font-family: var(--heading);
-  font-size: clamp(55px, 7vw, 94px);
+  font-size: clamp(52px, 7vw, 96px);
   font-weight: 500;
-  line-height: 0.99;
-  letter-spacing: -1px;
-  margin-bottom: 28px;
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
 }
 
 .hero h1 span {
