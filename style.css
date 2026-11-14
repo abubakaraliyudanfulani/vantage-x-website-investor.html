@@ -379,39 +379,87 @@ button {
 }
 
 /* =========================================
-   ABOUT SECTION
+   VANTAGE X GROUP LTD — ABOUT SECTION
 ========================================= */
 
 .about {
   position: relative;
-  background: var(--ivory);
+  overflow: hidden;
+  background:
+    linear-gradient(
+      135deg,
+      #f8f6f0 0%,
+      #ffffff 50%,
+      #f0ece3 100%
+    );
   color: var(--navy);
+  padding: 125px 9%;
+}
+
+.about::before {
+  content: "V";
+  position: absolute;
+  top: 15px;
+  right: 5%;
+  font-family: var(--heading);
+  font-size: clamp(180px, 30vw, 420px);
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(198, 163, 101, 0.055);
+  pointer-events: none;
 }
 
 .about .eyebrow {
-  color: #9a7845;
+  position: relative;
+  color: #94713b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
 }
 
 .about h2 {
-  max-width: 750px;
+  position: relative;
+  max-width: 850px;
+  color: #091b2b;
+  font-family: var(--heading);
+  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
 }
 
 .about-description {
-  max-width: 790px;
-  color: #596775;
+  position: relative;
+  max-width: 850px;
+  color: #526170;
   font-size: 14px;
-  line-height: 2.1;
+  font-weight: 400;
+  line-height: 2.15;
+  letter-spacing: 0.15px;
+  margin-bottom: 20px;
 }
 
 .text-link {
+  position: relative;
   display: inline-block;
   margin-top: 30px;
   color: #94713b;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
   border-bottom: 1px solid var(--gold);
-  padding-bottom: 7px;
+  padding-bottom: 9px;
+  transition: all 0.3s ease;
+}
+
+.text-link:hover {
+  color: var(--navy);
+  border-color: var(--navy);
+  transform: translateX(5px);
 }
 
 /* =========================================
