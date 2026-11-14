@@ -2124,6 +2124,84 @@ if (archiveButton) {
   }
 }
 
+    
+// ==========================================
+// LOAD ARCHIVED INVESTOR APPLICATIONS
+// ==========================================
+
+async function loadArchivedApplications() {
+
+  const list = $("archivesList");
+
+  if (!list) return;
+
+  if (!currentAdmin) {
+    list.innerHTML =
+      '<tr><td colspan="6">Admin session not detected.</td></tr>';
+    return;
+  }
+
+  list.innerHTML =
+    '<tr><td colspan="6">Loading archived applications...</td></tr>';
+
+  try {
+
+    const { data, error } = await supabaseClient
+      .from("investor_applications")
+      .select(`
+        id,
+        full_name,
+        email,
+        phone,
+        investor_type,
+        proposed_investment_amount,
+        archived_at
+      `)
+      .not("archived_at", "is", null)
+      .order("archived_at", { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      list.innerHTML =
+        '<tr><td colspan="6">No archived applications found.</td></tr>';
+      return;
+    }
+
+    list.innerHTML = data.map(function(application) {
+
+      const archivedDate = application.archived_at
+        ? new Date(application.archived_at).toLocaleString()
+        : "Unknown";
+
+      return `
+        <tr>
+          <td>${escapeHTML(application.full_name || "Unnamed")}</td>
+          <td>${escapeHTML(application.email || "Not provided")}</td>
+          <td>${escapeHTML(application.phone || "Not provided")}</td>
+          <td>${escapeHTML(application.investor_type || "Not specified")}</td>
+          <td>${escapeHTML(application.proposed_investment_amount || "Not specified")}</td>
+          <td>${escapeHTML(archivedDate)}</td>
+        </tr>
+      `;
+
+    }).join("");
+
+    console.log("Archived applications loaded:", data);
+
+  } catch (error) {
+
+    console.error("Archive loading error:", error);
+
+    list.innerHTML =
+      '<tr><td colspan="6">Unable to load archives: ' +
+      escapeHTML(error.message) +
+      '</td></tr>';
+
+  }
+}
+
+    
     // ==========================================
 // ARCHIVE REJECTED APPLICATION
 // ==========================================
