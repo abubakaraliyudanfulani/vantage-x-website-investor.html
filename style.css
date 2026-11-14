@@ -2109,5 +2109,63 @@ button {
   font-size: 10px;
   line-height: 1.9;
 }
+
+   
+/* CONTACT SECTION — MOBILE RESPONSIVE */
+
+#contact.contact {
+  padding: 85px 7%;
+}
+
+.contact-heading {
+  margin-bottom: 45px;
+}
+
+.contact-heading h2 {
+  font-size: clamp(36px, 10vw, 49px);
+  line-height: 1.15;
+}
+
+.contact-description {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.contact-grid {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.contact-card {
+  min-height: 250px;
+  padding: 30px 24px;
+}
+
+.contact-card h3 {
+  font-size: 26px;
+}
+
+.contact-card p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.contact-link {
+  font-size: 9px;
+}
+
+.contact-bottom {
+  margin-top: 60px;
+  padding: 40px 15px;
+}
+
+.contact-bottom h3 {
+  font-size: 31px;
+}
+
+.contact-bottom > p:not(.eyebrow) {
+  font-size: 12px;
+  line-height: 1.9;
+}
    
    }
