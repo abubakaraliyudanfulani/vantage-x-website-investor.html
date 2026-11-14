@@ -104,9 +104,10 @@ button {
 
 .header .logo img {
   display: block;
-  width: 85px;
-  height: 65px;
-  flex: 0 0 85px;
+  width: 350px;
+  height: auto;
+  max-width: 100%;
+  flex: 0 1 350px;
   object-fit: contain;
   object-position: left center;
   position: relative;
