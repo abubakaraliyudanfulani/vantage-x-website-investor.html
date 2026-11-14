@@ -1094,10 +1094,12 @@ button {
   }
 
   .header .logo img {
-    width: 60px;
-    height: 50px;
-    flex: 0 0 60px;
-    object-fit: contain;
+  width: 75px;
+  height: 60px;
+  flex: 0 0 75px;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
   }
 
   .header .logo-text strong {
