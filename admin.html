@@ -1175,7 +1175,9 @@ function openView(viewName) {
   if (viewName === "applications") {
     loadApplications();
   }
-
+if (viewName === "archives") {
+  loadArchivedApplications();
+}
 }
 
 /* ROLE CHECKS */
