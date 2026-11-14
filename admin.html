@@ -2624,6 +2624,16 @@ if (closeReviewButton) {
     selectedApplicationForReview = null;
   });
 }
+
+    // CLOSE ARCHIVED APPLICATION DETAILS
+const closeArchivedDetailsButton = $("closeArchivedDetailsButton");
+
+if (closeArchivedDetailsButton) {
+  closeArchivedDetailsButton.addEventListener("click", function () {
+    $("archivedApplicationModal").style.display = "none";
+    selectedArchivedApplication = null;
+  });
+}
     
 /* START APPLICATION */
 
