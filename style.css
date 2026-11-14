@@ -1533,4 +1533,58 @@ button {
 .services-footer .btn-primary {
   max-width: 100%;
 }
+
+   
+/* PROPERTY SECTION — MOBILE RESPONSIVE */
+
+#properties.properties {
+  padding: 85px 7%;
+}
+
+.properties-heading {
+  margin-bottom: 42px;
+}
+
+.properties-heading h2 {
+  font-size: clamp(36px, 10vw, 48px);
+  line-height: 1.15;
+}
+
+.properties .section-description {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.property-grid {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.property-card {
+  min-height: 390px;
+  padding: 25px;
+}
+
+.property-info h3 {
+  font-size: 30px;
+}
+
+.property-info p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.property-category {
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.portfolio-note {
+  margin-top: 25px;
+  padding: 16px;
+  font-size: 10px;
+  line-height: 1.9;
+  text-align: left;
+}
+   
    }
