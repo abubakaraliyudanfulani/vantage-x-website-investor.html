@@ -103,8 +103,10 @@ button {
   display: block;
   width: 58px;
   height: 58px;
-  flex-shrink: 0;
+  flex: 0 0 58px;
   object-fit: contain;
+  position: relative;
+  z-index: 2;
 }
 
 .header .logo-text {
