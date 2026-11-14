@@ -286,6 +286,7 @@ button {
   display: inline-block;
   color: var(--gold);
   font-weight: 500;
+  text-shadow: 0 3px 18px rgba(198, 163, 101, 0.18);
 }
 
 .hero-description {
