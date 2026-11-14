@@ -90,18 +90,17 @@ button {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  flex: 0 1 380px;
-width: 380px;
-min-width: 0;
-  height: 65px;
-  gap: 15px;
+  flex: 0 1 390px;
+  width: 390px;
+  min-width: 0;
+  height: 75px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   overflow: visible;
   position: relative;
   text-decoration: none;
 }
-
 .header .logo img {
   display: block;
   width: 350px;
