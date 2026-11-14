@@ -1473,51 +1473,160 @@ button {
 }
 
 
+
 /* =========================================
-   FOOTER
+   VANTAGE X GROUP LTD — PREMIUM FOOTER
 ========================================= */
 
 .footer {
-  padding: 55px 8% 35px;
-  text-align: center;
-  background: var(--navy-deep);
-  color: #aab5be;
-  font-size: 10px;
-  line-height: 2.3;
+  position: relative;
+  overflow: hidden;
+  padding: 85px 8% 30px;
+  background: #061522;
+  color: #aebbc5;
+  font-size: 11px;
+  line-height: 1.9;
 }
 
-.footer-line {
-  max-width: 1100px;
-  height: 1px;
-  margin: 0 auto 30px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gold),
-    transparent
-  );
+.footer-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr;
+  gap: 45px;
+  max-width: 1350px;
+  margin: auto;
+  padding-bottom: 65px;
 }
 
-.footer h3 {
-  color: var(--white);
-  font-size: 15px;
+.footer-brand h3 {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 800;
   letter-spacing: 2px;
+  line-height: 1.4;
   margin-bottom: 5px;
 }
 
-.footer p:nth-of-type(1) {
-  color: var(--gold);
-  margin-bottom: 14px;
+.footer-subtitle {
+  display: block;
+  color: #d1ad72;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
 }
 
-.footer a {
-  color: var(--gold-light);
+.footer-motto {
+  color: #d1ad72;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.footer-description {
+  max-width: 310px;
+  color: #aebbc5;
+  font-size: 11px;
+  line-height: 2;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer-column h4 {
+  position: relative;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 13px;
+  padding-bottom: 13px;
+}
+
+.footer-column h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 2px;
+  background: #c9a46b;
+}
+
+.footer-column a {
+  color: #aebbc5;
+  font-size: 10px;
+  line-height: 1.8;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.3s ease,
+              transform 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #dfbd83;
+  transform: translateX(4px);
+}
+
+.footer-contact p {
+  color: #aebbc5;
+  font-size: 10px;
+  margin-bottom: 3px;
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+  position: relative;
+  z-index: 2;
+  max-width: 1350px;
+  margin: auto;
+  padding-top: 25px;
+  border-top: 1px solid rgba(210, 173, 112, 0.25);
+  text-align: center;
+}
+
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-bottom: 22px;
+}
+
+.footer-legal a {
+  color: #d1ad72;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.footer a:hover {
-  color: var(--white);
+.footer-legal a:hover {
+  color: #ffffff;
 }
+
+.footer-bottom p {
+  color: #8998a4;
+  font-size: 9px;
+  line-height: 1.9;
+  margin-bottom: 8px;
+}
+
+.footer-bottom .footer-signature {
+  color: #c9a46b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-top: 12px;
+}
+
 
 /* =========================================
    TABLET RESPONSIVENESS
