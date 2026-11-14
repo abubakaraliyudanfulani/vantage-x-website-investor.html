@@ -2995,7 +2995,12 @@ function setupBackgroundLogout() {
         DOWNLOAD APPLICATION PDF
       </button>
 
-      <button type="button" id="closeArchivedDetailsButton" class="btn btn-light">
+      <button
+  type="button"
+  id="closeArchivedDetailsButton"
+  class="btn btn-light"
+  onclick="document.getElementById('archivedApplicationModal').style.display='none'; selectedArchivedApplication=null;"
+>
         CLOSE
       </button>
 
