@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b35">
+  <meta name="description" content="Join VANTAGE X COMMUNITY. Connect, discover and grow with a global community.">
+  <title>Create Account | VANTAGE X COMMUNITY</title>
+
+  <style>
+    :root {
+      --navy: #101b35;
+      --navy-light: #192949;
+      --gold: #c9a45c;
+      --gold-light: #e6ca8b;
+      --white: #ffffff;
+      --muted: #687386;
+      --border: #e4e8ef;
+      --background: #f4f6fa;
+      --success: #16794b;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--navy);
+      padding: 20px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--gold-light);
+    }
+
+    .header-link {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 45px 18px;
+    }
+
+    .signup-card {
+      width: 100%;
+      max-width: 490px;
+      background: var(--white);
+      border-radius: 18px;
+      padding: 38px;
+      box-shadow: 0 15px 45px rgba(16, 27, 53, 0.09);
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .heading .symbol {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto 17px;
+      border-radius: 15px;
+      background: var(--navy);
+      color: var(--gold-light);
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: 27px;
+      margin-bottom: 9px;
+    }
+
+    .heading p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+      color: var(--navy);
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.13);
+    }
+
+    .hint {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 75px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .terms input {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .terms a,
+    .login-link a {
+      color: #9a742e;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 9px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--navy-light);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0ef;
+      color: var(--danger);
+    }
+
+    .message.success {
+      display: block;
+      background: #eaf7ef;
+      color: var(--success);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 23px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--navy);
+      color: #d7dce6;
+      padding: 22px 15px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer span {
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 17px 5%;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .signup-card {
+        padding: 27px 21px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    VANTAGE X <span>COMMUNITY</span>
+  </a>
+  <a class="header-link" href="login.html">Log in</a>
+</header>
+
+<main>
+  <section class="signup-card">
+
+    <div class="heading">
+      <div class="symbol">VX</div>
+      <h1>Create Your Account</h1>
+      <p>
+        Join a growing community built around connection,
+        knowledge, creativity and opportunity.
+      </p>
+    </div>
+
+    <div id="formMessage" class="message" role="status"
+         aria-live="polite"></div>
+
+    <form id="signupForm">
+
+      <div class="field">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          maxlength="100"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Choose a username"
+          autocomplete="username"
+          pattern="[A-Za-z0-9_]{3,30}"
+          minlength="3"
+          maxlength="30"
+          required
+        >
+        <small class="hint">
+          3–30 characters. Letters, numbers and underscores only.
+          Your username will be converted to lowercase.
+        </small>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          maxlength="254"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a strong password"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="72"
+            required
+          >
+          <button
+            class="toggle-password"
+            type="button"
+            id="togglePassword"
+            aria-label="Show password"
+          >Show</button>
+        </div>
+        <small class="hint">
+          Use at least 8 characters. A mixture of letters,
+          numbers and symbols is recommended.
+        </small>
+      </div>
+
+      <div class="terms">
+        <input type="checkbox" id="agreeTerms" required>
+        <label for="agreeTerms">
+          I agree to the
+          <a href="community-terms.html">Community Terms</a>
+          and
+          <a href="community-privacy.html">Privacy Policy</a>.
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="signupButton">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="login-link">
+      Already have an account?
+      <a href="login.html">Log in</a>
+    </p>
+
+  </section>
+</main>
+
+<footer>
+  <strong>VANTAGE X <span>COMMUNITY</span></strong><br>
+  Building Connections. Creating Opportunities.<br>
+  A digital community by VANTAGE X GROUP LTD.
+</footer>
+
+<!-- Supabase JavaScript library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Community connection and authentication files -->
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+  const signupForm = document.getElementById("signupForm");
+  const signupButton = document.getElementById("signupButton");
+  const formMessage = document.getElementById("formMessage");
+  const passwordInput = document.getElementById("password");
+
+  function showMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = "message " + type;
+  }
+
+  document.getElementById("togglePassword").addEventListener("click", function () {
+    const isHidden = passwordInput.type === "password";
+
+    passwordInput.type = isHidden ? "text" : "password";
+    this.textContent = isHidden ? "Hide" : "Show";
+    this.setAttribute(
+      "aria-label",
+      isHidden ? "Hide password" : "Show password"
+    );
+  });
+
+  signupForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    formMessage.className = "message";
+
+    if (!signupForm.reportValidity()) {
+      return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+      showMessage(
+        "The connection to our account service is not ready. Please try again later.",
+        "error"
+      );
+      return;
+    }
+
+    if (typeof registerCommunityUser !== "function") {
+      showMessage(
+        "The registration service could not be loaded. Please try again later.",
+        "error"
+      );
+      return;
+    }
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = passwordInput.value;
+
+    if (!/^[A-Za-z0-9_]{3,30}$/.test(username)) {
+      showMessage(
+        "Your username must contain 3–30 letters, numbers or underscores.",
+        "error"
+      );
+      return;
+    }
+
+    signupButton.disabled = true;
+    signupButton.textContent = "Creating account...";
+
+    try {
+      const { data, error } = await registerCommunityUser(
+        fullName,
+        username,
+        email,
+        password
+      );
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user && !data.session) {
+        showMessage(
+          "Your registration has been received. Please check your email for a confirmation link before logging in.",
+          "success"
+        );
+        signupForm.reset();
+      } else if (data.user && data.session) {
+        showMessage(
+          "Your account has been created successfully. You can now continue to log in.",
+          "success"
+        );
+        signupForm.reset();
+      } else {
+        showMessage(
+          "We could not confirm your registration. Please try again.",
+          "error"
+        );
+      }
+
+    } catch (error) {
+      const message = error.message || "Something went wrong.";
+
+      if (message.toLowerCase().includes("duplicate key") ||
+          message.toLowerCase().includes("unique")) {
+        showMessage(
+          "That username may already be taken. Please choose another.",
+          "error"
+        );
+      } else {
+        showMessage(message, "error");
+      }
+
+    } finally {
+      signupButton.disabled = false;
+      signupButton.textContent = "Create Account";
+    }
+  });
+</script>
+
+</body>
+</html>
