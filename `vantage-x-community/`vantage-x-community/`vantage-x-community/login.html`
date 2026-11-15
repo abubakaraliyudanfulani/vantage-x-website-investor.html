@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b35">
+  <meta name="description" content="Log in to VANTAGE X COMMUNITY and connect with your community.">
+  <title>Login | VANTAGE X COMMUNITY</title>
+
+  <style>
+    :root {
+      --navy: #101b35;
+      --navy-light: #192949;
+      --gold: #c9a45c;
+      --gold-light: #e6ca8b;
+      --white: #ffffff;
+      --muted: #687386;
+      --border: #e4e8ef;
+      --background: #f4f6fa;
+      --success: #16794b;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--navy);
+      padding: 20px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--gold-light);
+    }
+
+    .header-link {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 45px 18px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 15px 45px rgba(16, 27, 53, 0.09);
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .symbol {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 18px;
+      border-radius: 15px;
+      background: var(--navy);
+      color: var(--gold-light);
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .heading p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+      color: var(--navy);
+      background: white;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.13);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 75px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .forgot {
+      display: block;
+      text-align: right;
+      margin-top: 10px;
+      color: #9a742e;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 9px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--navy-light);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0ef;
+      color: var(--danger);
+    }
+
+    .message.success {
+      display: block;
+      background: #eaf7ef;
+      color: var(--success);
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .signup-link a {
+      color: #9a742e;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #d7dce6;
+      padding: 22px 15px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer span {
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 17px 5%;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .login-card {
+        padding: 29px 22px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    VANTAGE X <span>COMMUNITY</span>
+  </a>
+  <a class="header-link" href="signup.html">Create account</a>
+</header>
+
+<main>
+  <section class="login-card">
+
+    <div class="heading">
+      <div class="symbol">VX</div>
+      <h1>Welcome Back</h1>
+      <p>
+        Sign in to continue connecting, discovering
+        and growing with VANTAGE X COMMUNITY.
+      </p>
+    </div>
+
+    <div id="formMessage" class="message"
+         role="status" aria-live="polite"></div>
+
+    <form id="loginForm">
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email address"
+          autocomplete="email"
+          maxlength="254"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            type="button"
+            class="toggle-password"
+            id="togglePassword"
+            aria-label="Show password"
+          >Show</button>
+        </div>
+
+        <a href="#" class="forgot" id="forgotPassword">
+          Forgot your password?
+        </a>
+      </div>
+
+      <button type="submit" class="submit-btn" id="loginButton">
+        Log In
+      </button>
+
+    </form>
+
+    <p class="signup-link">
+      New to VANTAGE X COMMUNITY?
+      <a href="signup.html">Create an account</a>
+    </p>
+
+  </section>
+</main>
+
+<footer>
+  <strong>VANTAGE X <span>COMMUNITY</span></strong><br>
+  Building Connections. Creating Opportunities.<br>
+  A digital community by VANTAGE X GROUP LTD.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+  const loginForm = document.getElementById("loginForm");
+  const loginButton = document.getElementById("loginButton");
+  const formMessage = document.getElementById("formMessage");
+  const passwordInput = document.getElementById("password");
+  const emailInput = document.getElementById("email");
+
+  function showMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = "message " + type;
+  }
+
+  document.getElementById("togglePassword").addEventListener("click", function () {
+    const isHidden = passwordInput.type === "password";
+
+    passwordInput.type = isHidden ? "text" : "password";
+    this.textContent = isHidden ? "Hide" : "Show";
+    this.setAttribute(
+      "aria-label",
+      isHidden ? "Hide password" : "Show password"
+    );
+  });
+
+  loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    formMessage.className = "message";
+
+    if (!loginForm.reportValidity()) {
+      return;
+    }
+
+    if (typeof supabaseClient === "undefined" ||
+        typeof loginCommunityUser !== "function") {
+      showMessage(
+        "The login service is not available right now. Please try again later.",
+        "error"
+      );
+      return;
+    }
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in...";
+
+    try {
+      const { data, error } = await loginCommunityUser(email, password);
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data.session) {
+        throw new Error("A login session could not be established.");
+      }
+
+      showMessage(
+        "Login successful. Your account session is now active. Your member home is being prepared.",
+        "success"
+      );
+
+    } catch (error) {
+      showMessage(
+        error.message || "Unable to log in. Please check your details.",
+        "error"
+      );
+
+    } finally {
+      loginButton.disabled = false;
+      loginButton.textContent = "Log In";
+    }
+  });
+
+  document.getElementById("forgotPassword").addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      showMessage(
+        "Enter your email address first, then select Forgot your password again.",
+        "error"
+      );
+      emailInput.focus();
+      return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+      showMessage("The account service is not available.", "error");
+      return;
+    }
+
+    const forgotButton = this;
+    forgotButton.style.pointerEvents = "none";
+    forgotButton.textContent = "Sending...";
+
+    try {
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+
+      if (error) {
+        throw error;
+      }
+
+      showMessage(
+        "If an account exists for this email, password recovery instructions will be sent. Check your inbox.",
+        "success"
+      );
+
+    } catch (error) {
+      showMessage(
+        error.message || "We could not send the recovery email. Please try again.",
+        "error"
+      );
+
+    } finally {
+      forgotButton.style.pointerEvents = "auto";
+      forgotButton.textContent = "Forgot your password?";
+    }
+  });
+</script>
+
+</body>
+</html>
