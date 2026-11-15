@@ -1,1 +1,119 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101a30">
+  <title>Login | VANTAGE X COMMUNITY</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #101a30;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+    }
+    .card {
+      background: #fff;
+      color: #101a30;
+      width: 100%;
+      max-width: 420px;
+      padding: 35px;
+      border-radius: 14px;
+    }
+    .brand {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .brand span { color: #bd9145; }
+    .subtitle {
+      text-align: center;
+      color: #687386;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+    h1 { text-align: center; font-size: 26px; margin-bottom: 23px; }
+    label { display: block; font-size: 13px; font-weight: bold; margin: 16px 0 7px; }
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d8dce4;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 24px;
+      background: #d6ad61;
+      color: #101a30;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .notice {
+      margin-top: 18px;
+      padding: 12px;
+      background: #f5f2eb;
+      color: #606b7d;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 23px;
+      font-size: 14px;
+    }
+    .footer a, .back { color: #9b742f; font-weight: bold; }
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">VANTAGE X <span>COMMUNITY</span></div>
+    <p class="subtitle">Building Connections. Creating Opportunities.</p>
+
+    <h1>Welcome Back</h1>
+
+    <form id="login-form">
+      <label for="email">Email address</label>
+      <input id="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+
+      <button type="submit">Log In</button>
+    </form>
+
+    <div class="notice">
+      Member login will be activated after secure Supabase authentication is connected.
+    </div>
+
+    <p class="footer">
+      New here? <a href="signup.html">Create an account</a>
+    </p>
+
+    <a href="index.html" class="back">← Back to Community homepage</a>
+  </main>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Login is not activated yet. Please check back soon.");
+    });
+  </script>
+</body>
+</html>
