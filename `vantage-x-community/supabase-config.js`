@@ -1,8 +1,0 @@
-const SUPABASE_URL = "https://urjxoewsgmfasnyygjuz.supabase.co";
-
-const SUPABASE_ANON_KEY = "sb_publishable_Cn4id_fYfIYkV5EUDKvWMA_yplZfC3A";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
